@@ -55,7 +55,7 @@ ROOT_URLCONF = 'haste.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["haste/templates/"],
+        'DIRS': ["haste/haste/templates/"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
