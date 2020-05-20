@@ -36,28 +36,49 @@
         </div>
     </div>
 </nav>
-
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Download</li>
+        </ol>
+    </nav>
+</div>
 <div class="container" style="padding-top: 3em">
-    <div class="jumbotron" style="padding-top: 3em">
-        <h3 class="text-muted">Welcome to Haste</h3>
-        <p>Haste provides a simple interface to create meaningful Haystack json files to represent the systems in your
-            building.</p>
-    </div>
-    <div class="header clearfix" style="padding-top: 1em; padding-bottom: 5em" >
-        <h3 class="text-muted" style="padding-bottom: 1em">Start a Project:</h3>
-        <button type="button" class="btn btn-primary btn-lg" >
-            <a href="{% url 'form' %}" style="color: white; text-decoration: none">+ Create your own</a>
-        </button>
-        <button type="button" class="btn btn-primary btn-lg">
-            <a href="{% url 'download' %}" style="color: white; text-decoration: none" >+ Choose from template</a>
-        </button>
-    </div>
+    <form>
+        <h3>Choose and existing system:</h3>
+        <hr class="mt-2 mb-3"/>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <select class="form-control" id="sys">
+                    <option>SZ VAV AHU hydronic heating and cooling with return fan</option>
+                    <option>MZ VAV AHU hydronic heating and cooling with return fan and hot-water reheat</option>
+                    <option>SZ CV AHU with heatpump heating and cooling</option>
+                </select>
+            </div>
+        </div>
+        <hr class="mt-2 mb-3"/>
+        <div class="form-group col-md-2">
+            <input class="form-check-input" type="checkbox" id="haystack">
+            <label class="form-check-label" for="haystack">
+                Haystack
+            </label>
+        </div>
+        <div class="form-group col-md-2" style="padding-bottom: 1em">
+            <input class="form-check-input" type="checkbox" id="brick">
+            <label class="form-check-label" for="brick">
+                Brick
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Download</button>
+    </form>
 </div>
 <footer class="footer">
-  <div class="container">
-    <span class="text-muted"></span>© 2020 Copyright:
+    <div class="container">
+        <span class="text-muted"></span>© 2020 Copyright:
         <a href="https://nrel.gov/"> nrel.gov</a>
-  </div>
+    </div>
 </footer>
 </body>
 </html>

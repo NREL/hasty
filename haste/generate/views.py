@@ -8,3 +8,7 @@ def index(request):
 
 def form(request):
     return render(request, 'form.html')
+
+
+def download(request):
+    return render(request, 'download.html')
