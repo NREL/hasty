@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% load static %}
 {% block page_content %}
 <html>
@@ -38,25 +37,27 @@
     </div>
 </nav>
 
-<div class="container" style="padding-top: 3em">
-    <div class="jumbotron" style="padding-top: 3em">
-        <h3 class="text-muted">Welcome to Haste</h3>
-        <p>Haste provides a simple interface to create meaningful Haystack json files to represent the systems in your
-            building.</p>
-    </div>
-    <div class="header clearfix" style="padding-top: 1em; padding-bottom: 5em" >
-        <h3 class="text-muted" style="padding-bottom: 1em">Start a Project:</h3>
-        <button type="button" class="btn btn-primary btn-lg" >
-            <a href="{% url 'form' %}" style="color: white; text-decoration: none">+ Create your own</a>
-        </button>
-        <button type="button" class="btn btn-primary btn-lg" >
-          <a href="{% url 'site' %}"  style="color: white; text-decoration: none" >+ Create Site</a>
-        </button>
-        <button type="button" class="btn btn-primary btn-lg">
-            <a href="{% url 'download' %}" style="color: white; text-decoration: none" >+ Choose from template</a>
-        </button>
-    </div>
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Site</li>
+        </ol>
+    </nav>
 </div>
+{#<div class="container" style="padding-top: 3em">#}
+{#    <form>#}
+{#        <h3>Create Air Handling Unit</h3>#}
+{#        <hr class="mt-2 mb-3"/>#}
+{#        <div class="form-group">#}
+{#            <label for="name">Name</label>#}
+{#            <input type="text" class="form-control" id="name" placeholder="Cory's Single Zone Slayer">#}
+{#        </div>#}
+{#    </form>#}
+{#</div>#}
+{% block content %}
+{% endblock content %}
+
 <footer class="footer">
   <div class="container">
     <span class="text-muted"></span>© 2020 Copyright:

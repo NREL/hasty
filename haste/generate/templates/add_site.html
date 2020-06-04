@@ -1,0 +1,20 @@
+{% extends "site.html" %}
+{#{% load bootstrap4 %}#}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    {% if errors %}
+        <p>errors</p>
+    {% endif %}
+    <h1>Create New Site</h1>
+<form method="post" action="">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-outline-success">Create</button>
+    {% endbuttons %}
+
+</form>
+</div>
+{% endblock content %}
