@@ -8,13 +8,13 @@ class SiteForm(forms.ModelForm):
         fields = ('name', 'city', 'state', 'zip')
 
 
-class AirSystemForm(forms.ModelForm):
+class AirSystemsForm(forms.ModelForm):
     class Meta:
         model = models.AirSystems
-        fields = ('name',)
-
+        fields = ("name",)
 
 class AirHandlerForm(forms.ModelForm):
+
     class Meta:
         model = models.AirHandler
-        fields = ('name',)
+        fields = ("name", "heating_coil_type", "cooling_coil_type")

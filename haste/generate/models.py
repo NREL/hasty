@@ -1,4 +1,5 @@
 from django.db import models
+from .utils import HEATING_COILS, COOLING_COILS
 
 # Create your models here.
 class Site(models.Model):
@@ -65,14 +66,48 @@ class Site(models.Model):
 
 class AirSystems(models.Model):
     name = models.CharField(max_length=50)
-    site = models.ForeignKey(Site, on_delete=models.CASCADE)
+    site_id = models.ForeignKey(Site, on_delete=models.CASCADE)
 
 
 class AirHandler(models.Model):
+    # Create the choices list on the fly
+    hc_choices = [(h.get('id'), h.get('description')) for h in HEATING_COILS]
+    cc_choices = [(h.get('id'), h.get('description')) for h in COOLING_COILS]
+
+    # Add in options for choice to be blank
+    hc_choices.append(('None', 'None'))
+    cc_choices.append(('None', 'None'))
+
     name = models.CharField(max_length=50)
-    air_system = models.ForeignKey(AirSystems, on_delete=models.CASCADE)
+    air_system_id = models.ForeignKey(AirSystems, on_delete=models.CASCADE)
+
+    heating_coil_type = models.CharField(max_length=100, choices=tuple(hc_choices))
+    cooling_coil_type = models.CharField(max_length=100, choices=tuple(cc_choices))
 
 
 class TerminalUnit(models.Model):
     name = models.CharField(max_length=50)
-    ahu = models.ForeignKey(AirHandler, on_delete=models.CASCADE)
+    ahu_id = models.ForeignKey(AirHandler, on_delete=models.CASCADE)
+
+
+# class HeatingCoil(models.Model):
+#     name = models.CharField(max_length=50)
+
+# class AirHandlerHeatingCoil(models.Model):
+#     hcs = HeatingCoil.objects.get_all()
+#     HEATING_COIL_CHOICES = []
+#     for hc in hcs.items():
+#         HEATING_COIL_CHOICES.append((hc.id, hc.description))
+#
+#     name = models.CharField(max_length=50)
+#     heating_coil_id = models.
+
+
+# class Component(models.Model):
+#     CATEGORIES = (
+#         ("Heating Coil", (
+#             ('Modulating DX heating ')),
+#          ),
+#     )
+#     name = models.CharField(max_length=100)
+#     # category =
