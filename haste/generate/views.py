@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import CreateView
 from . import forms
@@ -26,3 +26,11 @@ class CreateSite(CreateView):
         form = forms.SiteForm()
         args = {'form': form}
         return render(request, self.template_name, args)
+
+    def post(self, request):
+        form_result = forms.SiteForm(request.POST)
+        if form_result.is_valid():
+            site_def = form.save(commit=False)
+            site_def.save()
+
+            return redirect('site.html', site_def=site_def)

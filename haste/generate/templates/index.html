@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% load static %}
 {% block page_content %}
 <html>
@@ -50,7 +49,7 @@
             <a href="{% url 'form' %}" style="color: white; text-decoration: none">+ Create your own</a>
         </button>
         <button type="button" class="btn btn-primary btn-lg" >
-          <a href="{% url 'site' %}"  style="color: white; text-decoration: none" >+ Create Site</a>
+          <a href="{% url 'add_site' %}"  style="color: white; text-decoration: none" >+ Create Site</a>
         </button>
         <button type="button" class="btn btn-primary btn-lg">
             <a href="{% url 'download' %}" style="color: white; text-decoration: none" >+ Choose from template</a>

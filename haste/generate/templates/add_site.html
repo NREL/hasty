@@ -1,20 +1,64 @@
-{% extends "site.html" %}
-{#{% load bootstrap4 %}#}
+{% extends "base.html" %}
+{% load bootstrap4 %}
 {% load static %}
+{% block page_content %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>Haste</title>
+</head>
 
-{% block content %}
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">
+            <h1>Haste</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'index' %}">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'form' %}">Projects</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Site</li>
+        </ol>
+    </nav>
+</div>
+
 <div class="container">
     {% if errors %}
-        <p>errors</p>
+    <p>errors</p>
     {% endif %}
     <h1>Create New Site</h1>
-<form method="post" action="">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% buttons %}
+    <form method="post" action="">
+        {% bootstrap_form form %}
+        {% buttons %}
         <button type="submit" class="btn btn-outline-success">Create</button>
-    {% endbuttons %}
+        {% endbuttons %}
 
-</form>
+    </form>
 </div>
-{% endblock content %}
+{% endblock page_content %}
+
