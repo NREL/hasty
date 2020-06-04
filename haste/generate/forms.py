@@ -13,8 +13,8 @@ class AirSystemsForm(forms.ModelForm):
         model = models.AirSystems
         fields = ("name",)
 
-class AirHandlerForm(forms.ModelForm):
 
+class AirHandlerForm(forms.ModelForm):
     class Meta:
         model = models.AirHandler
         fields = ("name", "heating_coil_type", "cooling_coil_type")

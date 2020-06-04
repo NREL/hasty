@@ -20,8 +20,9 @@ class Site(CreateView):
     template_name = 'site.html'
 
     def get(self, request):
-        form = forms.AirSystemForm()
-        args = {'form': form}
+        air_sys_form = forms.AirSystemsForm()
+        air_handle_form = forms.AirHandlerForm()
+        args = {'air_sys_form': air_sys_form, 'air_handle_form': air_handle_form}
         return render(request, self.template_name, args)
 
     def post(self, request):
@@ -39,9 +40,7 @@ class CreateSite(CreateView):
     def post(self, request):
         form_result = forms.SiteForm(request.POST)
         if form_result.is_valid():
-            new_form = forms.AirSystemForm()
             site_def = form_result.save()
-            args = {'form': new_form}
             return redirect('site')
 
 
