@@ -1,0 +1,11 @@
+{% load bootstrap4 %}
+{% block content %}
+<h2>Create and Air System</h2>
+<form method="post">
+    {% csrf_token %}
+    {% bootstrap_form air_handle_form %}
+    {% buttons %}
+    <button type="submit" class="btn btn-outline-success">Create Air Handler</button>
+    {% endbuttons %}
+</form>
+{% endblock %}

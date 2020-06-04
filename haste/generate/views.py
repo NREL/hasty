@@ -15,8 +15,18 @@ def form(request):
 def download(request):
     return render(request, 'download.html')
 
-def site(request):
-    return render(request, 'site.html')
+
+class Site(CreateView):
+    template_name = 'site.html'
+
+    def get(self, request):
+        air_sys_form = forms.AirSystemsForm()
+        air_handle_form = forms.AirHandlerForm()
+        args = {'air_sys_form': air_sys_form, 'air_handle_form': air_handle_form}
+        return render(request, self.template_name, args)
+
+    def post(self, request):
+        pass
 
 
 class CreateSite(CreateView):
@@ -31,9 +41,22 @@ class CreateSite(CreateView):
         form_result = forms.SiteForm(request.POST)
         if form_result.is_valid():
             site_def = form_result.save()
-            args = {'site': site_def}
-            print(site_def)
-            print(type(site_def))
+            return redirect('site')
+
+
+class CreateAirSystem(CreateView):
+    template_name = 'add_air_system.html'
+
+    def get(self, request):
+        form = forms.AirSystemForm()
+        args = {'form': form}
+        return render(request, self.template_name, args)
+
+    def post(self, request):
+        form_result = forms.AirSystemForm(request.POST)
+        if form_result.is_valid():
+            air_sys_def = form_result.save()
+            args = {'air_sys': air_sys_def}
             # site_def.save()
 
-            return render(request, 'site.html', args)
+            # return render(request, 'site.html', args)
