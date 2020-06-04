@@ -53,6 +53,7 @@
     {% endif %}
     <h1>Create New Site</h1>
     <form method="post" action="">
+        {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
         <button type="submit" class="btn btn-outline-success">Create</button>

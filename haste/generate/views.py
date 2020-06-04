@@ -30,7 +30,10 @@ class CreateSite(CreateView):
     def post(self, request):
         form_result = forms.SiteForm(request.POST)
         if form_result.is_valid():
-            site_def = form.save(commit=False)
-            site_def.save()
+            site_def = form_result.save()
+            args = {'site': site_def}
+            print(site_def)
+            print(type(site_def))
+            # site_def.save()
 
-            return redirect('site.html', site_def=site_def)
+            return render(request, 'site.html', args)
