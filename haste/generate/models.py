@@ -60,6 +60,7 @@ class Site(models.Model):
     name = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=2, choices=STATES)
+    zip = models.IntegerField()
 
 
 class AirSystems(models.Model):
