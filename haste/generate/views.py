@@ -2,10 +2,15 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.generic import CreateView
 from . import forms
+from . import models
 
 
 def index(request):
-    return render(request, 'index.html')
+    sites = models.Site.objects.all()
+    args = {
+        'sites': sites
+    }
+    return render(request, 'index.html', args)
 
 
 def form(request):

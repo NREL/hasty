@@ -1,0 +1,27 @@
+{% load static %}
+<div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Site Name</th>
+      <th scope="col">Number of AHUs</th>
+      <th scope="col">Download</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for site in sites %}
+      <tr>
+        <td>{{ site.name }}</td>
+        <td>BLAH</td>
+        <td class="text">
+          <a href="{% url 'api.haystack.download' site.id %}" class="button">
+            <i class="fa fa-download">
+
+            </i>
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
