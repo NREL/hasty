@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from generate.models import Site
+from lib.helpers import Test
 from .serializers import SiteSerializer
 
 
@@ -42,14 +43,11 @@ class GenerateHaystackFile(APIView):
     Sebastian response: https://stackoverflow.com/a/46993577/10198770
     TODO:
         1. Plan is to utilize the generate.lib.helpers functions for this
-        2. This basically just calls one of those functions
-        3. That function responsible for returning similar to 'data' below
+        2. This should just call one of those functions, i.e. Test() below
     """
     def get(self, request, site_id):
-        data = [
-            {"test": 1},
-            {"test": 2}
-        ]
+        t = Test()
+        data = t.return_data()
         data_string = json.dumps(data)
         json_file = StringIO()
         json_file.write(data_string)

@@ -1,9 +1,46 @@
 import pandas as pd
 from uuid import uuid4
-#
-# class Reader:
-#     def __init__(self):
 
+def generate_cooling_coils():
+    cc = [
+        {
+            "id": 1,
+            "description": "Cooling Coil 1",
+            "tags": ["tag1", "tag2"]
+        },
+        {
+            "id": 2,
+            "description": "Cooling Coil 2",
+            "tags": ["tag1", "tag2"]
+        }
+    ]
+    return cc
+
+def generate_heating_coils():
+    hc = [
+        {
+            "id": 1,
+            "description": "Heating Coil 1",
+            "tags": ["tag1", "tag2"]
+        },
+        {
+            "id": 2,
+            "description": "Heating Coil 2",
+            "tags": ["tag3", "tag4"]
+        }
+    ]
+    return hc
+
+class Test:
+    def __init__(self):
+        pass
+
+    def return_data(self):
+        data = [
+            {"testers": 1},
+            {"testersss": 2}
+        ]
+        return data
 
 class Builder:
     def __init__(self):

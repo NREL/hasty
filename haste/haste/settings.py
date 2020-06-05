@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'generate',
     'rest_framework',
     'api',
+    'lib',
 ]
 
 MIDDLEWARE = [
