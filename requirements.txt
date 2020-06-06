@@ -1,6 +1,6 @@
 asgiref==3.2.5
 beautifulsoup4==4.9.1
-Django==3.0.4
+Django==3.0.7
 django-bootstrap4==2.0.1
 djangorestframework==3.11.0
 importlib-metadata==1.6.0
