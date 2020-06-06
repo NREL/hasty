@@ -1,5 +1,5 @@
 from django.db import models
-from .utils import HEATING_COILS, COOLING_COILS
+from lib.helpers import generate_heating_coils, generate_cooling_coils
 
 # Create your models here.
 class Site(models.Model):
@@ -71,8 +71,10 @@ class AirSystems(models.Model):
 
 class AirHandler(models.Model):
     # Create the choices list on the fly
-    hc_choices = [(h.get('id'), h.get('description')) for h in HEATING_COILS]
-    cc_choices = [(h.get('id'), h.get('description')) for h in COOLING_COILS]
+    hc = generate_heating_coils()
+    cc = generate_cooling_coils()
+    hc_choices = [(h.get('id'), h.get('description')) for h in hc]
+    cc_choices = [(h.get('id'), h.get('description')) for h in cc]
 
     # Add in options for choice to be blank
     hc_choices.append(('None', 'None'))
