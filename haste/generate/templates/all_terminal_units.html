@@ -14,11 +14,7 @@
       <tr>
         <td>{{ tu.id }}</td>
         <td>{{ tu.name }}</td>
-        {% for tu_type in terminal_unit_types %}
-          {% if tu_type.id == tu.terminal_unit_type %}
-            <td>{{ tu_type.description }}</td>
-          {% endif %}
-        {% endfor %}
+        <td>{{ tu.type }}</td>
       <td><button type="submit" class="btn btn-sm btn-outline-success" name="TerminalUnit-{{ tu.id }}">Save</button></td>
       </tr>
     {% endfor %}

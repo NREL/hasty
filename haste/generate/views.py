@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import CreateView
 from . import forms
 from . import models
-from lib.helpers import generate_terminal_unit_types, ahu_summary_info
+from lib.helpers import generate_terminal_unit_types, ahu_summary_info, terminal_unit_summary_info
 
 
 def index(request):
@@ -78,17 +78,12 @@ class AirHandler(CreateView):
     template_name = 'air_handler.html'
 
     def get(self, request, site_id, ahu_id):
-        tu_list = []
+        tu_info = []
         tus = models.TerminalUnit.objects.filter(ahu_id=ahu_id)
-        # for tu in tus:
-        #     print(tu)
-        #     tu_list.append(dict(tu))
-        # print(tus)
-        # blank_form = forms.AirHandlerForm()
-        # print(blank_form)
+        for tu in tus:
+            tu_info.append(terminal_unit_summary_info(tu))
         args = {
-            'terminal_units': tus,
-            'terminal_unit_types': generate_terminal_unit_types()
+            'terminal_units': tu_info
         }
         return render(request, self.template_name, args)
 
