@@ -1,15 +1,16 @@
 import pandas as pd
 from uuid import uuid4
+from generate import models
 
 def generate_cooling_coils():
     cc = [
         {
-            "id": 1,
+            "id": 'CC-001',
             "description": "Cooling Coil 1",
             "tags": ["tag1", "tag2"]
         },
         {
-            "id": 2,
+            "id": 'CC-002',
             "description": "Cooling Coil 2",
             "tags": ["tag1", "tag2"]
         }
@@ -19,17 +20,62 @@ def generate_cooling_coils():
 def generate_heating_coils():
     hc = [
         {
-            "id": 1,
+            "id": 'HC-001',
             "description": "Heating Coil 1",
             "tags": ["tag1", "tag2"]
         },
         {
-            "id": 2,
+            "id": 'HC-002',
             "description": "Heating Coil 2",
             "tags": ["tag3", "tag4"]
         }
     ]
     return hc
+
+def generate_terminal_unit_types():
+    tu = [
+        {
+            "id": 'TU-001',
+            "category": "VAV",
+            "description": "VAV Box Cooling Only",
+            "tags": ["tag1", "tag2"]
+        },
+        {
+            "id": 'TU-002',
+            "category": "CAV",
+            "description": "CAV Terminal Unit",
+            "tags": ["tag1", "tag2"]
+        }
+    ]
+    return tu
+
+
+def ahu_summary_info(ahu_model):
+    tus = models.TerminalUnit.objects.filter(ahu_id=ahu_model.id)
+    num_tus = tus.count()
+    data = {
+        'name': ahu_model.name,
+        'hc_name': hc_name_given_id(ahu_model.heating_coil_type),
+        'cc_name': cc_name_given_id(ahu_model.cooling_coil_type),
+        'num_terminal_units': num_tus
+    }
+    return data
+
+
+def hc_name_given_id(hc_id):
+    hcs = generate_heating_coils()
+    for hc in hcs:
+        if hc_id == hc['id']:
+            return hc['description']
+    return None
+
+
+def cc_name_given_id(cc_id):
+    ccs = generate_cooling_coils()
+    for cc in ccs:
+        if cc_id == cc['id']:
+            return cc['description']
+    return None
 
 class Test:
     def __init__(self):

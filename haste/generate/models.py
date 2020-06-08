@@ -1,5 +1,5 @@
 from django.db import models
-from lib.helpers import generate_heating_coils, generate_cooling_coils
+from lib.helpers import generate_heating_coils, generate_cooling_coils, generate_terminal_unit_types
 
 # Create your models here.
 class Site(models.Model):
@@ -81,15 +81,23 @@ class AirHandler(models.Model):
     cc_choices.append(('None', 'None'))
 
     name = models.CharField(max_length=50)
-    air_system_id = models.ForeignKey(AirSystems, on_delete=models.CASCADE)
+    site_id = models.ForeignKey(Site, on_delete=models.CASCADE)
 
     heating_coil_type = models.CharField(max_length=100, choices=tuple(hc_choices))
     cooling_coil_type = models.CharField(max_length=100, choices=tuple(cc_choices))
 
 
 class TerminalUnit(models.Model):
+    # Create the choices list on the fly
+    tu = generate_terminal_unit_types()
+    tu_choices = [(h.get('id'), h.get('description')) for h in tu]
+
+    # Add in options for choice to be blank
+    tu_choices.append(('None', 'None'))
+
     name = models.CharField(max_length=50)
     ahu_id = models.ForeignKey(AirHandler, on_delete=models.CASCADE)
+    terminal_unit_type = models.CharField(max_length=50, choices=tuple(tu_choices))
 
 
 # class HeatingCoil(models.Model):

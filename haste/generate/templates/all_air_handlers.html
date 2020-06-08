@@ -10,17 +10,19 @@
     </tr>
     </thead>
     <tbody>
-    {% for site in sites %}
+    {% for ahu in ahus %}
       <tr>
-        <td>{{ site.name }}</td>
-        <td>BLAH</td>
-        <td class="text">
-          <a href="{% url 'api.haystack.download' site.id %}" class="button">
-            <i class="fa fa-download">
-
-            </i>
-          </a>
-        </td>
+        <td>{{ ahu.name }}</td>
+        <td>{{ ahu.hc_name }}</td>
+        <td>{{ ahu.cc_name }}</td>
+        <td>{{ ahu.num_terminal_units }}</td>
+{#        <td class="text">#}
+{#          <a href="{% url 'api.haystack.download' site.id %}" class="button">#}
+{#            <i class="fa fa-download">#}
+{##}
+{#            </i>#}
+{#          </a>#}
+{#        </td>#}
       </tr>
     {% endfor %}
     </tbody>
