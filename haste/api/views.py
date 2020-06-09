@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from generate.models import Site
-from lib.helpers import Test
+from lib.helpers import HaystackBuilder
 from .serializers import SiteSerializer
 
 
@@ -46,9 +46,10 @@ class GenerateHaystackFile(APIView):
         2. This should just call one of those functions, i.e. Test() below
     """
     def get(self, request, site_id):
-        t = Test()
-        data = t.return_data()
-        data_string = json.dumps(data)
+        site = Site.objects.get(pk=site_id)
+        haystack = HaystackBuilder()
+        haystack_json = haystack.build_site(site)
+        data_string = json.dumps(haystack_json)
         json_file = StringIO()
         json_file.write(data_string)
         json_file.seek(0)

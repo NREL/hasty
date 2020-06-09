@@ -130,16 +130,23 @@ def cc_name_given_id(cc_id):
             return cc['description']
     return None
 
-class Test:
-    def __init__(self):
-        pass
 
-    def return_data(self):
-        data = [
-            {"testers": 1},
-            {"testersss": 2}
-        ]
-        return data
+class HaystackBuilder:
+    def __init__(self):
+        self.hay_json = []
+
+    def build_site(self, site):
+        id = uuid4()
+        self.hay_json.append({
+            ":id": f"r:{id}",
+            ":dis": site.name,
+            ":site": "m:",
+            ":geoCity": site.city,
+            ":geoState": site.state,
+            ":geoCountry": "United States"  # could infer this from state selection
+        })
+        return self.hay_json
+
 
 class Builder:
     def __init__(self):
