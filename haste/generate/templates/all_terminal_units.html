@@ -13,7 +13,7 @@
     {% for tu in terminal_units %}
       <tr>
         <td>{{ tu.id }}</td>
-        <td>{{ tu.name }}</td>
+        <td><input type="text" placeholder={{tu.name}}></td>
         <td>{{ tu.type }}</td>
       <td><button type="submit" class="btn btn-sm btn-outline-success" name="TerminalUnit-{{ tu.id }}">Save</button></td>
       </tr>

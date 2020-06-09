@@ -10,6 +10,7 @@ class SiteForm(forms.ModelForm):
 
 
 class AirHandlerForm(forms.ModelForm):
+
     tu = generate_terminal_unit_types()
     tu_choices = [(h.get('id'), h.get('description')) for h in tu]
 
@@ -21,7 +22,11 @@ class AirHandlerForm(forms.ModelForm):
 
     class Meta:
         model = models.AirHandler
-        fields = ("name", "heating_coil_type", "cooling_coil_type", "num_terminal_units", "terminal_unit_default_type")
+        fields = ("name", "heating_coil_type", "cooling_coil_type", "num_terminal_units",
+                  "terminal_unit_default_type", "pre_heat_coil", "supp_heat_coil", "exhaust_fan_type",
+                  "discharge_fan_type", "return_fan_type")
+
+
 
     # def save(self, commit=True):
     #     ntu = int(self.cleaned_data['num_terminal_units'])

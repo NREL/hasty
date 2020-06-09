@@ -1,5 +1,5 @@
 from django.db import models
-from lib.helpers import generate_heating_coils, generate_cooling_coils, generate_terminal_unit_types
+from lib.helpers import generate_heating_coils, generate_cooling_coils, generate_terminal_unit_types, generate_fan
 
 # Create your models here.
 class Site(models.Model):
@@ -73,18 +73,27 @@ class AirHandler(models.Model):
     # Create the choices list on the fly
     hc = generate_heating_coils()
     cc = generate_cooling_coils()
+    fa = generate_fan()
+
     hc_choices = [(h.get('id'), h.get('description')) for h in hc]
     cc_choices = [(h.get('id'), h.get('description')) for h in cc]
+    f_choices = [(f.get('id'), f.get('description')) for f in fa]
 
     # Add in options for choice to be blank
     hc_choices.append(('None', 'None'))
     cc_choices.append(('None', 'None'))
+    f_choices.append(('None', 'None'))
 
     name = models.CharField(max_length=50)
     site_id = models.ForeignKey(Site, on_delete=models.CASCADE)
 
+    pre_heat_coil = models.CharField(max_length=100, choices=tuple(hc_choices))
+    supp_heat_coil = models.CharField(max_length=100, choices=tuple(hc_choices))
     heating_coil_type = models.CharField(max_length=100, choices=tuple(hc_choices))
     cooling_coil_type = models.CharField(max_length=100, choices=tuple(cc_choices))
+    exhaust_fan_type = models.CharField(max_length=100, choices=tuple(f_choices))
+    discharge_fan_type = models.CharField(max_length=100, choices=tuple(f_choices))
+    return_fan_type = models.CharField(max_length=100, choices=tuple(f_choices))
 
 
 class TerminalUnit(models.Model):

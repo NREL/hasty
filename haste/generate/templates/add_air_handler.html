@@ -1,16 +1,55 @@
 {% load bootstrap4 %}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
-  <br>
-  <h5>Create Air Handler</h5>
-  <div class="container border rounded">
+    <br>
+    <h5>Create Air Handler</h5>
     <form method="post">
-        {% csrf_token %}
-        {% bootstrap_form air_handler_form %}
-        {% buttons %}
-        <button type="submit" class="btn btn-outline-success" name="create_air_handler">Create Air Handler</button>
-        {% endbuttons %}
+        <div class="container border rounded">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="col-md-14" style="padding-top: 1em; padding-bottom: 1em">
+                    {{ air_handler_form.name|as_crispy_field }}
+                </div>
+                <div class="form-row">
+                    <div class=" form-group col-md-3">
+                        {{ air_handler_form.heating_coil_type|as_crispy_field }}
+                    </div>
+                    <div class=" form-group col-md-3">
+                        {{ air_handler_form.cooling_coil_type|as_crispy_field }}
+                    </div>
+                    <div class=" form-group col-md-3">
+                        {{ air_handler_form.pre_heat_coil|as_crispy_field }}
+                    </div>
+                    <div class=" form-group col-md-3">
+                        {{ air_handler_form.supp_heat_coil|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class=" form-group col-md-4">
+                        {{ air_handler_form.discharge_fan_type|as_crispy_field }}
+                    </div>
+                    <div class=" form-group col-md-4">
+                        {{ air_handler_form.return_fan_type|as_crispy_field }}
+                    </div>
+                    <div class=" form-group col-md-4">
+                        {{ air_handler_form.exhaust_fan_type|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class=" form-group col-md-8">
+                        {{ air_handler_form.terminal_unit_default_type|as_crispy_field }}
+                    </div>
+                    <div class=" form-group col-md-4">
+                        {{ air_handler_form.num_terminal_units|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% buttons %}
+    <button class="btn btn-outline-success" name="create_air_handler" type="submit">Create Air Handler</button>
+    {% endbuttons %}
     </form>
-  </div>
+    </div>
 </div>
 {% endblock %}

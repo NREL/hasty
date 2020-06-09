@@ -8,6 +8,9 @@ from lib.helpers import generate_terminal_unit_types, ahu_summary_info, terminal
 
 def index(request):
     sites = models.Site.objects.all()
+    for site in sites:
+        ahus = models.AirHandler.objects.filter(site_id=site.id)
+
     args = {
         'sites': sites
     }
