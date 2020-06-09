@@ -12,11 +12,10 @@
     {% for site in sites %}
       <tr>
         <td>{{ site.name }}</td>
-        <td></td>
+        <td>0</td>
         <td class="text">
           <a href="{% url 'api.haystack.download' site.id %}" class="button">
             <i class="fa fa-download">
-
             </i>
           </a>
         </td>
