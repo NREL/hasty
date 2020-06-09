@@ -1,0 +1,23 @@
+{% load static %}
+<div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Terminal Unit Name</th>
+      <th scope="col">Terminal Unit Type</th>
+      <th scope="col">Save Changes</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for tu in terminal_units %}
+      <tr>
+        <td>{{ tu.id }}</td>
+        <td>{{ tu.name }}</td>
+        <td>{{ tu.type }}</td>
+      <td><button type="submit" class="btn btn-sm btn-outline-success" name="TerminalUnit-{{ tu.id }}">Save</button></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
