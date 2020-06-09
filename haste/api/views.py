@@ -4,7 +4,7 @@ from wsgiref.util import FileWrapper
 from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from generate.models import Site
+from generate.models import Site, AirHandler, TerminalUnit
 from lib.helpers import HaystackBuilder
 from .serializers import SiteSerializer
 
@@ -18,6 +18,10 @@ class GetSites(APIView):
     """Simple test"""
     def get(self, request):
         sites = Site.objects.all()
+        for site in sites:
+            ahus = AirHandler.objects.filter(site_id=site.id)
+            print(ahus)
+
         serializer = SiteSerializer(sites, many=True)
         return Response(serializer.data)
 
@@ -46,9 +50,19 @@ class GenerateHaystackFile(APIView):
         2. This should just call one of those functions, i.e. Test() below
     """
     def get(self, request, site_id):
-        site = Site.objects.get(pk=site_id)
+
+        haystack_json = []
         haystack = HaystackBuilder()
-        haystack_json = haystack.build_site(site)
+        site = Site.objects.get(pk=site_id)
+        ahus = AirHandler.objects.filter(site_id=site_id)
+
+        site_json = haystack.build_site(site)
+        equip_ref = site_json[0][":id"]
+        haystack_json.extend(site_json)
+        for ahu in ahus:
+            ahu_json = haystack.build_ahu(ahu, equip_ref)
+            haystack_json.extend(ahu_json)
+
         data_string = json.dumps(haystack_json)
         json_file = StringIO()
         json_file.write(data_string)

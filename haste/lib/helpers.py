@@ -42,6 +42,30 @@ def generate_heating_coils():
     ]
     return hc
 
+def generate_fan():
+    """
+    Generate a list of dicts for the different types of potential heating coils.
+    :return:
+    """
+    ef = [
+        {
+            "id": 'FAN-001',
+            "description": "On/Off",
+            "tags": ["tag1", "tag2"]
+        },
+        {
+            "id": 'FAN-002',
+            "description": "Multi-Speed",
+            "tags": ["tag1", "tag2"]
+        },
+        {
+            "id": 'FAN-003',
+            "description": "Varible-Speed",
+            "tags": ["tag1", "tag2"]
+        }
+    ]
+    return ef
+
 
 def generate_terminal_unit_types():
     """
@@ -132,12 +156,11 @@ def cc_name_given_id(cc_id):
 
 
 class HaystackBuilder:
-    def __init__(self):
-        self.hay_json = []
 
     def build_site(self, site):
+        hay_json = []
         id = uuid4()
-        self.hay_json.append({
+        hay_json.append({
             ":id": f"r:{id}",
             ":dis": site.name,
             ":site": "m:",
@@ -145,7 +168,19 @@ class HaystackBuilder:
             ":geoState": site.state,
             ":geoCountry": "United States"  # could infer this from state selection
         })
-        return self.hay_json
+        return hay_json
+
+    def build_ahu(self, ahu, equip_ref):
+        hay_json = []
+        id = uuid4()
+        hay_json.append({
+            ":id": f"r:{id}",
+            ":dis": ahu.name,
+            ":equip": "m:",
+            ":ahu": "m:",
+            "equipRef": f"r:{equip_ref}"
+        })
+        return hay_json
 
 
 class Builder:
