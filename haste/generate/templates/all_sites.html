@@ -11,7 +11,7 @@
     <tbody>
     {% for site in sites %}
       <tr>
-        <td>{{ site.name }}</td>
+        <td> <a href="{% url 'site' site.id %}">{{ site.name }} </a></td>
         <td>0</td>
         <td class="text">
           <a href="{% url 'api.haystack.download' site.id %}" class="button">
