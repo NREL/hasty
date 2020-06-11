@@ -12,7 +12,7 @@
     <tbody>
     {% for ahu in ahus %}
       <tr>
-        <td>{{ ahu.name }}</td>
+        <td><a href="{% url 'site.ahu' site.id ahu.id %}">{{ ahu.name }} </a> </td>
         <td>{{ ahu.hc_name }}</td>
         <td>{{ ahu.cc_name }}</td>
         <td>{{ ahu.num_terminal_units }}</td>

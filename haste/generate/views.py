@@ -82,10 +82,12 @@ class AirHandler(CreateView):
 
     def get(self, request, site_id, ahu_id):
         tu_info = []
+        site = models.Site.objects.get(id=site_id)
         tus = models.TerminalUnit.objects.filter(ahu_id=ahu_id)
         for tu in tus:
             tu_info.append(terminal_unit_summary_info(tu))
         args = {
+            'site': site,
             'terminal_units': tu_info
         }
         return render(request, self.template_name, args)

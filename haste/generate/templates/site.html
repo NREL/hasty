@@ -55,7 +55,13 @@
       </div>
       <div class="container collapse show" id="showAirSystems">
         {% include 'all_air_handlers.html' %}
-        {% include "add_air_handler.html" %}
+
+      <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#addAHU"
+                aria-expanded="true" aria-controls="addAHU">+ Add Air Handler</button>
+        <div class="container collapse" id="addAHU">
+          {% include "add_air_handler.html" %}
+        </div>
+        <br>
       </div>
     </div>
   </div>
