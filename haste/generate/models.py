@@ -96,6 +96,10 @@ class AirHandler(models.Model):
     return_fan_type = models.CharField(max_length=100, choices=tuple(f_choices))
 
 
+class ThermalZone(models.Model):
+    name = models.CharField(max_length=50)
+
+
 class TerminalUnit(models.Model):
     # Create the choices list on the fly
     tu = generate_terminal_unit_types()
@@ -107,7 +111,7 @@ class TerminalUnit(models.Model):
     name = models.CharField(max_length=50)
     ahu_id = models.ForeignKey(AirHandler, on_delete=models.CASCADE)
     terminal_unit_type = models.CharField(max_length=50, choices=tuple(tu_choices))
-
+    thermal_zone = models.OneToOneField(ThermalZone, on_delete=models.CASCADE)
 
 # class HeatingCoil(models.Model):
 #     name = models.CharField(max_length=50)

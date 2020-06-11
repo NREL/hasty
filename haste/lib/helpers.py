@@ -116,6 +116,7 @@ def terminal_unit_summary_info(terminal_unit_model):
     data = {
         'id': terminal_unit_model.id,
         'name': terminal_unit_model.name,
+        'zone_name': terminal_unit_model.thermal_zone.name,
         'type': tu_name_given_id(terminal_unit_model.terminal_unit_type)
     }
     return data

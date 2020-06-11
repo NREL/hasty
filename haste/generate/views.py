@@ -53,6 +53,9 @@ class Site(CreateView):
                         category = tu["category"]
                 for i in range(1, ntu + 1):
                     new_tu = models.TerminalUnit(name=f"{category}-{i:03d}", terminal_unit_type=tudt, ahu_id=ahu_def)
+                    new_tz = models.ThermalZone(name=f"Zone-{i:03d}")
+                    new_tz.save()
+                    new_tu.thermal_zone = new_tz
                     new_tu.save()
             return redirect('site.ahu', site_id=site_id, ahu_id=ahu_def.id)
         elif 'create_hot_water_system' in request.POST:
