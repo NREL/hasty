@@ -6,6 +6,7 @@
       <th scope="col">ID</th>
       <th scope="col">Terminal Unit Name</th>
       <th scope="col">Terminal Unit Type</th>
+      <th scope="col">Serves Zone</th>
       <th scope="col">Save Changes</th>
     </tr>
     </thead>
@@ -13,8 +14,19 @@
     {% for tu in terminal_units %}
       <tr>
         <td>{{ tu.id }}</td>
-        <td><input type="text" placeholder={{tu.name}}></td>
-        <td>{{ tu.type }}</td>
+        <td><input type="text" value={{tu.name}}></td>
+        <td>
+          <select id="terminal_unit" name="terminal_unit">
+            {% for tu_type in terminal_unit_types %}
+              {% if tu_type.description == tu.type %}
+                <option value="{{ tu_type.id }}" selected>{{ tu_type.description }}</option>
+              {% else %}
+                <option value="{{ tu_type.id }}">{{ tu_type.description }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+              </td>
+      <td><input type="text" value="Dummy-Zone"></td>
       <td><button type="submit" class="btn btn-sm btn-outline-success" name="TerminalUnit-{{ tu.id }}">Save</button></td>
       </tr>
     {% endfor %}
