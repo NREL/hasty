@@ -15,8 +15,10 @@
         <td>0</td>
         <td class="text">
           <a href="{% url 'api.haystack.download' site.id %}" class="button">
-            <i class="fa fa-download">
-            </i>
+            <i class="fa fa-download"></i>
+          </a>
+          <a href="{% url 'data_view' site.id %}" class="button">
+            <i class="fa fa-eye"></i>
           </a>
         </td>
       </tr>
