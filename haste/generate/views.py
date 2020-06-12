@@ -19,8 +19,12 @@ def index(request):
     return render(request, 'index.html', args)
 
 
-def view(request):
-    return render(request, 'view.html')
+def data_view(request, site_id):
+    site = models.Site.objects.get(id=site_id)
+    args = {
+        'site': site
+    }
+    return render(request, 'data_view.html', args)
 
 
 class Site(CreateView):

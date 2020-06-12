@@ -151,9 +151,6 @@ function load_entities(url) {
         xhr.open('GET', url);
         xhr.onload = resolve;
 
-
-			
-
         xhr.onerror = reject;
         xhr.send();
     });
