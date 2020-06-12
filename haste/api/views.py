@@ -52,23 +52,17 @@ class GenerateHaystackFile(APIView):
     def get(self, request, site_id):
 
         haystack_json = []
-        haystack = HaystackBuilder()
         site = Site.objects.get(pk=site_id)
         ahus = AirHandler.objects.filter(site_id=site_id)
+        builder = HaystackBuilder(site, ahus)
+        builder.build()
 
-        site_json = haystack.build_site(site)
-        equip_ref = site_json[0][":id"]
-        haystack_json.extend(site_json)
-        for ahu in ahus:
-            ahu_json = haystack.build_ahu(ahu, equip_ref)
-            haystack_json.extend(ahu_json)
-
-        data_string = json.dumps(haystack_json)
+        data_string = json.dumps(builder.hay_json)
         json_file = StringIO()
         json_file.write(data_string)
         json_file.seek(0)
 
         wrapper = FileWrapper(json_file)
         response = HttpResponse(wrapper, content_type='application/json')
-        response['Content-Disposition'] = 'attachement; filename=haystack.json'
+        response['Content-Disposition'] = f"attachement; filename={site.name} haystack.json"
         return response
