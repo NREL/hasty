@@ -1,0 +1,359 @@
+{
+      "cols": [
+        {
+            "name": "id"
+        },
+        {
+            "name": "ahu"
+        },
+        {
+            "name": "ahuGroup"
+        },
+        {
+            "name": "air"
+        },
+        {
+            "name": "area"
+        },
+        {
+            "name": "cmd"
+        },
+        {
+            "name": "cool"
+        },
+        {
+            "name": "cur"
+        },
+        {
+            "name": "curErr"
+        },
+        {
+            "name": "curStatus"
+        },
+        {
+            "name": "curVal"
+        },
+        {
+            "name": "damper"
+        },
+        {
+            "name": "dis"
+        },
+        {
+            "name": "discharge"
+        },
+        {
+            "name": "effective"
+        },
+        {
+            "name": "elec"
+        },
+        {
+            "name": "elecCost"
+        },
+        {
+            "name": "elecMeterLoad"
+        },
+        {
+            "name": "energy"
+        },
+        {
+            "name": "enum"
+        },
+        {
+            "name": "equip"
+        },
+        {
+            "name": "equipRef"
+        },
+        {
+            "name": "extColor"
+        },
+        {
+            "name": "fan"
+        },
+        {
+            "name": "floor"
+        },
+        {
+            "name": "gas"
+        },
+        {
+            "name": "geoAddr"
+        },
+        {
+            "name": "geoCity"
+        },
+        {
+            "name": "geoCoord"
+        },
+        {
+            "name": "geoCountry"
+        },
+        {
+            "name": "geoPostalCode"
+        },
+        {
+            "name": "geoState"
+        },
+        {
+            "name": "geoStreet"
+        },
+        {
+            "name": "heat"
+        },
+        {
+            "name": "his"
+        },
+        {
+            "name": "hisFunc"
+        },
+        {
+            "name": "hisInterpolate"
+        },
+        {
+            "name": "hq"
+        },
+        {
+            "name": "humidity"
+        },
+        {
+            "name": "hvac"
+        },
+        {
+            "name": "inService"
+        },
+        {
+            "name": "kind"
+        },
+        {
+            "name": "kwSite"
+        },
+        {
+            "name": "lighting"
+        },
+        {
+            "name": "lights"
+        },
+        {
+            "name": "lightsGroup"
+        },
+        {
+            "name": "meter"
+        },
+        {
+            "name": "metro"
+        },
+        {
+            "name": "mixed"
+        },
+        {
+            "name": "nextVal"
+        },
+        {
+            "name": "occupied"
+        },
+        {
+            "name": "occupiedEnd"
+        },
+        {
+            "name": "occupiedStart"
+        },
+        {
+            "name": "outside"
+        },
+        {
+            "name": "phone"
+        },
+        {
+            "name": "plug"
+        },
+        {
+            "name": "point"
+        },
+        {
+            "name": "power"
+        },
+        {
+            "name": "pressure"
+        },
+        {
+            "name": "primaryFunction"
+        },
+        {
+            "name": "region"
+        },
+        {
+            "name": "return"
+        },
+        {
+            "name": "revenue"
+        },
+        {
+            "name": "rooftop"
+        },
+        {
+            "name": "schedule"
+        },
+        {
+            "name": "sensor"
+        },
+        {
+            "name": "site"
+        },
+        {
+            "name": "siteMeter"
+        },
+        {
+            "name": "sitePoint"
+        },
+        {
+            "name": "siteRef"
+        },
+        {
+            "name": "sp"
+        },
+        {
+            "name": "stage"
+        },
+        {
+            "name": "store"
+        },
+        {
+            "name": "storeNum"
+        },
+        {
+            "name": "submeterOf"
+        },
+        {
+            "name": "sunrise"
+        },
+        {
+            "name": "tariffHis"
+        },
+        {
+            "name": "temp"
+        },
+        {
+            "name": "tz"
+        },
+        {
+            "name": "unit"
+        },
+        {
+            "name": "vendor"
+        },
+        {
+            "name": "volume"
+        },
+        {
+            "name": "water"
+        },
+        {
+            "name": "weatherCond"
+        },
+        {
+            "name": "weatherPoint"
+        },
+        {
+            "name": "weatherRef"
+        },
+        {
+            "name": "weatherSyncId"
+        },
+        {
+            "name": "yearBuilt"
+        },
+        {
+            "name": "zone"
+        }
+    ],
+  "meta": {
+        "ver": "3.0"
+    },
+  "rows": [
+    {
+      "id": "r:7d3206f9-61c1-40e8-8df3-ad95d37e6d1c",
+      "dis": "s:Austin Viveiros",
+      "site": "m:",
+      "geoCity": "s:Denver",
+      "geoState": "s:CO",
+      "geoCountry": "United States"
+    },
+    {
+      "id": "r:3c367bfc-b9bf-4144-8883-7892e6e56b24",
+      "dis": "s:Austin Viveiros",
+      "siteRef": "r:7d3206f9-61c1-40e8-8df3-ad95d37e6d1c",
+      "equip": "m:",
+      "ahu": "m:"
+    },
+    {
+      "id": "r:407177f6-a961-491c-a13f-1e281c9decb1",
+      "dis": "Austin Viveiros Preheat Coil",
+      "equipRef": "r:3c367bfc-b9bf-4144-8883-7892e6e56b24",
+      "continuous": "m:",
+      "naturalGasHeating": "m:",
+      "heatingCoil": "m:",
+      "equip": "m:"
+    },
+    {
+      "id": "r:b0c52c98-c0de-43d2-b917-ddc30a8f6ef1",
+      "dis": "Austin Viveiros Supp Heating Coil",
+      "equipRef": "r:3c367bfc-b9bf-4144-8883-7892e6e56b24",
+      "multiStage": "m:",
+      "numStages": "n:2",
+      "dxHeating": "m:",
+      "heatingCoil": "m:",
+      "equip": "m:"
+    },
+    {
+      "id": "r:e61dfdb8-5935-42ab-ad7a-2dd034d8a6f1",
+      "dis": "Austin Viveiros Heating Coil",
+      "equipRef": "r:3c367bfc-b9bf-4144-8883-7892e6e56b24",
+      "continuous": "m:",
+      "elecHeating": "m:",
+      "heatingCoil": "m:",
+      "equip": "m:"
+    },
+    {
+      "id": "r:58c11f72-6584-4960-8c82-45b622d16b78",
+      "dis": "Austin Viveiros Cooling Coil",
+      "equipRef": "r:3c367bfc-b9bf-4144-8883-7892e6e56b24",
+      "singleStage": "m:",
+      "dxCooling": "m:",
+      "coolingCoil": "m:",
+      "equip": "m:"
+    },
+    {
+      "id": "r:ffd85fe1-0ee4-468b-9ee4-dbe922d552dd",
+      "dis": "Austin Viveiros Discharge Fan",
+      "equipRef": "r:3c367bfc-b9bf-4144-8883-7892e6e56b24",
+      "discharge": "m:",
+      "continuous": "m:",
+      "fan": "m:",
+      "motor": "m:",
+      "equip": "m:"
+    },
+    {
+      "id": "r:8f271556-1fe6-44f9-9221-cb4c5aa1d582",
+      "dis": "Austin Viveiros Return Fan",
+      "equipRef": "r:3c367bfc-b9bf-4144-8883-7892e6e56b24",
+      "return": "m:",
+      "continuous": "m:",
+      "fan": "m:",
+      "motor": "m:",
+      "equip": "m:"
+    },
+    {
+      "id": "r:a4e7f812-b806-472d-b059-267baa0fd652",
+      "dis": "Austin Viveiros Exhaust Fan",
+      "equipRef": "r:3c367bfc-b9bf-4144-8883-7892e6e56b24",
+      "exhaust": "m:",
+      "multiStage": "m:",
+      "numStages": "n:2",
+      "fan": "m:",
+      "motor": "m:",
+      "equip": "m:"
+    }
+  ]
+}

@@ -110,7 +110,7 @@
 
             var options = get_options();
 
-            load_entities("{% static 'generate/json/dump.json' %}")
+            load_entities("{% static 'generate/json/dummy_haystack.json' %}")
                 .then(function (e) {
 
                     var data = on_receive_data(JSON.parse(e.target.response))
