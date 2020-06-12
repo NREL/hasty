@@ -19,6 +19,10 @@ def index(request):
     return render(request, 'index.html', args)
 
 
+def view(request):
+    return render(request, 'view.html')
+
+
 class Site(CreateView):
     template_name = 'site.html'
 
