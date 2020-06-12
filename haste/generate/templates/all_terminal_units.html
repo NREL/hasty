@@ -1,4 +1,5 @@
 {% load static %}
+<script src="{% static 'generate/alert.js' %}"></script>
 <div class="table-responsive">
   <table class="table table-bordered table-hover">
     <thead>
@@ -27,7 +28,7 @@
           </select>
               </td>
       <td>{{ tu.zone_name }}</td>
-      <td><button type="submit" class="btn btn-sm btn-outline-success" name="TerminalUnit-{{ tu.id }}">Save</button></td>
+      <td><button type="submit" onclick="f1()" class="btn btn-sm btn-outline-success" name="TerminalUnit-{{ tu.id }}">Save</button></td>
       </tr>
     {% endfor %}
     </tbody>
