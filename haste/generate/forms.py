@@ -1,4 +1,4 @@
-from lib.helpers import generate_terminal_unit_types
+from lib.helpers import Shadowfax
 from django import forms
 from . import models
 
@@ -10,9 +10,9 @@ class SiteForm(forms.ModelForm):
 
 
 class AirHandlerForm(forms.ModelForm):
-
-    tu = generate_terminal_unit_types()
-    tu_choices = [(h.get('id'), h.get('description')) for h in tu]
+    s = Shadowfax()
+    tu = s.generate_terminal_unit_types()
+    tu_choices = [(h.get('id'), h.get('Description')) for h in tu]
 
     # Add in options for choice to be blank
     tu_choices.append(('None', 'None'))

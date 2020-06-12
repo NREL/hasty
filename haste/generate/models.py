@@ -1,5 +1,5 @@
 from django.db import models
-from lib.helpers import generate_heating_coils, generate_cooling_coils, generate_terminal_unit_types, generate_fan
+from lib.helpers import Shadowfax
 
 # Create your models here.
 class Site(models.Model):
@@ -71,18 +71,25 @@ class AirSystems(models.Model):
 
 class AirHandler(models.Model):
     # Create the choices list on the fly
-    hc = generate_heating_coils()
-    cc = generate_cooling_coils()
-    fa = generate_fan()
+    s = Shadowfax()
+    hc = s.generate_heating_coils()
+    cc = s.generate_cooling_coils()
+    dis_fa = s.generate_discharge_fans()
+    ret_fa = s.generate_return_fans()
+    exh_fa = s.generate_exhaust_fans()
 
-    hc_choices = [(h.get('id'), h.get('description')) for h in hc]
-    cc_choices = [(h.get('id'), h.get('description')) for h in cc]
-    f_choices = [(f.get('id'), f.get('description')) for f in fa]
+    hc_choices = [(h.get('id'), h.get('Description')) for h in hc]
+    cc_choices = [(h.get('id'), h.get('Description')) for h in cc]
+    dis_fa_choices = [(f.get('id'), f.get('Description')) for f in dis_fa]
+    ret_fa_choices = [(f.get('id'), f.get('Description')) for f in ret_fa]
+    exh_fa_choices = [(f.get('id'), f.get('Description')) for f in exh_fa]
 
     # Add in options for choice to be blank
     hc_choices.append(('None', 'None'))
     cc_choices.append(('None', 'None'))
-    f_choices.append(('None', 'None'))
+    dis_fa_choices.append(('None', 'None'))
+    ret_fa_choices.append(('None', 'None'))
+    exh_fa_choices.append(('None', 'None'))
 
     name = models.CharField(max_length=50)
     site_id = models.ForeignKey(Site, on_delete=models.CASCADE)
@@ -91,9 +98,9 @@ class AirHandler(models.Model):
     supp_heat_coil = models.CharField(max_length=100, choices=tuple(hc_choices))
     heating_coil_type = models.CharField(max_length=100, choices=tuple(hc_choices))
     cooling_coil_type = models.CharField(max_length=100, choices=tuple(cc_choices))
-    exhaust_fan_type = models.CharField(max_length=100, choices=tuple(f_choices))
-    discharge_fan_type = models.CharField(max_length=100, choices=tuple(f_choices))
-    return_fan_type = models.CharField(max_length=100, choices=tuple(f_choices))
+    discharge_fan_type = models.CharField(max_length=100, choices=tuple(dis_fa_choices))
+    return_fan_type = models.CharField(max_length=100, choices=tuple(ret_fa_choices))
+    exhaust_fan_type = models.CharField(max_length=100, choices=tuple(exh_fa_choices))
 
 
 class ThermalZone(models.Model):
@@ -101,9 +108,10 @@ class ThermalZone(models.Model):
 
 
 class TerminalUnit(models.Model):
+    s = Shadowfax()
     # Create the choices list on the fly
-    tu = generate_terminal_unit_types()
-    tu_choices = [(h.get('id'), h.get('description')) for h in tu]
+    tu = s.generate_terminal_unit_types()
+    tu_choices = [(h.get('id'), h.get('Description')) for h in tu]
 
     # Add in options for choice to be blank
     tu_choices.append(('None', 'None'))
@@ -112,25 +120,3 @@ class TerminalUnit(models.Model):
     ahu_id = models.ForeignKey(AirHandler, on_delete=models.CASCADE)
     terminal_unit_type = models.CharField(max_length=50, choices=tuple(tu_choices))
     thermal_zone = models.OneToOneField(ThermalZone, on_delete=models.CASCADE)
-
-# class HeatingCoil(models.Model):
-#     name = models.CharField(max_length=50)
-
-# class AirHandlerHeatingCoil(models.Model):
-#     hcs = HeatingCoil.objects.get_all()
-#     HEATING_COIL_CHOICES = []
-#     for hc in hcs.items():
-#         HEATING_COIL_CHOICES.append((hc.id, hc.description))
-#
-#     name = models.CharField(max_length=50)
-#     heating_coil_id = models.
-
-
-# class Component(models.Model):
-#     CATEGORIES = (
-#         ("Heating Coil", (
-#             ('Modulating DX heating ')),
-#          ),
-#     )
-#     name = models.CharField(max_length=100)
-#     # category =

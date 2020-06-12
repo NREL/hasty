@@ -1,0 +1,63 @@
+﻿id,Category,Description,Usage Details,Include Tagset from ID,Add Tagset,Final Tagset,Haste Choice
+1,Damper,Outside air damper,Refers to a single outside air damper which is used for  economizing and ventilation purposes.,17,outside,outside damper actuator equip,
+2,Damper,Economizing damper,Denotes a damper in an outside duct that is used to reduce conditioning requirements,1,economizer,economizer outside damper actuator equip,
+3,Damper,Outside air and economizing damper,"Denotes a damper in an outside duct used for ventilation purposes, not economizing.",1,ventilation,ventilation outside damper actuator equip,
+4,Discharge fan,On/off discharge fan,On/off fan used in the discharge air stream,13,discharge,discharge singleSpeed fan motor equip,TRUE
+5,Discharge fan,Variable speed discharge fan,Variable speed fan used in the discharge air stream,14,discharge,discharge continuous fan motor equip,TRUE
+6,Discharge fan,Multi-speed discharge fan,Stepped fan used in the discharge air stream,15,discharge,discharge multiStage numStages:N fan motor equip,FALSE
+7,Return fan,On/off return fan,On/off fan used in the return air stream,13,return,return singleSpeed fan motor equip,TRUE
+8,Return fan,Variable speed return fan,Variable speed fan used in the return air stream,14,return,return continuous fan motor equip,TRUE
+9,Return fan,Multi-speed return fan,Stepped fan used in the return air stream,15,return,return multiStage numStages:N fan motor equip,FALSE
+10,Exhaust fan,On/off exhaust fan,On/off fan used in the exhaust air stream,13,exhaust,exhaust singleSpeed fan motor equip,TRUE
+11,Exhaust fan,Variable speed exhaust fan,Variable speed fan used in the exhaust air stream,14,exhaust,exhaust continuous fan motor equip,TRUE
+12,Exhaust fan,Multi-speed exhaust fan,Stepped fan used in the exhaust air stream,15,exhaust,exhaust multiStage numStages:N fan motor equip,FALSE
+13,Fan,On/off fan,Used to describe a fan with on/off control capabilities.,16,singleSpeed,singleSpeed fan motor equip,
+14,Fan,Variable speed fan,"Used to describe a fan which receives a control signal as a percentage, typically 0% - 100%. This does not guarantee the fan has continuous operating points, i.e. it might only be able to ramp in 5% increments.",16,continuous,continuous fan motor equip,
+15,Fan,Multi-speed fan,"Used to describe a fan with discrete steps. The numSteps parameter should define the number of discrete operating speeds for the fan motor, excluding off.",16,multiStage numStages:N,multiStage numStages:N fan motor equip,
+16,Fan,Fan,"General concept for thing that moves air.  For the sake of simplicity, we couple the fan and motor together.",18,fan motor,fan motor equip,
+17,Damper,Damper,"Actuator used to control the flow of air, actuator is for controlling the damper position",18,damper actuator,damper actuator equip,
+18,Equip,Equip,General equipment,,equip,equip,
+19,Damper,Open/close damper,Used to describe a damper that is either open or closed,17,openClose,openClose damper actuator equip,
+20,Damper,Modulating damper,Used to describe a damper with 0%-100% control capabilities,17,continuous,continuous damper actuator equip,
+21,Coil,Coil,An apparatus used to transer energy between two substances.,18,coil,coil equip,
+22,Heating coil,Heating coil,An apparatus used to transfer energy into a substance.,18,heatingCoil,heatingCoil equip,FALSE
+23,Cooling coil,Cooling coil,An apparatus used to transfer energy out of a substance.,18,coolingCoil,coolingCoil equip,FALSE
+24,Heating coil,DX heating coil,"An apparatus used to transfer energy into a substance using a direct expansion refrigeration cycle.  It is recommended to further refine this with a controlStrategyType (singleStage, multiStage, continuous).",22,dxHeating,dxHeating heatingCoil equip,FALSE
+25,Cooling coil,DX cooling coil,"An apparatus used to transfer energy out of a substance using a direct expansion refrigeration cycle.  It is recommended to further refine this with a controlStrategyType (singleStage, multiStage, continuous).",23,dxCooling,dxCooling coolingCoil equip,FALSE
+26,Heating coil,N-Stage DX heating coil,An apparatus used to transfer energy into a substance using a direct expansion refrigeration cycle with a specific number of stages.,24,multiStage numStages:N,multiStage numStages:N dxHeating heatingCoil equip,FALSE
+27,Cooling coil,N-Stage DX cooling coil,An apparatus used to transfer energy out of a substance using a direct expansion refrigeration cycle with a specific number of stages.,25,multiStage numStages:N,multiStage numStages:N dxCooling coolingCoil equip,FALSE
+28,Heating coil,Hot water coil,"An apparatus used to transfer energy into a substance using hot water flowing through a coil.  It is recommended to further refine this with a controlStrategyType (singleStage, multiStage, continuous).",22,hotWaterHeating,hotWaterHeating heatingCoil equip,FALSE
+29,Heating coil,Steam coil,"An apparatus used to transfer energy into a substance using steam flowing through a coil. It is recommended to further refine this with a controlStrategyType (singleStage, multiStage, continuous).",22,steamHeating,steamHeating heatingCoil equip,FALSE
+30,Cooling coil,Chilled water coil,"An apparatus used to transfer energy out of a substance using chilled water flowing through a coil. It is recommended to further refine this with a controlStrategyType (singleStage, multiStage, continuous).",23,chilledWaterCooling,chilledWaterCooling coolingCoil equip,FALSE
+31,Heating coil,Electric heating coil,"An apparatus used to transfer energy into a substance using electric resistance. It is recommended to further refine this with a controlStrategyType (singleStage, multiStage, continuous).",22,elecHeating,elecHeating heatingCoil equip,FALSE
+32,Heating coil,N-Stage electric heating coil,An apparatus used to transfer energy into a substance using electric resistance with a specific number of stages.,31,multiStage numStages:N,multiStage numStages:N elecHeating heatingCoil equip,FALSE
+33,Heating coil,Natural gas heating coil,"An apparatus used to transfer energy into a substance through the combustion of natural gas.  It is recommended to further refine this with a controlStrategyType (singleStage, multiStage, continuous).",22,naturalGasHeating,naturalGasHeating heatingCoil equip,FALSE
+34,Heating coil,N-Stage natural gas heating coil,An apparatus used to transfer energy into a substance through the combustion of natural gas with a specific number of stages.,33,multiStage numStages:N,multiStage numStages:N naturalGasHeating heatingCoil equip,FALSE
+35,Heating coil,Modulating DX heating coil,An apparatus used to transfer energy into a substance using a direct expansion refrigeration cycle with theoretical control capabilities of 0 - 100%.,24,continuous,continuous dxHeating heatingCoil equip,TRUE
+36,Cooling coil,Modulating DX cooling coil,An apparatus used to transfer energy out of a substance using a direct expansion refrigeration cycle with theoretical control capabilities of 0 - 100%.,25,continuous,continuous dxCooling coolingCoil equip,FALSE
+37,Heating coil,Modulating electric heating coil,An apparatus used to transfer energy into a substance using electric resistance with theoretical control capabilities of 0 - 100%.,31,continuous,continuous elecHeating heatingCoil equip,TRUE
+38,Heating cooling coil,Heating cooling coil,An apparatus used to transfer energy into and out of a substance.  The mode of the equipment determines whether heat should be transferred into (heating) or out of (cooling) the substance,18,heatingCoolingCoil,heatingCoolingCoil equip,
+39,Heating cooling coil,Heat pump coil,"A heating cooling coil using a reversible, direct expansion refrigeration cycle.  It is recommended to further refine this with a controlStrategyType (singleStage, multiStage, continuous).",38,dxHeating dxCooling,dxHeating dxCooling heatingCoolingCoil equip,
+40,Heating cooling coil,N-Stage heat pump coil,"A heating cooling coil using a reversible, direct expansion refrigeration cycle with a specific number of stages.",39,multiStage numStages:N,multiStage numStages:N dxHeating dxCooling heatingCoolingCoil equip,
+41,Heating cooling coil,Variable speed heat pump coil,"A heating cooling coil using a reversible, direct expansion refrigeration cycle with theoretical control capabilities of 0 - 100%.",39,continuous,continuous dxHeating dxCooling heatingCoolingCoil equip,
+42,Heating coil,Modulating natural gas heating coil,An apparatus used to transfer energy into a substance through the combustion of natural gas with theoretical control capabilities of 0 - 100%.,33,continuous,continuous naturalGasHeating heatingCoil equip,TRUE
+43,Heating coil,2-stage DX heating coil,An apparatus used to transfer energy into a substance using a direct expansion refrigeration cycle with two stages.,24,multiStage numStages:2,multiStage numStages:2 dxHeating heatingCoil equip,TRUE
+44,Cooling coil,2-stage DX cooling coil,An apparatus used to transfer energy out of a substance using a direct expansion refrigeration cycle with 2 stages.,25,multiStage numStages:2,multiStage numStages:2 dxCooling coolingCoil equip,TRUE
+45,Heating coil,2-stage electric heating coil,An apparatus used to transfer energy into a substance using electric resistance with exactly 2 stages,31,multiStage numStages:2,multiStage numStages:2 elecHeating heatingCoil equip,TRUE
+46,Heating coil,2-stage natural gas heating coil,An apparatus used to transfer energy into a substance through the combustion of natural gas with exactly 2 stages,33,multiStage numStages:2,multiStage numStages:2 naturalGasHeating heatingCoil equip,TRUE
+47,Multi-speed fan,2-speed fan,Used to describe a fan with two discrete speeds.,16,multiStage numStages:2,multiStage numStages:2 fan motor equip,
+48,Discharge fan,2-speed discharge fan,2-speed fan used in the discharge air stream,47,discharge,discharge multiStage numStages:2 fan motor equip,TRUE
+49,Exhaust fan,2-speed exhaust fan,2-speed fan used in the exhaust air stream,47,exhaust,exhaust multiStage numStages:2 fan motor equip,TRUE
+50,Return fan,2-speed return fan,2-speed fan used in the return air stream,47,return,return multiStage numStages:2 fan motor equip,TRUE
+51,Heating cooling coil,2-Stage heat pump coil,"A heating cooling coil using a reversible, direct expansion refrigeration cycle with exactly 2 stages.",39,multiStage numStages:2,multiStage numStages:2 dxHeating dxCooling heatingCoolingCoil equip,
+52,Space,,,,space,space,
+53,Space,,,52,zone,zone space,
+54,Space,,A thermal zone or HVAC zone.,53,hvac,hvac zone space,
+55,Heating coil,Single Stage DX heating coil,An apparatus used to transfer energy into a substance using a single stage direct expansion refrigeration cycle,24,singleStage,singleStage dxHeating heatingCoil equip,TRUE
+56,Cooling coil,Single Stage DX cooling coil,An apparatus used to transfer energy out of a substance using a single stage direct expansion refrigeration cycle,25,singleStage,singleStage dxCooling coolingCoil equip,TRUE
+57,Heating coil,Modulating hot water coil,"An apparatus used to transfer energy into a substance using hot water flowing through a coil.  It is recommended to further refine this with a controlStrategyType (singleStage, multiStage, continuous).",28,continuous,continuous hotWaterHeating heatingCoil equip,TRUE
+58,Heating coil,Modulating steam coil,"An apparatus used to transfer energy into a substance using steam flowing through a coil. It is recommended to further refine this with a controlStrategyType (singleStage, multiStage, continuous).",29,continuous,continuous steamHeating heatingCoil equip,TRUE
+59,Cooling coil,Modulating chilled water coil,"An apparatus used to transfer energy out of a substance using chilled water flowing through a coil. It is recommended to further refine this with a controlStrategyType (singleStage, multiStage, continuous).",30,continuous,continuous chilledWaterCooling coolingCoil equip,TRUE
+60,Heating coil,Single stage electric heating coil,An apparatus used to transfer energy into a substance using electric resistance with a single stage.,31,singleStage,singleStage elecHeating heatingCoil equip,TRUE
+61,Heating coil,Single stage natural gas heating coil,An apparatus used to transfer energy into a substance through the combustion of natural gas using a single stage.,33,singleStage,singleStage naturalGasHeating heatingCoil equip,TRUE
+62,Heating cooling coil,Single stage heat pump coil,"A heating cooling coil using a reversible, direct expansion refrigeration cycle with a single stage.",39,singleStage,singleStage dxHeating dxCooling heatingCoolingCoil equip,

@@ -1,159 +1,143 @@
+import os
 import pandas as pd
 from uuid import uuid4
 from generate import models
 
 
-def generate_cooling_coils():
+class Shadowfax:
     """
-    Generate a list of dicts for the different types of potential cooling coils.
-    :return:
+    The Lord of All Horses, and Gandalf's friend through many dangers.
+    He knows how to show the meaning of Haste.
     """
-    cc = [
-        {
-            "id": 'CC-001',
-            "description": "Cooling Coil 1",
-            "tags": ["tag1", "tag2"]
-        },
-        {
-            "id": 'CC-002',
-            "description": "Cooling Coil 2",
-            "tags": ["tag1", "tag2"]
+    def __init__(self):
+        p = os.path.dirname(os.path.abspath(__file__))
+        f_path = os.path.join(p, 'Components.csv')
+        self.df_components = pd.read_csv(f_path)
+        self.df_components = self.df_components[self.df_components['Haste Choice'] == True]
+        self.df_components['id'] = self.df_components['id'].astype(str)
+        self.df_cc = self.df_components[self.df_components['Category'] == 'Cooling coil']
+        self.df_hc = self.df_components[self.df_components['Category'] == 'Heating coil']
+        self.df_dis_fan = self.df_components[self.df_components['Category'] == 'Discharge fan']
+        self.df_ret_fan = self.df_components[self.df_components['Category'] == 'Return fan']
+        self.df_exh_fan = self.df_components[self.df_components['Category'] == 'Exhaust fan']
+
+    def generate_cooling_coils(self):
+        """
+        Generate a list of dicts for the different types of potential cooling coils.
+        :return:
+        """
+        return self.df_cc.to_dict('records')
+
+    def generate_heating_coils(self):
+        """
+        Generate a list of dicts for the different types of potential heating coils.
+        :return:
+        """
+        return self.df_hc.to_dict('records')
+
+    def generate_discharge_fans(self):
+        """
+        Generate a list of dicts for the different types of potential heating coils.
+        :return:
+        """
+        return self.df_dis_fan.to_dict('records')
+
+    def generate_return_fans(self):
+        """
+        Generate a list of dicts for the different types of potential heating coils.
+        :return:
+        """
+        return self.df_ret_fan.to_dict('records')
+
+    def generate_exhaust_fans(self):
+        """
+        Generate a list of dicts for the different types of potential heating coils.
+        :return:
+        """
+        return self.df_exh_fan.to_dict('records')
+
+    def generate_terminal_unit_types(self):
+        """
+        Generate a list of dicts for the different types of potential terminal units.
+        :return:
+        """
+        tu = [
+            {
+                "id": 'TU-001',
+                "category": "VAV",
+                "Description": "VAV Box Cooling Only",
+                "Final Tagset": ["tag1", "tag2"]
+            },
+            {
+                "id": 'TU-002',
+                "category": "CAV",
+                "Description": "CAV Terminal Unit",
+                "Final Tagset": ["tag1", "tag2"]
+            }
+        ]
+        return tu
+
+    def ahu_summary_info(self, ahu_model):
+        """
+        Return summary info for the AirHandler for displaying in the 'all_air_handlers.html' page
+        :param ahu_model: A single AirHandler model
+        :return: dict
+        """
+        tus = models.TerminalUnit.objects.filter(ahu_id=ahu_model.id)
+        num_tus = tus.count()
+        data = {
+            'id': ahu_model.id,
+            'name': ahu_model.name,
+            'hc_name': self.hc_name_given_id(ahu_model.heating_coil_type),
+            'cc_name': self.cc_name_given_id(ahu_model.cooling_coil_type),
+            'num_terminal_units': num_tus
         }
-    ]
-    return cc
+        return data
 
-
-def generate_heating_coils():
-    """
-    Generate a list of dicts for the different types of potential heating coils.
-    :return:
-    """
-    hc = [
-        {
-            "id": 'HC-001',
-            "description": "Heating Coil 1",
-            "tags": ["tag1", "tag2"]
-        },
-        {
-            "id": 'HC-002',
-            "description": "Heating Coil 2",
-            "tags": ["tag3", "tag4"]
+    def terminal_unit_summary_info(self, terminal_unit_model):
+        """
+        Return summary info for the TerminalUnit for displaying in the 'all_terminal_units.html' page
+        :param terminal_unit_model: A single TerminalUnit model
+        :return: dict
+        """
+        data = {
+            'id': terminal_unit_model.id,
+            'name': terminal_unit_model.name,
+            'zone_name': terminal_unit_model.thermal_zone.name,
+            'type': self.tu_name_given_id(terminal_unit_model.terminal_unit_type)
         }
-    ]
-    return hc
+        return data
 
-def generate_fan():
-    """
-    Generate a list of dicts for the different types of potential heating coils.
-    :return:
-    """
-    ef = [
-        {
-            "id": 'FAN-001',
-            "description": "On/Off",
-            "tags": ["tag1", "tag2"]
-        },
-        {
-            "id": 'FAN-002',
-            "description": "Multi-Speed",
-            "tags": ["tag1", "tag2"]
-        },
-        {
-            "id": 'FAN-003',
-            "description": "Varible-Speed",
-            "tags": ["tag1", "tag2"]
-        }
-    ]
-    return ef
+    def tu_name_given_id(self, tu_id):
+        tus = self.generate_terminal_unit_types()
+        for tu in tus:
+            if tu_id == tu['id']:
+                return tu['Description']
+        return None
 
+    def hc_name_given_id(self, hc_id):
+        """
+        Return the human readable version of the heating coil given its id.
+        :param hc_id: The id of the heating coil as returned by generate_heating_coils()
+        :return: str
+        """
+        hcs = self.generate_heating_coils()
+        for hc in hcs:
+            if hc_id == hc['id']:
+                return hc['Description']
+        return None
 
-def generate_terminal_unit_types():
-    """
-    Generate a list of dicts for the different types of potential terminal units.
-    :return:
-    """
-    tu = [
-        {
-            "id": 'TU-001',
-            "category": "VAV",
-            "description": "VAV Box Cooling Only",
-            "tags": ["tag1", "tag2"]
-        },
-        {
-            "id": 'TU-002',
-            "category": "CAV",
-            "description": "CAV Terminal Unit",
-            "tags": ["tag1", "tag2"]
-        }
-    ]
-    return tu
-
-
-def ahu_summary_info(ahu_model):
-    """
-    Return summary info for the AirHandler for displaying in the 'all_air_handlers.html' page
-    :param ahu_model: A single AirHandler model
-    :return: dict
-    """
-    tus = models.TerminalUnit.objects.filter(ahu_id=ahu_model.id)
-    num_tus = tus.count()
-    data = {
-        'id': ahu_model.id,
-        'name': ahu_model.name,
-        'hc_name': hc_name_given_id(ahu_model.heating_coil_type),
-        'cc_name': cc_name_given_id(ahu_model.cooling_coil_type),
-        'num_terminal_units': num_tus
-    }
-    return data
-
-
-def terminal_unit_summary_info(terminal_unit_model):
-    """
-    Return summary info for the TerminalUnit for displaying in the 'all_terminal_units.html' page
-    :param terminal_unit_model: A single TerminalUnit model
-    :return: dict
-    """
-    data = {
-        'id': terminal_unit_model.id,
-        'name': terminal_unit_model.name,
-        'zone_name': terminal_unit_model.thermal_zone.name,
-        'type': tu_name_given_id(terminal_unit_model.terminal_unit_type)
-    }
-    return data
-
-
-def tu_name_given_id(tu_id):
-    tus = generate_terminal_unit_types()
-    for tu in tus:
-        if tu_id == tu['id']:
-            return tu['description']
-    return None
-
-
-def hc_name_given_id(hc_id):
-    """
-    Return the human readable version of the heating coil given its id.
-    :param hc_id: The id of the heating coil as returned by generate_heating_coils()
-    :return: str
-    """
-    hcs = generate_heating_coils()
-    for hc in hcs:
-        if hc_id == hc['id']:
-            return hc['description']
-    return None
-
-
-def cc_name_given_id(cc_id):
-    """
-    Return the human readable version of the cooling coil given its id.
-    :param cc_id: The id of the heating coil as returned by generate_cooling_coils()
-    :return: str
-    """
-    ccs = generate_cooling_coils()
-    for cc in ccs:
-        if cc_id == cc['id']:
-            return cc['description']
-    return None
+    def cc_name_given_id(self, cc_id):
+        """
+        Return the human readable version of the cooling coil given its id.
+        :param cc_id: The id of the heating coil as returned by generate_cooling_coils()
+        :return: str
+        """
+        ccs = self.generate_cooling_coils()
+        for cc in ccs:
+            if cc_id == cc['id']:
+                return cc['Description']
+        return None
 
 
 class HaystackBuilder:
