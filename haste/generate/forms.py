@@ -27,17 +27,3 @@ class AirHandlerForm(forms.ModelForm):
                   "discharge_fan_type", "return_fan_type")
 
 
-
-    # def save(self, commit=True):
-    #     ntu = int(self.cleaned_data['num_terminal_units'])
-    #     tudt = self.cleaned_data['terminal_unit_default_type']
-    #     terminal_unit_types = generate_terminal_unit_types()
-    #
-    #     for tu in terminal_unit_types:
-    #         if tudt == tu["id"]:
-    #             category = tu["category"]
-    #     for i in range(1, ntu + 1):
-    #         new = models.TerminalUnit(name=f"{category}-{i:03d}", terminal_unit_type=tudt, ahu_id=)
-    #     print(self.cleaned_data['num_terminal_units'])
-    #     print(self.cleaned_data['terminal_unit_default_type'])
-    #     return super(AirHandlerForm, self).save(commit=commit)
