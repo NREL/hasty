@@ -2,6 +2,7 @@
 {% load static %}
 {% load bootstrap4 %}
 {% bootstrap_css %}
+
 <html>
 <head>
     <title></title>
@@ -110,7 +111,7 @@
 
             var options = get_options();
 
-            load_entities("{% static 'generate/json/dummy_haystack.json' %}")
+            load_entities("{% url 'api.haystack.download' site.id %}")
                 .then(function (e) {
 
                     var data = on_receive_data(JSON.parse(e.target.response))
