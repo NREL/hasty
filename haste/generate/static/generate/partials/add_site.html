@@ -1,8 +1,9 @@
-{% extends "partials/base.html" %}
+{% extends "base.html" %}
 {% load bootstrap4 %}
 {% block page_content %}
-{% include 'partials/header.html' %}
-{% include 'partials/nav.html' %}
+{% include 'header.html' %}
+{% include 'nav.html' %}
+
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -25,6 +26,5 @@
         {% endbuttons %}
     </form>
 </div>
-{% include 'partials/footer.html' %}
 {% endblock page_content %}
 

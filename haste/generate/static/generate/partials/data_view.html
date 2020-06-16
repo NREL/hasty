@@ -1,0 +1,196 @@
+<!doctype html>
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        #mynetwork {
+            width: 100%;
+            height: 100%;
+            border: 1px solid lightgray;
+        }
+
+        #loadingBar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(200, 200, 200, 0.8);
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -ms-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+            opacity: 1;
+        }
+
+        #wrapper {
+            position: relative;
+            height: 50em;
+        }
+
+        #text {
+            position: absolute;
+            top: 8px;
+            left: 530px;
+            width: 30px;
+            height: 50px;
+            margin: auto auto auto auto;
+            font-size: 22px;
+            color: #000000;
+        }
+
+        div.outerBorder {
+            position: relative;
+            top: 400px;
+            width: 600px;
+            height: 44px;
+            margin: auto auto auto auto;
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            background: rgb(252, 252, 252); /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(252, 252, 252, 1)), color-stop(100%, rgba(237, 237, 237, 1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom, rgba(252, 252, 252, 1) 0%, rgba(237, 237, 237, 1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#ededed', GradientType=0); /* IE6-9 */
+            border-radius: 72px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 500px;
+            height: 23px;
+            margin: auto auto auto auto;
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        #bar {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 20px;
+            height: 20px;
+            margin: auto auto auto auto;
+            border-radius: 11px;
+            border: 2px solid rgba(30, 30, 30, 0.05);
+            background: rgb(0, 173, 246); /* Old browsers */
+            box-shadow: 2px 0px 4px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+
+    <script type="application/javascript" src="{% static 'generate/js/vis.min.js' %}"></script>
+    <script type="application/javascript" src="{% static 'generate/js/haystackdata.js' %}"></script>
+    <script type="application/javascript" src="{% static 'generate/js/options.js' %}"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-77465018-11"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-77465018-11');
+    </script>
+    <script type="text/javascript">
+
+        function draw() {
+
+            var container = document.getElementById('mynetwork');
+
+            var options = get_options();
+
+            load_entities("{% static 'generate/json/dummy_haystack.json' %}")
+                .then(function (e) {
+
+                    var data = on_receive_data(JSON.parse(e.target.response))
+
+
+                    var network = new vis.Network(container, data, options);
+
+                    network.on("stabilizationProgress", function (params) {
+                        var maxWidth = 496;
+                        var minWidth = 20;
+                        var widthFactor = params.iterations / params.total;
+                        var width = Math.max(minWidth, maxWidth * widthFactor);
+
+                        document.getElementById('bar').style.width = width + 'px';
+                        document.getElementById('text').innerHTML = Math.round(widthFactor * 100) + '%';
+                    });
+                    network.once("stabilizationIterationsDone", function () {
+                        document.getElementById('text').innerHTML = '100%';
+                        document.getElementById('bar').style.width = '496px';
+                        document.getElementById('loadingBar').style.opacity = 0;
+                        // really clean the dom element
+                        setTimeout(function () {
+                            document.getElementById('loadingBar').style.display = 'none';
+                        }, 500);
+                    });
+                }, function (e) {
+                    // handle errors
+                });
+        }
+    </script>
+</head>
+<body onload="draw()">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">
+            <h1>Haste</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'index' %}">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Site</li>
+        </ol>
+    </nav>
+</div>
+<div class="container">
+    <h3>{{site.name}}</h3>
+    <p>Use mouse scroll wheel to zoom; Click and drag to pan</p>
+    <div id="wrapper">
+        <div id="mynetwork"></div>
+        <div id="loadingBar">
+            <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                    <div id="bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <span class="text-muted"></span>Powered By:
+        <a href="https://patrickcoffey.bitbucket.io/example1.html"> Patrick Coffey</a>
+  </div>
+</footer>
+</body>
+</html>
