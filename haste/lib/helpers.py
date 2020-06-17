@@ -17,6 +17,7 @@ class Shadowfax:
         self.df_components['id'] = self.df_components['id'].astype(str)
         self.df_cc = self.df_components[self.df_components['Category'] == 'Cooling coil']
         self.df_hc = self.df_components[self.df_components['Category'] == 'Heating coil']
+        self.df_hc_cc = self.df_components[self.df_components['Category'] == 'Heating cooling coil']
         self.df_dis_fan = self.df_components[self.df_components['Category'] == 'Discharge fan']
         self.df_ret_fan = self.df_components[self.df_components['Category'] == 'Return fan']
         self.df_exh_fan = self.df_components[self.df_components['Category'] == 'Exhaust fan']
@@ -43,6 +44,13 @@ class Shadowfax:
         :return:
         """
         return self.df_hc.to_dict('records')
+
+    def generate_heating_cooling_coils(self):
+        """
+        Generate a list of dicts for the different types of potential heating / cooling coils.
+        :return:
+        """
+        return self.df_hc_cc.to_dict('records')
 
     def generate_discharge_fans(self):
         """
@@ -83,8 +91,16 @@ class Shadowfax:
         data = {
             'id': ahu_model.id,
             'name': ahu_model.name,
-            'hc_name': self.hc_name_given_id(ahu_model.heating_coil_type),
-            'cc_name': self.cc_name_given_id(ahu_model.cooling_coil_type),
+            'coil_configurations': [
+                self.hc_name_given_id(ahu_model.heating_coil_type),
+                self.cc_name_given_id(ahu_model.cooling_coil_type),
+                self.hc_cc_name_given_id(ahu_model.heating_cooling_coil_type)
+            ],
+            'fan_configurations': [
+                self.df_name_given_id(ahu_model.discharge_fan_type),
+                self.rf_name_given_id(ahu_model.return_fan_type),
+                self.ef_name_given_id(ahu_model.exhaust_fan_type)
+            ],
             'num_terminal_units': num_tus,
             'df_name': self.df_name_given_id(ahu_model.discharge_fan_type)
         }
@@ -114,7 +130,7 @@ class Shadowfax:
     def hc_name_given_id(self, hc_id):
         """
         Return the human readable version of the heating coil given its id.
-        :param hc_id: The id of the heating coil as returned by generate_heating_coils()
+        :param hc_id: The id of the heating coil
         :return: str
         """
         hcs = self.generate_heating_coils()
@@ -126,7 +142,7 @@ class Shadowfax:
     def cc_name_given_id(self, cc_id):
         """
         Return the human readable version of the cooling coil given its id.
-        :param cc_id: The id of the heating coil as returned by generate_cooling_coils()
+        :param cc_id: The id of the cooling coil
         :return: str
         """
         ccs = self.generate_cooling_coils()
@@ -135,10 +151,22 @@ class Shadowfax:
                 return cc['Description']
         return None
 
+    def hc_cc_name_given_id(self, hc_cc_id):
+        """
+        Return the human readable version of the heating cooling coil given its id.
+        :param hc_cc_id: The id of the heating cooling coil
+        :return: str
+        """
+        hc_ccs = self.generate_heating_cooling_coils()
+        for hc_cc in hc_ccs:
+            if hc_cc_id == hc_cc['id']:
+                return hc_cc['Description']
+        return None
+
     def df_name_given_id(self, df_id):
         """
-        Return the human readable version of the cooling coil given its id.
-        :param cc_id: The id of the heating coil as returned by generate_cooling_coils()
+        Return the human readable version of the discharge fan given its id.
+        :param df_id: The id of the discharge fan
         :return: str
         """
         dfs = self.generate_discharge_fans()
@@ -146,6 +174,31 @@ class Shadowfax:
             if df_id == df['id']:
                 return df['Description']
         return None
+
+    def ef_name_given_id(self, ef_id):
+        """
+        Return the human readable version of the exhaust fan given its id.
+        :param ef_id: The id of the exhaust fan
+        :return: str
+        """
+        efs = self.generate_exhaust_fans()
+        for ef in efs:
+            if ef_id == ef['id']:
+                return ef['Description']
+        return None
+
+    def rf_name_given_id(self, rf_id):
+        """
+        Return the human readable version of the cooling coil given its id.
+        :param rf_id: The id of the return fan
+        :return: str
+        """
+        rfs = self.generate_return_fans()
+        for rf in rfs:
+            if rf_id == rf['id']:
+                return rf['Description']
+        return None
+
 
 class HaystackBuilder:
 

@@ -74,12 +74,14 @@ class AirHandler(models.Model):
     s = Shadowfax()
     hc = s.generate_heating_coils()
     cc = s.generate_cooling_coils()
+    hc_cc = s.generate_heating_cooling_coils()
     dis_fa = s.generate_discharge_fans()
     ret_fa = s.generate_return_fans()
     exh_fa = s.generate_exhaust_fans()
 
     hc_choices = [(h.get('id'), h.get('Description')) for h in hc]
     cc_choices = [(h.get('id'), h.get('Description')) for h in cc]
+    hc_cc_choices = [(h.get('id'), h.get('Description')) for h in hc_cc]
     dis_fa_choices = [(f.get('id'), f.get('Description')) for f in dis_fa]
     ret_fa_choices = [(f.get('id'), f.get('Description')) for f in ret_fa]
     exh_fa_choices = [(f.get('id'), f.get('Description')) for f in exh_fa]
@@ -87,17 +89,19 @@ class AirHandler(models.Model):
     # Add in options for choice to be blank
     hc_choices.append(('None', 'None'))
     cc_choices.append(('None', 'None'))
+    hc_cc_choices.append(('None', 'None'))
     dis_fa_choices.append(('None', 'None'))
     ret_fa_choices.append(('None', 'None'))
     exh_fa_choices.append(('None', 'None'))
 
     name = models.CharField(max_length=50)
-    site_id = models.ForeignKey(Site, on_delete=models.CASCADE)
+    site_id = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='air_handlers')
 
     pre_heat_coil = models.CharField(max_length=100, choices=tuple(hc_choices))
     supp_heat_coil = models.CharField(max_length=100, choices=tuple(hc_choices))
     heating_coil_type = models.CharField(max_length=100, choices=tuple(hc_choices))
     cooling_coil_type = models.CharField(max_length=100, choices=tuple(cc_choices))
+    heating_cooling_coil_type = models.CharField(max_length=100, choices=tuple(hc_cc_choices))
     discharge_fan_type = models.CharField(max_length=100, choices=tuple(dis_fa_choices))
     return_fan_type = models.CharField(max_length=100, choices=tuple(ret_fa_choices))
     exhaust_fan_type = models.CharField(max_length=100, choices=tuple(exh_fa_choices))
