@@ -15,7 +15,7 @@
 14,Fan,Variable speed fan,"Used to describe a fan which receives a control signal as a percentage, typically 0% - 100%. This does not guarantee the fan has continuous operating points, i.e. it might only be able to ramp in 5% increments.",16,continuous,continuous fan motor equip,
 15,Fan,Multi-speed fan,"Used to describe a fan with discrete steps. The numSteps parameter should define the number of discrete operating speeds for the fan motor, excluding off.",16,multiStage numStages:N,multiStage numStages:N fan motor equip,
 16,Fan,Fan,"General concept for thing that moves air.  For the sake of simplicity, we couple the fan and motor together.",18,fan motor,fan motor equip,
-17,Damper,Damper,"Actuator used to control the flow of air, actuator is for controlling the damper position",18,damper actuator,damper actuator equip,
+17,Damper,Damper,"Actuator used to control the flow of air, actuator is for controlling the damper position",18,damper actuator,damper actuator equip,TRUE
 18,Equip,Equip,General equipment,,equip,equip,
 19,Damper,Open/close damper,Used to describe a damper that is either open or closed,17,openClose,openClose damper actuator equip,
 20,Damper,Modulating damper,Used to describe a damper with 0%-100% control capabilities,17,continuous,continuous damper actuator equip,

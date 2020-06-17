@@ -21,6 +21,15 @@ class Shadowfax:
         self.df_ret_fan = self.df_components[self.df_components['Category'] == 'Return fan']
         self.df_exh_fan = self.df_components[self.df_components['Category'] == 'Exhaust fan']
 
+        # Read in and generate terminal units
+        f_path_tu = os.path.join(p, 'TerminalUnits.csv')
+        self.df_terminal_units = pd.read_csv(f_path_tu)
+        self.df_terminal_units = self.df_terminal_units[self.df_terminal_units['Haste Choice'] == True]
+        cast_to_str = ['id', 'damperComponentID', 'heatingComponentID', 'coolingComponentID']
+        self.df_terminal_units[cast_to_str] = self.df_terminal_units[cast_to_str].astype(str).applymap(lambda x: x.split('.')[0])
+        self.df_terminal_units[cast_to_str] = self.df_terminal_units[cast_to_str].applymap(lambda x: "None" if x == "nan" else x)
+
+
     def generate_cooling_coils(self):
         """
         Generate a list of dicts for the different types of potential cooling coils.
@@ -61,21 +70,7 @@ class Shadowfax:
         Generate a list of dicts for the different types of potential terminal units.
         :return:
         """
-        tu = [
-            {
-                "id": 'TU-001',
-                "category": "VAV",
-                "Description": "VAV Box Cooling Only",
-                "Final Tagset": ["tag1", "tag2"]
-            },
-            {
-                "id": 'TU-002',
-                "category": "CAV",
-                "Description": "CAV Terminal Unit",
-                "Final Tagset": ["tag1", "tag2"]
-            }
-        ]
-        return tu
+        return self.df_terminal_units.to_dict('records')
 
     def ahu_summary_info(self, ahu_model):
         """
@@ -186,8 +181,59 @@ class HaystackBuilder:
             })
             self.id_mapper[hay_id] = f"{hay_id} {ahu.id}"
             self.add_ahu_components(ahu, hay_id)
+            self.gen_terminal_unit_records(ahu, hay_id)
+
+    def gen_terminal_unit_records(self, ahu, ahu_hay_id):
+        """
+        Generate all terminal unit records for a given air handler.
+        :param ahu:
+        :param ahu_hay_id:
+        :return:
+        """
+        tus = models.TerminalUnit.objects.filter(ahu_id = ahu.id)
+        for tu in tus:
+            hay_id = uuid4()
+            temp = {
+                "id": f"r:{hay_id}",
+                "dis": f"s:{tu.name}",
+                "ahuRef": f"r:{ahu_hay_id}",
+            }
+            tu_type = self.sf.df_terminal_units[self.sf.df_terminal_units['id'] == tu.terminal_unit_type]
+            if tu_type.empty:
+                raise TerminalUnitNotFoundError(tu.terminal_unit_type)
+            tags = tu_type['Final Tagset'].values[0]
+            tags = tags.split(" ")
+            for tag in tags:
+                temp[tag] = "m:"
+            self.hay_json.append(temp)
+            self.add_terminal_unit_components(tu, hay_id)
+
+    def add_terminal_unit_components(self, tu, tu_hay_id):
+        """
+        Given a models.TerminalUnit, generate records for all of the defined terminal unit components.
+        components for a given terminal unit type are defined by the TerminalUnits.csv file.
+        :param tu: A models.TerminalUnit
+        :param tu_hay_id: The UUID of the terminal unit
+        :return:
+        """
+        tu_type = self.sf.df_terminal_units[self.sf.df_terminal_units['id'] == tu.terminal_unit_type]
+        damper = tu_type['damperComponentID'].values[0]
+        hc = tu_type['heatingComponentID'].values[0]
+        cc = tu_type['coolingComponentID'].values[0]
+
+        self.gen_component_record(tu, damper, tu_hay_id, "Damper")
+        self.gen_component_record(tu, hc, tu_hay_id, "Heating Coil")
+        self.gen_component_record(tu, cc, tu_hay_id, "Cooling Coil")
 
     def add_ahu_components(self, ahu, ahu_hay_id):
+        """
+        Given a models.AirHandler, generate records for all of the defined ahu components.
+        components with 'None' do not get generated.
+        :param ahu: A models.AirHandler for which components should be added
+        :type ahu: models.AirHandler
+        :param ahu_hay_id: The UUID of the ahu.
+        :return:
+        """
         self.gen_component_record(ahu, ahu.pre_heat_coil, ahu_hay_id, "Preheat Coil")
         self.gen_component_record(ahu, ahu.supp_heat_coil, ahu_hay_id, "Supp Heating Coil")
         self.gen_component_record(ahu, ahu.heating_coil_type, ahu_hay_id, "Heating Coil")
@@ -197,14 +243,27 @@ class HaystackBuilder:
         self.gen_component_record(ahu, ahu.exhaust_fan_type, ahu_hay_id, "Exhaust Fan")
 
     def gen_component_record(self, equip, component, equip_ref, component_type):
-        if component != "None":
+        """
+        Generate a record for a given component as a sub-equip of the defined equip_ref.
+        The 'typing' tags for the component record
+        are generated via the 'Final Tagset' specified in Components.csv.
+        :param equip: The model of the parent equip.
+        :type equip: models.AirHandler or models.TerminalUnit
+        :param str component: The id of the component to look up in Components.csv
+        :param str equip_ref: A UUID to use as the equipRef for the component
+        :param str component_type: A generic component description, for use in the 'dis' field
+        :return:
+        """
+        if component and component != "None":
             hay_id = uuid4()
             temp = {
                 "id": f"r:{hay_id}",
-                "dis": f"{equip.name} {component_type}",
+                "dis": f"s:{equip.name} {component_type}",
                 "equipRef": f"r:{equip_ref}",
             }
             comp_def = self.sf.df_components[self.sf.df_components['id'] == component]
+            if comp_def.empty:
+                raise ComponentNotFoundError(component)
             tags = comp_def['Final Tagset'].values[0]
             tags = tags.split(" ")
             for tag in tags:
@@ -222,7 +281,7 @@ class HaystackBuilder:
         try:
             float(n)
             return True
-        except:
+        except ValueError:
             return False
 
     def build(self):
@@ -306,7 +365,19 @@ class HaystackBuilder:
 
     # def add_fan_points(self, component_id, tagset):
 
+class ComponentNotFoundError(Exception):
+    def __init__(self, component_id):
+        self.component_id = component_id
+        self.message = f"Component with ID = {self.component_id} not found in df_components as imported from Components.csv.  Make sure 'Haste Choice' == True is specified."
 
-if __name__ == "__main__":
-    b = Builder()
-    b.build_ahu(1)
+    def __str__(self):
+        return self.message
+
+
+class TerminalUnitNotFoundError(Exception):
+    def __init__(self, terminal_unit_id):
+        self.terminal_unit_id = terminal_unit_id
+        self.message = f"Terminal Unit with ID = {self.terminal_unit_id} not found in df_terminal_units as imported from TerminalUnits.csv."
+
+    def __str__(self):
+        return self.message
