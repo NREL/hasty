@@ -16,7 +16,7 @@
         <form method="post">
             <tr>
                 <td>{{ tu.id }}</td>
-                <td><input id="{tu.name}}" name="{{tu.name}}" type="text" value={{tu.name}}></td>
+                <td><input id="{tu.id}}" name="{{tu.id}}" type="text" value={{tu.name}}></td>
                 <td>
                     <select id="terminal_unit" name="terminal_unit">
                         {% for tu_type in terminal_unit_types %}

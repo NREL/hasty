@@ -131,13 +131,12 @@ class AirHandler(CreateView):
     def post(self, request, site_id, ahu_id):
         if 'update_terminal_unit' in request.POST:
             data = request.POST
-            tus = models.TerminalUnit.objects.filter(ahu_id=ahu_id)
-            for tu in tus:
-                if tu.name in data.keys():
-                    new_name = data.get(tu.name, False)
-                    tu.name = new_name
-                    tu.terminal_unit_type = data.get('terminal_unit')
-                    tu.save()
+            key = next(iter(data))
+            tu = models.TerminalUnit.objects.get(id=key)
+            new_name = data.get(key, False)
+            tu.name = new_name
+            tu.terminal_unit_type = data.get('terminal_unit')
+            tu.save()
 
             return redirect('site.ahu', site_id=site_id, ahu_id=ahu_id)
 
