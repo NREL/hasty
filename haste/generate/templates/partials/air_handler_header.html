@@ -1,0 +1,10 @@
+{% extends 'partials/site_header.html' %}
+{% block air_handler_header %}
+  <hr>
+  <div class="card-body">
+    <h5 class="card-title">{{ ahu.name }}</h5>
+    <p class="card-subtitle">Heating type: {{ ahu_summary.hc_name }}</p>
+    <p class="card-subtitle">Cooling type: {{ ahu_summary.cc_name }}</p>
+    <p class="card-subtitle">Discharge fan type: {{ ahu_summary.df_name }}</p>
+  </div>
+{% endblock %}

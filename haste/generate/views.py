@@ -62,10 +62,12 @@ class Site(CreateView):
                 tudt = form_result.cleaned_data['terminal_unit_default_type']
                 s = Shadowfax()
                 terminal_unit_types = s.generate_terminal_unit_types()
+                print(terminal_unit_types)
+                print(f"TUDT: {tudt}")
 
                 for tu in terminal_unit_types:
                     if tudt == tu["id"]:
-                        category = tu["category"]
+                        category = tu["Category"]
                 for i in range(1, ntu + 1):
                     new_tu = models.TerminalUnit(name=f"{category}-{i:03d}", terminal_unit_type=tudt, ahu_id=ahu_def)
                     new_tz = models.ThermalZone(name=f"Zone-{i:03d}")
@@ -113,12 +115,14 @@ class AirHandler(CreateView):
         tu_types = s.generate_terminal_unit_types()
         site = models.Site.objects.get(id=site_id)
         ahu = models.AirHandler.objects.get(id=ahu_id)
+        ahu_summary = s.ahu_summary_info(ahu)
         tus = models.TerminalUnit.objects.filter(ahu_id=ahu_id)
         for tu in tus:
             tu_info.append(s.terminal_unit_summary_info(tu))
         args = {
             'site': site,
             'ahu': ahu,
+            'ahu_summary': ahu_summary,
             'terminal_units': tu_info,
             'terminal_unit_types': tu_types
         }
