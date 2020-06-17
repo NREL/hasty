@@ -303,6 +303,7 @@ class HaystackBuilder:
         self.gen_component_record(ahu, ahu.supp_heat_coil, ahu_hay_id, "Supp Heating Coil")
         self.gen_component_record(ahu, ahu.heating_coil_type, ahu_hay_id, "Heating Coil")
         self.gen_component_record(ahu, ahu.cooling_coil_type, ahu_hay_id, "Cooling Coil")
+        self.gen_component_record(ahu, ahu.heating_cooling_coil_type, ahu_hay_id, "Heating Cooling Coil")
         self.gen_component_record(ahu, ahu.discharge_fan_type, ahu_hay_id, "Discharge Fan")
         self.gen_component_record(ahu, ahu.return_fan_type, ahu_hay_id, "Return Fan")
         self.gen_component_record(ahu, ahu.exhaust_fan_type, ahu_hay_id, "Exhaust Fan")
