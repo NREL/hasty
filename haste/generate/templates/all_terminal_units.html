@@ -1,36 +1,43 @@
 {% load static %}
 <script src="{% static 'generate/alert.js' %}"></script>
 <div class="table-responsive">
-  <table class="table table-bordered table-hover">
-    <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Terminal Unit Name</th>
-      <th scope="col">Terminal Unit Type</th>
-      <th scope="col">Serves Zone</th>
-      <th scope="col">Save Changes</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for tu in terminal_units %}
-      <tr>
-        <td>{{ tu.id }}</td>
-        <td><input type="text" value={{tu.name}}></td>
-        <td>
-          <select id="terminal_unit" name="terminal_unit">
-            {% for tu_type in terminal_unit_types %}
-              {% if tu_type.Description == tu.type %}
-                <option value="{{ tu_type.id }}" selected>{{ tu_type.Description }}</option>
-              {% else %}
-                <option value="{{ tu_type.id }}">{{ tu_type.Description }}</option>
-              {% endif %}
-            {% endfor %}
-          </select>
-              </td>
-      <td>{{ tu.zone_name }}</td>
-      <td><button type="submit" onclick="f1()" class="btn btn-sm btn-outline-success" name="TerminalUnit-{{ tu.id }}">Save</button></td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Terminal Unit Name</th>
+            <th scope="col">Terminal Unit Type</th>
+            <th scope="col">Serves Zone</th>
+            <th scope="col">Save Changes</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tu in terminal_units %}
+        <form method="post">
+            <tr>
+                <td>{{ tu.id }}</td>
+                <td><input id="{tu.name}}" name="{{tu.name}}" type="text" value={{tu.name}}></td>
+                <td>
+                    <select id="terminal_unit" name="terminal_unit">
+                        {% for tu_type in terminal_unit_types %}
+                        {% if tu_type.Description == tu.type %}
+                        <option value="{{ tu_type.id }}" selected>{{ tu_type.Description }}</option>
+                        {% else %}
+                        <option value="{{ tu_type.id }}">{{ tu_type.Description }}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>{{ tu.zone_name }}</td>
+                {% csrf_token %}
+                <td>
+                    <button type="submit" class="btn btn-sm btn-outline-success"
+                            name="update_terminal_unit">Save
+                    </button>
+                </td>
+        </form>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>

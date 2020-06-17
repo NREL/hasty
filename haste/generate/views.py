@@ -1,11 +1,13 @@
+import json
+from io import StringIO
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.views.generic import CreateView
 from django.contrib import messages
-
 from . import forms
 from . import models
 from lib.helpers import Shadowfax
+from lib.helpers import HaystackBuilder
 
 
 def index(request):
@@ -20,7 +22,8 @@ def index(request):
 
 
 def data_view(request, site_id):
-    site = models.Site.objects.get(id=site_id)
+
+    site = models.Site.objects.get(pk=site_id)
     args = {
         'site': site
     }
@@ -71,6 +74,7 @@ class Site(CreateView):
                     new_tz.save()
                     new_tu.thermal_zone = new_tz
                     new_tu.save()
+
                 return redirect('site.ahu', site_id=site_id, ahu_id=ahu_def.id)
             else:
                 args = {
@@ -123,10 +127,15 @@ class AirHandler(CreateView):
         return render(request, self.template_name, args)
 
     def post(self, request, site_id, ahu_id):
-        form_result = forms.AirHandlerForm(request.POST)
-        if form_result.is_valid():
-            air_sys_def = form_result.save()
-            args = {'air_sys': air_sys_def}
-            # site_def.save()
+        if 'update_terminal_unit' in request.POST:
+            data = request.POST
+            tus = models.TerminalUnit.objects.filter(ahu_id=ahu_id)
+            for tu in tus:
+                if tu.name in data.keys():
+                    new_name = data.get(tu.name, False)
+                    tu.name = new_name
+                    tu.terminal_unit_type = data.get('terminal_unit')
+                    tu.save()
 
-            # return render(request, 'site.html', args)
+            return redirect('site.ahu', site_id=site_id, ahu_id=ahu_id)
+

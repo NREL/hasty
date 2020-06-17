@@ -16,6 +16,7 @@ def index(request):
 # Create your views here.
 class GetSites(APIView):
     """Simple test"""
+
     def get(self, request):
         sites = Site.objects.all()
         for site in sites:
@@ -34,12 +35,14 @@ class GenerateHaystack(APIView):
     General APIView for getting Haystack formatted JSON data.
     Same plan as below.
     """
+
     def get(self, request, site_id):
         data = [
             {"test": 1},
             {"test": 2}
         ]
         return Response(data)
+
 
 class GenerateHaystackFile(APIView):
     """
@@ -49,15 +52,14 @@ class GenerateHaystackFile(APIView):
         1. Plan is to utilize the generate.lib.helpers functions for this
         2. This should just call one of those functions, i.e. Test() below
     """
-    def get(self, request, site_id):
 
-        haystack_json = []
+    def get(self, request, site_id):
         site = Site.objects.get(pk=site_id)
         ahus = AirHandler.objects.filter(site_id=site_id)
         builder = HaystackBuilder(site, ahus)
         builder.build()
 
-        data_string = json.dumps(builder.hay_json)
+        data_string = json.dumps({'rows': builder.hay_json})
         json_file = StringIO()
         json_file.write(data_string)
         json_file.seek(0)
