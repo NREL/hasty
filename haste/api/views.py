@@ -58,8 +58,19 @@ class GenerateHaystackFile(APIView):
         ahus = AirHandler.objects.filter(site_id=site_id)
         builder = HaystackBuilder(site, ahus)
         builder.build()
-
-        data_string = json.dumps({'rows': builder.hay_json})
+        cols = []
+        for entity in builder.hay_json:
+            for k in entity.keys():
+                if {"name": k} not in cols:
+                    cols.append({"name": k})
+        data = {
+            "meta": {
+                "ver": "3.0"
+            },
+            "cols": cols,
+            "rows": builder.hay_json
+        }
+        data_string = json.dumps(data)
         json_file = StringIO()
         json_file.write(data_string)
         json_file.seek(0)
