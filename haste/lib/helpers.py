@@ -85,7 +85,8 @@ class Shadowfax:
             'name': ahu_model.name,
             'hc_name': self.hc_name_given_id(ahu_model.heating_coil_type),
             'cc_name': self.cc_name_given_id(ahu_model.cooling_coil_type),
-            'num_terminal_units': num_tus
+            'num_terminal_units': num_tus,
+            'df_name': self.df_name_given_id(ahu_model.discharge_fan_type)
         }
         return data
 
@@ -134,6 +135,17 @@ class Shadowfax:
                 return cc['Description']
         return None
 
+    def df_name_given_id(self, df_id):
+        """
+        Return the human readable version of the cooling coil given its id.
+        :param cc_id: The id of the heating coil as returned by generate_cooling_coils()
+        :return: str
+        """
+        dfs = self.generate_discharge_fans()
+        for df in dfs:
+            if df_id == df['id']:
+                return df['Description']
+        return None
 
 class HaystackBuilder:
 

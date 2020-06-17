@@ -115,12 +115,14 @@ class AirHandler(CreateView):
         tu_types = s.generate_terminal_unit_types()
         site = models.Site.objects.get(id=site_id)
         ahu = models.AirHandler.objects.get(id=ahu_id)
+        ahu_summary = s.ahu_summary_info(ahu)
         tus = models.TerminalUnit.objects.filter(ahu_id=ahu_id)
         for tu in tus:
             tu_info.append(s.terminal_unit_summary_info(tu))
         args = {
             'site': site,
             'ahu': ahu,
+            'ahu_summary': ahu_summary,
             'terminal_units': tu_info,
             'terminal_unit_types': tu_types
         }
