@@ -1,10 +1,47 @@
-{% extends 'partials/site_header.html' %}
-{% block air_handler_header %}
-  <hr>
-  <div class="card-body">
-    <h5 class="card-title">{{ ahu.name }}</h5>
-    <p class="card-subtitle">Heating type: {{ ahu_summary.hc_name }}</p>
-    <p class="card-subtitle">Cooling type: {{ ahu_summary.cc_name }}</p>
-    <p class="card-subtitle">Discharge fan type: {{ ahu_summary.df_name }}</p>
-  </div>
-{% endblock %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'generate/css/dropdown.css' %}">
+<script type="text/javascript" src="{% static 'generate/js/dropdown.js' %}"></script>
+
+<div class="container" onload="loadTree()">
+    <div class="card">
+        <div class="card-body">
+            <ul id="myUL">
+                <li><span class="caret">Info</span>
+                    <ul class="nested">
+                        <li>Heating type: {{ ahu_summary.hc_name }}</li>
+                        <li>Cooling type: {{ ahu_summary.cc_name }}</li>
+                        <li>Discharge fan type: {{ ahu_summary.df_name }}</li>
+                        <li><span class="caret">Points</span>
+                            <ul class="nested">
+                                <li>BLAH</li>
+                                <li>BLAH</li>
+                                <li><span class="caret">BLAH</span>
+                                    <ul class="nested">
+                                        <li>BLAH</li>
+                                        <li>BLAH</li>
+                                        <li>BLAH</li>
+                                        <li>BLAH</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    var toggler = document.getElementsByClassName("caret");
+    var i;
+
+    for (i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener("click", function () {
+            this.parentElement.querySelector(".nested").classList.toggle("active");
+            this.classList.toggle("caret-down");
+        });
+    }
+</script>
+
+

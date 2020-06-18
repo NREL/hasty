@@ -3,32 +3,43 @@
 {% block page_content %}
 {% include 'partials/header.html' %}
 {% include 'partials/nav.html' %}
+<script type="text/javascript" src="{% static 'generate/js/dropdown.js' %}"></script>
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
-          <li class="breadcrumb-item"><a href="{% url 'site' site.id %}">Site</a></li>
-          <li class="breadcrumb-item active" aria-current="page">AHU</li>
+            <li class="breadcrumb-item"><a href="{% url 'site' site.id %}">Site</a></li>
+            <li class="breadcrumb-item active" aria-current="page">AHU</li>
         </ol>
     </nav>
 </div>
-{% include 'partials/air_handler_header.html' %}
-  <br>
-<div class="container">
-  <div class="card mb-3">
-    <div class="card-body p-0">
-      <div class="card-title">
-        <button class="btn btn-block btn-lg btn-primary" type="button" data-toggle="collapse"
-                data-target="#showTerminalUnits"
-                aria-expanded="true" aria-controls="showTerminalUnits">
-          Terminal Units
-        </button>
-      </div>
-      <div class="container collapse show" id="showTerminalUnits">
-        {% include 'all_terminal_units.html' %}
-      </div>
+<br>
+{% include 'partials/site_header.html' %}
+<div class="container" style="padding-top: 1em">
+    <div class="card" onload="loadTree()">
+        <h5 class="card-header text-primary">{{ ahu.name }}</h5>
+        <div class="row">
+            <div class="col-sm-3" style="padding-left: 0">
+                {% include 'partials/air_handler_header.html' %}
+            </div>
+            <div class="col-sm-9">
+                <div class="card mb-3">
+                    <div class="card-body p-0">
+                        <div class="card-title">
+                            <button class="btn btn-block btn-lg btn-primary" type="button" data-toggle="collapse"
+                                    data-target="#showTerminalUnits"
+                                    aria-expanded="true" aria-controls="showTerminalUnits">
+                                Terminal Units
+                            </button>
+                        </div>
+                        <div class="container collapse show" id="showTerminalUnits">
+                            {% include 'all_terminal_units.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 {% include 'partials/footer.html' %}
 {% endblock %}
