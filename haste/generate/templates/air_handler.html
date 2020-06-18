@@ -3,7 +3,6 @@
 {% block page_content %}
 {% include 'partials/header.html' %}
 {% include 'partials/nav.html' %}
-<script type="text/javascript" src="{% static 'generate/js/dropdown.js' %}"></script>
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -16,15 +15,15 @@
 <br>
 {% include 'partials/site_header.html' %}
 <div class="container" style="padding-top: 1em">
-    <div class="card" onload="loadTree()">
+    <div class="card border-top">
         <h5 class="card-header text-primary">{{ ahu.name }}</h5>
-        <div class="row">
-            <div class="col-sm-3" style="padding-left: 0">
+        <div class="row" style="padding-top: 1em">
+            <div class="col-sm-3">
                 {% include 'partials/air_handler_header.html' %}
             </div>
             <div class="col-sm-9">
-                <div class="card mb-3">
-                    <div class="card-body p-0">
+                <div class="card mb-3 boarder-right-0">
+                    <div class="card-body p-0 boarder-right-0">
                         <div class="card-title">
                             <button class="btn btn-block btn-lg btn-primary" type="button" data-toggle="collapse"
                                     data-target="#showTerminalUnits"
