@@ -1,40 +1,53 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'generate/css/dropdown.css' %}">
-<div class="container">
-    <div class="card">
-        <div id="jstree" class="card-body">
-            <ul id="myUL">
-                <li><span class="caret">Equips</span>
-                    <ul class="nested">
-                        <li>Heating type: {{ ahu_summary.hc_name }}</li>
-                        <li>Cooling type: {{ ahu_summary.cc_name }}</li>
-                        <li>Discharge fan type: {{ ahu_summary.df_name }}</li>
+<div class="container" style="padding-bottom: 2em">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div id="equip_jstree" class="card-body">
+                    <ul id="">
+                        <li><span class="caret">Equips</span>
+                            <ul class="nested">
+                                <li>Heating type: {{ ahu_summary.hc_name }}</li>
+                                <li>Cooling type: {{ ahu_summary.cc_name }}</li>
+                                <li>Discharge fan type: {{ ahu_summary.df_name }}</li>
+                            </ul>
+                        </li>
                     </ul>
-                </li>
-                <li><span class="caret">Points</span>
-                    <ul class="nested">
-                        <li>Heating type: {{ ahu_summary.hc_name }}</li>
-                        <li>Cooling type: {{ ahu_summary.cc_name }}</li>
-                        <li>Discharge fan type: {{ ahu_summary.df_name }}</li>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div id="point_jstree" class="card-body">
+                    <ul id="none">
                         <li><span class="caret">Points</span>
                             <ul class="nested">
-                                <li>BLAH</li>
-                                <li>BLAH</li>
-                                <li><span class="caret">BLAH</span>
+                                <li>Heating type: {{ ahu_summary.hc_name }}</li>
+                                <li>Cooling type: {{ ahu_summary.cc_name }}</li>
+                                <li>Discharge fan type: {{ ahu_summary.df_name }}</li>
+                                <li><span class="caret">Points</span>
                                     <ul class="nested">
                                         <li>BLAH</li>
                                         <li>BLAH</li>
-                                        <li>BLAH</li>
-                                        <li>BLAH</li>
+                                        <li><span class="caret">BLAH</span>
+                                            <ul class="nested">
+                                                <li>BLAH</li>
+                                                <li>BLAH</li>
+                                                <li>BLAH</li>
+                                                <li>BLAH</li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
                         </li>
                     </ul>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 </div>
 <script type="text/javascript" src="{% static 'generate/js/dropdown.js' %}"></script>
 
