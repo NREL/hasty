@@ -12,11 +12,11 @@ from lib.helpers import HaystackBuilder
 
 def index(request):
     sites = models.Site.objects.all()
-    for site in sites:
-        ahus = models.AirHandler.objects.filter(site_id=site.id)
+    ahus = models.AirHandler.objects.all()
 
     args = {
-        'sites': sites
+        'sites': sites,
+        'ahus': ahus
     }
     return render(request, 'index.html', args)
 

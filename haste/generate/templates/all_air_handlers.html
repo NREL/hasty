@@ -4,8 +4,8 @@
     <thead>
     <tr>
       <th scope="col">Air Handler Name</th>
-      <th scope="col">Heating Type</th>
-      <th scope="col">Cooling Type</th>
+      <th scope="col">Coil Configurations</th>
+      <th scope="col">Fan Configurations</th>
       <th scope="col">Number of Terminal Units</th>
     </tr>
     </thead>
@@ -13,9 +13,21 @@
     {% for ahu in ahus %}
       <tr>
         <td><a href="{% url 'site.ahu' site.id ahu.id %}">{{ ahu.name }} </a> </td>
-        <td>{{ ahu.hc_name }}</td>
-        <td>{{ ahu.cc_name }}</td>
-        <td>{{ ahu.num_terminal_units }}</td>
+        <td>
+            {% for coil in ahu.coil_configurations %}
+              {% if coil != None %}
+                <p>{{ coil }}</p>
+              {% endif %}
+            {% endfor %}
+        </td>
+      <td>
+        {% for fan in ahu.fan_configurations %}
+          {% if fan != None %}
+            <p>{{ fan }}</p>
+          {% endif %}
+        {% endfor %}
+      </td>
+      <td>{{ ahu.num_terminal_units }}</td>
       </tr>
     {% endfor %}
     </tbody>

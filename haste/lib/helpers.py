@@ -17,6 +17,7 @@ class Shadowfax:
         self.df_components['id'] = self.df_components['id'].astype(str)
         self.df_cc = self.df_components[self.df_components['Category'] == 'Cooling coil']
         self.df_hc = self.df_components[self.df_components['Category'] == 'Heating coil']
+        self.df_hc_cc = self.df_components[self.df_components['Category'] == 'Heating cooling coil']
         self.df_dis_fan = self.df_components[self.df_components['Category'] == 'Discharge fan']
         self.df_ret_fan = self.df_components[self.df_components['Category'] == 'Return fan']
         self.df_exh_fan = self.df_components[self.df_components['Category'] == 'Exhaust fan']
@@ -43,6 +44,13 @@ class Shadowfax:
         :return:
         """
         return self.df_hc.to_dict('records')
+
+    def generate_heating_cooling_coils(self):
+        """
+        Generate a list of dicts for the different types of potential heating / cooling coils.
+        :return:
+        """
+        return self.df_hc_cc.to_dict('records')
 
     def generate_discharge_fans(self):
         """
@@ -83,8 +91,16 @@ class Shadowfax:
         data = {
             'id': ahu_model.id,
             'name': ahu_model.name,
-            'hc_name': self.hc_name_given_id(ahu_model.heating_coil_type),
-            'cc_name': self.cc_name_given_id(ahu_model.cooling_coil_type),
+            'coil_configurations': [
+                self.hc_name_given_id(ahu_model.heating_coil_type),
+                self.cc_name_given_id(ahu_model.cooling_coil_type),
+                self.hc_cc_name_given_id(ahu_model.heating_cooling_coil_type)
+            ],
+            'fan_configurations': [
+                self.df_name_given_id(ahu_model.discharge_fan_type),
+                self.rf_name_given_id(ahu_model.return_fan_type),
+                self.ef_name_given_id(ahu_model.exhaust_fan_type)
+            ],
             'num_terminal_units': num_tus,
             'df_name': self.df_name_given_id(ahu_model.discharge_fan_type)
         }
@@ -114,7 +130,7 @@ class Shadowfax:
     def hc_name_given_id(self, hc_id):
         """
         Return the human readable version of the heating coil given its id.
-        :param hc_id: The id of the heating coil as returned by generate_heating_coils()
+        :param hc_id: The id of the heating coil
         :return: str
         """
         hcs = self.generate_heating_coils()
@@ -126,7 +142,7 @@ class Shadowfax:
     def cc_name_given_id(self, cc_id):
         """
         Return the human readable version of the cooling coil given its id.
-        :param cc_id: The id of the heating coil as returned by generate_cooling_coils()
+        :param cc_id: The id of the cooling coil
         :return: str
         """
         ccs = self.generate_cooling_coils()
@@ -135,10 +151,22 @@ class Shadowfax:
                 return cc['Description']
         return None
 
+    def hc_cc_name_given_id(self, hc_cc_id):
+        """
+        Return the human readable version of the heating cooling coil given its id.
+        :param hc_cc_id: The id of the heating cooling coil
+        :return: str
+        """
+        hc_ccs = self.generate_heating_cooling_coils()
+        for hc_cc in hc_ccs:
+            if hc_cc_id == hc_cc['id']:
+                return hc_cc['Description']
+        return None
+
     def df_name_given_id(self, df_id):
         """
-        Return the human readable version of the cooling coil given its id.
-        :param cc_id: The id of the heating coil as returned by generate_cooling_coils()
+        Return the human readable version of the discharge fan given its id.
+        :param df_id: The id of the discharge fan
         :return: str
         """
         dfs = self.generate_discharge_fans()
@@ -146,6 +174,31 @@ class Shadowfax:
             if df_id == df['id']:
                 return df['Description']
         return None
+
+    def ef_name_given_id(self, ef_id):
+        """
+        Return the human readable version of the exhaust fan given its id.
+        :param ef_id: The id of the exhaust fan
+        :return: str
+        """
+        efs = self.generate_exhaust_fans()
+        for ef in efs:
+            if ef_id == ef['id']:
+                return ef['Description']
+        return None
+
+    def rf_name_given_id(self, rf_id):
+        """
+        Return the human readable version of the cooling coil given its id.
+        :param rf_id: The id of the return fan
+        :return: str
+        """
+        rfs = self.generate_return_fans()
+        for rf in rfs:
+            if rf_id == rf['id']:
+                return rf['Description']
+        return None
+
 
 class HaystackBuilder:
 
@@ -250,6 +303,7 @@ class HaystackBuilder:
         self.gen_component_record(ahu, ahu.supp_heat_coil, ahu_hay_id, "Supp Heating Coil")
         self.gen_component_record(ahu, ahu.heating_coil_type, ahu_hay_id, "Heating Coil")
         self.gen_component_record(ahu, ahu.cooling_coil_type, ahu_hay_id, "Cooling Coil")
+        self.gen_component_record(ahu, ahu.heating_cooling_coil_type, ahu_hay_id, "Heating Cooling Coil")
         self.gen_component_record(ahu, ahu.discharge_fan_type, ahu_hay_id, "Discharge Fan")
         self.gen_component_record(ahu, ahu.return_fan_type, ahu_hay_id, "Return Fan")
         self.gen_component_record(ahu, ahu.exhaust_fan_type, ahu_hay_id, "Exhaust Fan")
@@ -300,82 +354,6 @@ class HaystackBuilder:
         self.gen_site_record()
         self.gen_ahu_records()
 
-    # def build_ahu(self, ahu, equip_ref):
-    #     hay_json = []
-    #     id = uuid4()
-    #     hay_json.append({
-    #         "id": f"r:{id}",
-    #         "dis": ahu.name,
-    #         "equip": "m:",
-    #         "ahu": "m:",
-    #         "equipRef": f"r:{equip_ref}"
-    #     })
-    #     return hay_json
-
-
-# class Builder:
-#     def __init__(self):
-#         self.df = pd.ExcelFile('Templating-003.xlsx')
-#         self.df_components = pd.read_excel(self.df, 'Components')
-#         self.df_ahus = pd.read_excel(self.df, 'AHUs')
-#         self.df_points = pd.read_excel(self.df, 'Points')
-#         self.components = {}
-#         # self.df_components['id'] = self.df_components['id'].map(lambda x: int(x))
-#         # self.df_ahus['id'] = self.df_ahus['id'].map(lambda x: int(x))
-#         # self.df_points['id'] = self.df_points['id'].map(lambda x: int(x))
-#         self.haystack_json = []
-#
-#     def build_ahu(self, ahu_lookup_id):
-#         test = self.df_ahus[self.df_ahus.id == ahu_lookup_id]
-#         ahu_id = uuid4()
-#         self.haystack_json.append({
-#             "id": f"r:{ahu_id}",
-#             "dis": f"BLAH BLAH",
-#             "equip": "m:",
-#             "ahu": "m:"
-#         })
-#         self.heating_coil_id = test['heatingCoilID'][0]
-#         self.cooling_coil_id = test['coolingCoilID'][0]
-#         self.discharge_fan_id = test['dischargeFanComponentID'][0]
-#
-#         self.component_ids = [
-#             int(self.heating_coil_id),
-#             int(self.cooling_coil_id),
-#             int(self.discharge_fan_id)
-#         ]
-#
-#         for component_id in self.component_ids:
-#             self.add_component_to_ahu(component_id, ahu_id)
-#
-#         self.add_points_to_components()
-#
-#     def add_component_to_ahu(self, component_id, ahu_id):
-#         id = f"r:{uuid4()}"
-#         entity = {
-#             "id": id,
-#             "dis": f"s:Component {component_id}",
-#             "equipRef": f"r:{ahu_id}"
-#         }
-#         comp = self.df_components[self.df_components.id == component_id]
-#         tagset = comp['Final Tagset'].iloc[0].split(" ")
-#         self.components[id] = set(tagset)
-#         for t in tagset:
-#             entity[t] = "m:"
-#         self.haystack_json.append(entity)
-#
-#     def add_points_to_components(self):
-#         fan_set = set(['fan', 'motor', 'equip'])
-#         heating_coil_set = set(['heatingCoil', 'equip'])
-#         cooling_coil_set = set(['coolingCoil', 'equip'])
-#         for entity_id, entity_tagset in self.components.items():
-#             if fan_set.issubset(entity_tagset):
-#                 self.add_fan_points(entity_id, entity_tagset)
-#             elif heating_coil_set.issubset(entity_tagset):
-#                 self.add_heating_coil_points(entity_id, entity_tagset)
-#             elif cooling_coil_set.issubset(entity_tagset):
-#                 self.add_cooling_coil_points(entity_id, entity_tagset)
-
-    # def add_fan_points(self, component_id, tagset):
 
 class ComponentNotFoundError(Exception):
     def __init__(self, component_id):

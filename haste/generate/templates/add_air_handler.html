@@ -14,20 +14,31 @@
                 <div class="col-md-14" style="padding-top: 1em; padding-bottom: 1em">
                     {{ air_handler_form.name|as_crispy_field }}
                 </div>
+              <hr>
+                <h5 class="text-muted">Select Coil Configurations</h5>
+              <br>
                 <div class="form-row">
-                    <div class=" form-group col-md-3">
-                        {{ air_handler_form.heating_coil_type|as_crispy_field }}
-                    </div>
-                    <div class=" form-group col-md-3">
-                        {{ air_handler_form.cooling_coil_type|as_crispy_field }}
-                    </div>
-                    <div class=" form-group col-md-3">
+                    <div class=" form-group col-md-4">
                         {{ air_handler_form.pre_heat_coil|as_crispy_field }}
                     </div>
-                    <div class=" form-group col-md-3">
+                    <div class=" form-group col-md-4">
+                        {{ air_handler_form.heating_coil_type|as_crispy_field }}
+                    </div>
+                    <div class=" form-group col-md-4">
+                        {{ air_handler_form.cooling_coil_type|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class=" form-group col-md-6">
+                        {{ air_handler_form.heating_cooling_coil_type|as_crispy_field }}
+                    </div>
+                    <div class=" form-group col-md-6">
                         {{ air_handler_form.supp_heat_coil|as_crispy_field }}
                     </div>
                 </div>
+              <hr>
+                <h5 class="text-muted">Select Fan Configurations</h5>
+              <br>
                 <div class="form-row">
                     <div class=" form-group col-md-4">
                         {{ air_handler_form.discharge_fan_type|as_crispy_field }}
@@ -39,6 +50,9 @@
                         {{ air_handler_form.exhaust_fan_type|as_crispy_field }}
                     </div>
                 </div>
+              <hr>
+                <h5 class="text-muted">Select Terminal Unit Configurations</h5>
+              <br>
                 <div class="form-row">
                     <div class=" form-group col-md-8">
                         {{ air_handler_form.terminal_unit_default_type|as_crispy_field }}
@@ -47,6 +61,27 @@
                         {{ air_handler_form.num_terminal_units|as_crispy_field }}
                     </div>
                 </div>
+              <hr>
+                <h5 class="text-muted">Select Controls Configurations</h5>
+              <br>
+                  <div class="form-row">
+                    <div class=" form-group col-md-6">
+                        {{ air_handler_form.discharge_air_temperature_reset_strategy|as_crispy_field }}
+                    </div>
+                    <div class=" form-group col-md-6">
+                        {{ air_handler_form.discharge_air_pressure_reset_strategy|as_crispy_field }}
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class=" form-group col-md-6">
+                        {{ air_handler_form.economizer_control_strategy|as_crispy_field }}
+                    </div>
+                    <div class=" form-group col-md-6">
+                        {{ air_handler_form.ventilation_control_strategy|as_crispy_field }}
+                    </div>
+                  </div>
+                </div>
+              <br>
             </div>
         </div>
 <!--        <div id="mySidebar" class="sidebar" onmouseover="toggleSidebar()" onmouseout="toggleSidebar()">-->
