@@ -15,7 +15,7 @@
                     {{ air_handler_form.name|as_crispy_field }}
                 </div>
               <hr>
-                <h5>Select Coil Configurations</h5>
+                <h5 class="text-muted">Select Coil Configurations</h5>
               <br>
                 <div class="form-row">
                     <div class=" form-group col-md-4">
@@ -37,7 +37,7 @@
                     </div>
                 </div>
               <hr>
-                <h5>Select Fan Configurations</h5>
+                <h5 class="text-muted">Select Fan Configurations</h5>
               <br>
                 <div class="form-row">
                     <div class=" form-group col-md-4">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
               <hr>
-                <h5>Select Terminal Unit Configurations</h5>
+                <h5 class="text-muted">Select Terminal Unit Configurations</h5>
               <br>
                 <div class="form-row">
                     <div class=" form-group col-md-8">
@@ -62,7 +62,25 @@
                     </div>
                 </div>
               <hr>
-                <h5>Select Controls Configurations</h5>
+                <h5 class="text-muted">Select Controls Configurations</h5>
+              <br>
+                  <div class="form-row">
+                    <div class=" form-group col-md-6">
+                        {{ air_handler_form.discharge_air_temperature_reset_strategy|as_crispy_field }}
+                    </div>
+                    <div class=" form-group col-md-6">
+                        {{ air_handler_form.discharge_air_pressure_reset_strategy|as_crispy_field }}
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class=" form-group col-md-6">
+                        {{ air_handler_form.economizer_control_strategy|as_crispy_field }}
+                    </div>
+                    <div class=" form-group col-md-6">
+                        {{ air_handler_form.ventilation_control_strategy|as_crispy_field }}
+                    </div>
+                  </div>
+                </div>
               <br>
             </div>
         </div>

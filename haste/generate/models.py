@@ -70,6 +70,33 @@ class AirSystems(models.Model):
 
 
 class AirHandler(models.Model):
+    DAT_RESET_STRATEGY = (
+        (1, "None"),
+        (2, "Outdoor air temperature reset"),
+        (3, "Return air temperature reset"),
+        (4, "Zone Trim and Respond")
+    )
+    DAP_RESET_STRATEGY = (
+        (1, "None"),
+        (2, "Zone Trim and Respond"),
+        (3, "Average of VAV damper position signals")
+    )
+    ECON_STRATEGY = (
+        (1, "None"),
+        (2, "Fixed dry-bulb"),
+        (3, "Fixed enthalpy"),
+        (4, "Differential dry-bulb"),
+        (5, "Differential enthalpy"),
+        (6, "Fixed dry-bulb & differential dry-bulb"),
+        (7, "Fixed enthalpy & fixed dry-bulb"),
+        (8, "Differential enthalpy & fixed dry-bulb")
+    )
+    VENTILATION_STRATEGY = (
+        (1, "None"),
+        (2, "Minimum design outside airflow control"),
+        (3, "DCV with zone-level CO2 sensors"),
+        (4, "DCV with central return sensor")
+    )
     # Create the choices list on the fly
     s = Shadowfax()
     hc = s.generate_heating_coils()
@@ -97,14 +124,29 @@ class AirHandler(models.Model):
     name = models.CharField(max_length=50)
     site_id = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='air_handlers')
 
-    pre_heat_coil = models.CharField(max_length=100, choices=tuple(hc_choices))
-    supp_heat_coil = models.CharField(max_length=100, choices=tuple(hc_choices))
-    heating_coil_type = models.CharField(max_length=100, choices=tuple(hc_choices))
-    cooling_coil_type = models.CharField(max_length=100, choices=tuple(cc_choices))
-    heating_cooling_coil_type = models.CharField(max_length=100, choices=tuple(hc_cc_choices))
-    discharge_fan_type = models.CharField(max_length=100, choices=tuple(dis_fa_choices))
-    return_fan_type = models.CharField(max_length=100, choices=tuple(ret_fa_choices))
-    exhaust_fan_type = models.CharField(max_length=100, choices=tuple(exh_fa_choices))
+    # Coil Configurations
+    pre_heat_coil = models.CharField(max_length=100, choices=tuple(hc_choices), default="None")
+    heating_coil_type = models.CharField(max_length=100, choices=tuple(hc_choices), default="61")
+    cooling_coil_type = models.CharField(max_length=100, choices=tuple(cc_choices), default="44")
+    heating_cooling_coil_type = models.CharField(max_length=100, choices=tuple(hc_cc_choices), default="None")
+    supp_heat_coil = models.CharField(max_length=100, choices=tuple(hc_choices), default="None")
+
+    # Fan Configurations
+    discharge_fan_type = models.CharField(max_length=100, choices=tuple(dis_fa_choices), default="5")
+    return_fan_type = models.CharField(max_length=100, choices=tuple(ret_fa_choices), default="None")
+    exhaust_fan_type = models.CharField(max_length=100, choices=tuple(exh_fa_choices), default="None")
+
+    # Controls Configurations
+    # Discharge temperature reset strategy
+    discharge_air_temperature_reset_strategy = models.PositiveSmallIntegerField(choices=DAT_RESET_STRATEGY, default=1)
+    # Discharge pressure reset strategy
+    discharge_air_pressure_reset_strategy = models.PositiveSmallIntegerField(choices=DAP_RESET_STRATEGY, default=1)
+    # Economizer control strategy
+    economizer_control_strategy = models.PositiveSmallIntegerField(choices=ECON_STRATEGY, default=1)
+    # Ventilation control strategy
+    ventilation_control_strategy = models.PositiveSmallIntegerField(choices=VENTILATION_STRATEGY, default=2)
+
+    # Damper Configurations
 
 
 class ThermalZone(models.Model):

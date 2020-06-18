@@ -22,8 +22,22 @@ class AirHandlerForm(forms.ModelForm):
 
     class Meta:
         model = models.AirHandler
-        fields = ("name", "heating_coil_type", "cooling_coil_type", "num_terminal_units",
-                  "terminal_unit_default_type", "pre_heat_coil", "supp_heat_coil", "exhaust_fan_type",
-                  "discharge_fan_type", "return_fan_type", "heating_cooling_coil_type")
+        fields = (
+            "name",
+            "pre_heat_coil",
+            "heating_coil_type",
+            "cooling_coil_type",
+            "heating_cooling_coil_type",
+            "supp_heat_coil",
+            "discharge_fan_type",
+            "return_fan_type",
+            "exhaust_fan_type",
+            "num_terminal_units",
+            "terminal_unit_default_type",
+            "discharge_air_temperature_reset_strategy",
+            "discharge_air_pressure_reset_strategy",
+            "economizer_control_strategy",
+            "ventilation_control_strategy"
+        )
 
 
