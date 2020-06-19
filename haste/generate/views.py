@@ -76,6 +76,7 @@ class Site(CreateView):
                     new_tu.thermal_zone = new_tz
                     new_tu.save()
 
+                form_result.generate_base_ahu_points()
                 return redirect('site.ahu', site_id=site_id, ahu_id=form_result.ahu_model.id)
             else:
                 args = {

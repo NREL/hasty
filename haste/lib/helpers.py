@@ -259,18 +259,24 @@ class HaystackBuilder:
                     temp[tag] = "m:"
             self.hay_json.append(temp)
 
-    def gen_base_ahu_point_set(self, ahu_hay_id):
-        # This is a dummy implementation.
-        # TODO: Make robust
-        ahu_id = '63'
-
-    def gen_component_point_set(self, component_id, equip_ref, child_component_id=None):
-        comp_points = self.sf.df_component_points[self.sf.df_component_points['On Type ID'] == component_id]
-
     def build(self):
         self.gen_site_record()
         self.gen_ahu_records()
+        for ahu in self.ahus:
+            self.gen_base_ahu_point_set(ahu)
 
+    def gen_base_ahu_point_set(self, ahu):
+        points = ahu.points.all()
+        for p in points:
+            t = json.loads(p.tags)
+            data = {
+                "id": f"r:{p.id}",
+                "dis": f"s:{p.name}",
+                "equipRef": f"r:{ahu.id}",
+            }
+            t.update(data)
+            final_tags = finalize_tags(t)
+            self.hay_json.append(final_tags)
 
 class ComponentNotFoundError(Exception):
     def __init__(self, component_id):
@@ -312,3 +318,17 @@ def finalize_tags(entity):
         else:
             better[k] = v
     return better
+
+def json_dump_tags_from_string(s):
+    tags = s.split(" ")
+    final_tags = {}
+    for tag in tags:
+        if ":" in tag:
+            t = tag.split(":")
+            if is_number(t[1]):
+                final_tags[t[0]] = t[1]
+            else:
+                final_tags[t[0]] = f"{t[1]}"
+        else:
+            final_tags[tag] = True
+    return json.dumps(final_tags)

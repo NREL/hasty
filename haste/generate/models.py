@@ -21,7 +21,7 @@ class Point(models.Model):
     # https://docs.djangoproject.com/en/dev/ref/contrib/contenttypes/#django.contrib.contenttypes.models.ContentType
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     object_id = models.UUIDField()
-    content_object = GenericForeignKey('content_type', 'object_id')
+    is_point_of = GenericForeignKey('content_type', 'object_id')
 
 
 class Component(models.Model):
