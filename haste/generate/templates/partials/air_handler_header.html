@@ -23,23 +23,9 @@
                     <ul id="none">
                         <li><span class="caret">Points</span>
                             <ul class="nested">
-                                <li>Heating type: {{ ahu_summary.hc_name }}</li>
-                                <li>Cooling type: {{ ahu_summary.cc_name }}</li>
-                                <li>Discharge fan type: {{ ahu_summary.df_name }}</li>
-                                <li><span class="caret">Points</span>
-                                    <ul class="nested">
-                                        <li>BLAH</li>
-                                        <li>BLAH</li>
-                                        <li><span class="caret">BLAH</span>
-                                            <ul class="nested">
-                                                <li>BLAH</li>
-                                                <li>BLAH</li>
-                                                <li>BLAH</li>
-                                                <li>BLAH</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
+                              {% for point in ahu.points.all %}
+                                <li>{{ point.name }}</li>
+                              {% endfor %}
                             </ul>
                         </li>
                     </ul>
