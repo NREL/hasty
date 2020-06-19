@@ -14,20 +14,25 @@
       <tr>
         <td><a href="{% url 'site.ahu' site.id ahu.id %}">{{ ahu.name }} </a> </td>
         <td>
-            {% for coil in ahu.coil_configurations %}
-              {% if coil != None %}
-                <p>{{ coil }}</p>
+            {% for comp in ahu.components.all %}
+              {% if comp != None %}
+                <p>{{ comp.preheatcoil.short_description }}</p>
+                <p>{{ comp.heatingcoil.short_description }}</p>
+                <p>{{ comp.coolingcoil.short_description }}</p>
+                <p>{{ comp.supplementaryheatingcoil.short_description }}</p>
               {% endif %}
             {% endfor %}
         </td>
       <td>
-        {% for fan in ahu.fan_configurations %}
-          {% if fan != None %}
-            <p>{{ fan }}</p>
+        {% for comp in ahu.components.all %}
+          {% if comp != None %}
+            <p>{{ comp.dischargefan.short_description }}</p>
+            <p>{{ comp.returnfan.short_description }}</p>
+            <p>{{ comp.exhaustfan.short_description }}</p>
           {% endif %}
         {% endfor %}
       </td>
-      <td>{{ ahu.num_terminal_units }}</td>
+      <td>{{ tus_count }}</td>
       </tr>
     {% endfor %}
     </tbody>
