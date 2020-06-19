@@ -1,4 +1,6 @@
 import os
+import json
+
 import pandas as pd
 from uuid import uuid4
 from generate import models
@@ -30,6 +32,19 @@ class Shadowfax:
         self.df_terminal_units[cast_to_str] = self.df_terminal_units[cast_to_str].astype(str).applymap(lambda x: x.split('.')[0])
         self.df_terminal_units[cast_to_str] = self.df_terminal_units[cast_to_str].applymap(lambda x: "None" if x == "nan" else x)
 
+        f_path_cp = os.path.join(p, 'ComponentPoints.csv')
+        self.df_component_points = pd.read_csv(f_path_cp)
+        cast_to_str = ['id', 'Requires Child ID', 'On Type ID', 'Add Point ID']
+        self.df_component_points[cast_to_str] = self.df_component_points[cast_to_str].astype(str).applymap(lambda x: x.split('.')[0])
+        self.df_component_points[cast_to_str] = self.df_component_points[cast_to_str].applymap(lambda x: "None" if x == "nan" else x)
+
+        f_path_p = os.path.join(p, 'Points.csv')
+        self.df_points = pd.read_csv(f_path_p)
+        cast_to_str = ['id', 'Include Tagset from ID']
+        self.df_points[cast_to_str] = self.df_points[cast_to_str].astype(str).applymap(
+            lambda x: x.split('.')[0])
+        self.df_points[cast_to_str] = self.df_points[cast_to_str].applymap(
+            lambda x: "None" if x == "nan" else x)
 
     def generate_cooling_coils(self):
         """
@@ -80,31 +95,8 @@ class Shadowfax:
         """
         return self.df_terminal_units.to_dict('records')
 
-    def ahu_summary_info(self, ahu_model):
-        """
-        Return summary info for the AirHandler for displaying in the 'all_air_handlers.html' page
-        :param ahu_model: A single AirHandler model
-        :return: dict
-        """
-        tus = models.TerminalUnit.objects.filter(ahu_id=ahu_model.id)
-        num_tus = tus.count()
-        data = {
-            'id': ahu_model.id,
-            'name': ahu_model.name,
-            'coil_configurations': [
-                self.hc_name_given_id(ahu_model.heating_coil_type),
-                self.cc_name_given_id(ahu_model.cooling_coil_type),
-                self.hc_cc_name_given_id(ahu_model.heating_cooling_coil_type)
-            ],
-            'fan_configurations': [
-                self.df_name_given_id(ahu_model.discharge_fan_type),
-                self.rf_name_given_id(ahu_model.return_fan_type),
-                self.ef_name_given_id(ahu_model.exhaust_fan_type)
-            ],
-            'num_terminal_units': num_tus,
-            'df_name': self.df_name_given_id(ahu_model.discharge_fan_type)
-        }
-        return data
+    def generate_points(self):
+        return self.df_points.to_dict('records')
 
     def terminal_unit_summary_info(self, terminal_unit_model):
         """
@@ -116,88 +108,8 @@ class Shadowfax:
             'id': terminal_unit_model.id,
             'name': terminal_unit_model.name,
             'zone_name': terminal_unit_model.thermal_zone.name,
-            'type': self.tu_name_given_id(terminal_unit_model.terminal_unit_type)
         }
         return data
-
-    def tu_name_given_id(self, tu_id):
-        tus = self.generate_terminal_unit_types()
-        for tu in tus:
-            if tu_id == tu['id']:
-                return tu['Description']
-        return None
-
-    def hc_name_given_id(self, hc_id):
-        """
-        Return the human readable version of the heating coil given its id.
-        :param hc_id: The id of the heating coil
-        :return: str
-        """
-        hcs = self.generate_heating_coils()
-        for hc in hcs:
-            if hc_id == hc['id']:
-                return hc['Description']
-        return None
-
-    def cc_name_given_id(self, cc_id):
-        """
-        Return the human readable version of the cooling coil given its id.
-        :param cc_id: The id of the cooling coil
-        :return: str
-        """
-        ccs = self.generate_cooling_coils()
-        for cc in ccs:
-            if cc_id == cc['id']:
-                return cc['Description']
-        return None
-
-    def hc_cc_name_given_id(self, hc_cc_id):
-        """
-        Return the human readable version of the heating cooling coil given its id.
-        :param hc_cc_id: The id of the heating cooling coil
-        :return: str
-        """
-        hc_ccs = self.generate_heating_cooling_coils()
-        for hc_cc in hc_ccs:
-            if hc_cc_id == hc_cc['id']:
-                return hc_cc['Description']
-        return None
-
-    def df_name_given_id(self, df_id):
-        """
-        Return the human readable version of the discharge fan given its id.
-        :param df_id: The id of the discharge fan
-        :return: str
-        """
-        dfs = self.generate_discharge_fans()
-        for df in dfs:
-            if df_id == df['id']:
-                return df['Description']
-        return None
-
-    def ef_name_given_id(self, ef_id):
-        """
-        Return the human readable version of the exhaust fan given its id.
-        :param ef_id: The id of the exhaust fan
-        :return: str
-        """
-        efs = self.generate_exhaust_fans()
-        for ef in efs:
-            if ef_id == ef['id']:
-                return ef['Description']
-        return None
-
-    def rf_name_given_id(self, rf_id):
-        """
-        Return the human readable version of the cooling coil given its id.
-        :param rf_id: The id of the return fan
-        :return: str
-        """
-        rfs = self.generate_return_fans()
-        for rf in rfs:
-            if rf_id == rf['id']:
-                return rf['Description']
-        return None
 
 
 class HaystackBuilder:
@@ -211,9 +123,8 @@ class HaystackBuilder:
         self.site = site
         self.ahus = ahus
         self.sf = Shadowfax()
-        self.site_hay_id = uuid4()
         self.hay_json = []
-        self.id_mapper = {}  # haystack_uuid : f"haystack_uuid database_id",
+        self.point_sets = []
 
     def gen_site_record(self):
         """
@@ -221,14 +132,13 @@ class HaystackBuilder:
         :return:
         """
         self.hay_json.append({
-            "id": f"r:{self.site_hay_id}",
+            "id": f"r:{self.site.id}",
             "dis": f"s:{self.site.name}",
             "site": "m:",
             "geoCity": f"s:{self.site.city}",
             "geoState": f"s:{self.site.state}",
             "geoCountry": "United States"  # could infer this from state selection
         })
-        self.id_mapper[self.site_hay_id] = f"{self.site_hay_id} {self.site.id}"
 
     def gen_ahu_records(self):
         """
@@ -236,17 +146,15 @@ class HaystackBuilder:
         :return:
         """
         for ahu in self.ahus:
-            hay_id = uuid4()
             self.hay_json.append({
-                "id": f"r:{hay_id}",
+                "id": f"r:{ahu.id}",
                 "dis": f"s:{ahu.name}",
-                "siteRef": f"r:{self.site_hay_id}",
+                "siteRef": f"r:{self.site.id}",
                 "equip": "m:",
                 "ahu": "m:"
             })
-            self.id_mapper[hay_id] = f"{hay_id} {ahu.id}"
-            self.add_ahu_components(ahu, hay_id)
-            self.gen_terminal_unit_records(ahu, hay_id)
+            self.add_ahu_components(ahu)
+            self.gen_terminal_unit_records(ahu, ahu.id)
 
     def gen_terminal_unit_records(self, ahu, ahu_hay_id):
         """
@@ -290,7 +198,7 @@ class HaystackBuilder:
         self.gen_component_record(tu, hc, tu_hay_id, "Heating Coil")
         self.gen_component_record(tu, cc, tu_hay_id, "Cooling Coil")
 
-    def add_ahu_components(self, ahu, ahu_hay_id):
+    def add_ahu_components(self, ahu):
         """
         Given a models.AirHandler, generate records for all of the defined ahu components.
         components with 'None' do not get generated.
@@ -299,14 +207,22 @@ class HaystackBuilder:
         :param ahu_hay_id: The UUID of the ahu.
         :return:
         """
-        self.gen_component_record(ahu, ahu.pre_heat_coil, ahu_hay_id, "Preheat Coil")
-        self.gen_component_record(ahu, ahu.supp_heat_coil, ahu_hay_id, "Supp Heating Coil")
-        self.gen_component_record(ahu, ahu.heating_coil_type, ahu_hay_id, "Heating Coil")
-        self.gen_component_record(ahu, ahu.cooling_coil_type, ahu_hay_id, "Cooling Coil")
-        self.gen_component_record(ahu, ahu.heating_cooling_coil_type, ahu_hay_id, "Heating Cooling Coil")
-        self.gen_component_record(ahu, ahu.discharge_fan_type, ahu_hay_id, "Discharge Fan")
-        self.gen_component_record(ahu, ahu.return_fan_type, ahu_hay_id, "Return Fan")
-        self.gen_component_record(ahu, ahu.exhaust_fan_type, ahu_hay_id, "Exhaust Fan")
+        for comp in ahu.components.all():
+            t = json.loads(comp.tags)
+            t["id"] = f"r:{comp.id}"
+            t["dis"] = f"s:{comp.name}"
+            t["equipRef"] = f"r:{ahu.id}"
+            final_tags = finalize_tags(t)
+            self.hay_json.append(final_tags)
+
+        # self.gen_component_record(ahu, ahu.pre_heat_coil, ahu_hay_id, "Preheat Coil")
+        # self.gen_component_record(ahu, ahu.supp_heat_coil, ahu_hay_id, "Supp Heating Coil")
+        # self.gen_component_record(ahu, ahu.heating_coil_type, ahu_hay_id, "Heating Coil")
+        # self.gen_component_record(ahu, ahu.cooling_coil_type, ahu_hay_id, "Cooling Coil")
+        # self.gen_component_record(ahu, ahu.heating_cooling_coil_type, ahu_hay_id, "Heating Cooling Coil")
+        # self.gen_component_record(ahu, ahu.discharge_fan_type, ahu_hay_id, "Discharge Fan")
+        # self.gen_component_record(ahu, ahu.return_fan_type, ahu_hay_id, "Return Fan")
+        # self.gen_component_record(ahu, ahu.exhaust_fan_type, ahu_hay_id, "Exhaust Fan")
 
     def gen_component_record(self, equip, component, equip_ref, component_type):
         """
@@ -335,7 +251,7 @@ class HaystackBuilder:
             for tag in tags:
                 if ":" in tag:
                     t = tag.split(":")
-                    if self.is_number(t[1]):
+                    if is_number(t[1]):
                         temp[t[0]] = f"n:{t[1]}"
                     else:
                         temp[t[0]] = f"s:{t[1]}"
@@ -343,12 +259,13 @@ class HaystackBuilder:
                     temp[tag] = "m:"
             self.hay_json.append(temp)
 
-    def is_number(self, n):
-        try:
-            float(n)
-            return True
-        except ValueError:
-            return False
+    def gen_base_ahu_point_set(self, ahu_hay_id):
+        # This is a dummy implementation.
+        # TODO: Make robust
+        ahu_id = '63'
+
+    def gen_component_point_set(self, component_id, equip_ref, child_component_id=None):
+        comp_points = self.sf.df_component_points[self.sf.df_component_points['On Type ID'] == component_id]
 
     def build(self):
         self.gen_site_record()
@@ -371,3 +288,27 @@ class TerminalUnitNotFoundError(Exception):
 
     def __str__(self):
         return self.message
+
+
+def is_number(n):
+    try:
+        float(n)
+        return True
+    except ValueError:
+        return False
+
+
+def is_false(s):
+    return s == 'False'
+
+
+def finalize_tags(entity):
+    better = {}
+    for k, v in entity.items():
+        if isinstance(v, bool):
+            better[k] = "m:"
+        elif is_number(v):
+            better[k] = f"n:{v}"
+        else:
+            better[k] = v
+    return better

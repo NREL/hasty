@@ -21,7 +21,7 @@ class GetSites(APIView):
         sites = Site.objects.all()
         for site in sites:
             ahus = AirHandler.objects.filter(site_id=site.id)
-            print(ahus)
+            # print(ahus)
 
         serializer = SiteSerializer(sites, many=True)
         return Response(serializer.data)

@@ -1,0 +1,71 @@
+﻿id,Category,Description,Include Tagset from ID,Add Tagset,Final Typing Tagset,Final Typing Tagset with AHU,Brick Concept,Brick Needs Review,Brick Needs Narrower,Notes,Datatype
+1,point,A point is generally something we would associate timeseries data with.  It is often also referred to as telemetry.,,point,point,CAV AHU point,Point,,,,
+2,sensor,A point representing the digitization of a measurement for a  phenomenon.  This is traditionally referred to as an input ( analog or binary) in the context of an analog to digital converter.,1,sensor,sensor point,CAV AHU sensor point,Sensor,,,,
+3,cmd,A point representing a command or an action to be initiated.  This is traditionally referred to as an output (analog or binary) in the context of an analog to digital converter.,1,cmd,cmd point,CAV AHU cmd point,Command,,,,
+4,sp,A point representing the desired value of another point / variable.,1,sp,sp point,CAV AHU sp point,Setpoint,,,,
+5,parameter,"A parameter represents a point that is often referred to as a variable or 'soft point'.  These are typically used as intermediate points in calculations, and are traditionally referred to as values (analog or binary) in the context of BACnet.",1,param,param point,CAV AHU param point,Parameter,,,,
+6,sensor,"A generic temperature sensor.  Recommend further definition via a phenomenon (air, water, etc.) and a location (discharge, outside, zone, etc.)",2,temp,temp sensor point,CAV AHU temp sensor point,Temperature_Sensor,,,,Numeric
+7,sensor,"A generic air drybulb temperature sensor.  Recommend further definition via a location (discharge, outside, zone, etc.)",6,air,air temp sensor point,CAV AHU air temp sensor point,Air_Temperature_Sensor,,,,Numeric
+8,sensor,"An air drybulb temperature sensor, placed in the discharge duct of an airHandlingEquip.  It is located downstream of of the conditioning elements (coils, humidification, etc.) and typically downstream of a fan.",7,discharge,discharge air temp sensor point,CAV AHU discharge air temp sensor point,Discharge_Air_Temperature_Sensor,,,,Numeric
+9,sensor,"An air drybulb temperature sensor, placed in the return duct of an airHandlingEquip.  It is located in a return duct or plenum, upstream of the mixing duct.",7,return,return air temp sensor point,CAV AHU return air temp sensor point,Return_Air_Temperature_Sensor,,,,Numeric
+10,sensor,"An air drybulb temperature sensor, placed in the exhaust duct of an airHandlingEquip.  It is after the mixing duct.",7,exhaust,exhaust air temp sensor point,CAV AHU exhaust air temp sensor point,Exhaust_Air_Temperature_Sensor,,,,Numeric
+11,sensor,"An air drybulb temperature sensor, placed in the mixing duct of an airHandlingEquip.",7,mixed,mixed air temp sensor point,CAV AHU mixed air temp sensor point,Mixed_Air_Temperature_Sensor,,,,Numeric
+12,cmd,This represents the primary commanded state for a piece of equipment.  If the equipment ,3,run,run cmd point,CAV AHU run cmd point,Run_Request_Command,TRUE,,,Boolean
+13,cmd,"Used in a multi-stage  equipment to represent the first stage, where a boolean value of true signifies the first stage is activated.  No other stages should be active simultaneously for the given equipment.",3,stage:1,stage:1 cmd point,CAV AHU stage:1 cmd point,,,,,Boolean
+14,cmd,"Used in a multi-stage  equipment to represent the second stage, where a boolean value of true signifies the second stage is activated.  No other stages should be active simultaneously for the given equipment.",3,stage:2,stage:2 cmd point,CAV AHU stage:2 cmd point,,,,,Boolean
+15,sensor,"A generic relative humidity sensor.  This should only be paired with a gas phenomenon type.  Recommend further definition via a location (discharge, outside, zone, etc.).",2,humidity,humidity sensor point,CAV AHU humidity sensor point,Humidity_Sensor,,,,Numeric
+16,sensor,"An air relative humidity sensor. Recommend further definition via a location (discharge, outside, zone, etc.).",15,air,air humidity sensor point,CAV AHU air humidity sensor point,Air_Humidity_Sensor,,,,Numeric
+17,sensor,"An air relative humidity sensor, placed in the return duct of an airHandlingEquip.",16,return,return air humidity sensor point,CAV AHU return air humidity sensor point,Return_Air_Humidity_Sensor,,,,Numeric
+18,sensor,"An air relative humidity sensor, placed outside.",16,outside,outside air humidity sensor point,CAV AHU outside air humidity sensor point,Outside_Air_Humidity_Sensor,,,,Numeric
+19,sensor,"An air relative humidity sensor, placed in the mixed duct of an airHandlingEquip.",16,mixed,mixed air humidity sensor point,CAV AHU mixed air humidity sensor point,Mixed_Air_Humidity_Sensor,,,,Numeric
+20,sensor,"An air drybulb temperature sensor, placed in an {hvac zone space}.",7,zone,zone air temp sensor point,CAV AHU zone air temp sensor point,Zone_Air_Temperature_Sensor,,,,Numeric
+21,sensor,"An air relative humidity sensor, placed in an {hvac zone space}.",16,zone,zone air humidity sensor point,CAV AHU zone air humidity sensor point,Zone_Air_Humidity_Sensor,,,,Numeric
+22,sp,"A generic temperature setpoint.  Recommend further definition via a phenomenon (air, water, etc.) and a location (discharge, etc.)",4,temp,temp sp point,CAV AHU temp sp point,Temperature_Setpoint,,,,
+23,sp,"A generic air drybulb temperature setpoint.  Recommend further definition via a location (discharge, outside, zone, etc.).",22,air,air temp sp point,CAV AHU air temp sp point,Air_Temperature_Setpoint,,,,
+24,sp,The air drybulb temperature setpoint for a zone.,23,zone,zone air temp sp point,CAV AHU zone air temp sp point,Zone_Air_Temperature_Setpoint,,TRUE,"How to distinguish the concept of an 'effective' setpoint.  There should be a heating, cooling as well as occupied, unoccupied, and standby setpoints.  How to incorporate?",Numeric
+25,sp,"A generic relative humidity setpoint.  Recommend further definition via a phenomenon (air, water, etc.) and a location (discharge, etc.).",4,humidity,humidity sp point,CAV AHU humidity sp point,Humidity_Setpoint,,,,
+26,,"A generic air relative humidity setpoint.  Recommend further definition via a location (discharge, outside, zone, etc.).",25,air,air humidity sp point,CAV AHU air humidity sp point,Humidity_Setpoint,,TRUE,,
+27,sp,The air relative humidity setpoint for a zone.,26,zone,zone air humidity sp point,CAV AHU zone air humidity sp point,Humidity_Setpoint,,TRUE,,Numeric
+28,sp,"An air drybulb temperature setpoint, placed in the mixing duct of an airHandlingEquip.",23,mixed,mixed air temp sp point,CAV AHU mixed air temp sp point,Mixed_Air_Temperature_Setpoint,,,,Numeric
+29,sp,"An air drybulb temperature setpoint, placed in the discharge duct of an airHandlingEquip.",23,discharge,discharge air temp sp point,CAV AHU discharge air temp sp point,Discharge_Air_Temperature_Setpoint,,,,Numeric
+30,sensor,"An air drybulb temperature sensor, placed outside",7,outside,outside air temp sensor point,CAV AHU outside air temp sensor point,Outside_Air_Temperature_Sensor,,,,Numeric
+31,cmd,A generic damper command point,3,damper,damper cmd point,,Damper_Command,,,,
+32,cmd,,31,outside,outside damper cmd point,,,,,Don't think we need.  Should just use generic {position cmd point}.,
+33,cmd,,12,fan,fan run cmd point,,,,,Don't think we need.  Should just use generic {run cmd point},
+34,cmd,,33,discharge,discharge fan run cmd point,,,,,Don't think we need.  Should just use generic {run cmd point},
+35,sensor,"A generic sensor measuring the flow of a substance.  Recommend further definition via a phenomenon (air, water, etc.) and a location (discharge, etc.).",2,flow,flow sensor point,,Flow_Sensor,,,,
+36,sensor,"A generic sensor measure the flow of air.  Recommend further definition via a location (discharge, outside, zone, etc.)",35,air,air flow sensor point,,Air_Flow_Sensor,,,,
+37,cmd,"This represents the secondary state point for a piece of equipment.  Typically, this point is a hard connection to a relay or mechanical switch used for taking a piece of equipment down for maintenance.",3,enable,enable cmd point,,Enable_Command,,,,Boolean
+38,status,Represents a feedback signal for a generic {cmd point}.,1,status,status point,,,,,,
+39,,"A generic position command for use with {actuator equip}.  It is recommended to further refine this via one of: [modulating, binary] to indicate the type of position actuation.",3,position,position cmd point,,,,,,
+40,,"A damper position command, where the position is given as a percentage.  Convention is that 0% = Closed/Fully off, 100% = Open/fully on.",31,modulating,modulating damper cmd point,,Damper_Position_Command,TRUE,TRUE,,Numeric
+41,,"A damper position command, where the position is a boolean value.  Convention is that 0=closed/fully off, 1=open/fully on",31,twoPosition,twoPosition damper cmd point,,Damper_Position_Command,TRUE,TRUE,,Boolean
+42,,A generic valve command point,3,valve,valve cmd point,,Valve_Command,,,,Boolean
+43,,"A valve position command, where the position is given as a percentage.  Convention is that 0% = Closed/Fully off, 100% = Open/fully on.",42,modulating,modulating valve cmd point,,Valve_Command,,TRUE,,
+44,,"A valve position command, where the position is a boolean value.  Convention is that 0=closed/fully off, 1=open/fully on",42,twoPosition,twoPosition valve cmd point,,Valve_Command,,TRUE,,
+45,,"A sensor point indicating whether the damper is allowing air to pass through.  Convention is that True = air is flowing, False = air is not flowing.",2,damper,damper sensor point,,,,,,
+46,,"A sensor point indicating whether the valve is allowing fluid to pass through.  Convention is that True = fluid is flowing, False = fluid is not flowing.",2,valve,valve sensor point,,,,,,
+47,,An air flow sensor placed in the discharge  air duct.,36,discharge,discharge air flow sensor point,,Discharge_Air_Flow_Sensor,,,,
+48,,An air flow sensor placed in the mixed  air duct.,36,mixed,mixed air flow sensor point,,Air_Flow_Sensor,,TRUE,,
+49,,An air flow sensor placed in the exhaust  air duct.,36,exhaust,exhaust air flow sensor point,,Exhaust_Air_Flow_Sensor,,,,
+50,,An air flow sensor placed in the outside air duct.,36,outside,outside air flow sensor point,,Outside_Air_Flow_Sensor,,,,
+51,,An air flow sensor placed in the return  air duct.,36,return,return air flow sensor point,,Return_Air_Flow_Sensor,,,,
+52,,,3,twoPosition,twoPosition cmd point,,Command,,TRUE,,
+53,,,3,modulating,modulating cmd point,,Command,,TRUE,,
+54,,,24,cooling,cooling zone air temp sp point,,,,,,
+55,,,54,occ,occ cooling zone air temp sp point,,,,,,
+56,,,54,unocc,unocc cooling zone air temp sp point,,,,,,
+57,,,54,standby,standby cooling zone air temp sp point,,,,,,
+58,,,24,heating,heating zone air temp sp point,,,,,,
+59,,,58,occ,occ heating zone air temp sp point,,,,,,
+60,,,58,unocc,unocc heating zone air temp sp point,,,,,,
+61,,,58,standby,standby heating zone air temp sp point,,,,,,
+62,,"Used in a multi-stage  equipment to represent the Nth stage, where a boolean value of true signifies the first stage is activated.  No other stages should be active simultaneously for the given equipment.",3,stage:N,stage:N cmd point,,,,,,Boolean
+63,,,39,modulating,modulating position cmd point,,,,,,Numeric
+64,,,2,pressure,pressure sensor point,,,,,,
+65,,,64,air,air pressure sensor point,,,,,,
+66,,,65,discharge,discharge air pressure sensor point,,Discharge_Air_Static_Pressure_Sensor,,,,Numeric
+67,,,65,return,return air pressure sensor point,,,,,,Numeric
+68,,,3,speed,speed cmd point,,,,,,Numeric
+69,,,2,run,run sensor point,,Status,,,,Boolean
+70,,,,,,,,,,,

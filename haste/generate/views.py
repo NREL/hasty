@@ -38,13 +38,18 @@ class Site(CreateView):
         site = models.Site.objects.get(id=site_id)
         ahu_info = []
         ahus = models.AirHandler.objects.filter(site_id=site_id)
+        # tus = models.TerminalUnit.objects.filter(ahu_id=)
+        count = 0
         for ahu in ahus:
-            ahu_info.append(s.ahu_summary_info(ahu))
+            tus = models.TerminalUnit.objects.filter(ahu_id=ahu.id)
+            count += tus.count()
+        print(count)
         air_handler_form = forms.AirHandlerForm()
         args = {
             'air_handler_form': air_handler_form,
             'site': site,
-            'ahus': ahu_info
+            'ahus': ahus,
+            'tus_count': count
         }
         return render(request, self.template_name, args)
 
@@ -52,30 +57,26 @@ class Site(CreateView):
         if site_id is not None:
             site = get_object_or_404(models.Site, id=site_id)
         if 'create_air_handler' in request.POST:
-            print(request.POST)
             form_result = forms.AirHandlerForm(request.POST)
             if form_result.is_valid():
-                ahu_def = form_result.save(commit=False)
-                ahu_def.site_id = site
-                ahu_def.save()
+                form_result.generate_ahu(site.id)
+                form_result.generate_all_components()
                 ntu = int(form_result.cleaned_data['num_terminal_units'])
                 tudt = form_result.cleaned_data['terminal_unit_default_type']
                 s = Shadowfax()
                 terminal_unit_types = s.generate_terminal_unit_types()
-                print(terminal_unit_types)
-                print(f"TUDT: {tudt}")
 
                 for tu in terminal_unit_types:
                     if tudt == tu["id"]:
                         category = tu["Category"]
                 for i in range(1, ntu + 1):
-                    new_tu = models.TerminalUnit(name=f"{category}-{i:03d}", terminal_unit_type=tudt, ahu_id=ahu_def)
+                    new_tu = models.TerminalUnit(name=f"{category}-{i:03d}", terminal_unit_type=tudt, ahu_id=form_result.ahu_model)
                     new_tz = models.ThermalZone(name=f"Zone-{i:03d}")
                     new_tz.save()
                     new_tu.thermal_zone = new_tz
                     new_tu.save()
 
-                return redirect('site.ahu', site_id=site_id, ahu_id=ahu_def.id)
+                return redirect('site.ahu', site_id=site_id, ahu_id=form_result.ahu_model.id)
             else:
                 args = {
                     'form': form_result,
@@ -115,14 +116,12 @@ class AirHandler(CreateView):
         tu_types = s.generate_terminal_unit_types()
         site = models.Site.objects.get(id=site_id)
         ahu = models.AirHandler.objects.get(id=ahu_id)
-        ahu_summary = s.ahu_summary_info(ahu)
         tus = models.TerminalUnit.objects.filter(ahu_id=ahu_id)
         for tu in tus:
             tu_info.append(s.terminal_unit_summary_info(tu))
         args = {
             'site': site,
             'ahu': ahu,
-            'ahu_summary': ahu_summary,
             'terminal_units': tu_info,
             'terminal_unit_types': tu_types
         }
