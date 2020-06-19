@@ -8,9 +8,9 @@
                     <ul id="">
                         <li><span class="caret">Equips</span>
                             <ul class="nested">
-                                <li>Heating type: {{ ahu_summary.hc_name }}</li>
-                                <li>Cooling type: {{ ahu_summary.cc_name }}</li>
-                                <li>Discharge fan type: {{ ahu_summary.df_name }}</li>
+                              {% for comp in ahu.components.all %}
+                                <li>{{ comp.name }}</li>
+                              {% endfor %}
                             </ul>
                         </li>
                     </ul>
