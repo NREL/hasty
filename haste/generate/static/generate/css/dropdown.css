@@ -1,0 +1,5 @@
+#jstree {
+    white-space: initial;
+    overflow: scroll;
+    text-overflow: ellipsis;
+}
