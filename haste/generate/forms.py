@@ -1,6 +1,6 @@
 import json
 
-from lib.helpers import Shadowfax, is_false, is_number
+from lib.helpers import Shadowfax, is_false, is_number, json_dump_tags_from_string
 from django import forms
 from . import models
 
@@ -88,7 +88,7 @@ class AirHandlerForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(AirHandlerForm, self).__init__(*args, **kwargs)
-        self.s = Shadowfax()
+        self.sf = Shadowfax()
         self.site_model = None
         self.ahu_model = None
 
@@ -100,11 +100,13 @@ class AirHandlerForm(forms.Form):
         """
         self.site_model = models.Site.objects.get(id=site_id)
         ahu = models.AirHandler(name=self.cleaned_data['name'],
-                                site_id = self.site_model,
-                                discharge_air_temperature_reset_strategy = self.cleaned_data['discharge_air_temperature_reset_strategy'],
-                                discharge_air_pressure_reset_strategy = self.cleaned_data['discharge_air_pressure_reset_strategy'],
-                                economizer_control_strategy = self.cleaned_data['economizer_control_strategy'],
-                                ventilation_control_strategy = self.cleaned_data['ventilation_control_strategy'],
+                                site_id=self.site_model,
+                                discharge_air_temperature_reset_strategy=self.cleaned_data[
+                                    'discharge_air_temperature_reset_strategy'],
+                                discharge_air_pressure_reset_strategy=self.cleaned_data[
+                                    'discharge_air_pressure_reset_strategy'],
+                                economizer_control_strategy=self.cleaned_data['economizer_control_strategy'],
+                                ventilation_control_strategy=self.cleaned_data['ventilation_control_strategy'],
                                 )
         ahu.save()
         self.ahu_model = ahu
@@ -214,20 +216,27 @@ class AirHandlerForm(forms.Form):
             cc.save()
 
     def doer(self, t):
-        temp = self.s.df_components[self.s.df_components['id'] == t]
+        temp = self.sf.df_components[self.sf.df_components['id'] == t]
         n = f"{self.ahu_model.name} {temp['Description'].values[0]}"
         dis = temp['Description'].values[0]
         tags = temp['Final Tagset'].values[0]
-        tags = tags.split(" ")
-        final_tags = {}
-        for tag in tags:
-            if ":" in tag:
-                t = tag.split(":")
-                if is_number(t[1]):
-                    final_tags[t[0]] = f"{t[1]}"
-                else:
-                    final_tags[t[0]] = f"{t[1]}"
-            else:
-                final_tags[tag] = True
-        return_tags = json.dumps(final_tags)
+        return_tags = json_dump_tags_from_string(tags)
         return n, dis, return_tags
+
+    def generate_base_ahu_points(self):
+        # This is a dummy implementation.
+        # TODO: Make robust
+        ahu_id = '63'
+        self.gen_component_point_set(self.ahu_model, ahu_id)
+
+    def gen_component_point_set(self, component, component_id):
+        comp_points = self.sf.df_component_points[self.sf.df_component_points['On Type ID'] == component_id]
+        for ind in comp_points.index:
+            t = json_dump_tags_from_string(comp_points['Point Tagset'][ind])
+            p = models.Point(
+                name=f"{component.name} {comp_points['Point Tagset'][ind]}",
+                point_type=comp_points['Add Point ID'][ind],
+                tags=t,
+                is_point_of=component
+            )
+            p.save()
