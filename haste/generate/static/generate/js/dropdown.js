@@ -23,6 +23,8 @@ $(function () {
                 "icons": false
             },
         },
+    }).bind("loaded.jstree", function(){
+        $(this).jstree("open_all");
     });
 });
 
