@@ -219,15 +219,6 @@ class HaystackBuilder:
             final_tags = finalize_tags(t)
             self.hay_json.append(final_tags)
 
-        # self.gen_component_record(ahu, ahu.pre_heat_coil, ahu_hay_id, "Preheat Coil")
-        # self.gen_component_record(ahu, ahu.supp_heat_coil, ahu_hay_id, "Supp Heating Coil")
-        # self.gen_component_record(ahu, ahu.heating_coil_type, ahu_hay_id, "Heating Coil")
-        # self.gen_component_record(ahu, ahu.cooling_coil_type, ahu_hay_id, "Cooling Coil")
-        # self.gen_component_record(ahu, ahu.heating_cooling_coil_type, ahu_hay_id, "Heating Cooling Coil")
-        # self.gen_component_record(ahu, ahu.discharge_fan_type, ahu_hay_id, "Discharge Fan")
-        # self.gen_component_record(ahu, ahu.return_fan_type, ahu_hay_id, "Return Fan")
-        # self.gen_component_record(ahu, ahu.exhaust_fan_type, ahu_hay_id, "Exhaust Fan")
-
     def gen_component_record(self, equip, component, equip_ref, component_type):
         """
         Generate a record for a given component as a sub-equip of the defined equip_ref.
@@ -368,7 +359,6 @@ def finalize_tags(entity):
             better[k] = v
     return better
 
-
 def json_dump_tags_from_string(s):
     tags = s.split(" ")
     final_tags = {}
@@ -382,5 +372,3 @@ def json_dump_tags_from_string(s):
         else:
             final_tags[tag] = True
     return json.dumps(final_tags)
-
-
