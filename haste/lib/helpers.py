@@ -1,8 +1,13 @@
 import os
 import json
+from io import StringIO
+from wsgiref.util import FileWrapper
+from urllib.parse import quote
 
 import pandas as pd
 from uuid import uuid4
+from brickschema.inference import HaystackInferenceSession
+
 from generate import models
 
 
@@ -114,14 +119,13 @@ class Shadowfax:
 
 class HaystackBuilder:
 
-    def __init__(self, site, ahus):
+    def __init__(self, site):
         """
 
         :param site: a single models.Site entity
-        :param ahus: list() all models.AirHandler entities contained in the above site
         """
         self.site = site
-        self.ahus = ahus
+        self.ahus = models.AirHandler.objects.filter(site_id=self.site.id)
         self.sf = Shadowfax()
         self.hay_json = []
         self.point_sets = []
@@ -171,9 +175,9 @@ class HaystackBuilder:
                 "dis": f"s:{tu.name}",
                 "ahuRef": f"r:{ahu_hay_id}",
             }
-            tu_type = self.sf.df_terminal_units[self.sf.df_terminal_units['id'] == tu.terminal_unit_type]
+            tu_type = self.sf.df_terminal_units[self.sf.df_terminal_units['id'] == tu.lookup_id]
             if tu_type.empty:
-                raise TerminalUnitNotFoundError(tu.terminal_unit_type)
+                raise TerminalUnitNotFoundError(tu.lookup_id)
             tags = tu_type['Final Tagset'].values[0]
             tags = tags.split(" ")
             for tag in tags:
@@ -189,7 +193,7 @@ class HaystackBuilder:
         :param tu_hay_id: The UUID of the terminal unit
         :return:
         """
-        tu_type = self.sf.df_terminal_units[self.sf.df_terminal_units['id'] == tu.terminal_unit_type]
+        tu_type = self.sf.df_terminal_units[self.sf.df_terminal_units['id'] == tu.lookup_id]
         damper = tu_type['damperComponentID'].values[0]
         hc = tu_type['heatingComponentID'].values[0]
         cc = tu_type['coolingComponentID'].values[0]
@@ -207,8 +211,8 @@ class HaystackBuilder:
         :param ahu_hay_id: The UUID of the ahu.
         :return:
         """
-        for comp in ahu.components.all():
-            t = json.loads(comp.tags)
+        for comp in ahu.has_part.all():
+            t = json.loads(comp.tagset)
             t["id"] = f"r:{comp.id}"
             t["dis"] = f"s:{comp.name}"
             t["equipRef"] = f"r:{ahu.id}"
@@ -266,9 +270,9 @@ class HaystackBuilder:
             self.gen_base_ahu_point_set(ahu)
 
     def gen_base_ahu_point_set(self, ahu):
-        points = ahu.points.all()
+        points = ahu.has_point.all()
         for p in points:
-            t = json.loads(p.tags)
+            t = json.loads(p.tagset)
             data = {
                 "id": f"r:{p.id}",
                 "dis": f"s:{p.name}",
@@ -277,6 +281,51 @@ class HaystackBuilder:
             t.update(data)
             final_tags = finalize_tags(t)
             self.hay_json.append(final_tags)
+
+    def json_string(self):
+        cols = []
+
+        for entity in self.hay_json:
+            for k in entity.keys():
+                if {"name": k} not in cols:
+                    cols.append({"name": k})
+        data = {
+            "meta": {
+                "ver": "3.0"
+            },
+            "cols": cols,
+            "rows": self.hay_json
+        }
+        return json.dumps(data)
+
+    def json_file_serializer(self):
+        data_string = self.json_string()
+        json_file = StringIO()
+        json_file.write(data_string)
+        json_file.seek(0)
+        return FileWrapper(json_file)
+
+
+class BrickBuilder:
+    def __init__(self, site):
+        self.site = site
+        self.ahus = models.AirHandler.objects.filter(site_id=self.site.id)
+        self.hb = HaystackBuilder(self.site)
+        self.brick_model = None
+        self.hay_sess = HaystackInferenceSession(quote(f"http://localhost/{self.site.name}#"))
+
+    def build(self):
+        self.hb.build()
+        f = self.hb.json_string()
+        self.brick_model = json.loads(f)
+        self.brick_model = self.hay_sess.infer_model(self.brick_model)
+
+    def ttl_file_serializer(self):
+        ttl_file = StringIO()
+        ttl_file.write(self.brick_model.g.serialize(format="turtle").decode('utf-8'))
+        ttl_file.seek(0)
+        return ttl_file
+
 
 class ComponentNotFoundError(Exception):
     def __init__(self, component_id):
@@ -319,6 +368,7 @@ def finalize_tags(entity):
             better[k] = v
     return better
 
+
 def json_dump_tags_from_string(s):
     tags = s.split(" ")
     final_tags = {}
@@ -332,3 +382,5 @@ def json_dump_tags_from_string(s):
         else:
             final_tags[tag] = True
     return json.dumps(final_tags)
+
+
