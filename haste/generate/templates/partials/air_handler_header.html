@@ -8,7 +8,7 @@
                     <ul id="">
                         <li><span class="caret">Equips</span>
                             <ul class="nested">
-                              {% for comp in ahu.components.all %}
+                              {% for comp in ahu.has_part.all %}
                                 <li>{{ comp.name }}</li>
                               {% endfor %}
                             </ul>
@@ -23,7 +23,7 @@
                     <ul id="none">
                         <li><span class="caret">Points</span>
                             <ul class="nested">
-                              {% for point in ahu.points.all %}
+                              {% for point in ahu.has_point.all %}
                                 <li>{{ point.name }}</li>
                               {% endfor %}
                             </ul>

@@ -14,7 +14,7 @@
       <tr>
         <td><a href="{% url 'site.ahu' site.id ahu.id %}">{{ ahu.name }} </a> </td>
         <td>
-            {% for comp in ahu.components.all %}
+            {% for comp in ahu.has_part.all %}
               {% if comp != None %}
                 <p>{{ comp.preheatcoil.short_description }}</p>
                 <p>{{ comp.heatingcoil.short_description }}</p>
@@ -24,7 +24,7 @@
             {% endfor %}
         </td>
       <td>
-        {% for comp in ahu.components.all %}
+        {% for comp in ahu.has_part.all %}
           {% if comp != None %}
             <p>{{ comp.dischargefan.short_description }}</p>
             <p>{{ comp.returnfan.short_description }}</p>
