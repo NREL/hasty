@@ -14,22 +14,7 @@
         <td> <a href="{% url 'site' site.id %}">{{ site.name }} </a></td>
         <td>{{ site.air_handlers.count }}</td>
         <td class="text">
-          <form method="get">
-            <div class="form-group">
-              <select class="form-control" id="download_type" name="download_type">
-                <option value="haystack">Haystack</option>
-                <option value="brick">Brick</option>
-              </select>
-              <br>
-            <button type="submit" class="btn btn-primary" formaction="{% url 'api.download' site.id %}">
-              <i class="fa fa-download"></i>
-            </button>
-            <button type="submit" class="btn btn-primary" formaction="{% url 'data_view' site.id %}">
-              <i class="fa fa-eye"></i>
-            </button>
-            </div>
-          </form>
-
+          {% include 'partials/data_view_download_form.html' %}
         </td>
       </tr>
     {% endfor %}
