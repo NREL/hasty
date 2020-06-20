@@ -125,118 +125,112 @@ class AirHandlerForm(forms.Form):
         self.generate_ef()
 
     def generate_hc(self):
-        hc_type = self.cleaned_data['heating_coil_type']
-        if not is_false(hc_type):
-            name, dis, tags = self.doer(hc_type)
-            hc = models.HeatingCoil(
-                name=name,
-                lookup_id=hc_type,
-                short_description=dis,
-                is_part_of=self.ahu_model,
-                tags=tags
-            )
-            hc.save()
+        t = self.cleaned_data['heating_coil_type']
+        if not is_false(t):
+            self.add_component_to_ahu(t, models.HeatingCoil)
 
     def generate_cc(self):
-        cc_type = self.cleaned_data['cooling_coil_type']
-        if not is_false(cc_type):
-            name, dis, tags = self.doer(cc_type)
-            cc = models.CoolingCoil(
-                name=name,
-                lookup_id=cc_type,
-                short_description=dis,
-                is_part_of=self.ahu_model,
-                tags=tags
-            )
-            cc.save()
+        t = self.cleaned_data['cooling_coil_type']
+        if not is_false(t):
+            self.add_component_to_ahu(t, models.CoolingCoil)
 
     def generate_phc(self):
         t = self.cleaned_data['pre_heat_coil']
         if not is_false(t):
-            name, dis, tags = self.doer(t)
-            cc = models.PreHeatCoil(
-                name=name,
-                lookup_id=t,
-                short_description=dis,
-                is_part_of=self.ahu_model,
-                tags=tags
-            )
-            cc.save()
+            self.add_component_to_ahu(t, models.PreHeatCoil)
 
     def generate_shc(self):
         t = self.cleaned_data['supp_heat_coil']
         if not is_false(t):
-            name, dis, tags = self.doer(t)
-            cc = models.SupplementaryHeatingCoil(
-                name=name,
-                lookup_id=t,
-                short_description=dis,
-                is_part_of=self.ahu_model,
-                tags=tags
-            )
-            cc.save()
+            self.add_component_to_ahu(t, models.SupplementaryHeatingCoil)
 
     def generate_df(self):
         t = self.cleaned_data['discharge_fan_type']
         if not is_false(t):
-            name, dis, tags = self.doer(t)
-            cc = models.DischargeFan(
-                name=name,
-                lookup_id=t,
-                short_description=dis,
-                is_part_of=self.ahu_model,
-                tags=tags
-            )
-            cc.save()
+            self.add_component_to_ahu(t, models.DischargeFan)
 
     def generate_rf(self):
         t = self.cleaned_data['return_fan_type']
         if not is_false(t):
-            name, dis, tags = self.doer(t)
-            cc = models.ReturnFan(
-                name=name,
-                lookup_id=t,
-                short_description=dis,
-                is_part_of=self.ahu_model,
-                tags=tags
-            )
-            cc.save()
+            self.add_component_to_ahu(t, models.ReturnFan)
 
     def generate_ef(self):
         t = self.cleaned_data['exhaust_fan_type']
         if not is_false(t):
-            name, dis, tags = self.doer(t)
-            cc = models.ExhaustFan(
-                name=name,
-                lookup_id=t,
-                short_description=dis,
-                is_part_of=self.ahu_model,
-                tags=tags
-            )
-            cc.save()
+            self.add_component_to_ahu(t, models.ExhaustFan)
 
-    def doer(self, t):
-        temp = self.sf.df_components[self.sf.df_components['id'] == t]
-        n = f"{self.ahu_model.name} {temp['Description'].values[0]}"
+    def add_component_to_ahu(self, component_lookup_id, component_class):
+        """
+
+        :param component_lookup_id:
+        :param component_class:
+        :return:
+        """
+        temp = self.sf.df_components[self.sf.df_components['id'] == component_lookup_id]
+        name = f"{self.ahu_model.name} {temp['Description'].values[0]}"
         dis = temp['Description'].values[0]
         tags = temp['Final Tagset'].values[0]
-        return_tags = json_dump_tags_from_string(tags)
-        return n, dis, return_tags
+        tagset = json_dump_tags_from_string(tags)
+        brick = temp['Brick Concept'].values[0]
+        c = component_class(
+                name=name,
+                lookup_id=component_lookup_id,
+                short_description=dis,
+                is_part_of=self.ahu_model,
+                tagset=tagset,
+                brick_class=brick
+        )
+        c.save()
 
     def generate_base_ahu_points(self):
         # This is a dummy implementation.
         # TODO: Make robust
         ahu_id = '63'
-        self.gen_component_point_set(self.ahu_model, ahu_id)
+        self.generate_component_point_set(self.ahu_model, ahu_id)
 
-    def gen_component_point_set(self, component, component_id):
+    def generate_component_point_set(self, component, component_id):
         comp_points = self.sf.df_component_points[self.sf.df_component_points['On Type ID'] == component_id]
         for ind in comp_points.index:
             t = json_dump_tags_from_string(comp_points['Point Tagset'][ind])
+            bc = comp_points['Brick Concept'][ind]
             p = models.Point(
                 name=f"{component.name} {comp_points['Point Tagset'][ind]}",
-                point_type=comp_points['Add Point ID'][ind],
-                tags=t,
-                is_point_of=component
+                lookup_id=comp_points['Add Point ID'][ind],
+                is_point_of=component,
+                tagset=t,
+                brick_class=bc
             )
             p.save()
+
+    def generate_terminal_units_and_thermal_zones(self):
+        ntu = int(self.cleaned_data['num_terminal_units'])
+        tu_default = self.cleaned_data['terminal_unit_default_type']
+        tu_all_types = self.sf.generate_terminal_unit_types()
+        for tu in tu_all_types:
+            if tu_default == tu["id"]:
+                category = tu["Category"]
+
+        temp = self.sf.df_terminal_units[self.sf.df_terminal_units['id'] == tu_default]
+        category = temp['Category'].values[0]
+        tags = temp['Final Tagset'].values[0]
+        tagset = json_dump_tags_from_string(tags)
+        brick = temp['Brick Concept'].values[0]
+
+        for i in range(1, ntu + 1):
+            new_tu = models.TerminalUnit(
+                name=f"{category}-{i:03d}",
+                lookup_id=tu_default,
+                ahu_id=self.ahu_model,
+                tagset=tagset,
+                brick_class=brick
+            )
+            tz_tags = "hvac zone space"
+            tz_tagset = json_dump_tags_from_string(tz_tags)
+            new_tz = models.ThermalZone(
+                name=f"Zone-{i:03d}",
+                tagset=tz_tagset,
+                brick_class="HVAC_Zone"
+            )
+            new_tz.save()
+            new_tu.thermal_zone = new_tz
+            new_tu.save()

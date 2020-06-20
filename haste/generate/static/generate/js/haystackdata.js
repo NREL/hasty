@@ -12,7 +12,7 @@ var is_ref = function(val) {
 };
 
 var parse_ref = function(val) {
-	//return val.substring(2).split(' ',1)[0];		
+	//return val.substring(2).split(' ',1)[0];
 	return "id: " + val
 };
 
@@ -56,7 +56,7 @@ var on_receive_data = function(hs_data) {
 
 			if (tag == 'id')
 				return;
-			
+
 			var val = row[tag];
 
 			if (val === 'm:') {
@@ -92,7 +92,7 @@ var on_receive_data = function(hs_data) {
 
 			if (!is_ref(val))
 				return;
-			
+
 			var dest = parse_ref(val);
 			//console.log('New edge: tag ' + tag + ' id ' + id + ' to ' + dest);
 			edge = {
@@ -106,7 +106,7 @@ var on_receive_data = function(hs_data) {
 					type: 'continuous',
 					roundness: 0
 				}
-			} 
+			}
 			edges.push(edge);
 
 			if (tag === 'siteRef' && point) {
@@ -129,11 +129,11 @@ var on_receive_data = function(hs_data) {
 				edge.length = 0.1;
 				//console.log('value : ' + edge.value);
 			}
-			
+
 		});
 	});
-	
-    
+
+
     var data = {
         nodes: nodes,
         edges: edges
@@ -148,11 +148,13 @@ var on_receive_data = function(hs_data) {
 function load_entities(url) {
     return new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest();
+        var formData = new FormData();
+        formData.append("download_type", "haystack");
         xhr.open('GET', url);
         xhr.onload = resolve;
 
         xhr.onerror = reject;
-        xhr.send();
+        xhr.send(formData);
     });
 }
 

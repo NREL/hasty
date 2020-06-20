@@ -111,7 +111,7 @@
 
             var options = get_options();
 
-            load_entities("{% url 'api.haystack.download' site.id %}")
+            load_entities("{% url 'api.download' site.id %}")
                 .then(function (e) {
 
                     var data = on_receive_data(JSON.parse(e.target.response))

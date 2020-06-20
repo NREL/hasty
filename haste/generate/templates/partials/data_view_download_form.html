@@ -1,0 +1,24 @@
+{% load static %}
+<form method="get">
+  <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="download_type" id="haystack" value="haystack" checked>
+      <label class="form-check-label" for="haystack">
+        Haystack
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="download_type" id="brick" value="brick" checked>
+      <label class="form-check-label" for="brick">
+        Brick
+      </label>
+    </div>
+    <br>
+  <button type="submit" class="btn btn-primary" formaction="{% url 'api.download' site.id %}">
+    <i class="fa fa-download"></i>
+  </button>
+  <button type="submit" class="btn btn-primary" formaction="{% url 'data_view' site.id %}">
+    <i class="fa fa-eye"></i>
+  </button>
+  </div>
+</form>

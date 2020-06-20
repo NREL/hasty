@@ -27,4 +27,3 @@ $(function () {
         $(this).jstree("open_all");
     });
 });
-

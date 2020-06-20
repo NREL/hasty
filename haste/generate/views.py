@@ -1,13 +1,12 @@
-import json
-from io import StringIO
+import requests
+
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import CreateView
-from django.contrib import messages
+
 from . import forms
 from . import models
-from lib.helpers import Shadowfax
-from lib.helpers import HaystackBuilder
+from lib.helpers import Shadowfax, BrickBuilder
 
 
 def index(request):
@@ -27,7 +26,15 @@ def data_view(request, site_id):
     args = {
         'site': site
     }
-    return render(request, 'data_view.html', args)
+    if request.GET['download_type'] == 'haystack':
+        return render(request, 'data_view.html', args)
+    elif request.GET['download_type'] == 'brick':
+        builder = BrickBuilder(site)
+        builder.build()
+        file = builder.ttl_file_serializer()
+        url = 'https://viewer.brickschema.org/upload'
+
+        return HttpResponseRedirect(url)
 
 
 class Site(CreateView):
@@ -61,21 +68,7 @@ class Site(CreateView):
             if form_result.is_valid():
                 form_result.generate_ahu(site.id)
                 form_result.generate_all_components()
-                ntu = int(form_result.cleaned_data['num_terminal_units'])
-                tudt = form_result.cleaned_data['terminal_unit_default_type']
-                s = Shadowfax()
-                terminal_unit_types = s.generate_terminal_unit_types()
-
-                for tu in terminal_unit_types:
-                    if tudt == tu["id"]:
-                        category = tu["Category"]
-                for i in range(1, ntu + 1):
-                    new_tu = models.TerminalUnit(name=f"{category}-{i:03d}", terminal_unit_type=tudt, ahu_id=form_result.ahu_model)
-                    new_tz = models.ThermalZone(name=f"Zone-{i:03d}")
-                    new_tz.save()
-                    new_tu.thermal_zone = new_tz
-                    new_tu.save()
-
+                form_result.generate_terminal_units_and_thermal_zones()
                 form_result.generate_base_ahu_points()
                 return redirect('site.ahu', site_id=site_id, ahu_id=form_result.ahu_model.id)
             else:
@@ -135,7 +128,7 @@ class AirHandler(CreateView):
             tu = models.TerminalUnit.objects.get(id=key)
             new_name = data.get(key, False)
             tu.name = new_name
-            tu.terminal_unit_type = data.get('terminal_unit')
+            tu.lookup_id = data.get('terminal_unit')
             tu.save()
 
             return redirect('site.ahu', site_id=site_id, ahu_id=ahu_id)

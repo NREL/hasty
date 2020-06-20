@@ -1,11 +1,9 @@
-import json
-from io import StringIO
-from wsgiref.util import FileWrapper
+
 from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from generate.models import Site, AirHandler, TerminalUnit
-from lib.helpers import HaystackBuilder
+from lib.helpers import HaystackBuilder, BrickBuilder
 from .serializers import SiteSerializer
 
 
@@ -44,38 +42,31 @@ class GenerateHaystack(APIView):
         return Response(data)
 
 
-class GenerateHaystackFile(APIView):
+class DownloadFile(APIView):
     """
     Specifically for direct file download.  Implementation based on
     Sebastian response: https://stackoverflow.com/a/46993577/10198770
     TODO:
         1. Plan is to utilize the generate.lib.helpers functions for this
-        2. This should just call one of those functions, i.e. Test() below
     """
 
     def get(self, request, site_id):
+        # import pdb; pdb.set_trace()
+        print(request.query_params)
+        download_type = request.query_params.get('download_type', 'haystack')
         site = Site.objects.get(pk=site_id)
-        ahus = AirHandler.objects.filter(site_id=site_id)
-        builder = HaystackBuilder(site, ahus)
-        builder.build()
-        cols = []
-        for entity in builder.hay_json:
-            for k in entity.keys():
-                if {"name": k} not in cols:
-                    cols.append({"name": k})
-        data = {
-            "meta": {
-                "ver": "3.0"
-            },
-            "cols": cols,
-            "rows": builder.hay_json
-        }
-        data_string = json.dumps(data)
-        json_file = StringIO()
-        json_file.write(data_string)
-        json_file.seek(0)
+        if download_type == 'haystack':
+            builder = HaystackBuilder(site)
+            builder.build()
+            file = builder.json_file_serializer()
+            response = HttpResponse(file, content_type='application/json')
+            response['Content-Disposition'] = f"attachement; filename={site.name} haystack.json"
+            return response
+        elif download_type == 'brick':
+            builder = BrickBuilder(site)
+            builder.build()
+            file = builder.ttl_file_serializer()
 
-        wrapper = FileWrapper(json_file)
-        response = HttpResponse(wrapper, content_type='application/json')
-        response['Content-Disposition'] = f"attachement; filename={site.name} haystack.json"
-        return response
+            response = HttpResponse(file, content_type='application/x-turtle')
+            response['Content-Disposition'] = f"attachement; filename={site.name} brick.ttl"
+            return response
