@@ -15,8 +15,9 @@ class Point(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=50)
-    point_type = models.CharField(max_length=100, choices=ch)
-    tags = models.CharField(max_length=200)
+    lookup_id = models.CharField(max_length=100, choices=ch)
+    tagset = models.CharField(max_length=200, default=None, null=True)
+    brick_class = models.CharField(max_length=100, default=None, null=True)
 
     # https://docs.djangoproject.com/en/dev/ref/contrib/contenttypes/#django.contrib.contenttypes.models.ContentType
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
@@ -28,7 +29,8 @@ class Component(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=50)
     short_description = models.CharField(max_length=50, null=True)
-    tags = models.CharField(max_length=200)
+    tagset = models.CharField(max_length=200, default=None, null=True)
+    brick_class = models.CharField(max_length=100, default=None, null=True)
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
     object_id = models.UUIDField(null=True)
@@ -175,6 +177,8 @@ class AirHandler(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=50)
     site_id = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='air_handlers')
+    tagset = models.CharField(max_length=200, default=None, null=True)
+    brick_class = models.CharField(max_length=100, default=None, null=True)
 
     # Controls Configurations
     discharge_air_temperature_reset_strategy = models.PositiveSmallIntegerField(choices=DAT_RESET_STRATEGY, default=1)
@@ -182,14 +186,17 @@ class AirHandler(models.Model):
     economizer_control_strategy = models.PositiveSmallIntegerField(choices=ECON_STRATEGY, default=1)
     ventilation_control_strategy = models.PositiveSmallIntegerField(choices=VENTILATION_STRATEGY, default=2)
 
-    components = GenericRelation(Component)
-    points = GenericRelation(Point)
+    has_part = GenericRelation(Component)
+    has_point = GenericRelation(Point)
 
 
 class ThermalZone(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=50)
-    points = GenericRelation(Point)
+    tagset = models.CharField(max_length=200, default=None, null=True)
+    brick_class = models.CharField(max_length=100, default=None, null=True)
+
+    has_point = GenericRelation(Point)
 
 
 class TerminalUnit(models.Model):
@@ -204,8 +211,11 @@ class TerminalUnit(models.Model):
 
     name = models.CharField(max_length=50)
     ahu_id = models.ForeignKey(AirHandler, on_delete=models.CASCADE)
-    terminal_unit_type = models.CharField(max_length=50, choices=tuple(tu_choices))
+    lookup_id = models.CharField(max_length=50, choices=tuple(tu_choices))
+
+    tagset = models.CharField(max_length=200, default=None, null=True)
+    brick_class = models.CharField(max_length=100, default=None, null=True)
     thermal_zone = models.OneToOneField(ThermalZone, on_delete=models.CASCADE)
 
-    components = GenericRelation(Component)
-    points = GenericRelation(Point)
+    has_part = GenericRelation(Component)
+    has_point = GenericRelation(Point)
