@@ -101,6 +101,11 @@ class AirHandlerForm(forms.Form):
         self.site_model = models.Site.objects.get(id=site_id)
         ahu = models.AirHandler(name=self.cleaned_data['name'],
                                 site_id=self.site_model,
+                                tagset=json.dumps({
+                                    "equip": True,
+                                    "ahu": True
+                                }),
+                                brick_class="AHU",
                                 discharge_air_temperature_reset_strategy=self.cleaned_data[
                                     'discharge_air_temperature_reset_strategy'],
                                 discharge_air_pressure_reset_strategy=self.cleaned_data[
@@ -220,17 +225,18 @@ class AirHandlerForm(forms.Form):
             new_tu = models.TerminalUnit(
                 name=f"{category}-{i:03d}",
                 lookup_id=tu_default,
-                ahu_id=self.ahu_model,
+                is_fed_by=self.ahu_model,
                 tagset=tagset,
                 brick_class=brick
             )
+            new_tu.save()
             tz_tags = "hvac zone space"
             tz_tagset = json_dump_tags_from_string(tz_tags)
             new_tz = models.ThermalZone(
                 name=f"Zone-{i:03d}",
                 tagset=tz_tagset,
-                brick_class="HVAC_Zone"
+                brick_class="HVAC_Zone",
+                is_fed_by=new_tu
             )
             new_tz.save()
-            new_tu.thermal_zone = new_tz
-            new_tu.save()
+            # new_tu.feeds = new_tz
