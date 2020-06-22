@@ -35,8 +35,8 @@ class Component(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
     object_id = models.UUIDField(null=True)
     is_part_of = GenericForeignKey('content_type', 'object_id')
-    has_part = GenericRelation('Component')
 
+    has_part = GenericRelation('Component')
     has_points = GenericRelation(Point)
 
 
@@ -145,6 +145,44 @@ class Site(models.Model):
     zip = models.IntegerField()
 
 
+class ThermalZone(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4)
+    name = models.CharField(max_length=50)
+    tagset = models.CharField(max_length=200, default=None, null=True)
+    brick_class = models.CharField(max_length=100, default=None, null=True)
+
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
+    object_id = models.UUIDField(null=True)
+
+    is_fed_by = GenericForeignKey('content_type', 'object_id')
+    has_point = GenericRelation(Point)
+
+
+class TerminalUnit(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4)
+    s = Shadowfax()
+    # Create the choices list on the fly
+    tu = s.generate_terminal_unit_types()
+    tu_choices = [(h.get('id'), h.get('Description')) for h in tu]
+
+    # Add in options for choice to be blank
+    tu_choices.append(('None', 'None'))
+
+    name = models.CharField(max_length=50)
+    lookup_id = models.CharField(max_length=50, choices=tuple(tu_choices))
+
+    tagset = models.CharField(max_length=200, default=None, null=True)
+    brick_class = models.CharField(max_length=100, default=None, null=True)
+
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
+    object_id = models.UUIDField(null=True)
+
+    is_fed_by = GenericForeignKey('content_type', 'object_id')
+    feeds = GenericRelation(ThermalZone)
+    has_part = GenericRelation(Component)
+    has_point = GenericRelation(Point)
+
+
 class AirHandler(models.Model):
     DAT_RESET_STRATEGY = (
         (1, "None"),
@@ -186,36 +224,6 @@ class AirHandler(models.Model):
     economizer_control_strategy = models.PositiveSmallIntegerField(choices=ECON_STRATEGY, default=1)
     ventilation_control_strategy = models.PositiveSmallIntegerField(choices=VENTILATION_STRATEGY, default=2)
 
-    has_part = GenericRelation(Component)
-    has_point = GenericRelation(Point)
-
-
-class ThermalZone(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid4)
-    name = models.CharField(max_length=50)
-    tagset = models.CharField(max_length=200, default=None, null=True)
-    brick_class = models.CharField(max_length=100, default=None, null=True)
-
-    has_point = GenericRelation(Point)
-
-
-class TerminalUnit(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid4)
-    s = Shadowfax()
-    # Create the choices list on the fly
-    tu = s.generate_terminal_unit_types()
-    tu_choices = [(h.get('id'), h.get('Description')) for h in tu]
-
-    # Add in options for choice to be blank
-    tu_choices.append(('None', 'None'))
-
-    name = models.CharField(max_length=50)
-    ahu_id = models.ForeignKey(AirHandler, on_delete=models.CASCADE)
-    lookup_id = models.CharField(max_length=50, choices=tuple(tu_choices))
-
-    tagset = models.CharField(max_length=200, default=None, null=True)
-    brick_class = models.CharField(max_length=100, default=None, null=True)
-    thermal_zone = models.OneToOneField(ThermalZone, on_delete=models.CASCADE)
-
+    feeds = GenericRelation(TerminalUnit)
     has_part = GenericRelation(Component)
     has_point = GenericRelation(Point)

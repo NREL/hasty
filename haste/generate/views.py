@@ -48,9 +48,8 @@ class Site(CreateView):
         # tus = models.TerminalUnit.objects.filter(ahu_id=)
         count = 0
         for ahu in ahus:
-            tus = models.TerminalUnit.objects.filter(ahu_id=ahu.id)
+            tus = ahu.feeds.all()
             count += tus.count()
-        print(count)
         air_handler_form = forms.AirHandlerForm()
         args = {
             'air_handler_form': air_handler_form,
@@ -110,7 +109,7 @@ class AirHandler(CreateView):
         tu_types = s.generate_terminal_unit_types()
         site = models.Site.objects.get(id=site_id)
         ahu = models.AirHandler.objects.get(id=ahu_id)
-        tus = models.TerminalUnit.objects.filter(ahu_id=ahu_id)
+        tus = ahu.feeds.all()
         for tu in tus:
             tu_info.append(s.terminal_unit_summary_info(tu))
         args = {

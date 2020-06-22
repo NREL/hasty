@@ -112,7 +112,7 @@ class Shadowfax:
         data = {
             'id': terminal_unit_model.id,
             'name': terminal_unit_model.name,
-            'zone_name': terminal_unit_model.thermal_zone.name,
+            'zone_name': terminal_unit_model.feeds.first().name
         }
         return data
 
@@ -167,7 +167,7 @@ class HaystackBuilder:
         :param ahu_hay_id:
         :return:
         """
-        tus = models.TerminalUnit.objects.filter(ahu_id = ahu.id)
+        tus = ahu.feeds.all()
         for tu in tus:
             hay_id = uuid4()
             temp = {
