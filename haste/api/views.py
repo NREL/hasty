@@ -51,8 +51,6 @@ class DownloadFile(APIView):
     """
 
     def get(self, request, site_id):
-        # import pdb; pdb.set_trace()
-        print(request.query_params)
         download_type = request.query_params.get('download_type', 'haystack')
         site = Site.objects.get(pk=site_id)
         if download_type == 'haystack':
