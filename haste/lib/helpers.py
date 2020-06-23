@@ -16,6 +16,7 @@ class Shadowfax:
     The Lord of All Horses, and Gandalf's friend through many dangers.
     He knows how to show the meaning of Haste.
     """
+
     def __init__(self):
         p = os.path.dirname(os.path.abspath(__file__))
         f_path = os.path.join(p, 'Components.csv')
@@ -34,14 +35,18 @@ class Shadowfax:
         self.df_terminal_units = pd.read_csv(f_path_tu)
         self.df_terminal_units = self.df_terminal_units[self.df_terminal_units['Haste Choice'] == True]
         cast_to_str = ['id', 'damperComponentID', 'heatingComponentID', 'coolingComponentID']
-        self.df_terminal_units[cast_to_str] = self.df_terminal_units[cast_to_str].astype(str).applymap(lambda x: x.split('.')[0])
-        self.df_terminal_units[cast_to_str] = self.df_terminal_units[cast_to_str].applymap(lambda x: "None" if x == "nan" else x)
+        self.df_terminal_units[cast_to_str] = self.df_terminal_units[cast_to_str].astype(str).applymap(
+            lambda x: x.split('.')[0])
+        self.df_terminal_units[cast_to_str] = self.df_terminal_units[cast_to_str].applymap(
+            lambda x: "None" if x == "nan" else x)
 
         f_path_cp = os.path.join(p, 'ComponentPoints.csv')
         self.df_component_points = pd.read_csv(f_path_cp)
         cast_to_str = ['id', 'Requires Child ID', 'On Type ID', 'Add Point ID']
-        self.df_component_points[cast_to_str] = self.df_component_points[cast_to_str].astype(str).applymap(lambda x: x.split('.')[0])
-        self.df_component_points[cast_to_str] = self.df_component_points[cast_to_str].applymap(lambda x: "None" if x == "nan" else x)
+        self.df_component_points[cast_to_str] = self.df_component_points[cast_to_str].astype(str).applymap(
+            lambda x: x.split('.')[0])
+        self.df_component_points[cast_to_str] = self.df_component_points[cast_to_str].applymap(
+            lambda x: "None" if x == "nan" else x)
 
         f_path_p = os.path.join(p, 'Points.csv')
         self.df_points = pd.read_csv(f_path_p)
@@ -359,6 +364,7 @@ def finalize_tags(entity):
             better[k] = v
     return better
 
+
 def json_dump_tags_from_string(s):
     tags = s.split(" ")
     final_tags = {}
@@ -372,3 +378,9 @@ def json_dump_tags_from_string(s):
         else:
             final_tags[tag] = True
     return json.dumps(final_tags)
+
+
+def file_proccessing(file):
+    data = json.load(file)
+    for d in data:
+        print(d)

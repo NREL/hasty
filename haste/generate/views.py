@@ -6,18 +6,36 @@ from django.views.generic import CreateView
 
 from . import forms
 from . import models
-from lib.helpers import Shadowfax, BrickBuilder
+from lib.helpers import Shadowfax, BrickBuilder, file_proccessing
 
 
-def index(request):
-    sites = models.Site.objects.all()
-    ahus = models.AirHandler.objects.all()
+class Index(CreateView):
 
-    args = {
-        'sites': sites,
-        'ahus': ahus
-    }
-    return render(request, 'index.html', args)
+    def get(self, request):
+        sites = models.Site.objects.all()
+        ahus = models.AirHandler.objects.all()
+
+        args = {
+            'sites': sites,
+            'ahus': ahus
+        }
+        return render(request, 'index.html', args)
+
+    def post(self, request):
+
+        file = request.FILES['file']
+        file_proccessing(file)
+        print(file)
+
+        sites = models.Site.objects.all()
+        ahus = models.AirHandler.objects.all()
+
+        args = {
+            'sites': sites,
+            'ahus': ahus
+        }
+
+        return render(request, 'index.html', args)
 
 
 def data_view(request, site_id):
