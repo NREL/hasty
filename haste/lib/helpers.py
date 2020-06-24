@@ -380,7 +380,33 @@ def json_dump_tags_from_string(s):
     return json.dumps(final_tags)
 
 
-def file_proccessing(file):
+def file_processing(file):
+    """
+    - get file extension
+    - if file ext is json
+        - if uuid4 id already exists
+            - just load the file as a copy with a new uuid4
+        - else we need to create a whole new model instance
+            - unserialize(file)?
+              what styles of haystack json are there
+    - elif file ext is osm
+        - unserialize(file)?
+    - elif file ext is idf
+        - unserialize(file)?
+    """
+
     data = json.load(file)
-    for d in data:
-        print(d)
+    try:
+        site_id = str(data['rows'][0]['id'])[2:] # remove "r:" from UUID
+    except:
+        print("JSON file is not valid format")
+
+    try:
+        new_site = models.Site.objects.get(id=site_id)
+        print(new_site)
+        new_site.id = uuid4()
+        new_site.name = "{}(copy)".format(new_site.name, file)
+        new_site.save()
+    except:
+        print("UUID is not in DB or is not associated with a model isntance")
+

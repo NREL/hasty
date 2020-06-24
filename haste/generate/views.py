@@ -1,3 +1,5 @@
+from itertools import chain
+
 import requests
 
 from django.shortcuts import render, redirect, get_object_or_404
@@ -6,7 +8,7 @@ from django.views.generic import CreateView
 
 from . import forms
 from . import models
-from lib.helpers import Shadowfax, BrickBuilder, file_proccessing
+from lib.helpers import Shadowfax, BrickBuilder, file_processing
 
 
 class Index(CreateView):
@@ -23,9 +25,17 @@ class Index(CreateView):
 
     def post(self, request):
 
-        file = request.FILES['file']
-        file_proccessing(file)
-        print(file)
+        if 'delete' in request.POST:
+            id = request.POST.get('id')
+            try:
+                site = models.Site.objects.get(id=id)
+                site.delete()
+            except:
+                print("object already deleted")
+
+        elif 'upload' in request.POST:
+            file = request.FILES['file']
+            file_processing(file)
 
         sites = models.Site.objects.all()
         ahus = models.AirHandler.objects.all()
