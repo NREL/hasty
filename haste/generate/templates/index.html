@@ -2,6 +2,7 @@
 {% block page_content %}
 {% include 'partials/header.html' %}
 {% include 'partials/nav.html' %}
+{% load static %}
 <div class="container" style="padding-top: 3em">
     <div class="jumbotron" style="padding-top: 3em">
         <h3 class="text-muted">Welcome to Haste</h3>
@@ -15,6 +16,23 @@
         <button type="button" class="btn btn-primary btn-lg">
             <a href="{% url 'add_site' %}" style="color: white; text-decoration: none">+ Choose from template</a>
         </button>
+        <div class="col-sm-2" style="padding-top: 1em">
+            <p style="text-align: center"><strong>Or</strong></p>
+        </div>
+
+        <form method="post" enctype="multipart/form-data">
+            <div class=" container row">
+                <div class="col-sm-3">
+                    {% csrf_token %}
+                    <input type="file" name="file" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose a file</label>
+                </div>
+                <div class="'col-sm-2" style="padding-left: 1em">
+                    <button type="submit" name="upload" class="btn btn-outline-success">Upload</button>
+                </div>
+            </div>
+        </form>
+
     </div>
     <div class="card mb-3">
         <div class="card-body p-0">
@@ -31,5 +49,6 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="{% static 'generate/js/fileupload.js' %}"></script>
 {% include 'partials/footer.html' %}
 {% endblock %}

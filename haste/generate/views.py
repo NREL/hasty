@@ -1,3 +1,5 @@
+from itertools import chain
+
 import requests
 
 from django.shortcuts import render, redirect, get_object_or_404
@@ -6,18 +8,44 @@ from django.views.generic import CreateView
 
 from . import forms
 from . import models
-from lib.helpers import Shadowfax, BrickBuilder
+from lib.helpers import Shadowfax, BrickBuilder, file_processing
 
 
-def index(request):
-    sites = models.Site.objects.all()
-    ahus = models.AirHandler.objects.all()
+class Index(CreateView):
 
-    args = {
-        'sites': sites,
-        'ahus': ahus
-    }
-    return render(request, 'index.html', args)
+    def get(self, request):
+        sites = models.Site.objects.all()
+        ahus = models.AirHandler.objects.all()
+
+        args = {
+            'sites': sites,
+            'ahus': ahus
+        }
+        return render(request, 'index.html', args)
+
+    def post(self, request):
+
+        if 'delete' in request.POST:
+            id = request.POST.get('id')
+            try:
+                site = models.Site.objects.get(id=id)
+                site.delete()
+            except:
+                print("object already deleted")
+
+        elif 'upload' in request.POST:
+            file = request.FILES['file']
+            file_processing(file)
+
+        sites = models.Site.objects.all()
+        ahus = models.AirHandler.objects.all()
+
+        args = {
+            'sites': sites,
+            'ahus': ahus
+        }
+
+        return render(request, 'index.html', args)
 
 
 def data_view(request, site_id):
