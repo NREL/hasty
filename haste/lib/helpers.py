@@ -7,7 +7,7 @@ from urllib.parse import quote
 import pandas as pd
 from uuid import uuid4
 from brickschema.inference import HaystackInferenceSession
-
+from lib.deserialization import *
 from generate import models
 
 
@@ -396,17 +396,9 @@ def file_processing(file):
     """
 
     data = json.load(file)
-    try:
-        site_id = str(data['rows'][0]['id'])[2:] # remove "r:" from UUID
-    except:
-        print("JSON file is not valid format")
+    handle_haystack(data)
 
-    try:
-        new_site = models.Site.objects.get(id=site_id)
-        print(new_site)
-        new_site.id = uuid4()
-        new_site.name = "{}(copy)".format(new_site.name, file)
-        new_site.save()
-    except:
-        print("UUID is not in DB or is not associated with a model isntance")
+
+
+
 
