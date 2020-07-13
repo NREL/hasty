@@ -1,4 +1,4 @@
-from haste.lib.helpers import is_number, is_false
+from lib.helpers import is_number, is_false
 
 
 def test_is_number():
