@@ -6,3 +6,4 @@ __pycache__
 tmp
 db.sqlite3
 migrations
+tests/.pytest_cache
