@@ -1,7 +1,87 @@
+from uuid import uuid4
+
 from django.db import models
-from lib.helpers import generate_heating_coils, generate_cooling_coils, generate_terminal_unit_types
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
+from lib.helpers import Shadowfax
+
+SHADOW = Shadowfax()
+
 
 # Create your models here.
+class Point(models.Model):
+    choices = SHADOW.generate_points()
+    ch = [(h.get('id'), h.get('Final Typing Tagset')) for h in choices]
+
+    id = models.UUIDField(primary_key=True, default=uuid4)
+    name = models.CharField(max_length=50)
+    lookup_id = models.CharField(max_length=100, choices=ch)
+    tagset = models.CharField(max_length=200, default=None, null=True)
+    brick_class = models.CharField(max_length=100, default=None, null=True)
+
+    # https://docs.djangoproject.com/en/dev/ref/contrib/contenttypes/#django.contrib.contenttypes.models.ContentType
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.UUIDField()
+    is_point_of = GenericForeignKey('content_type', 'object_id')
+
+
+class Component(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4)
+    name = models.CharField(max_length=50)
+    short_description = models.CharField(max_length=50, null=True)
+    tagset = models.CharField(max_length=200, default=None, null=True)
+    brick_class = models.CharField(max_length=100, default=None, null=True)
+
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
+    object_id = models.UUIDField(null=True)
+    is_part_of = GenericForeignKey('content_type', 'object_id')
+
+    has_part = GenericRelation('Component')
+    has_points = GenericRelation(Point)
+
+
+class HeatingCoil(Component):
+    _ = SHADOW.generate_heating_coils()
+    choices = [(h.get('id'), h.get('Description')) for h in _]
+    lookup_id = models.CharField(max_length=100, choices=choices, default="61", null=True, blank=True)
+
+
+class CoolingCoil(Component):
+    _ = SHADOW.generate_cooling_coils()
+    choices = [(h.get('id'), h.get('Description')) for h in _]
+    lookup_id = models.CharField(max_length=100, choices=choices, default="44", null=True, blank=True)
+
+
+class PreHeatCoil(Component):
+    _ = SHADOW.generate_heating_coils()
+    choices = [(h.get('id'), h.get('Description')) for h in _]
+    lookup_id = models.CharField(max_length=100, choices=choices, null=True, blank=True)
+
+
+class SupplementaryHeatingCoil(Component):
+    _ = SHADOW.generate_heating_coils()
+    choices = [(h.get('id'), h.get('Description')) for h in _]
+    lookup_id = models.CharField(max_length=100, choices=choices, null=True, blank=True)
+
+
+class DischargeFan(Component):
+    _ = SHADOW.generate_discharge_fans()
+    choices = [(h.get('id'), h.get('Description')) for h in _]
+    lookup_id = models.CharField(max_length=100, choices=choices, null=True, blank=True)
+
+
+class ReturnFan(Component):
+    _ = SHADOW.generate_return_fans()
+    choices = [(h.get('id'), h.get('Description')) for h in _]
+    lookup_id = models.CharField(max_length=100, choices=choices, null=True, blank=True)
+
+
+class ExhaustFan(Component):
+    _ = SHADOW.generate_exhaust_fans()
+    choices = [(h.get('id'), h.get('Description')) for h in _]
+    lookup_id = models.CharField(max_length=100, choices=choices, null=True, blank=True)
+
+
 class Site(models.Model):
     STATES = (
         ("AK", "Alaska"),
@@ -58,66 +138,92 @@ class Site(models.Model):
         ("WY", "Wyoming")
     )
 
+    id = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=2, choices=STATES)
     zip = models.IntegerField()
 
 
-class AirSystems(models.Model):
+class ThermalZone(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=50)
-    site_id = models.ForeignKey(Site, on_delete=models.CASCADE)
+    tagset = models.CharField(max_length=200, default=None, null=True)
+    brick_class = models.CharField(max_length=100, default=None, null=True)
 
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
+    object_id = models.UUIDField(null=True)
 
-class AirHandler(models.Model):
-    # Create the choices list on the fly
-    hc = generate_heating_coils()
-    cc = generate_cooling_coils()
-    hc_choices = [(h.get('id'), h.get('description')) for h in hc]
-    cc_choices = [(h.get('id'), h.get('description')) for h in cc]
-
-    # Add in options for choice to be blank
-    hc_choices.append(('None', 'None'))
-    cc_choices.append(('None', 'None'))
-
-    name = models.CharField(max_length=50)
-    site_id = models.ForeignKey(Site, on_delete=models.CASCADE)
-
-    heating_coil_type = models.CharField(max_length=100, choices=tuple(hc_choices))
-    cooling_coil_type = models.CharField(max_length=100, choices=tuple(cc_choices))
+    is_fed_by = GenericForeignKey('content_type', 'object_id')
+    has_point = GenericRelation(Point)
 
 
 class TerminalUnit(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid4)
+    s = Shadowfax()
     # Create the choices list on the fly
-    tu = generate_terminal_unit_types()
-    tu_choices = [(h.get('id'), h.get('description')) for h in tu]
+    tu = s.generate_terminal_unit_types()
+    tu_choices = [(h.get('id'), h.get('Description')) for h in tu]
 
     # Add in options for choice to be blank
     tu_choices.append(('None', 'None'))
 
     name = models.CharField(max_length=50)
-    ahu_id = models.ForeignKey(AirHandler, on_delete=models.CASCADE)
-    terminal_unit_type = models.CharField(max_length=50, choices=tuple(tu_choices))
+    lookup_id = models.CharField(max_length=50, choices=tuple(tu_choices))
+
+    tagset = models.CharField(max_length=200, default=None, null=True)
+    brick_class = models.CharField(max_length=100, default=None, null=True)
+
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
+    object_id = models.UUIDField(null=True)
+
+    is_fed_by = GenericForeignKey('content_type', 'object_id')
+    feeds = GenericRelation(ThermalZone)
+    has_part = GenericRelation(Component)
+    has_point = GenericRelation(Point)
 
 
-# class HeatingCoil(models.Model):
-#     name = models.CharField(max_length=50)
+class AirHandler(models.Model):
+    DAT_RESET_STRATEGY = (
+        (1, "None"),
+        (2, "Outdoor air temperature reset"),
+        (3, "Return air temperature reset"),
+        (4, "Zone Trim and Respond")
+    )
+    DAP_RESET_STRATEGY = (
+        (1, "None"),
+        (2, "Zone Trim and Respond"),
+        (3, "Average of VAV damper position signals")
+    )
+    ECON_STRATEGY = (
+        (1, "None"),
+        (2, "Fixed dry-bulb"),
+        (3, "Fixed enthalpy"),
+        (4, "Differential dry-bulb"),
+        (5, "Differential enthalpy"),
+        (6, "Fixed dry-bulb & differential dry-bulb"),
+        (7, "Fixed enthalpy & fixed dry-bulb"),
+        (8, "Differential enthalpy & fixed dry-bulb")
+    )
+    VENTILATION_STRATEGY = (
+        (1, "None"),
+        (2, "Minimum design outside airflow control"),
+        (3, "DCV with zone-level CO2 sensors"),
+        (4, "DCV with central return sensor")
+    )
 
-# class AirHandlerHeatingCoil(models.Model):
-#     hcs = HeatingCoil.objects.get_all()
-#     HEATING_COIL_CHOICES = []
-#     for hc in hcs.items():
-#         HEATING_COIL_CHOICES.append((hc.id, hc.description))
-#
-#     name = models.CharField(max_length=50)
-#     heating_coil_id = models.
+    id = models.UUIDField(primary_key=True, default=uuid4)
+    name = models.CharField(max_length=50)
+    site_id = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='air_handlers')
+    tagset = models.CharField(max_length=200, default=None, null=True)
+    brick_class = models.CharField(max_length=100, default=None, null=True)
 
+    # Controls Configurations
+    discharge_air_temperature_reset_strategy = models.PositiveSmallIntegerField(choices=DAT_RESET_STRATEGY, default=1)
+    discharge_air_pressure_reset_strategy = models.PositiveSmallIntegerField(choices=DAP_RESET_STRATEGY, default=1)
+    economizer_control_strategy = models.PositiveSmallIntegerField(choices=ECON_STRATEGY, default=1)
+    ventilation_control_strategy = models.PositiveSmallIntegerField(choices=VENTILATION_STRATEGY, default=2)
 
-# class Component(models.Model):
-#     CATEGORIES = (
-#         ("Heating Coil", (
-#             ('Modulating DX heating ')),
-#          ),
-#     )
-#     name = models.CharField(max_length=100)
-#     # category =
+    feeds = GenericRelation(TerminalUnit)
+    has_part = GenericRelation(Component)
+    has_point = GenericRelation(Point)

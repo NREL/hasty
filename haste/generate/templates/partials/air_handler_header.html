@@ -1,0 +1,40 @@
+{% load static %}
+<script type="text/javascript" src="{% static 'generate/js/dropdown.js' %}"></script>
+<div class="container" style="padding-bottom: 2em">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div id="equip_jstree" class="card-body">
+                    <ul id="">
+                        <li><span class="caret">Equips</span>
+                            <ul class="nested">
+                              {% for comp in ahu.has_part.all %}
+                                <li>{{ comp.name }}</li>
+                              {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card">
+                <div id="point_jstree" class="card-body">
+                    <ul id="none">
+                        <li><span class="caret">Points</span>
+                            <ul class="nested">
+                              {% for point in ahu.has_point.all %}
+                                <li>{{ point.name }}</li>
+                              {% endfor %}
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+

@@ -1,71 +1,60 @@
-{% extends "base.html" %}
+{% extends "partials/base.html" %}
 {% load static %}
 {% block page_content %}
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-    <title>Haste</title>
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-        <a class="navbar-brand" href="{% url 'index' %}">
-            <h1>Haste</h1>
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'index' %}">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+{% include 'partials/header.html' %}
+{% include 'partials/nav.html' %}
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Site</li>
+            <li class="breadcrumb-item"><a href="{% url 'site' site.id %}">Site</a></li>
+            <li class="breadcrumb-item active" aria-current="page">AHU</li>
         </ol>
     </nav>
 </div>
-<div class="container">
-  <h3 class="text-muted">{{ site.name }}</h3>
-  <h4 class="text-muted">{{ air_handler.name }}</h4>
-</div>
-<div class="container">
-  <div class="card mb-3">
-    <div class="card-body p-0">
-      <div class="card-title">
-        <button class="btn btn-block btn-lg btn-primary" type="button" data-toggle="collapse"
-                data-target="#showTerminalUnits"
-                aria-expanded="true" aria-controls="showTerminalUnits">
-          Terminal Units
-        </button>
-      </div>
-      <div class="container collapse show" id="showTerminalUnits">
-        {% include 'all_terminal_units.html' %}
-      </div>
+<br>
+{% include 'partials/site_header.html' %}
+<div class="container" style="padding-top: 1em">
+    <div class="card border-top">
+        <h5 class="card-header text-primary">{{ ahu.name }}</h5>
+        <div class="row" style="padding-top: 1em">
+            <div class="col-sm-12">
+                {% include 'partials/air_handler_header.html' %}
+            </div>
+            <div class="col-sm-12">
+                <div class="card mb-3 boarder-right-0">
+                    <div class="card-body p-0 boarder-right-0">
+                        <div class="card-title">
+                            <button class="btn btn-block btn-lg btn-primary" type="button" data-toggle="collapse"
+                                    data-target="#showFaultInfo"
+                                    aria-expanded="true" aria-controls="showFaultInfo">
+                                Fault Information
+                            </button>
+                        </div>
+                        <div class="container collapse show" id="showFaultInfo">
+                            {% include 'faults.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="card mb-3 boarder-right-0">
+                    <div class="card-body p-0 boarder-right-0">
+                        <div class="card-title">
+                            <button class="btn btn-block btn-lg btn-primary" type="button" data-toggle="collapse"
+                                    data-target="#showTerminalUnits"
+                                    aria-expanded="true" aria-controls="showTerminalUnits">
+                                Terminal Units
+                            </button>
+                        </div>
+                        <div class="container collapse show" id="showTerminalUnits">
+                            {% include 'all_terminal_units.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-<footer class="footer">
-    <div class="container">
-        <span class="text-muted"></span>© 2020 Copyright:
-        <a href="https://nrel.gov/"> nrel.gov</a>
-    </div>
-</footer>
-</body>
-</html>
+{% include 'partials/footer.html' %}
 {% endblock %}

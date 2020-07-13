@@ -3,3 +3,7 @@ __pycache__
 .idea
 .DS_Store
 .python-version
+tmp
+db.sqlite3
+migrations
+tests/.pytest_cache

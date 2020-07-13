@@ -1,0 +1,2306 @@
+{
+  "meta": {
+    "ver": "2.0"
+  },
+  "cols": [
+    {
+      "name": "id"
+    },
+    {
+      "name": "account"
+    },
+    {
+      "name": "actionPolicy"
+    },
+    {
+      "name": "air"
+    },
+    {
+      "name": "application"
+    },
+    {
+      "name": "authMethod"
+    },
+    {
+      "name": "camera"
+    },
+    {
+      "name": "connection"
+    },
+    {
+      "name": "cur"
+    },
+    {
+      "name": "curStatus"
+    },
+    {
+      "name": "curVal"
+    },
+    {
+      "name": "current"
+    },
+    {
+      "name": "device"
+    },
+    {
+      "name": "device1Ref"
+    },
+    {
+      "name": "device2Ref"
+    },
+    {
+      "name": "dis"
+    },
+    {
+      "name": "domestic"
+    },
+    {
+      "name": "elec"
+    },
+    {
+      "name": "email"
+    },
+    {
+      "name": "energy"
+    },
+    {
+      "name": "equip"
+    },
+    {
+      "name": "equipRef"
+    },
+    {
+      "name": "flow"
+    },
+    {
+      "name": "freq"
+    },
+    {
+      "name": "geoAddr"
+    },
+    {
+      "name": "geoCity"
+    },
+    {
+      "name": "geoCoord"
+    },
+    {
+      "name": "geoState"
+    },
+    {
+      "name": "grantType"
+    },
+    {
+      "name": "his"
+    },
+    {
+      "name": "hisTotalized"
+    },
+    {
+      "name": "installationDate"
+    },
+    {
+      "name": "kind"
+    },
+    {
+      "name": "lightLevel"
+    },
+    {
+      "name": "network"
+    },
+    {
+      "name": "networkAddress"
+    },
+    {
+      "name": "networkRef"
+    },
+    {
+      "name": "objectFilter"
+    },
+    {
+      "name": "operationFilter"
+    },
+    {
+      "name": "outside"
+    },
+    {
+      "name": "point"
+    },
+    {
+      "name": "power"
+    },
+    {
+      "name": "pressure"
+    },
+    {
+      "name": "primaryFunction"
+    },
+    {
+      "name": "protocol"
+    },
+    {
+      "name": "redirectUrl"
+    },
+    {
+      "name": "roleMember"
+    },
+    {
+      "name": "roleRef"
+    },
+    {
+      "name": "sensor"
+    },
+    {
+      "name": "site"
+    },
+    {
+      "name": "siteRef"
+    },
+    {
+      "name": "smartLight"
+    },
+    {
+      "name": "smartLightGroup"
+    },
+    {
+      "name": "smartLightOf"
+    },
+    {
+      "name": "space"
+    },
+    {
+      "name": "spaceRef"
+    },
+    {
+      "name": "spaceUserLink"
+    },
+    {
+      "name": "status"
+    },
+    {
+      "name": "submeterOf"
+    },
+    {
+      "name": "temp"
+    },
+    {
+      "name": "tz"
+    },
+    {
+      "name": "unit"
+    },
+    {
+      "name": "uri"
+    },
+    {
+      "name": "user"
+    },
+    {
+      "name": "userRef"
+    },
+    {
+      "name": "volt"
+    },
+    {
+      "name": "volume"
+    },
+    {
+      "name": "water"
+    },
+    {
+      "name": "weatherPoint"
+    },
+    {
+      "name": "writable"
+    },
+    {
+      "name": "writeErr"
+    },
+    {
+      "name": "writeLevel"
+    },
+    {
+      "name": "writeStatus"
+    },
+    {
+      "name": "writeVal"
+    },
+    {
+      "name": "wwChannel"
+    },
+    {
+      "name": "wwField"
+    },
+    {
+      "name": "wwSerial"
+    },
+    {
+      "name": "yearBuilt"
+    }
+  ],
+  "rows": [
+    {
+      "id": "r:vrt.huegroup",
+      "dis": "s:VRT Office Phillips Hue Light Group",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "smartLightGroup": "m:",
+      "tz": "s:GMT-10"
+      },
+    {
+      "id": "r:vrt.hue1",
+      "dis": "s:VRT Office Phillips Hue Light #1",
+      "equip": "m:",
+      "geoCoord": "c:-27.47227,153.002972",
+      "siteRef": "r:vrt",
+      "smartLight": "m:",
+      "smartLightOf": "r:vrt.huegroup huegroup",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.hue2",
+      "dis": "s:VRT Office Phillips Hue Light #2",
+      "equip": "m:",
+      "geoCoord": "c:-27.472307,153.003007",
+      "siteRef": "r:vrt",
+      "smartLight": "m:",
+      "smartLightOf": "r:vrt.huegroup huegroup",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt",
+      "dis": "s:VRT Systems",
+      "geoAddr": "s:38b Douglas St, Milton, QLD 4066",
+      "geoCity": "s:Brisbane",
+      "geoState": "s:Queensland",
+      "primaryFunction": "s:commercial",
+      "weatherRef": "r:ws1",
+      "site": "m:",
+      "tz": "s:GMT-10",
+      "yearBuilt": "n:2014"
+    },
+    {
+      "id": "r:vrt.dc",
+      "dis": "s:Data Centre",
+      "primaryFunction": "s:Data centre",
+      "siteRef": "r:vrt",
+      "space": "m:"
+    },
+    {
+      "id": "r:vrt.gf",
+      "dis": "s:Ground Floor",
+      "primaryFunction": "s:commercial",
+      "siteRef": "r:vrt",
+      "space": "m:"
+    },
+    {
+      "id": "r:vrt.l1",
+      "dis": "s:Level 1",
+      "primaryFunction": "s:commercial",
+      "siteRef": "r:vrt",
+      "space": "m:"
+    },
+    {
+      "id": "r:vrt.binlab",
+      "dis": "s:Equip",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:Brisbane"
+    },
+    {
+      "id": "r:vrt.gf_inc",
+      "dis": "s:Building Incomer",
+      "elec": "m:",
+      "equip": "m:",
+      "siteMeter": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.gf",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.dc_ac1",
+      "dis": "s:Data Centre Air Conditioner 1",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.dc",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.gf_ac1",
+      "dis": "s:Ground Floor Air Conditioner 1",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.gf",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.gf_ac2",
+      "dis": "s:Ground Floor Air Conditioner 2",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.gf",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.gf_gl1",
+      "dis": "s:Ground Floor General Line 1",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.gf",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.gf_gl1-1",
+      "dis": "s:Ground Floor General Line 1 Sub",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.gf",
+      "submeterOf": "r:vrt.gf_gl1 gf_gl1",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.gf_gl2",
+      "dis": "s:Ground Floor General Line 2",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.gf",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.gf_gp1",
+      "dis": "s:Ground Floor General Power 1",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.gf",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.gf_gp2",
+      "dis": "s:Ground Floor General Power 2",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.gf",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.gf_gp3",
+      "dis": "s:Ground Floor General Power 3",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.gf",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.gf_hw1",
+      "dis": "s:Ground Floor Hot Water 1",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.gf",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.gf_wm1",
+      "dis": "s:Potable Water Meter 1",
+      "domestic": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.gf",
+      "tz": "s:GMT-10",
+      "water": "m:"
+    },
+    {
+      "id": "r:vrt.gf_wm2",
+      "dis": "s:Potable Water Meter 2",
+      "domestic": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.gf",
+      "tz": "s:GMT-10",
+      "water": "m:"
+    },
+    {
+      "id": "r:vrt.l1_ac1",
+      "dis": "s:Level 1 Air Conditioner 1",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.l1",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.l1_gl3",
+      "dis": "s:Level 1 General Line 3",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.l1",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.l1_gl1",
+      "dis": "s:Level 1 General Line 1",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.l1",
+      "submeterOf": "r:vrt.l1_gl3 l1_gl3",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.l1_gl2",
+      "dis": "s:Level 1 General Line 2",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.l1",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.l1_gp1",
+      "dis": "s:Level 1 General Power 1",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.l1",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.l1_gp2",
+      "dis": "s:Level 1 General Power 2",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.l1",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:ws1",
+      "dis": "s:Weather Station",
+      "weather": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark",
+      "camera": "m:",
+      "device": "m:",
+      "dis": "s:Carpark CCTV Camera",
+      "equip": "m:",
+      "geoCoord": "c:-27.472249,153.002976",
+      "siteRef": "r:vrt"
+    },
+    {
+      "id": "r:vrt.carpark_group",
+      "dis": "s:VRT Carpark Lighting Group",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "smartLightGroup": "m:",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.livingLab_group",
+      "dis": "s:Living Lab Lighting Group",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "smartLightGroup": "m:",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_light1",
+      "dis": "s:Carpark Smart Light 1 (West)",
+      "equip": "m:",
+      "geoCoord": "c:-27.472254,153.00296",
+      "siteRef": "r:vrt",
+      "smartLight": "m:",
+      "smartLightOf": "r:vrt.carpark_group carpark_group",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.binlab.binlevel",
+      "dis": "s:Garbage Height Level in Bin",
+      "equipRef": "r:vrt.binlab",
+      "his": "m:",
+      "kind": "s:Number",
+      "outside": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:Brisbane",
+      "unit": "s:mm"
+    },
+    {
+      "id": "r:vrt.dc_ac1.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.dc_ac1",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.dc_ac1.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.dc_ac1",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.gf_ac1.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.gf_ac1",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.gf_ac1.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.gf_ac1",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.gf_ac2.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.gf_ac2",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.gf_ac2.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.gf_ac2",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.gf_gl1-1.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.gf_gl1-1",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.gf_gl1-1.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.gf_gl1-1",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.gf_gl1.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.gf_gl1",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.gf_gl1.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.gf_gl1",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.gf_gl2.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.gf_gl2",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.gf_gl2.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.gf_gl2",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.gf_gp1.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.gf_gp1",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.gf_gp1.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.gf_gp1",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.gf_gp2.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.gf_gp2",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.gf_gp2.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.gf_gp2",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.gf_gp3.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.gf_gp3",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.gf_gp3.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.gf_gp3",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.gf_hw1.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.gf_hw1",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.gf_hw1.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.gf_hw1",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.gf_inc.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.gf_inc",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.gf_inc.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.gf_inc",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.gf_wm1.waterVolume",
+      "dis": "s:Total Volume",
+      "equipRef": "r:vrt.gf_wm1",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:L",
+      "volume": "m:",
+      "water": "m:"
+    },
+    {
+      "id": "r:vrt.gf_wm2.waterVolume",
+      "dis": "s:Total Volume",
+      "equipRef": "r:vrt.gf_wm2",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:L",
+      "volume": "m:",
+      "water": "m:"
+    },
+    {
+      "id": "r:vrt.l1_ac1.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.l1_ac1",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.l1_ac1.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.l1_ac1",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.l1_ac2.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.l1_ac2",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.l1_ac2.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.l1_ac2",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.l1_gl1.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.l1_gl1",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.l1_gl1.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.l1_gl1",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.l1_gl2.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.l1_gl2",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.l1_gl2.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.l1_gl2",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.l1_gl3.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.l1_gl3",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.l1_gl3.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.l1_gl3",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.l1_gp1.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.l1_gp1",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.l1_gp1.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.l1_gp1",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.l1_gp2.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.l1_gp2",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.l1_gp2.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.l1_gp2",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:vrt.l1_ups.elecEnergy",
+      "dis": "s:Active Energy Import",
+      "elec": "m:",
+      "energy": "m:",
+      "equipRef": "r:vrt.l1_ups",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kWh"
+    },
+    {
+      "id": "r:vrt.l1_ups.elecPower",
+      "dis": "s:Active Power Total",
+      "elec": "m:",
+      "equipRef": "r:vrt.l1_ups",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:kW"
+    },
+    {
+      "id": "r:ws1.baro",
+      "air": "m:",
+      "dis": "s:Air pressure",
+      "weatherRef": "r:ws1",
+      "his": "m:",
+      "kind": "s:Number",
+      "outside": "m:",
+      "point": "m:",
+      "pressure": "m:",
+      "sensor": "m:",
+      "tz": "s:GMT-10",
+      "unit": "s:mmHg",
+      "weatherPoint": "m:"
+    },
+    {
+      "id": "r:ws1.dayRain",
+      "dis": "s:Total rain",
+      "weatherRef": "r:ws1",
+      "flow": "m:",
+      "his": "m:",
+      "hisTotalized": "m:",
+      "kind": "s:Number",
+      "outside": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "tz": "s:GMT-10",
+      "unit": "s:mm",
+      "volume": "m:",
+      "water": "m:",
+      "weatherPoint": "m:"
+    },
+    {
+      "id": "r:ws1.insideHumid",
+      "dis": "s:Inside Humidity",
+      "weatherRef": "r:ws1",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "tz": "s:GMT-10",
+      "unit": "s:%",
+      "weatherPoint": "m:"
+    },
+    {
+      "id": "r:ws1.insideTemp",
+      "dis": "s:Inside Temperature",
+      "weatherRef": "r:ws1",
+      "his": "m:",
+      "kind": "s:Number",
+      "point": "m:",
+      "sensor": "m:",
+      "temp": "m:",
+      "tz": "s:GMT-10",
+      "unit": "s:°C",
+      "weatherPoint": "m:"
+    },
+    {
+      "id": "r:ws1.outsideHumid",
+      "dis": "s:Outside Humidity",
+      "weatherRef": "r:ws1",
+      "his": "m:",
+      "kind": "s:Number",
+      "outside": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "tz": "s:GMT-10",
+      "unit": "s:%",
+      "weatherPoint": "m:"
+    },
+    {
+      "id": "r:ws1.outsideTemp",
+      "dis": "s:Outside Temperature",
+      "weatherRef": "r:ws1",
+      "his": "m:",
+      "kind": "s:Number",
+      "outside": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "temp": "m:",
+      "tz": "s:GMT-10",
+      "unit": "s:°C",
+      "weatherPoint": "m:"
+    },
+    {
+      "id": "r:ws1.rainRate",
+      "dis": "s:Rain Rate",
+      "weatherRef": "r:ws1",
+      "his": "m:",
+      "kind": "s:Number",
+      "outside": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "tz": "s:GMT-10",
+      "unit": "s:mm/h",
+      "weatherPoint": "m:"
+    },
+    {
+      "id": "r:ws1.solar",
+      "dis": "s:Solar Radiation",
+      "weatherRef": "r:ws1",
+      "his": "m:",
+      "kind": "s:Number",
+      "outside": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "tz": "s:GMT-10",
+      "unit": "s:W/m²",
+      "weatherPoint": "m:"
+    },
+    {
+      "id": "r:ws1.uv",
+      "dis": "s:UV Index",
+      "weatherRef": "r:ws1",
+      "his": "m:",
+      "kind": "s:Number",
+      "outside": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "tz": "s:GMT-10",
+      "weatherPoint": "m:"
+    },
+    {
+      "id": "r:ws1.windDir",
+      "air": "m:",
+      "dis": "s:Wind Direction",
+      "weatherRef": "r:ws1",
+      "his": "m:",
+      "kind": "s:Number",
+      "outside": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "tz": "s:GMT-10",
+      "unit": "s:deg",
+      "weatherPoint": "m:"
+    },
+    {
+      "id": "r:ws1.windSpeed",
+      "air": "m:",
+      "dis": "s:Wind Speed",
+      "weatherRef": "r:ws1",
+      "flow": "m:",
+      "his": "m:",
+      "kind": "s:Number",
+      "outside": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "tz": "s:GMT-10",
+      "unit": "s:km/h",
+      "weatherPoint": "m:"
+    },
+    {
+      "id": "r:vrt.carpark_light2",
+      "dis": "s:Carpark Smart Light 2 (East)",
+      "equip": "m:",
+      "geoCoord": "c:-27.472242,153.002994",
+      "siteRef": "r:vrt",
+      "smartLight": "m:",
+      "smartLightOf": "r:vrt.carpark_group carpark_group",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.l1_ups",
+      "dis": "s:Level 1 UPS",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.dc",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.livinglabcctv",
+      "camera": "m:",
+      "device": "m:",
+      "dis": "s:Living Lab CCTV Camera",
+      "equip": "m:",
+      "geoCoord": "c:-27.472273,153.00298",
+      "siteRef": "r:vrt"
+    },
+    {
+      "id": "r:vrt.livingLab_light1",
+      "dis": "s:Living Lab Smart Light 1",
+      "equip": "m:",
+      "geoCoord": "c:-27.47228,153.002969",
+      "siteRef": "r:vrt",
+      "smartLight": "m:",
+      "smartLightOf": "r:vrt.livingLab_group livingLab_group",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.l1_ac2",
+      "dis": "s:Level 1 Air Conditioner 2",
+      "elec": "m:",
+      "equip": "m:",
+      "siteRef": "r:vrt",
+      "spaceRef": "r:vrt.dc",
+      "submeterOf": "r:vrt.gf_inc",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt_demo",
+      "weatherRef": "r:ws1",
+      "dis": "s:Stand 3 VRT Systems Demo",
+      "geoAddr": "s:Merivale St & Glenelg St, South Brisbane, QLD 4101",
+      "geoCity": "s:Brisbane",
+      "geoState": "s:Queensland",
+      "primaryFunction": "s:commercial",
+      "site": "m:",
+      "tz": "s:GMT-10",
+      "yearBuilt": "n:2014"
+    },
+    {
+      "id": "r:vrt.huegroup.control_mode",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "s:AUTO",
+      "dis": "s:Test light control mode",
+      "equipRef": "r:vrt.huegroup",
+      "kind": "s:Str",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "writable": "m:",
+      "writeErr": "s:x:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "s:auto"
+    },
+    {
+      "id": "r:vrt.huegroup.lamp_level",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:100",
+      "dis": "s:Hue Group brightness (percent)",
+      "equipRef": "r:vrt.huegroup",
+      "his": "m:",
+      "kind": "s:Number",
+      "lightLevel": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:%",
+      "writable": "m:",
+      "writeErr": "s:x:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "n:100"
+    },
+    {
+      "id": "r:vrt.huegroup.lamp_on",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": true,
+      "dis": "s:Hue Group on/off state",
+      "equipRef": "r:vrt.huegroup",
+      "his": "m:",
+      "kind": "s:Bool",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "writable": "m:"
+    },
+    {
+      "id": "r:vrt.hue1.control_mode",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "s:MANUAL",
+      "dis": "s:Hue Light 1 control mode",
+      "equipRef": "r:vrt.hue1",
+      "kind": "s:Str",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "writable": "m:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "s:manual"
+    },
+    {
+      "id": "r:vrt.hue1.lamp_level",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:100",
+      "dis": "s:Hue Light 1 brightness (percent)",
+      "equipRef": "r:vrt.hue1",
+      "his": "m:",
+      "kind": "s:Number",
+      "lightLevel": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:%",
+      "writable": "m:",
+      "writeErr": "s:x:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "n:10"
+    },
+    {
+      "id": "r:vrt.hue1.lamp_on",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": true,
+      "dis": "s:Hue Light 1 on/off state",
+      "equipRef": "r:vrt.hue1",
+      "his": "m:",
+      "kind": "s:Bool",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "writable": "m:"
+    },
+    {
+      "id": "r:vrt.hue2.control_mode",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "s:AUTO",
+      "dis": "s:Hue Light 2 control mode",
+      "equipRef": "r:vrt.hue2",
+      "kind": "s:Str",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "writable": "m:",
+      "writeErr": "s:x:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "s:manual"
+    },
+    {
+      "id": "r:vrt.hue2.lamp_level",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:100",
+      "dis": "s:Hue Light 2 brightness (percent)",
+      "equipRef": "r:vrt.hue2",
+      "his": "m:",
+      "kind": "s:Number",
+      "lightLevel": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:%",
+      "writable": "m:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "n:0"
+    },
+    {
+      "id": "r:vrt.hue2.lamp_on",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": true,
+      "dis": "s:Hue Light 2 on/off state",
+      "equipRef": "r:vrt.hue2",
+      "his": "m:",
+      "kind": "s:Bool",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "writable": "m:"
+    },
+    {
+      "id": "r:vrt.carpark_group.active",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:738136",
+      "dis": "s:Carpark group active energy",
+      "energy": "m:",
+      "equipRef": "r:vrt.carpark_group",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_group.control_mode",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "s:AUTO",
+      "dis": "s:Carpark group control mode",
+      "equipRef": "r:vrt.carpark_group",
+      "kind": "s:Str",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "writable": "m:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "s:manual"
+    },
+    {
+      "id": "r:vrt.carpark_group.i_rms",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:0.307",
+      "current": "m:",
+      "dis": "s:Carpark group current consumption",
+      "equipRef": "r:vrt.carpark_group",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_group.lamp_level",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:25",
+      "dis": "s:Carpark group brightness (percent)",
+      "equipRef": "r:vrt.carpark_group",
+      "his": "m:",
+      "kind": "s:Number",
+      "lightLevel": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:%",
+      "writable": "m:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "n:20"
+    },
+    {
+      "id": "r:vrt.carpark_group.power_active",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:67",
+      "dis": "s:Carpark group active power",
+      "equipRef": "r:vrt.carpark_group",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_group.power_reactive",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:-30",
+      "dis": "s:Carpark group reactive power",
+      "equipRef": "r:vrt.carpark_group",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_group.reactive",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:-299157",
+      "dis": "s:Carpark group reactive energy",
+      "energy": "m:",
+      "equipRef": "r:vrt.carpark_group",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_light1.active",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:272520",
+      "dis": "s:Carpark light 1 Active energy",
+      "energy": "m:",
+      "equipRef": "r:vrt.carpark_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_light1.control_mode",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "s:AUTO",
+      "dis": "s:Carpark light 1 control mode",
+      "equipRef": "r:vrt.carpark_light1",
+      "kind": "s:Str",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "writable": "m:",
+      "writeErr": "s:x:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "s:auto"
+    },
+    {
+      "id": "r:vrt.carpark_light1.freq",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:50",
+      "dis": "s:Carpark light 1 line frequency",
+      "equipRef": "r:vrt.carpark_light1",
+      "freq": "m:",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_light1.i_rms",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:0.093",
+      "current": "m:",
+      "dis": "s:Carpark light 1 current consumption",
+      "equipRef": "r:vrt.carpark_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_light1.lamp_level",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:20",
+      "dis": "s:Carpark light 1 brightness (percent)",
+      "equipRef": "r:vrt.carpark_light1",
+      "his": "m:",
+      "kind": "s:Number",
+      "lightLevel": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:%",
+      "writable": "m:",
+      "writeErr": "s:x:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "n:20"
+    },
+    {
+      "id": "r:vrt.carpark_light1.power_active",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:19",
+      "dis": "s:Carpark light 1 Active power",
+      "equipRef": "r:vrt.carpark_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_light1.power_reactive",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:-11",
+      "dis": "s:Carpark light 1 Reactive power",
+      "equipRef": "r:vrt.carpark_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_light1.reactive",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:-105558",
+      "dis": "s:Carpark light 1 Reactive energy",
+      "energy": "m:",
+      "equipRef": "r:vrt.carpark_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_light1.u_rms",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:242",
+      "dis": "s:Carpark light 1 line voltage",
+      "equipRef": "r:vrt.carpark_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "volt": "m:"
+    },
+    {
+      "id": "r:vrt.carpark_light2.active",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:465616",
+      "dis": "s:Carpark light 2 Active energy",
+      "energy": "m:",
+      "equipRef": "r:vrt.carpark_light2",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_light2.control_mode",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "s:AUTO",
+      "dis": "s:Carpark light 2 control mode",
+      "equipRef": "r:vrt.carpark_light2",
+      "kind": "s:Str",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "writable": "m:",
+      "writeErr": "s:x:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "s:auto"
+    },
+    {
+      "id": "r:vrt.carpark_light2.freq",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:50",
+      "dis": "s:Carpark light 2 line frequency",
+      "equipRef": "r:vrt.carpark_light2",
+      "freq": "m:",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_light2.i_rms",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:0.214",
+      "current": "m:",
+      "dis": "s:Carpark light 2 current consumption",
+      "equipRef": "r:vrt.carpark_light2",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_light2.lamp_level",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:30",
+      "dis": "s:Carpark light 2 brightness (percent)",
+      "equipRef": "r:vrt.carpark_light2",
+      "his": "m:",
+      "kind": "s:Number",
+      "lightLevel": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:%",
+      "writable": "m:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "n:30"
+    },
+    {
+      "id": "r:vrt.carpark_light2.power_active",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:48",
+      "dis": "s:Carpark light 2 active power",
+      "equipRef": "r:vrt.carpark_light2",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_light2.power_reactive",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:-19",
+      "dis": "s:Carpark light 2 reactive power",
+      "equipRef": "r:vrt.carpark_light2",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_light2.reactive",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:-193599",
+      "dis": "s:Carpark light 2 reactive energy",
+      "energy": "m:",
+      "equipRef": "r:vrt.carpark_light2",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.carpark_light2.u_rms",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:242",
+      "dis": "s:Carpark light 2 line voltage",
+      "equipRef": "r:vrt.carpark_light2",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "volt": "m:"
+    },
+    {
+      "id": "r:vrt_demo.portable_light1.active",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:53893",
+      "dis": "s:Portable light 1 active energy",
+      "energy": "m:",
+      "equipRef": "r:vrt_demo.portable_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt_demo",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt_demo.portable_light1.control_mode",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "s:AUTO",
+      "dis": "s:Portable light 1 control mode",
+      "equipRef": "r:vrt_demo.portable_light1",
+      "kind": "s:Str",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt_demo",
+      "tz": "s:GMT-10",
+      "writable": "m:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "s:auto"
+    },
+    {
+      "id": "r:vrt_demo.portable_light1.freq",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:50",
+      "dis": "s:Portable light 1 line frequency",
+      "equipRef": "r:vrt_demo.portable_light1",
+      "freq": "m:",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt_demo",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt_demo.portable_light1.i_rms",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:0.02",
+      "current": "m:",
+      "dis": "s:Portable light 1 current consumption",
+      "equipRef": "r:vrt_demo.portable_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt_demo",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt_demo.portable_light1.lamp_level",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:20",
+      "dis": "s:Portable light 1 brightness (percent)",
+      "equipRef": "r:vrt_demo.portable_light1",
+      "his": "m:",
+      "kind": "s:Number",
+      "lightLevel": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt_demo",
+      "tz": "s:GMT-10",
+      "unit": "s:%",
+      "writable": "m:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "n:20"
+    },
+    {
+      "id": "r:vrt_demo.portable_light1.power_active",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:1",
+      "dis": "s:Portable light 1 active power",
+      "equipRef": "r:vrt_demo.portable_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt_demo",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt_demo.portable_light1.power_reactive",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:-4",
+      "dis": "s:Portable light 1 reactive power",
+      "equipRef": "r:vrt_demo.portable_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt_demo",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt_demo.portable_light1.reactive",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:-34960",
+      "dis": "s:Portable light 1 reactive energy",
+      "energy": "m:",
+      "equipRef": "r:vrt_demo.portable_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt_demo",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt_demo.portable_light1.u_rms",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:239",
+      "dis": "s:Portable light 1 line voltage",
+      "equipRef": "r:vrt_demo.portable_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt_demo",
+      "tz": "s:GMT-10",
+      "volt": "m:"
+    },
+    {
+      "id": "r:vrt.livingLab_group.active",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:50977",
+      "dis": "s:Living Lab group active energy",
+      "energy": "m:",
+      "equipRef": "r:vrt.livingLab_group",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.livingLab_group.control_mode",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "s:AUTO",
+      "dis": "s:Living Lab group control mode",
+      "equipRef": "r:vrt.livingLab_group",
+      "kind": "s:Str",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "writable": "m:",
+      "writeErr": "s:x:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "s:manual"
+    },
+    {
+      "id": "r:vrt.livingLab_group.i_rms",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:0.027",
+      "current": "m:",
+      "dis": "s:Living Lab group current consumption",
+      "equipRef": "r:vrt.livingLab_group",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.livingLab_group.lamp_level",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:80",
+      "dis": "s:Living Lab group brightness (percent)",
+      "equipRef": "r:vrt.livingLab_group",
+      "his": "m:",
+      "kind": "s:Number",
+      "lightLevel": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:%",
+      "writable": "m:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "n:90"
+    },
+    {
+      "id": "r:vrt.livingLab_group.power_active",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:5",
+      "dis": "s:Living Lab group active power",
+      "equipRef": "r:vrt.livingLab_group",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.livingLab_group.power_reactive",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:-3",
+      "dis": "s:Living Lab group reactive power",
+      "equipRef": "r:vrt.livingLab_group",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.livingLab_group.reactive",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:-40839",
+      "dis": "s:Living Lab group reactive energy",
+      "energy": "m:",
+      "equipRef": "r:vrt.livingLab_group",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.livingLab_light1.active",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:50977",
+      "dis": "s:Living Lab light 1 Active energy",
+      "energy": "m:",
+      "equipRef": "r:vrt.livingLab_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.livingLab_light1.control_mode",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "s:AUTO",
+      "dis": "s:Living Lab light 1 control mode",
+      "equipRef": "r:vrt.livingLab_light1",
+      "kind": "s:Str",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "writable": "m:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "s:auto"
+    },
+    {
+      "id": "r:vrt.livingLab_light1.freq",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:50",
+      "dis": "s:Living Lab light 1 line frequency",
+      "equipRef": "r:vrt.livingLab_light1",
+      "freq": "m:",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.livingLab_light1.i_rms",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:0.027",
+      "current": "m:",
+      "dis": "s:Living Lab light 1 current consumption",
+      "equipRef": "r:vrt.livingLab_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.livingLab_light1.lamp_level",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:80",
+      "dis": "s:Living Lab light 1 brightness (percent)",
+      "equipRef": "r:vrt.livingLab_light1",
+      "his": "m:",
+      "kind": "s:Number",
+      "lightLevel": "m:",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "unit": "s:%",
+      "writable": "m:",
+      "writeErr": "s:x:",
+      "writeLevel": "n:17",
+      "writeStatus": "s:ok",
+      "writeVal": "n:100"
+    },
+    {
+      "id": "r:vrt.livingLab_light1.power_active",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:5",
+      "dis": "s:Living Lab light 1 active power",
+      "equipRef": "r:vrt.livingLab_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.livingLab_light1.power_reactive",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:-3",
+      "dis": "s:Living Lab light 1 reactive power",
+      "equipRef": "r:vrt.livingLab_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "power": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.livingLab_light1.reactive",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:-40839",
+      "dis": "s:Living Lab light 1 reactive energy",
+      "energy": "m:",
+      "equipRef": "r:vrt.livingLab_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10"
+    },
+    {
+      "id": "r:vrt.livingLab_light1.u_rms",
+      "cur": "m:",
+      "curStatus": "s:ok",
+      "curVal": "n:245",
+      "dis": "s:Living Lab light 1 line voltage",
+      "equipRef": "r:vrt.livingLab_light1",
+      "his": "m:",
+      "kind": "s:float",
+      "point": "m:",
+      "sensor": "m:",
+      "siteRef": "r:vrt",
+      "tz": "s:GMT-10",
+      "volt": "m:"
+    }
+  ]
+}

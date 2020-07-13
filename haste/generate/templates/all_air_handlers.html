@@ -4,18 +4,35 @@
     <thead>
     <tr>
       <th scope="col">Air Handler Name</th>
-      <th scope="col">Heating Type</th>
-      <th scope="col">Cooling Type</th>
+      <th scope="col">Coil Configurations</th>
+      <th scope="col">Fan Configurations</th>
       <th scope="col">Number of Terminal Units</th>
     </tr>
     </thead>
     <tbody>
     {% for ahu in ahus %}
       <tr>
-        <td>{{ ahu.name }}</td>
-        <td>{{ ahu.hc_name }}</td>
-        <td>{{ ahu.cc_name }}</td>
-        <td>{{ ahu.num_terminal_units }}</td>
+        <td><a href="{% url 'site.ahu' site.id ahu.id %}">{{ ahu.name }} </a> </td>
+        <td>
+            {% for comp in ahu.has_part.all %}
+              {% if comp != None %}
+                <p>{{ comp.preheatcoil.short_description }}</p>
+                <p>{{ comp.heatingcoil.short_description }}</p>
+                <p>{{ comp.coolingcoil.short_description }}</p>
+                <p>{{ comp.supplementaryheatingcoil.short_description }}</p>
+              {% endif %}
+            {% endfor %}
+        </td>
+      <td>
+        {% for comp in ahu.has_part.all %}
+          {% if comp != None %}
+            <p>{{ comp.dischargefan.short_description }}</p>
+            <p>{{ comp.returnfan.short_description }}</p>
+            <p>{{ comp.exhaustfan.short_description }}</p>
+          {% endif %}
+        {% endfor %}
+      </td>
+      <td>{{ tus_count }}</td>
       </tr>
     {% endfor %}
     </tbody>

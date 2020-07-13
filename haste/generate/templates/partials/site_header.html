@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="card">
+    <h3 class="card-header text-primary">{{ site.name }}</h3>
+    <div class="card-body">
+      <h5 class="card-subtitle">{{ site.city }}, {{ site.state }}  {{ site.zip }}</h5>
+    </div>
+    <div class="card-body">
+      {% include 'partials/data_view_download_form.html' %}
+    </div>
+  </div>
+</div>

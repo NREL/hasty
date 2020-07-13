@@ -1,0 +1,26 @@
+﻿id,If Marker,On Type ID,On Type Tagset,Requires Child ID,Requires Child Tagset,Requires Control ID,Requires Control Description,Find,Iterator,Add Point ID,Point Tagset,Brick Concept,Datatype
+1,,63,ahu equip,,,,,,,8,discharge air temp sensor point,Discharge_Air_Temperature_Sensor,Numeric
+2,,63,ahu equip,,,,,,,9,return air temp sensor point,Return_Air_Temperature_Sensor,Numeric
+3,,63,ahu equip,,,,,,,11,mixed air temp sensor point,Mixed_Air_Temperature_Sensor,Numeric
+4,,63,ahu equip,5,discharge continuous fan motor equip,,,,,66,discharge air pressure sensor point,Discharge_Air_Static_Pressure_Sensor,Numeric
+5,,63,ahu equip,8,return continuous fan motor equip,,,,,67,return air pressure sensor point,0,Numeric
+6,singleStage,22,heatingCoil equip,,,,,,,13,stage:1 cmd point,0,Boolean
+7,singleStage,23,coolingCoil equip,,,,,,,13,stage:1 cmd point,0,Boolean
+8,singleStage,38,heatingCoolingCoil equip,,,,,,,13,stage:1 cmd point,0,Boolean
+9,multiStage,22,heatingCoil equip,,,,,numStages,N,62,stage:N cmd point,0,Boolean
+10,multiStage,23,coolingCoil equip,,,,,numStages,N,62,stage:N cmd point,0,Boolean
+11,multiStage,38,heatingCoolingCoil equip,,,,,numStages,N,62,stage:N cmd point,0,Boolean
+12,continuous,22,heatingCoil equip,,,,,,,63,modulating position cmd point,0,Numeric
+13,continuous,23,coolingCoil equip,,,,,,,63,modulating position cmd point,0,Numeric
+14,continuous,38,heatingCoolingCoil equip,,,,,,,63,modulating position cmd point,0,Numeric
+15,,13,singleSpeed fan motor equip,,,,,,,12,run cmd point,Run_Request_Command,Boolean
+16,,14,continuous fan motor equip,,,,,,,12,run cmd point,Run_Request_Command,Boolean
+17,,14,continuous fan motor equip,,,,,,,37,enable cmd point,Enable_Command,Boolean
+18,,14,continuous fan motor equip,,,,,,,68,speed cmd point,0,Numeric
+19,,14,continuous fan motor equip,,,,,,,69,run sensor point,Status,Boolean
+20,,63,ahu equip,,,,,,,30,outside air temp sensor point,Outside_Air_Temperature_Sensor,Numeric
+21,,,,,,,,,,,,,
+22,,,,,,,,,,,,,
+23,,,,,,,,,,,,,
+24,,,,,,,,,,,,,
+25,,,,,,,,,,,,,
