@@ -12,11 +12,11 @@ def handle_haystack(data):
 
 
 def handle_brick(data):
-    pass
+    print(data)
 
 
 def handle_osm(data):
-    pass
+    print(data)
 
 
 def find_sites(entities):
