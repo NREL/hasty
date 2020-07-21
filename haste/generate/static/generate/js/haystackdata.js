@@ -157,7 +157,3 @@ function load_entities(url) {
         xhr.send(formData);
     });
 }
-
-
-
-

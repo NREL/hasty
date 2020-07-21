@@ -7,7 +7,7 @@ from urllib.parse import quote
 import pandas as pd
 from uuid import uuid4
 from brickschema.inference import HaystackInferenceSession
-from lib.deserialization import *
+from lib import deserialization
 from generate import models
 
 
@@ -21,7 +21,7 @@ class Shadowfax:
         p = os.path.dirname(os.path.abspath(__file__))
         f_path = os.path.join(p, 'Components.csv')
         self.df_components = pd.read_csv(f_path)
-        self.df_components = self.df_components[self.df_components['Haste Choice'] == True]
+        self.df_components = self.df_components[self.df_components['Haste Choice'] == True]  # noqa
         self.df_components['id'] = self.df_components['id'].astype(str)
         self.df_cc = self.df_components[self.df_components['Category'] == 'Cooling coil']
         self.df_hc = self.df_components[self.df_components['Category'] == 'Heating coil']
@@ -33,7 +33,7 @@ class Shadowfax:
         # Read in and generate terminal units
         f_path_tu = os.path.join(p, 'TerminalUnits.csv')
         self.df_terminal_units = pd.read_csv(f_path_tu)
-        self.df_terminal_units = self.df_terminal_units[self.df_terminal_units['Haste Choice'] == True]
+        self.df_terminal_units = self.df_terminal_units[self.df_terminal_units['Haste Choice'] == True]  # noqa
         cast_to_str = ['id', 'damperComponentID', 'heatingComponentID', 'coolingComponentID']
         self.df_terminal_units[cast_to_str] = self.df_terminal_units[cast_to_str].astype(str).applymap(
             lambda x: x.split('.')[0])
@@ -396,9 +396,4 @@ def file_processing(file):
     """
 
     data = json.load(file)
-    handle_haystack(data)
-
-
-
-
-
+    deserialization.handle_haystack(data)

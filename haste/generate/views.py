@@ -1,9 +1,7 @@
-from itertools import chain
 
-import requests
 
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.views.generic import CreateView
 
 from . import forms
@@ -30,7 +28,7 @@ class Index(CreateView):
             try:
                 site = models.Site.objects.get(id=id)
                 site.delete()
-            except:
+            except BaseException:
                 print("object already deleted")
 
         elif 'upload' in request.POST:
@@ -59,7 +57,7 @@ def data_view(request, site_id):
     elif request.GET['download_type'] == 'brick':
         builder = BrickBuilder(site)
         builder.build()
-        file = builder.ttl_file_serializer()
+        builder.ttl_file_serializer()
         url = 'https://viewer.brickschema.org/upload'
 
         return HttpResponseRedirect(url)
@@ -69,9 +67,8 @@ class Site(CreateView):
     template_name = 'site.html'
 
     def get(self, request, site_id):
-        s = Shadowfax()
+        Shadowfax()
         site = models.Site.objects.get(id=site_id)
-        ahu_info = []
         ahus = models.AirHandler.objects.filter(site_id=site_id)
         # tus = models.TerminalUnit.objects.filter(ahu_id=)
         count = 0
@@ -159,4 +156,3 @@ class AirHandler(CreateView):
             tu.save()
 
             return redirect('site.ahu', site_id=site_id, ahu_id=ahu_id)
-

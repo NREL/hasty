@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from generate.models import Site, AirHandler, TerminalUnit
+from generate.models import Site
 from lib.helpers import HaystackBuilder, BrickBuilder
 from .serializers import SiteSerializer
 
@@ -17,9 +17,9 @@ class GetSites(APIView):
 
     def get(self, request):
         sites = Site.objects.all()
-        for site in sites:
-            ahus = AirHandler.objects.filter(site_id=site.id)
-            # print(ahus)
+        # for site in sites:
+        #     ahus = AirHandler.objects.filter(site_id=site.id)
+        # print(ahus)
 
         serializer = SiteSerializer(sites, many=True)
         return Response(serializer.data)

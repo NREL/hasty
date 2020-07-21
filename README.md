@@ -8,4 +8,3 @@ web app to create haystack json files (for now)
 
 ## Third-Party Licenses
 This project utilizes code written by [Patrick Coffey](https://patrickcoffey.bitbucket.io) under an [MIT](https://opensource.org/licenses/MIT) license
-

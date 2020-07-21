@@ -1,7 +1,7 @@
 
 
 var get_options = function() {
-  
+
   var options = {
     autoResize: true,
     manipulation: true,
@@ -11,10 +11,10 @@ var get_options = function() {
         enabled: false
     },
       layout: {
-        improvedLayout: true 
+        improvedLayout: true
       },
-      
-      
+
+
     nodes: {
         font: {
           color: '#343434',
@@ -34,7 +34,7 @@ var get_options = function() {
         right: 10
       },
       widthConstraint: { minimum: 250 },
-      heightConstraint: { minimum: 200 }    
+      heightConstraint: { minimum: 200 }
       },
 
     edges:{
@@ -51,7 +51,7 @@ var get_options = function() {
             },
         },
       },
-      
+
       physics: {
         enabled: true,
         solver: 'hierarchicalRepulsion',
@@ -72,7 +72,7 @@ var get_options = function() {
           fit: true
         },
 
-    
+
 
       },
       groups: {

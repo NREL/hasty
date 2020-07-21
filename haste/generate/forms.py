@@ -1,6 +1,6 @@
 import json
 
-from lib.helpers import Shadowfax, is_false, is_number, json_dump_tags_from_string
+from lib.helpers import Shadowfax, is_false, json_dump_tags_from_string
 from django import forms
 from . import models
 
@@ -178,12 +178,12 @@ class AirHandlerForm(forms.Form):
         tagset = json_dump_tags_from_string(tags)
         brick = temp['Brick Concept'].values[0]
         c = component_class(
-                name=name,
-                lookup_id=component_lookup_id,
-                short_description=dis,
-                is_part_of=self.ahu_model,
-                tagset=tagset,
-                brick_class=brick
+            name=name,
+            lookup_id=component_lookup_id,
+            short_description=dis,
+            is_part_of=self.ahu_model,
+            tagset=tagset,
+            brick_class=brick
         )
         c.save()
 

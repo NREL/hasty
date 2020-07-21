@@ -49,7 +49,7 @@ def save_site(site):
 
     try:
         models.Site.objects.get(id=site_id)
-    except:
+    except BaseException:
         id = uuid4()
         imported_site = models.Site.objects.create(id=id, name=site_name, city=geo_city, state=geo_state, zip=0)
         imported_site.save()
