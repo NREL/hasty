@@ -1,0 +1,28 @@
+{% load static %}
+{% load mapp_extras %}
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+          <form method="get">
+        <tr>
+
+            <th scope="col">Id</th>
+            <th scope="col">Haystack Proto {{ filter.form.haystack_tagset }}</th>
+            <th scope="col">Brick Class {{ filter.form.brick_class }}
+            <button class="btn btn-primary" type="submit">Search</button></th>
+        </tr>
+          </form>
+        </thead>
+        <tbody>
+        {% for pm in point_maps %}
+          <tr>
+            <td>{{ pm.id }}</td>
+            {% with pm.haystack_tagset|concat_protos as hp %}
+              <td> <a href="https://project-haystack.dev/doc/proto/{{ hp }}"> {{ pm.haystack_tagset }}</a></td>
+            {% endwith %}
+            <td> <a href="https://brickschema.org/schema/1.1/Brick#{{ pm.brick_class }}">{{ pm.brick_class }}</a></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  </div>
