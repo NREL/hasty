@@ -1,0 +1,197 @@
+/*
+// Copyright (c) 2017, Project-Haystack
+// Licensed under the Academic Free License version 3.0
+//
+// History:
+//   27 Sep 2017  Brian Frank  Creation
+*/
+
+/*
+Palette:
+  #d49011 (orange): def names/links
+  #2980b9 (lighter blue): links in def bodies
+  #4476a4 (darker blue): top-level headings
+  #27ae60 (green): def names/links/manual headings
+
+*/
+
+.defc {
+  font: 16px -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif;
+  line-height: 1.5em;
+  max-width: 960px;
+}
+
+.defc img { border:0; }
+
+.defc hr {
+  border: 0;
+  border-top: 1px solid #eee;
+  height: 1px;
+}
+
+.defc a {
+  color: hsl(39, 85%, 45%); /* #d49011 */
+}
+
+.defc a:hover {
+  color: hsl(39, 85%, 40%);
+}
+
+.defc code {
+  font: 14px Menlo, Consolas, Courier, monospace;
+  padding: 0.2em 0.4em;
+  background: #f4f4f6;
+}
+
+.defc pre {
+  font: 14px Menlo, Consolas, Courier, monospace;
+  background: #f7f7f9;
+  margin: 1em 0;
+  padding: 1.5em;
+  overflow: auto;
+}
+
+.defc-manual {
+}
+
+.defc-font-small {
+  font-size: 12px;
+}
+
+
+.defc-manual h2 {
+  color: #27ae60;
+}
+
+/*************************************************************************
+ * Def Navigation
+ ************************************************************************/
+
+.defc-nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.defc-nav ul li {
+  display: inline;
+  margin: 0 4px;
+  padding: 2px 0;
+  color: #aaa;
+}
+
+.defc-nav li.next {
+  text-align: right;
+}
+
+.defc-nav li + li.next {
+  float: right;
+}
+
+/*************************************************************************
+ * Def Main
+ ************************************************************************/
+
+.defc-main  {
+  margin: 20px 0 0 0;
+  display: grid;
+  grid-template-columns: 120px 850px;
+  grid-row-gap: 30px;
+  grid-column-gap: 20px;
+}
+
+.defc-main-heading  {
+  margin: 0;
+  padding: 5px 10px 0 0;
+  text-align: right;
+  font-size: 100%;
+  font-weight: normal;
+  color: #b2b2b2;
+}
+
+.defc-main-heading a {
+  color: #b2b2b2;
+  text-decoration: none;
+}
+
+.defc-main-heading a:hover {
+  color: #b2b2b2;
+  text-decoration: underline;
+}
+
+.defc-main-section {
+  margin: 0;
+  padding: 0;
+}
+
+.defc-main-section > h1 {
+  color: #4476a4;
+  margin: 0 0 0.5em 0;
+  padding: 0;
+}
+
+.defc-chapter-title {
+  color: #4476a4;
+  margin: 10px 0 20px 0;
+  padding: 0;
+}
+
+.defc-footer-ts  {
+  font-size: 60%;
+  color: #999;
+}
+
+/*************************************************************************
+ * Def Props Table
+ ************************************************************************/
+
+.defc-props {
+  border-collapse: collapse;
+}
+
+.defc-props tr  {
+  border-top: 1px solid #eee;
+}
+
+.defc-props th {
+  font-weight: bold;
+  text-align: left;
+  vertical-align: text-top;
+  padding: 4px 10px 4px 0px;
+  white-space: nowrap;
+}
+
+.defc-props .prop-title {
+  font-weight: bold;
+  text-align: left;
+  vertical-align: text-top;
+  padding: 1em 0 0.5em 0;
+  white-space: nowrap;
+  color: #4476a4;
+}
+
+.defc-props th a {
+  color: #27ae60;
+  text-decoration: none;
+}
+
+.defc-props th a:hover {
+  color: #27ae60;
+  text-decoration: underline;
+}
+
+.defc-props td {
+  padding: 4px 6px;
+}
+
+.defc-props td a {
+  text-decoration: none;
+}
+
+.defc-props td a:hover {
+  text-decoration: underline;
+}
+
+.defc-props td p {
+  margin: 0;
+}

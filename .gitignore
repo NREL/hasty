@@ -7,3 +7,9 @@ tmp
 db.sqlite3
 migrations
 tests/.pytest_cache
+docHaystack
+lib-ph
+lib-phIct
+lib-phIoT
+lib-phScience
+proto
