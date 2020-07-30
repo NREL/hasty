@@ -12,6 +12,7 @@ class Mapper(models.Model):
     )
     brick_version = models.CharField(max_length=20, choices=BRICK_VERSIONS)
     haystack_version = models.CharField(max_length=20, choices=HAYSTACK_VERSIONS)
+    brick_inference_version = models.CharField(max_length=20)
 
 
 class PointMapping(models.Model):
