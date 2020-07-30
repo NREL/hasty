@@ -6,7 +6,12 @@ __pycache__
 tmp
 db.sqlite3
 migrations
+
+# Testing
 tests/.pytest_cache
+outputs
+
+# Haystack
 docHaystack
 lib-ph
 lib-phIct
