@@ -3,7 +3,23 @@
 {% include 'partials/header.html' %}
 {% include 'partials/nav.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+{% if mapper %}
+<form method="get">
 <div class="container" style="padding-top: 1em">
+  <div class="card">
+      <div class="form-row">
+        <div class="col-md-14">
+            {{ map_filter.form.brick_version|as_crispy_field }}
+        </div>
+        <div class="col-md-14">
+            {{ map_filter.form.haystack_version|as_crispy_field }}
+        </div>
+        <div class="col-md-14">
+            {{ map_filter.form.brick_inference_version|as_crispy_field }}
+        </div>
+      </div>
+  </div>
   <div class="card border-top">
     <h5 class="card-header text-primary">Points Table</h5>
       <div class="row" style="padding-top: 1em">
@@ -17,5 +33,14 @@
       </div>
   </div>
   </div>
+</form>
+{% else %}
+<div class="container" style="padding-top: 1em">
+  <div class="card border-top">
+    <h6 class="card-header text-primary">
+      No mappings have been created.  Please run migrations per the README and restart app.
+    </h6>
+  </div>
 </div>
+{% endif %}
 {% endblock page_content %}
