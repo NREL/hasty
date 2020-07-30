@@ -3,15 +3,13 @@
   <div class="table-responsive">
     <table class="table table-bordered table-hover">
         <thead>
-          <form method="get">
         <tr>
 
             <th scope="col">Id</th>
-            <th scope="col">Haystack Proto {{ filter.form.haystack_tagset }}</th>
-            <th scope="col">Brick Class {{ filter.form.brick_class }}
+            <th scope="col">Haystack Proto {{ pm_filter.form.haystack_tagset }}</th>
+            <th scope="col">Brick Class {{ pm_filter.form.brick_class }}
             <button class="btn btn-primary" type="submit">Search</button></th>
         </tr>
-          </form>
         </thead>
         <tbody>
         {% for pm in point_maps %}
