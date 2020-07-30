@@ -17,6 +17,10 @@ def create_initial_mapper(apps, schema_editor, brick_version='V1.1', haystack_ve
     :return:
     """
     Mapper = apps.get_model('mapp', 'Mapper')
+    m = Mapper.objects.filter(brick_version=brick_version, haystack_version=haystack_version, brick_inference_version=brickschema.__version__)
+    assert len(m) == 0, f"Mapper with versions already exists: brick_version: {brick_version}, haystack_version: {haystack_version}, " \
+                        f"brick_inference_version: {brickschema.__version__}.  Either remove this Mapper instance from the database " \
+                        f"or try switching to a different version of brickschema and re-running the migration."
     m = Mapper(brick_version=brick_version, haystack_version=haystack_version, brick_inference_version=brickschema.__version__)
     m.save()
 
