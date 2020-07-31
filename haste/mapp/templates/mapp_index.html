@@ -4,7 +4,15 @@
 {% include 'partials/nav.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% if mapper %}
+{% if no_map %}
+<div class="container" style="padding-top: 1em">
+  <div class="card border-top">
+    <h6 class="card-header text-primary">
+      {{no_map}}
+    </h6>
+  </div>
+</div>
+{% else %}
 <form method="get">
 <div class="container" style="padding-top: 1em">
   <div class="card">
@@ -34,13 +42,5 @@
   </div>
   </div>
 </form>
-{% else %}
-<div class="container" style="padding-top: 1em">
-  <div class="card border-top">
-    <h6 class="card-header text-primary">
-      No mappings have been created.  Please run migrations per the README and restart app.
-    </h6>
-  </div>
-</div>
 {% endif %}
 {% endblock page_content %}

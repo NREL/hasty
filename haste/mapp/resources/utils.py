@@ -60,7 +60,6 @@ def generate_point_protos(haystack_version):
     :param haystack_version: <str> version of Haystack, i.e. 'V3.9.9'
     :return: List[List[],] list of lists, with tagsets
     """
-    print(os.getcwd())
     p = os.path.join(os.getcwd(), f"mapp/resources/haystack/{haystack_version}/index-pointProtos.html")
     with open(p, 'r') as f:
         data = f.read()
@@ -68,8 +67,8 @@ def generate_point_protos(haystack_version):
     all_protos = soup.find_all('th')
 
     # Generate a list of sets
-    all_protos = [p.a.text for p in all_protos]
-    all_protos = [p.split(' ') for p in all_protos]
+    all_protos = [p.a.text.replace(' ', '-') for p in all_protos]
+    # all_protos = [p.split(' ') for p in all_protos]
     return all_protos
 
 
