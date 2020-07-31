@@ -7,3 +7,6 @@ register = template.Library()
 def concat_protos(proto_list):
     """concatenate arg1 & arg2"""
     return proto_list.replace(' ', '-')
+
+# @register.filter
+# def list_all_tags()

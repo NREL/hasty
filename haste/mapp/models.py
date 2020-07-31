@@ -3,19 +3,50 @@ from django.db import models
 # Create your models here.
 
 
-class Mapper(models.Model):
-    BRICK_VERSIONS = (
-        ('V1.1', 'V1.1'),
-    )
-    HAYSTACK_VERSIONS = (
-        ('V3.9.9', '3.9.9'),
-    )
-    brick_version = models.CharField(max_length=20, choices=BRICK_VERSIONS)
-    haystack_version = models.CharField(max_length=20, choices=HAYSTACK_VERSIONS)
-    brick_inference_version = models.CharField(max_length=20)
+# class Mapper(models.Model):
+class InferenceVersion(models.Model):
+    version = models.CharField(max_length=20, null=False, blank=False, unique=True)
 
 
-class PointMapping(models.Model):
-    brick_class = models.CharField(max_length=150, null=True, blank=True, default=None)
-    haystack_tagset = models.CharField(max_length=150, null=True, blank=True, default=None)
-    parent_map = models.ForeignKey(Mapper, on_delete=models.CASCADE)
+class HaystackVersion(models.Model):
+    version = models.CharField(max_length=20, null=False, blank=False, unique=True)
+
+
+class BrickVersion(models.Model):
+    version = models.CharField(max_length=20, null=False, blank=False, unique=True)
+
+
+class HaystackMarkerTag(models.Model):
+    tag = models.CharField(max_length=100, null=False, blank=False)
+    version = models.ForeignKey(HaystackVersion, on_delete=models.CASCADE)
+    namespace = models.CharField(max_length=100, null=False, blank=False)
+
+    class Meta:
+        unique_together = ('tag', 'version',)
+
+
+class BrickTag(models.Model):
+    tag = models.CharField(max_length=100, null=False, blank=False)
+    version = models.ForeignKey(BrickVersion, on_delete=models.CASCADE)
+    namespace = models.CharField(max_length=100, null=False, blank=False)
+
+    class Meta:
+        unique_together = ('tag', 'version',)
+
+
+class BrickPointType(models.Model):
+    tags = models.ManyToManyField(BrickTag)
+    brick_class = models.CharField(max_length=150, null=False, blank=False)
+    version = models.ForeignKey(BrickVersion, on_delete=models.CASCADE)
+
+
+class HaystackPointType(models.Model):
+    marker_tags = models.ManyToManyField(HaystackMarkerTag)
+    haystack_tagset = models.CharField(max_length=150, null=False, blank=False)
+    version = models.ForeignKey(HaystackVersion, on_delete=models.CASCADE)
+
+
+class PointTypeMap(models.Model):
+    inference_version = models.ForeignKey(InferenceVersion, on_delete=models.CASCADE)
+    brick_point = models.ForeignKey(BrickPointType, on_delete=models.CASCADE)
+    haystack_point = models.ForeignKey(HaystackPointType, on_delete=models.CASCADE)
