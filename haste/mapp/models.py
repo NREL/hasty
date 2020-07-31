@@ -37,11 +37,13 @@ class BrickTag(models.Model):
 class BrickPointType(models.Model):
     tags = models.ManyToManyField(BrickTag)
     brick_class = models.CharField(max_length=150, null=False, blank=False)
+    version = models.ForeignKey(BrickVersion, on_delete=models.CASCADE)
 
 
 class HaystackPointType(models.Model):
     marker_tags = models.ManyToManyField(HaystackMarkerTag)
     haystack_tagset = models.CharField(max_length=150, null=False, blank=False)
+    version = models.ForeignKey(HaystackVersion, on_delete=models.CASCADE)
 
 
 class PointTypeMap(models.Model):
