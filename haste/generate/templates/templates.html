@@ -1,7 +1,71 @@
 {% extends "partials/base.html" %}
 {% block page_content %}
+{% load static %}
 {% include 'partials/header.html' %}
 {% include 'partials/nav.html' %}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Templates</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container">
+    <h3 class="card-header text-primary">DOE Prototype Templates</h3>
+    <div class="container">
+        <br />
+        <div class="card-deck">
+            <div class="card">
+                <img src="{% static 'generate/images/smalloffice.png' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Small office</h5>
+                    <p class="card-text">description?</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="{% static 'generate/images/medOffice.png' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Medium office</h5>
+                    <p class="card-text">description?</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="{% static 'generate/images/primaryschool.png' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Primary School</h5>
+                    <p class="card-text">description?</p>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="card-deck">
+            <div class="card col-sm-4">
+                <img src="{% static 'generate/images/secondaryschool.png' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Secondary School</h5>
+                    <p class="card-text">description?</p>
+                </div>
+            </div>
+            <div class="card col-sm-4">
+                <img src="{% static 'generate/images/retailstand.png' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Retail Standalone</h5>
+                    <p class="card-text">description?</p>
+                </div>
+            </div>
+            <div class="card col-sm-4">
+                <img src="{% static 'generate/images/outpatienthealth.png' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Outpatient Health</h5>
+                    <p class="card-text">description.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 
 {% include 'partials/footer.html' %}
 {% endblock %}
