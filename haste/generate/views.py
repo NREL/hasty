@@ -1,5 +1,3 @@
-
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView
@@ -47,7 +45,6 @@ class Index(CreateView):
 
 
 def data_view(request, site_id):
-
     site = models.Site.objects.get(pk=site_id)
     args = {
         'site': site
@@ -156,3 +153,15 @@ class AirHandler(CreateView):
             tu.save()
 
             return redirect('site.ahu', site_id=site_id, ahu_id=ahu_id)
+
+
+class TemplateView(CreateView):
+    template_name = 'templates.html'
+
+    def get(self, request):
+
+        return render(request, self.template_name)
+
+    def post(self, request):
+
+        return render(request, 'index.html')
