@@ -4,7 +4,7 @@ from django.views.generic import CreateView
 from django.contrib.staticfiles.storage import staticfiles_storage
 from . import forms
 from . import models
-from lib.helpers import Shadowfax, BrickBuilder, file_processing
+from lib.helpers import Shadowfax, BrickBuilder, file_processing, handle_template
 
 
 class Index(CreateView):
@@ -21,7 +21,6 @@ class Index(CreateView):
 
     def post(self, request):
 
-        print(request.FILES)
         if 'delete' in request.POST:
             id = request.POST.get('id')
             try:
@@ -160,7 +159,6 @@ class TemplateView(CreateView):
     template_name = 'templates.html'
 
     def get(self, request):
-
         sites = models.Site.objects.all()
 
         args = {
@@ -170,18 +168,10 @@ class TemplateView(CreateView):
         return render(request, self.template_name, args)
 
     def post(self, request):
-
         if 'upload' in request.POST:
             file = request.POST['upload']
-            url = staticfiles_storage.url('generate/doe/smalloffice.json')
-            data = open(url).read()
+            handle_template(file)
 
-        sites = models.Site.objects.all()
-        ahus = models.AirHandler.objects.all()
+        site = models.Site.objects.latest('id')
 
-        args = {
-            'sites': sites,
-            'ahus': ahus
-        }
-
-        return render(request, 'index.html', args)
+        return redirect('site', site_id=site.id)

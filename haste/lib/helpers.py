@@ -397,3 +397,11 @@ def file_processing(file):
 
     data = json.load(file)
     deserialization.handle_haystack(data)
+
+
+def handle_template(path):
+    p = os.path.dirname(os.path.abspath(__file__))
+    f_path = os.path.join(p, path)
+    with open(f_path) as json_file:
+        data = json.loads(json_file.read())
+        deserialization.handle_haystack(data)
