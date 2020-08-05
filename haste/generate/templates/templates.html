@@ -3,6 +3,7 @@
 {% load static %}
 {% include 'partials/header.html' %}
 {% include 'partials/nav.html' %}
+<script type="text/javascript" src="{% static 'generate/js/hover.js' %}"></script>
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -15,57 +16,82 @@
 <div class="container">
     <h3 class="card-header text-primary">DOE Prototype Templates</h3>
     <div class="container">
-        <br />
+        <br/>
         <div class="card-deck">
             <div class="card">
-                <img src="{% static 'generate/images/smalloffice.png' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Small office</h5>
-                    <p class="card-text">description?</p>
-                </div>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <button type="submit" id="upload" name="upload" style="border: none; background: none" value="{% static 'generate/doe/smalloffice.json' %}">
+                        <img src="{% static 'generate/images/smallOffice.png' %}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Small office</h5>
+                            <p class="card-text">Single zone, constant air volume air distribution, one unit per
+                                occupied
+                                thermal zone</p>
+                        </div>
+                    </button>
+                </form>
             </div>
-            <div class="card">
-                <img src="{% static 'generate/images/medOffice.png' %}" class="card-img-top" alt="...">
+
+            <div class="card" style="opacity: 0.5">
+                <img src="{% static 'generate/images/mediumOffice.png' %}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Medium office</h5>
-                    <p class="card-text">description?</p>
+                    <p class="card-text">VAV terminal box with damper and electric reheating coil</p>
                 </div>
             </div>
-            <div class="card">
-                <img src="{% static 'generate/images/primaryschool.png' %}" class="card-img-top" alt="...">
+            <div class="card" style="opacity: 0.5">
+                <img src="{% static 'generate/images/primSchool.png' %}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Primary School</h5>
-                    <p class="card-text">description?</p>
+                    <p class="card-text">1. CAV systems: direct air from the packaged air conditioning unit
+                        2. VAV systems: VAV terminal box with damper and hot water reheating coil</p>
+                </div>
+            </div>
+            <div class="card" style="opacity: 0.5">
+                <img src="{% static 'generate/images/secondSchool.png' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Secondary School</h5>
+                    <p class="card-text">1. CAV system: direct air from the packaged unit
+                        2. VAV System: VAV terminal box with damper and hot water reheating coil</p>
                 </div>
             </div>
         </div>
-        <br />
-        <div class="card-deck">
-            <div class="card col-sm-4">
-                <img src="{% static 'generate/images/secondaryschool.png' %}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Secondary School</h5>
-                    <p class="card-text">description?</p>
-                </div>
-            </div>
-            <div class="card col-sm-4">
-                <img src="{% static 'generate/images/retailstand.png' %}" class="card-img-top" alt="...">
+        <br/>
+        <div class="card-deck" style="opacity: 0.5">
+            <div class="card">
+                <img src="{% static 'generate/images/retailStandalone.png' %}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Retail Standalone</h5>
-                    <p class="card-text">description?</p>
+                    <p class="card-text">Constant air volume air distribution
+                        4 single-zone roof top units serving four thermal zones</p>
                 </div>
             </div>
-            <div class="card col-sm-4">
-                <img src="{% static 'generate/images/outpatienthealth.png' %}" class="card-img-top" alt="...">
+            <div class="card">
+                <img src="{% static 'generate/images/outHealth.png' %}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Outpatient Health</h5>
-                    <p class="card-text">description.</p>
+                    <p class="card-text">VAV terminal box with damper and hot water reheating coil
+                        Electric resistance reheat in AHU-2.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="{% static 'generate/images/stMall.png' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Stripmall</h5>
+                    <p class="card-text">10 single-zone rooftop units with Constant air volume air distribution. One unit serving one store.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="{% static 'generate/images/smHotel.png' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Small Hotel</h5>
+                    <p class="card-text">Constant air volume systems.</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 </div>
-
 {% include 'partials/footer.html' %}
 {% endblock %}

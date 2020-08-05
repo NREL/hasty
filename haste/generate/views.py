@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView
-
+from django.contrib.staticfiles.storage import staticfiles_storage
 from . import forms
 from . import models
 from lib.helpers import Shadowfax, BrickBuilder, file_processing
@@ -21,6 +21,7 @@ class Index(CreateView):
 
     def post(self, request):
 
+        print(request.FILES)
         if 'delete' in request.POST:
             id = request.POST.get('id')
             try:
@@ -160,8 +161,27 @@ class TemplateView(CreateView):
 
     def get(self, request):
 
-        return render(request, self.template_name)
+        sites = models.Site.objects.all()
+
+        args = {
+            'sites': sites,
+        }
+
+        return render(request, self.template_name, args)
 
     def post(self, request):
 
-        return render(request, 'index.html')
+        if 'upload' in request.POST:
+            file = request.POST['upload']
+            url = staticfiles_storage.url('generate/doe/smalloffice.json')
+            data = open(url).read()
+
+        sites = models.Site.objects.all()
+        ahus = models.AirHandler.objects.all()
+
+        args = {
+            'sites': sites,
+            'ahus': ahus
+        }
+
+        return render(request, 'index.html', args)
