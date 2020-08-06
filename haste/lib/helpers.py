@@ -404,4 +404,6 @@ def handle_template(path):
     f_path = os.path.join(p, path)
     with open(f_path) as json_file:
         data = json.loads(json_file.read())
-        deserialization.handle_haystack(data)
+        site_id = deserialization.handle_haystack(data)
+
+    return site_id

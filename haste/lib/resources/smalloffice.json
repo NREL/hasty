@@ -655,6 +655,7 @@
         {
             "id": "r:p:demo:r:23a44701-7265b064 Small Office RTU-1",
             "ahu": "m:",
+            "dis": "RTU-1",
             "disMacro": "$siteRef $navName",
             "elecMeterLoad": "r:p:demo:r:23a44701-092f16fa Small Office ElecMeter-Main",
             "equip": "m:",

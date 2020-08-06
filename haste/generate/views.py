@@ -170,8 +170,7 @@ class TemplateView(CreateView):
     def post(self, request):
         if 'upload' in request.POST:
             file = request.POST['upload']
-            handle_template(file)
+            id = handle_template(file)
 
-        site = models.Site.objects.latest('id')
-
+        site = models.Site.objects.get(id=id)
         return redirect('site', site_id=site.id)

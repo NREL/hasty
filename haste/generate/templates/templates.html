@@ -21,7 +21,8 @@
             <div class="card">
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
-                    <button type="submit" id="upload" name="upload" style="border: none; background: none" value="resources/smalloffice.json">
+                    <button type="submit" id="upload" name="upload" style="border: none; background: none"
+                            value="resources/smalloffice.json">
                         <img src="{% static 'generate/images/smallOffice.png' %}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Small office</h5>
@@ -79,7 +80,8 @@
                 <img src="{% static 'generate/images/stMall.png' %}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">Stripmall</h5>
-                    <p class="card-text">10 single-zone rooftop units with Constant air volume air distribution. One unit serving one store.</p>
+                    <p class="card-text">10 single-zone rooftop units with Constant air volume air distribution. One
+                        unit serving one store.</p>
                 </div>
             </div>
             <div class="card">
@@ -90,8 +92,68 @@
                 </div>
             </div>
         </div>
+        <br/>
+        <h3 class="card-header text-primary">Project Haystack Examples</h3>
+        <div class="container">
+            <br/>
+            <div class="card-deck">
+                <div class="card">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <button type="submit" name="upload" style="border: none; background: none"
+                                value="resources/alpha.json">
+                            <div class="card-body">
+                                <h5 class="card-title">Alpha</h5>
+                                <p class="card-text">Building in Colorado with central plant and VAV system
+                                    123 Prarie St, Hugo, CO 80821 (Anonymized)
+                                    Donated by BuildingFit
+                                    0 Spaces
+                                    184 Equips
+                                    1842 Points
+                                    4 Weather Points</p>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+                <div class="card">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <button type="submit" name="upload" style="border: none; background: none"
+                                value="resources/alpha.json">
+                            <div class="card-body">
+                                <h5 class="card-title">Bravo</h5>
+                                <p class="card-text">Hospital with steam, hot water, chilled water central plants.
+                                    123 Some Rd, Fort Wayne, IN 46900 (Anonymized)
+                                    Donated by Sitton
+                                    8 Spaces
+                                    149 Equips
+                                    914 Points
+                                    4 Weather Points</p>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+                <div class="card">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <button type="submit" name="upload" style="border: none; background: none"
+                                value="resources/alpha.json">
+                            <div class="card-body">
+                                <h5 class="card-title">Charlie</h5>
+                                <p class="card-text">One tenant's space in a multi-story office building.
+                                    123 Some Rd, Troy, MI 48007 (Anonymized)
+                                    Donated by Thomas Duke
+                                    0 Spaces
+                                    52 Equips
+                                    562 Points
+                                    8 Weather Points</p>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 </div>
 {% include 'partials/footer.html' %}
 {% endblock %}

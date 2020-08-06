@@ -6,9 +6,11 @@ def handle_haystack(data):
     data = data['rows']
     site = find_sites(data)
     ahus = find_ahus(data)
+    vavs = find_vavs(data)
 
     site_id = save_site(site)
-    save_ahus(ahus, site_id)
+    save_ahus(ahus, site_id, vavs)
+    return site_id
 
 
 def handle_brick(data):
@@ -34,6 +36,11 @@ def find_ahus(entities):
     return ahus
 
 
+def find_vavs(entities):
+    vavs = find_tagset(entities, tags=['vav'])
+    return vavs
+
+
 def find_tagset(entities, tags):
     tags = set(tags)
     matches = [e for e in entities if tags.issubset(e.keys())]
@@ -56,12 +63,33 @@ def save_site(site):
         return id
 
 
-def save_ahus(ahus, site_id):
+def save_ahus(ahus, site_id, vavs):
+
     site = models.Site.objects.get(id=site_id)
     for ahu in ahus:
         ahu_id = uuid4()
-        ahu_name = ahu.get('navName')
+        ahu_name = ahu.get('dis')
+
         imported_ahu = models.AirHandler.objects.create(id=ahu_id, name=ahu_name,
                                                         site_id=site, tagset=None, brick_class=None)
-
         imported_ahu.save()
+
+        for vav in vavs:
+            if ahu.get('id') == vav.get('equipRef'):
+                name = vav.get('dis')
+                name = name.replace(" ", "_")
+                imported_vav = models.TerminalUnit(
+                    name=name,
+                    is_fed_by=imported_ahu
+                )
+                imported_vav.save()
+                new_tz = models.ThermalZone(
+                    name="Zone",
+                    brick_class="HVAC_Zone",
+                    is_fed_by=imported_vav
+                )
+                new_tz.save()
+
+
+
+
