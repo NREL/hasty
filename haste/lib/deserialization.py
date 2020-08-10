@@ -80,6 +80,7 @@ def save_ahus(ahus, site_id, vavs):
                 name = name.replace(" ", "_")
                 imported_vav = models.TerminalUnit(
                     name=name,
+                    lookup_id=vav.get('id'),
                     is_fed_by=imported_ahu
                 )
                 imported_vav.save()
@@ -89,7 +90,3 @@ def save_ahus(ahus, site_id, vavs):
                     is_fed_by=imported_vav
                 )
                 new_tz.save()
-
-
-
-

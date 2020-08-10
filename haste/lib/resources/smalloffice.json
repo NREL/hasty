@@ -1,731 +1,415 @@
 {
-    "meta": {
-        "ver": "3.0"
+  "meta": {
+    "ver": "3.0"
+  },
+  "cols": [
+    {
+      "name": "id"
     },
-    "cols": [
-        {
-            "name": "id"
-        },
-        {
-            "name": "ahu"
-        },
-        {
-            "name": "air"
-        },
-        {
-            "name": "area"
-        },
-        {
-            "name": "cmd"
-        },
-        {
-            "name": "cool"
-        },
-        {
-            "name": "costPerHour"
-        },
-        {
-            "name": "cur"
-        },
-        {
-            "name": "curStatus"
-        },
-        {
-            "name": "curVal"
-        },
-        {
-            "name": "damper"
-        },
-        {
-            "name": "dis"
-        },
-        {
-            "name": "disMacro"
-        },
-        {
-            "name": "discharge"
-        },
-        {
-            "name": "effective"
-        },
-        {
-            "name": "elec"
-        },
-        {
-            "name": "elecCost"
-        },
-        {
-            "name": "elecMeterLoad"
-        },
-        {
-            "name": "energy"
-        },
-        {
-            "name": "enum"
-        },
-        {
-            "name": "equip"
-        },
-        {
-            "name": "equipRef"
-        },
-        {
-            "name": "fan"
-        },
-        {
-            "name": "geoAddr"
-        },
-        {
-            "name": "geoCity"
-        },
-        {
-            "name": "geoCoord"
-        },
-        {
-            "name": "geoCountry"
-        },
-        {
-            "name": "geoPostalCode"
-        },
-        {
-            "name": "geoState"
-        },
-        {
-            "name": "geoStreet"
-        },
-        {
-            "name": "heat"
-        },
-        {
-            "name": "his"
-        },
-        {
-            "name": "hisEnd"
-        },
-        {
-            "name": "hisFunc"
-        },
-        {
-            "name": "hisInterval"
-        },
-        {
-            "name": "hisMode"
-        },
-        {
-            "name": "hisRollupFunc"
-        },
-        {
-            "name": "hisSize"
-        },
-        {
-            "name": "hisStart"
-        },
-        {
-            "name": "hvac"
-        },
-        {
-            "name": "kind"
-        },
-        {
-            "name": "kwSite"
-        },
-        {
-            "name": "lights"
-        },
-        {
-            "name": "lightsGroup"
-        },
-        {
-            "name": "meter"
-        },
-        {
-            "name": "metro"
-        },
-        {
-            "name": "navName"
-        },
-        {
-            "name": "occupied"
-        },
-        {
-            "name": "occupiedEnd"
-        },
-        {
-            "name": "occupiedStart"
-        },
-        {
-            "name": "outside"
-        },
-        {
-            "name": "phone"
-        },
-        {
-            "name": "point"
-        },
-        {
-            "name": "power"
-        },
-        {
-            "name": "pressure"
-        },
-        {
-            "name": "primaryFunction"
-        },
-        {
-            "name": "regionRef"
-        },
-        {
-            "name": "return"
-        },
-        {
-            "name": "rooftop"
-        },
-        {
-            "name": "sensor"
-        },
-        {
-            "name": "site"
-        },
-        {
-            "name": "siteMeter"
-        },
-        {
-            "name": "sitePoint"
-        },
-        {
-            "name": "siteRef"
-        },
-        {
-            "name": "sp"
-        },
-        {
-            "name": "stage"
-        },
-        {
-            "name": "store"
-        },
-        {
-            "name": "storeNum"
-        },
-        {
-            "name": "summary"
-        },
-        {
-            "name": "tariffHis"
-        },
-        {
-            "name": "temp"
-        },
-        {
-            "name": "tz"
-        },
-        {
-            "name": "unit"
-        },
-        {
-            "name": "weatherRef"
-        },
-        {
-            "name": "yearBuilt"
-        },
-        {
-            "name": "zone"
-        },
-        {
-            "name": "mod"
-        }
-    ],
-    "rows": [
-        {
-            "id": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "area": "n:3149 ft\u00b2",
-            "dis": "Small Office",
-            "geoAddr": "123 Prarie St, Hugo, CO 80821",
-            "geoCity": "Richmond",
-            "geoCoord": "c:37.555385,-77.486903",
-            "geoCountry": "US",
-            "geoPostalCode": "23221",
-            "geoState": "VA",
-            "geoStreet": "3504 W Cary St",
-            "metro": "Richmond",
-            "occupiedEnd": "h:20:00:00",
-            "occupiedStart": "h:10:00:00",
-            "phone": "804.552.2222",
-            "primaryFunction": "Retail Store",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "site": "m:",
-            "store": "m:",
-            "storeNum": "n:1",
-            "tz": "New_York",
-            "weatherRef": "r:p:demo:r:23a44701-1af1bca9 Richmond, VA",
-            "yearBuilt": "n:1996",
-            "mod": "t:2018-12-12T22:24:01.714Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-bbc36976 Tariff His",
-            "dis": "Tariff His",
-            "equipRef": "r:p:demo:r:23a44701-092f16fa Small Office ElecMeter-Main",
-            "his": "m:",
-            "hisEnd": "t:2019-03-01T00:00:00-05:00 New_York",
-            "hisSize": "n:27",
-            "hisStart": "t:2017-01-01T00:00:00-05:00 New_York",
-            "kind": "Str",
-            "point": "m:",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "sp": "m:",
-            "tariffHis": "m:",
-            "tz": "New_York",
-            "mod": "t:2018-12-12T22:24:01.849Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-4ea35663 Small Office RTU-1 ZoneTempSp",
-            "air": "m:",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": "n:73 \u00b0F",
-            "disMacro": "$equipRef $navName",
-            "effective": "m:",
-            "equipRef": "r:p:demo:r:23a44701-7265b064 Small Office RTU-1",
-            "his": "m:",
-            "hisEnd": "t:2019-03-12T23:45:00-04:00 New_York",
-            "hisMode": "cov",
-            "hisSize": "n:76884",
-            "hisStart": "t:2017-01-01T00:00:00-05:00 New_York",
-            "kind": "Number",
-            "navName": "ZoneTempSp",
-            "point": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "sp": "m:",
-            "temp": "m:",
-            "tz": "New_York",
-            "unit": "\u00b0F",
-            "zone": "m:",
-            "mod": "t:2018-12-12T22:24:01.724Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-3940e690 Small Office ElecMeter-Main kW",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": "n:840.5367088075697 kW",
-            "disMacro": "$equipRef $navName",
-            "equipRef": "r:p:demo:r:23a44701-092f16fa Small Office ElecMeter-Main",
-            "his": "m:",
-            "hisEnd": "t:2019-03-12T23:45:00-04:00 New_York",
-            "hisInterval": "n:15 min",
-            "hisMode": "sampled",
-            "hisSize": "n:76884",
-            "hisStart": "t:2017-01-01T00:00:00-05:00 New_York",
-            "kind": "Number",
-            "kwSite": "m:",
-            "navName": "kW",
-            "point": "m:",
-            "power": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "sensor": "m:",
-            "siteMeter": "m:",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "tz": "New_York",
-            "unit": "kW",
-            "mod": "t:2018-12-12T22:24:01.718Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-27a8a001 Small Office RTU-1 ZoneTemp",
-            "air": "m:",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": "n:68.67304021434077 \u00b0F",
-            "disMacro": "$equipRef $navName",
-            "equipRef": "r:p:demo:r:23a44701-7265b064 Small Office RTU-1",
-            "his": "m:",
-            "hisEnd": "t:2019-03-12T23:45:00-04:00 New_York",
-            "hisMode": "sampled",
-            "hisSize": "n:76884",
-            "hisStart": "t:2017-01-01T00:00:00-05:00 New_York",
-            "kind": "Number",
-            "navName": "ZoneTemp",
-            "point": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "sensor": "m:",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "summary": "m:",
-            "temp": "m:",
-            "tz": "New_York",
-            "unit": "\u00b0F",
-            "zone": "m:",
-            "mod": "t:2018-12-12T22:24:01.725Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-3624929f Small Office Misc",
-            "disMacro": "$siteRef $navName",
-            "equip": "m:",
-            "navName": "Misc",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "sitePoint": "m:",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "mod": "t:2018-12-12T22:24:01.715Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-423ebf02 Small Office RTU-1 DischargeTemp",
-            "air": "m:",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": "n:56.951406229993474 \u00b0F",
-            "disMacro": "$equipRef $navName",
-            "discharge": "m:",
-            "equipRef": "r:p:demo:r:23a44701-7265b064 Small Office RTU-1",
-            "his": "m:",
-            "hisEnd": "t:2019-03-12T23:45:00-04:00 New_York",
-            "hisMode": "sampled",
-            "hisSize": "n:76884",
-            "hisStart": "t:2017-01-01T00:00:00-05:00 New_York",
-            "kind": "Number",
-            "navName": "DischargeTemp",
-            "point": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "sensor": "m:",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "temp": "m:",
-            "tz": "New_York",
-            "unit": "\u00b0F",
-            "mod": "t:2018-12-12T22:24:01.732Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-3a62fd7a Small Office RTU-1 Heat-2",
-            "cmd": "m:",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": false,
-            "disMacro": "$equipRef $navName",
-            "elecMeterLoad": "r:p:demo:r:23a44701-092f16fa Small Office ElecMeter-Main",
-            "enum": "off,on",
-            "equipRef": "r:p:demo:r:23a44701-7265b064 Small Office RTU-1",
-            "heat": "m:",
-            "his": "m:",
-            "hisEnd": "t:2019-03-12T20:15:00-04:00 New_York",
-            "hisMode": "cov",
-            "hisSize": "n:1711",
-            "hisStart": "t:2017-01-01T00:00:00-05:00 New_York",
-            "kind": "Bool",
-            "navName": "Heat-2",
-            "point": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "stage": "n:2",
-            "summary": "m:",
-            "tz": "New_York",
-            "mod": "t:2018-12-12T22:24:01.73Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-18bbbd7e Small Office RTU-1 Heat-1",
-            "cmd": "m:",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": false,
-            "disMacro": "$equipRef $navName",
-            "elecMeterLoad": "r:p:demo:r:23a44701-092f16fa Small Office ElecMeter-Main",
-            "enum": "off,on",
-            "equipRef": "r:p:demo:r:23a44701-7265b064 Small Office RTU-1",
-            "heat": "m:",
-            "his": "m:",
-            "hisEnd": "t:2019-03-12T00:00:00-04:00 New_York",
-            "hisMode": "cov",
-            "hisSize": "n:1641",
-            "hisStart": "t:2017-01-01T00:00:00-05:00 New_York",
-            "kind": "Bool",
-            "navName": "Heat-1",
-            "point": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "stage": "n:1",
-            "summary": "m:",
-            "tz": "New_York",
-            "mod": "t:2018-12-12T22:24:01.729Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-f299239f Small Office ElecMeter-Main Cost",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": "n:0.15499669792019688 $",
-            "disMacro": "$equipRef $navName",
-            "elecCost": "m:",
-            "equipRef": "r:p:demo:r:23a44701-092f16fa Small Office ElecMeter-Main",
-            "his": "m:",
-            "hisFunc": "tariffCostToHis",
-            "hisMode": "sampled",
-            "hisRollupFunc": "sum",
-            "kind": "Number",
-            "navName": "Cost",
-            "point": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "sensor": "m:",
-            "siteMeter": "m:",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "tz": "New_York",
-            "unit": "$",
-            "mod": "t:2018-12-12T22:24:01.72Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-0144bdd8 Small Office RTU-1 DischargePressure",
-            "air": "m:",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": "n:0.9663769527788633 inH\u2082O",
-            "disMacro": "$equipRef $navName",
-            "discharge": "m:",
-            "equipRef": "r:p:demo:r:23a44701-7265b064 Small Office RTU-1",
-            "his": "m:",
-            "hisEnd": "t:2019-03-12T23:45:00-04:00 New_York",
-            "hisMode": "sampled",
-            "hisSize": "n:76884",
-            "hisStart": "t:2017-01-01T00:00:00-05:00 New_York",
-            "kind": "Number",
-            "navName": "DischargePressure",
-            "point": "m:",
-            "pressure": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "sensor": "m:",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "tz": "New_York",
-            "unit": "inH\u2082O",
-            "mod": "t:2018-12-12T22:24:01.734Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-092f16fa Small Office ElecMeter-Main",
-            "disMacro": "$siteRef $navName",
-            "elec": "m:",
-            "equip": "m:",
-            "meter": "m:",
-            "navName": "ElecMeter-Main",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "siteMeter": "m:",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "mod": "t:2018-12-12T22:24:01.717Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-e0edb850 Small Office RTU-1 Cool-2",
-            "cmd": "m:",
-            "cool": "m:",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": false,
-            "disMacro": "$equipRef $navName",
-            "elecMeterLoad": "r:p:demo:r:23a44701-092f16fa Small Office ElecMeter-Main",
-            "enum": "off,on",
-            "equipRef": "r:p:demo:r:23a44701-7265b064 Small Office RTU-1",
-            "his": "m:",
-            "hisEnd": "t:2019-03-12T00:00:00-04:00 New_York",
-            "hisMode": "cov",
-            "hisSize": "n:1881",
-            "hisStart": "t:2017-01-01T00:00:00-05:00 New_York",
-            "kind": "Bool",
-            "navName": "Cool-2",
-            "point": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "stage": "n:2",
-            "summary": "m:",
-            "tz": "New_York",
-            "mod": "t:2018-12-12T22:24:01.728Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-5c6fd964 Small Office Misc Occupancy",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": true,
-            "disMacro": "$equipRef $navName",
-            "enum": "unocc,occ",
-            "equipRef": "r:p:demo:r:23a44701-3624929f Small Office Misc",
-            "his": "m:",
-            "hisEnd": "t:2019-03-12T20:15:00-04:00 New_York",
-            "hisMode": "cov",
-            "hisSize": "n:2403",
-            "hisStart": "t:2017-01-01T00:00:00-05:00 New_York",
-            "kind": "Bool",
-            "navName": "Occupancy",
-            "occupied": "m:",
-            "point": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "sitePoint": "m:",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "sp": "m:",
-            "tz": "New_York",
-            "mod": "t:2018-12-12T22:24:01.716Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-51b0b0ff Small Office ElecMeter-Main kWh",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": "n:660.4029914145925 kWh",
-            "disMacro": "$equipRef $navName",
-            "energy": "m:",
-            "equipRef": "r:p:demo:r:23a44701-092f16fa Small Office ElecMeter-Main",
-            "his": "m:",
-            "hisFunc": "elecKwToKwhHis",
-            "hisInterval": "n:15 min",
-            "hisMode": "sampled",
-            "kind": "Number",
-            "navName": "kWh",
-            "point": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "sensor": "m:",
-            "siteMeter": "m:",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "tz": "New_York",
-            "unit": "kWh",
-            "mod": "t:2018-12-12T22:24:01.719Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-81534688 Small Office RTU-1 Cool-1",
-            "cmd": "m:",
-            "cool": "m:",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": false,
-            "disMacro": "$equipRef $navName",
-            "elecMeterLoad": "r:p:demo:r:23a44701-092f16fa Small Office ElecMeter-Main",
-            "enum": "off,on",
-            "equipRef": "r:p:demo:r:23a44701-7265b064 Small Office RTU-1",
-            "his": "m:",
-            "hisEnd": "t:2019-03-12T00:00:00-04:00 New_York",
-            "hisMode": "cov",
-            "hisSize": "n:1787",
-            "hisStart": "t:2017-01-01T00:00:00-05:00 New_York",
-            "kind": "Bool",
-            "navName": "Cool-1",
-            "point": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "stage": "n:1",
-            "summary": "m:",
-            "tz": "New_York",
-            "mod": "t:2018-12-12T22:24:01.727Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-cb53b843 Small Office Main Lights Status",
-            "cmd": "m:",
-            "costPerHour": "n:2.4 $",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": true,
-            "disMacro": "$equipRef $navName",
-            "elecMeterLoad": "r:p:demo:r:23a44701-092f16fa Small Office ElecMeter-Main",
-            "enum": "off,on",
-            "equipRef": "r:p:demo:r:23a44701-cef6cd79 Small Office Main Lights",
-            "his": "m:",
-            "hisEnd": "t:2019-03-12T20:30:00-04:00 New_York",
-            "hisMode": "cov",
-            "hisSize": "n:2129",
-            "hisStart": "t:2017-01-01T00:00:00-05:00 New_York",
-            "kind": "Bool",
-            "lights": "m:",
-            "navName": "Status",
-            "point": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "tz": "New_York",
-            "mod": "t:2018-12-12T22:24:01.722Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-f8856742 Small Office RTU-1 Fan",
-            "air": "m:",
-            "cmd": "m:",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": true,
-            "disMacro": "$equipRef $navName",
-            "discharge": "m:",
-            "elecMeterLoad": "r:p:demo:r:23a44701-092f16fa Small Office ElecMeter-Main",
-            "enum": "off,on",
-            "equipRef": "r:p:demo:r:23a44701-7265b064 Small Office RTU-1",
-            "fan": "m:",
-            "his": "m:",
-            "hisEnd": "t:2019-03-12T00:00:00-04:00 New_York",
-            "hisMode": "cov",
-            "hisSize": "n:2349",
-            "hisStart": "t:2017-01-01T00:00:00-05:00 New_York",
-            "kind": "Bool",
-            "navName": "Fan",
-            "point": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "tz": "New_York",
-            "mod": "t:2018-12-12T22:24:01.733Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-7265b064 Small Office RTU-1",
-            "ahu": "m:",
-            "dis": "RTU-1",
-            "disMacro": "$siteRef $navName",
-            "elecMeterLoad": "r:p:demo:r:23a44701-092f16fa Small Office ElecMeter-Main",
-            "equip": "m:",
-            "hvac": "m:",
-            "navName": "RTU-1",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "rooftop": "m:",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "mod": "t:2018-12-12T22:24:01.723Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-d83664ec Small Office RTU-1 OutsideDamper",
-            "air": "m:",
-            "cmd": "m:",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": "n:3.543799363281579 %",
-            "damper": "m:",
-            "disMacro": "$equipRef $navName",
-            "equipRef": "r:p:demo:r:23a44701-7265b064 Small Office RTU-1",
-            "his": "m:",
-            "hisEnd": "t:2019-03-12T23:45:00-04:00 New_York",
-            "hisMode": "cov",
-            "hisSize": "n:76884",
-            "hisStart": "t:2017-01-01T00:00:00-05:00 New_York",
-            "kind": "Number",
-            "navName": "OutsideDamper",
-            "outside": "m:",
-            "point": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "tz": "New_York",
-            "unit": "%",
-            "mod": "t:2018-12-12T22:24:01.726Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-3f2eb151 Small Office RTU-1 ReturnTemp",
-            "air": "m:",
-            "cur": "m:",
-            "curStatus": "ok",
-            "curVal": "n:55.7279433164445 \u00b0F",
-            "disMacro": "$equipRef $navName",
-            "equipRef": "r:p:demo:r:23a44701-7265b064 Small Office RTU-1",
-            "his": "m:",
-            "hisEnd": "t:2019-03-12T23:45:00-04:00 New_York",
-            "hisMode": "sampled",
-            "hisSize": "n:76884",
-            "hisStart": "t:2017-01-01T00:00:00-05:00 New_York",
-            "kind": "Number",
-            "navName": "ReturnTemp",
-            "point": "m:",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "return": "m:",
-            "sensor": "m:",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "temp": "m:",
-            "tz": "New_York",
-            "unit": "\u00b0F",
-            "mod": "t:2018-12-12T22:24:01.731Z UTC"
-        },
-        {
-            "id": "r:p:demo:r:23a44701-cef6cd79 Small Office Main Lights",
-            "disMacro": "$siteRef $navName",
-            "elecMeterLoad": "r:p:demo:r:23a44701-092f16fa Small Office ElecMeter-Main",
-            "equip": "m:",
-            "lightsGroup": "m:",
-            "navName": "Main Lights",
-            "regionRef": "r:p:demo:r:23a44701-67faf4db Richmond",
-            "siteRef": "r:p:demo:r:23a44701-a89a6c66 Small Office",
-            "mod": "t:2018-12-12T22:24:01.721Z UTC"
-        }
-    ]
+    {
+      "name": "dis"
+    },
+    {
+      "name": "weather"
+    },
+    {
+      "name": "tz"
+    },
+    {
+      "name": "geoCoord"
+    },
+    {
+      "name": "site"
+    },
+    {
+      "name": "area"
+    },
+    {
+      "name": "weatherRef"
+    },
+    {
+      "name": "geoCity"
+    },
+    {
+      "name": "geoState"
+    },
+    {
+      "name": "geoCountry"
+    },
+    {
+      "name": "simStatus"
+    },
+    {
+      "name": "simType"
+    },
+    {
+      "name": "siteRef"
+    },
+    {
+      "name": "floor"
+    },
+    {
+      "name": "hvac"
+    },
+    {
+      "name": "zone"
+    },
+    {
+      "name": "space"
+    },
+    {
+      "name": "equip"
+    },
+    {
+      "name": "ahu"
+    },
+    {
+      "name": "dxHeating"
+    },
+    {
+      "name": "dxCooling"
+    },
+    {
+      "name": "equipRef"
+    },
+    {
+      "name": "fan"
+    },
+    {
+      "name": "motor"
+    },
+    {
+      "name": "constantAirVolume"
+    },
+    {
+      "name": "discharge"
+    },
+    {
+      "name": "coil"
+    },
+    {
+      "name": "heating"
+    },
+    {
+      "name": "dx"
+    },
+    {
+      "name": "cooling"
+    },
+    {
+      "name": "directZone"
+    },
+    {
+      "name": "ahuRef"
+    }
+  ],
+  "rows": [
+    {
+      "id": "r:3a36c2ad-7de6-46cd-aadf-dd576dd5e22d",
+      "dis": "s:Buffalo Niagara Intl AP",
+      "weather": "m:",
+      "tz": "n:-5.0",
+      "geoCoord": "c:42.93,-78.73"
+    },
+    {
+      "id": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "dis": "s:-SmallOffice-ASHRAE 169-2013-5A created: 2020-05-04 20:29:25 -0600",
+      "site": "m:",
+      "area": "n:511.15740000000005",
+      "weatherRef": "r:3a36c2ad-7de6-46cd-aadf-dd576dd5e22d",
+      "tz": "n:-5.0",
+      "geoCity": "s:Buffalo Niagara Intl AP",
+      "geoState": "s:NY",
+      "geoCountry": "s:USA",
+      "geoCoord": "c:42.93,-78.73",
+      "simStatus": "s:Stopped",
+      "simType": "s:osm"
+    },
+    {
+      "id": "r:2edc3034-10d9-48ff-9f1e-ff89d18bbb3f",
+      "dis": "s:Building Story 1",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "floor": "m:"
+    },
+    {
+      "id": "r:ed5abad6-fd0c-4636-8a25-8f38af0b1dd3",
+      "dis": "s:Perimeter_ZN_4 ZN",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "hvac": "m:",
+      "zone": "m:",
+      "space": "m:"
+    },
+    {
+      "id": "r:511ec221-c634-4d26-9830-af2e62cf1117",
+      "dis": "s:Perimeter_ZN_3 ZN",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "hvac": "m:",
+      "zone": "m:",
+      "space": "m:"
+    },
+    {
+      "id": "r:05e5e6a3-93cc-4ff5-93b6-7caf3c16341e",
+      "dis": "s:Core_ZN ZN",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "hvac": "m:",
+      "zone": "m:",
+      "space": "m:"
+    },
+    {
+      "id": "r:7cc967ee-4e4f-4928-80bd-a6a298363bfb",
+      "dis": "s:Perimeter_ZN_2 ZN",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "hvac": "m:",
+      "zone": "m:",
+      "space": "m:"
+    },
+    {
+      "id": "r:0a6f08a0-8d7c-4b5e-bb46-98c095ba5502",
+      "dis": "s:Perimeter_ZN_1 ZN",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "hvac": "m:",
+      "zone": "m:",
+      "space": "m:"
+    },
+    {
+      "id": "r:147c161a-2d06-444b-8da6-fe1226e80b07",
+      "dis": "s:Perimeter_ZN_4 ZN PSZ-AC-5",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equip": "m:",
+      "ahu": "m:",
+      "dxHeating": "m:",
+      "dxCooling": "m:"
+    },
+    {
+      "id": "r:f732bfdf-5fc5-41d2-a71b-700279ea113d",
+      "dis": "s:Perimeter_ZN_3 ZN PSZ-AC-4",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equip": "m:",
+      "ahu": "m:",
+      "dxHeating": "m:",
+      "dxCooling": "m:"
+    },
+    {
+      "id": "r:c8fff78f-0723-4066-9d89-4c7869af5981",
+      "dis": "s:Core_ZN ZN PSZ-AC-1",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equip": "m:",
+      "ahu": "m:",
+      "dxHeating": "m:",
+      "dxCooling": "m:"
+    },
+    {
+      "id": "r:d21deeea-5ee8-4128-aeba-cd4d1c360ca0",
+      "dis": "s:Perimeter_ZN_2 ZN PSZ-AC-3",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equip": "m:",
+      "ahu": "m:",
+      "dxHeating": "m:",
+      "dxCooling": "m:"
+    },
+    {
+      "id": "r:5ff36ec1-7a35-41f4-9eae-6ec592dfb135",
+      "dis": "s:Perimeter_ZN_1 ZN PSZ-AC-2",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equip": "m:",
+      "ahu": "m:",
+      "dxHeating": "m:",
+      "dxCooling": "m:"
+    },
+    {
+      "id": "r:017ec712-1525-4b9d-9a98-c6be9daa035a",
+      "dis": "s:Perimeter_ZN_4 ZN PSZ-AC-5 Fan",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equipRef": "r:147c161a-2d06-444b-8da6-fe1226e80b07",
+      "equip": "m:",
+      "fan": "m:",
+      "motor": "m:",
+      "constantAirVolume": "m:",
+      "discharge": "m:"
+    },
+    {
+      "id": "r:a3d7687f-f0c6-48e0-915b-ff1d741b31d8",
+      "dis": "s:Perimeter_ZN_4 ZN HP Htg Coil",
+      "equipRef": "r:147c161a-2d06-444b-8da6-fe1226e80b07",
+      "equip": "m:",
+      "coil": "m:",
+      "heating": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:13847e25-e4ee-4297-899d-2120167380f9",
+      "dis": "s:Perimeter_ZN_4 ZN PSZ-AC-5 1spd DX HP Clg Coil",
+      "equipRef": "r:147c161a-2d06-444b-8da6-fe1226e80b07",
+      "equip": "m:",
+      "coil": "m:",
+      "cooling": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:02c3bbe8-eb57-44eb-a100-7e30687a0c9f",
+      "dis": "s:Perimeter_ZN_3 ZN PSZ-AC-4 Fan",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equipRef": "r:f732bfdf-5fc5-41d2-a71b-700279ea113d",
+      "equip": "m:",
+      "fan": "m:",
+      "motor": "m:",
+      "constantAirVolume": "m:",
+      "discharge": "m:"
+    },
+    {
+      "id": "r:51fdb8c4-a1c6-41fa-b17c-082c46c91d6f",
+      "dis": "s:Perimeter_ZN_3 ZN HP Htg Coil",
+      "equipRef": "r:f732bfdf-5fc5-41d2-a71b-700279ea113d",
+      "equip": "m:",
+      "coil": "m:",
+      "heating": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:914218ce-71c5-47c2-bb70-903262e0ad59",
+      "dis": "s:Perimeter_ZN_3 ZN PSZ-AC-4 1spd DX HP Clg Coil",
+      "equipRef": "r:f732bfdf-5fc5-41d2-a71b-700279ea113d",
+      "equip": "m:",
+      "coil": "m:",
+      "cooling": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:693288c5-1038-497f-9284-1a01743de262",
+      "dis": "s:Core_ZN ZN PSZ-AC-1 Fan",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equipRef": "r:c8fff78f-0723-4066-9d89-4c7869af5981",
+      "equip": "m:",
+      "fan": "m:",
+      "motor": "m:",
+      "constantAirVolume": "m:",
+      "discharge": "m:"
+    },
+    {
+      "id": "r:3e1c3084-2b60-472f-b021-c9b57c91c676",
+      "dis": "s:Core_ZN ZN HP Htg Coil",
+      "equipRef": "r:c8fff78f-0723-4066-9d89-4c7869af5981",
+      "equip": "m:",
+      "coil": "m:",
+      "heating": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:6d0d1c7f-be8c-4a08-ab48-8a8c23af6463",
+      "dis": "s:Core_ZN ZN PSZ-AC-1 1spd DX HP Clg Coil",
+      "equipRef": "r:c8fff78f-0723-4066-9d89-4c7869af5981",
+      "equip": "m:",
+      "coil": "m:",
+      "cooling": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:82d01944-5824-41f8-9483-b0901b6b3cfb",
+      "dis": "s:Perimeter_ZN_2 ZN PSZ-AC-3 Fan",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equipRef": "r:d21deeea-5ee8-4128-aeba-cd4d1c360ca0",
+      "equip": "m:",
+      "fan": "m:",
+      "motor": "m:",
+      "constantAirVolume": "m:",
+      "discharge": "m:"
+    },
+    {
+      "id": "r:9dddecc9-3e2d-4ecb-9e3a-ac913a62f76a",
+      "dis": "s:Perimeter_ZN_2 ZN HP Htg Coil",
+      "equipRef": "r:d21deeea-5ee8-4128-aeba-cd4d1c360ca0",
+      "equip": "m:",
+      "coil": "m:",
+      "heating": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:836e9825-0dfd-407c-8d38-276e1d29fa9b",
+      "dis": "s:Perimeter_ZN_2 ZN PSZ-AC-3 1spd DX HP Clg Coil",
+      "equipRef": "r:d21deeea-5ee8-4128-aeba-cd4d1c360ca0",
+      "equip": "m:",
+      "coil": "m:",
+      "cooling": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:cfde919d-0431-49aa-8d6d-87c8b98ac358",
+      "dis": "s:Perimeter_ZN_1 ZN PSZ-AC-2 Fan",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equipRef": "r:5ff36ec1-7a35-41f4-9eae-6ec592dfb135",
+      "equip": "m:",
+      "fan": "m:",
+      "motor": "m:",
+      "constantAirVolume": "m:",
+      "discharge": "m:"
+    },
+    {
+      "id": "r:187de9c8-db8a-4a33-9c8a-6edb192d5c6b",
+      "dis": "s:Perimeter_ZN_1 ZN HP Htg Coil",
+      "equipRef": "r:5ff36ec1-7a35-41f4-9eae-6ec592dfb135",
+      "equip": "m:",
+      "coil": "m:",
+      "heating": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:2a179542-da3f-4836-b066-065ab9df629f",
+      "dis": "s:Perimeter_ZN_1 ZN PSZ-AC-2 1spd DX HP Clg Coil",
+      "equipRef": "r:5ff36ec1-7a35-41f4-9eae-6ec592dfb135",
+      "equip": "m:",
+      "coil": "m:",
+      "cooling": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:bb2c16b3-217e-46e2-94df-70e90a8c26a9",
+      "dis": "s:Perimeter_ZN_4 ZN PSZ-AC-5 Diffuser",
+      "hvac": "m:",
+      "directZone": "m:",
+      "equip": "m:",
+      "equipRef": "r:147c161a-2d06-444b-8da6-fe1226e80b07",
+      "ahuRef": "r:147c161a-2d06-444b-8da6-fe1226e80b07",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5"
+    },
+    {
+      "id": "r:d69f18a1-4877-4c44-bf8b-a8f038197557",
+      "dis": "s:Perimeter_ZN_3 ZN PSZ-AC-4 Diffuser",
+      "hvac": "m:",
+      "directZone": "m:",
+      "equip": "m:",
+      "equipRef": "r:f732bfdf-5fc5-41d2-a71b-700279ea113d",
+      "ahuRef": "r:f732bfdf-5fc5-41d2-a71b-700279ea113d",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5"
+    },
+    {
+      "id": "r:0f347fab-0e2f-4632-ba03-4bb23228370e",
+      "dis": "s:Core_ZN ZN PSZ-AC-1 Diffuser",
+      "hvac": "m:",
+      "directZone": "m:",
+      "equip": "m:",
+      "equipRef": "r:c8fff78f-0723-4066-9d89-4c7869af5981",
+      "ahuRef": "r:c8fff78f-0723-4066-9d89-4c7869af5981",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5"
+    },
+    {
+      "id": "r:5d4f5e2d-916a-4c1f-b869-7d859153fae1",
+      "dis": "s:Perimeter_ZN_2 ZN PSZ-AC-3 Diffuser",
+      "hvac": "m:",
+      "directZone": "m:",
+      "equip": "m:",
+      "equipRef": "r:d21deeea-5ee8-4128-aeba-cd4d1c360ca0",
+      "ahuRef": "r:d21deeea-5ee8-4128-aeba-cd4d1c360ca0",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5"
+    },
+    {
+      "id": "r:09630098-ee00-4c3f-bf4a-d3cb8012d624",
+      "dis": "s:Perimeter_ZN_1 ZN PSZ-AC-2 Diffuser",
+      "hvac": "m:",
+      "directZone": "m:",
+      "equip": "m:",
+      "equipRef": "r:5ff36ec1-7a35-41f4-9eae-6ec592dfb135",
+      "ahuRef": "r:5ff36ec1-7a35-41f4-9eae-6ec592dfb135",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5"
+    }
+  ]
 }
