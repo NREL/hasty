@@ -14,7 +14,7 @@
             <a href="{% url 'add_site' %}" style="color: white; text-decoration: none">+ Create Site</a>
         </button>
         <button type="button" class="btn btn-primary btn-lg">
-            <a href="{% url 'add_site' %}" style="color: white; text-decoration: none">+ Choose from template</a>
+            <a href="{% url 'templates' %}" style="color: white; text-decoration: none">+ Choose from template</a>
         </button>
         <div class="col-sm-2" style="padding-top: 1em">
             <p style="text-align: center"><strong>Or</strong></p>
@@ -24,7 +24,7 @@
             <div class=" container row">
                 <div class="col-sm-3">
                     {% csrf_token %}
-                    <input type="file" name="file" class="custom-file-input" id="customFile">
+                    <input type="file" name="file" class="custom-file-input" id="customFile" >
                     <label class="custom-file-label" for="customFile">Choose a file</label>
                 </div>
                 <div class="'col-sm-2" style="padding-left: 1em">

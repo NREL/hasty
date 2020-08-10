@@ -5,6 +5,7 @@ __pycache__
 .python-version
 tmp
 db.sqlite3
+staticfiles
 
 # Testing
 tests/.pytest_cache

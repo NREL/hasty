@@ -1,12 +1,9 @@
-
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.views.generic import CreateView
-
 from . import forms
 from . import models
-from lib.helpers import Shadowfax, BrickBuilder, file_processing
+from lib.helpers import Shadowfax, BrickBuilder, file_processing, handle_template
 
 
 class Index(CreateView):
@@ -47,7 +44,6 @@ class Index(CreateView):
 
 
 def data_view(request, site_id):
-
     site = models.Site.objects.get(pk=site_id)
     args = {
         'site': site
@@ -153,6 +149,27 @@ class AirHandler(CreateView):
             new_name = data.get(key, False)
             tu.name = new_name
             tu.lookup_id = data.get('terminal_unit')
+            print(tu.lookup_id)
             tu.save()
 
             return redirect('site.ahu', site_id=site_id, ahu_id=ahu_id)
+
+
+class TemplateView(CreateView):
+    template_name = 'templates.html'
+
+    def get(self, request):
+        sites = models.Site.objects.all()
+
+        args = {
+            'sites': sites,
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request):
+        if 'upload' in request.POST:
+            file = request.POST['upload']
+            id = handle_template(file)
+
+        site = models.Site.objects.get(id=id)
+        return redirect('site', site_id=site.id)

@@ -1,0 +1,415 @@
+{
+  "meta": {
+    "ver": "3.0"
+  },
+  "cols": [
+    {
+      "name": "id"
+    },
+    {
+      "name": "dis"
+    },
+    {
+      "name": "weather"
+    },
+    {
+      "name": "tz"
+    },
+    {
+      "name": "geoCoord"
+    },
+    {
+      "name": "site"
+    },
+    {
+      "name": "area"
+    },
+    {
+      "name": "weatherRef"
+    },
+    {
+      "name": "geoCity"
+    },
+    {
+      "name": "geoState"
+    },
+    {
+      "name": "geoCountry"
+    },
+    {
+      "name": "simStatus"
+    },
+    {
+      "name": "simType"
+    },
+    {
+      "name": "siteRef"
+    },
+    {
+      "name": "floor"
+    },
+    {
+      "name": "hvac"
+    },
+    {
+      "name": "zone"
+    },
+    {
+      "name": "space"
+    },
+    {
+      "name": "equip"
+    },
+    {
+      "name": "ahu"
+    },
+    {
+      "name": "dxHeating"
+    },
+    {
+      "name": "dxCooling"
+    },
+    {
+      "name": "equipRef"
+    },
+    {
+      "name": "fan"
+    },
+    {
+      "name": "motor"
+    },
+    {
+      "name": "constantAirVolume"
+    },
+    {
+      "name": "discharge"
+    },
+    {
+      "name": "coil"
+    },
+    {
+      "name": "heating"
+    },
+    {
+      "name": "dx"
+    },
+    {
+      "name": "cooling"
+    },
+    {
+      "name": "directZone"
+    },
+    {
+      "name": "ahuRef"
+    }
+  ],
+  "rows": [
+    {
+      "id": "r:3a36c2ad-7de6-46cd-aadf-dd576dd5e22d",
+      "dis": "s:Buffalo Niagara Intl AP",
+      "weather": "m:",
+      "tz": "n:-5.0",
+      "geoCoord": "c:42.93,-78.73"
+    },
+    {
+      "id": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "dis": "s:-SmallOffice-ASHRAE 169-2013-5A created: 2020-05-04 20:29:25 -0600",
+      "site": "m:",
+      "area": "n:511.15740000000005",
+      "weatherRef": "r:3a36c2ad-7de6-46cd-aadf-dd576dd5e22d",
+      "tz": "n:-5.0",
+      "geoCity": "s:Buffalo Niagara Intl AP",
+      "geoState": "s:NY",
+      "geoCountry": "s:USA",
+      "geoCoord": "c:42.93,-78.73",
+      "simStatus": "s:Stopped",
+      "simType": "s:osm"
+    },
+    {
+      "id": "r:2edc3034-10d9-48ff-9f1e-ff89d18bbb3f",
+      "dis": "s:Building Story 1",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "floor": "m:"
+    },
+    {
+      "id": "r:ed5abad6-fd0c-4636-8a25-8f38af0b1dd3",
+      "dis": "s:Perimeter_ZN_4 ZN",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "hvac": "m:",
+      "zone": "m:",
+      "space": "m:"
+    },
+    {
+      "id": "r:511ec221-c634-4d26-9830-af2e62cf1117",
+      "dis": "s:Perimeter_ZN_3 ZN",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "hvac": "m:",
+      "zone": "m:",
+      "space": "m:"
+    },
+    {
+      "id": "r:05e5e6a3-93cc-4ff5-93b6-7caf3c16341e",
+      "dis": "s:Core_ZN ZN",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "hvac": "m:",
+      "zone": "m:",
+      "space": "m:"
+    },
+    {
+      "id": "r:7cc967ee-4e4f-4928-80bd-a6a298363bfb",
+      "dis": "s:Perimeter_ZN_2 ZN",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "hvac": "m:",
+      "zone": "m:",
+      "space": "m:"
+    },
+    {
+      "id": "r:0a6f08a0-8d7c-4b5e-bb46-98c095ba5502",
+      "dis": "s:Perimeter_ZN_1 ZN",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "hvac": "m:",
+      "zone": "m:",
+      "space": "m:"
+    },
+    {
+      "id": "r:147c161a-2d06-444b-8da6-fe1226e80b07",
+      "dis": "s:Perimeter_ZN_4 ZN PSZ-AC-5",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equip": "m:",
+      "ahu": "m:",
+      "dxHeating": "m:",
+      "dxCooling": "m:"
+    },
+    {
+      "id": "r:f732bfdf-5fc5-41d2-a71b-700279ea113d",
+      "dis": "s:Perimeter_ZN_3 ZN PSZ-AC-4",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equip": "m:",
+      "ahu": "m:",
+      "dxHeating": "m:",
+      "dxCooling": "m:"
+    },
+    {
+      "id": "r:c8fff78f-0723-4066-9d89-4c7869af5981",
+      "dis": "s:Core_ZN ZN PSZ-AC-1",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equip": "m:",
+      "ahu": "m:",
+      "dxHeating": "m:",
+      "dxCooling": "m:"
+    },
+    {
+      "id": "r:d21deeea-5ee8-4128-aeba-cd4d1c360ca0",
+      "dis": "s:Perimeter_ZN_2 ZN PSZ-AC-3",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equip": "m:",
+      "ahu": "m:",
+      "dxHeating": "m:",
+      "dxCooling": "m:"
+    },
+    {
+      "id": "r:5ff36ec1-7a35-41f4-9eae-6ec592dfb135",
+      "dis": "s:Perimeter_ZN_1 ZN PSZ-AC-2",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equip": "m:",
+      "ahu": "m:",
+      "dxHeating": "m:",
+      "dxCooling": "m:"
+    },
+    {
+      "id": "r:017ec712-1525-4b9d-9a98-c6be9daa035a",
+      "dis": "s:Perimeter_ZN_4 ZN PSZ-AC-5 Fan",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equipRef": "r:147c161a-2d06-444b-8da6-fe1226e80b07",
+      "equip": "m:",
+      "fan": "m:",
+      "motor": "m:",
+      "constantAirVolume": "m:",
+      "discharge": "m:"
+    },
+    {
+      "id": "r:a3d7687f-f0c6-48e0-915b-ff1d741b31d8",
+      "dis": "s:Perimeter_ZN_4 ZN HP Htg Coil",
+      "equipRef": "r:147c161a-2d06-444b-8da6-fe1226e80b07",
+      "equip": "m:",
+      "coil": "m:",
+      "heating": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:13847e25-e4ee-4297-899d-2120167380f9",
+      "dis": "s:Perimeter_ZN_4 ZN PSZ-AC-5 1spd DX HP Clg Coil",
+      "equipRef": "r:147c161a-2d06-444b-8da6-fe1226e80b07",
+      "equip": "m:",
+      "coil": "m:",
+      "cooling": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:02c3bbe8-eb57-44eb-a100-7e30687a0c9f",
+      "dis": "s:Perimeter_ZN_3 ZN PSZ-AC-4 Fan",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equipRef": "r:f732bfdf-5fc5-41d2-a71b-700279ea113d",
+      "equip": "m:",
+      "fan": "m:",
+      "motor": "m:",
+      "constantAirVolume": "m:",
+      "discharge": "m:"
+    },
+    {
+      "id": "r:51fdb8c4-a1c6-41fa-b17c-082c46c91d6f",
+      "dis": "s:Perimeter_ZN_3 ZN HP Htg Coil",
+      "equipRef": "r:f732bfdf-5fc5-41d2-a71b-700279ea113d",
+      "equip": "m:",
+      "coil": "m:",
+      "heating": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:914218ce-71c5-47c2-bb70-903262e0ad59",
+      "dis": "s:Perimeter_ZN_3 ZN PSZ-AC-4 1spd DX HP Clg Coil",
+      "equipRef": "r:f732bfdf-5fc5-41d2-a71b-700279ea113d",
+      "equip": "m:",
+      "coil": "m:",
+      "cooling": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:693288c5-1038-497f-9284-1a01743de262",
+      "dis": "s:Core_ZN ZN PSZ-AC-1 Fan",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equipRef": "r:c8fff78f-0723-4066-9d89-4c7869af5981",
+      "equip": "m:",
+      "fan": "m:",
+      "motor": "m:",
+      "constantAirVolume": "m:",
+      "discharge": "m:"
+    },
+    {
+      "id": "r:3e1c3084-2b60-472f-b021-c9b57c91c676",
+      "dis": "s:Core_ZN ZN HP Htg Coil",
+      "equipRef": "r:c8fff78f-0723-4066-9d89-4c7869af5981",
+      "equip": "m:",
+      "coil": "m:",
+      "heating": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:6d0d1c7f-be8c-4a08-ab48-8a8c23af6463",
+      "dis": "s:Core_ZN ZN PSZ-AC-1 1spd DX HP Clg Coil",
+      "equipRef": "r:c8fff78f-0723-4066-9d89-4c7869af5981",
+      "equip": "m:",
+      "coil": "m:",
+      "cooling": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:82d01944-5824-41f8-9483-b0901b6b3cfb",
+      "dis": "s:Perimeter_ZN_2 ZN PSZ-AC-3 Fan",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equipRef": "r:d21deeea-5ee8-4128-aeba-cd4d1c360ca0",
+      "equip": "m:",
+      "fan": "m:",
+      "motor": "m:",
+      "constantAirVolume": "m:",
+      "discharge": "m:"
+    },
+    {
+      "id": "r:9dddecc9-3e2d-4ecb-9e3a-ac913a62f76a",
+      "dis": "s:Perimeter_ZN_2 ZN HP Htg Coil",
+      "equipRef": "r:d21deeea-5ee8-4128-aeba-cd4d1c360ca0",
+      "equip": "m:",
+      "coil": "m:",
+      "heating": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:836e9825-0dfd-407c-8d38-276e1d29fa9b",
+      "dis": "s:Perimeter_ZN_2 ZN PSZ-AC-3 1spd DX HP Clg Coil",
+      "equipRef": "r:d21deeea-5ee8-4128-aeba-cd4d1c360ca0",
+      "equip": "m:",
+      "coil": "m:",
+      "cooling": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:cfde919d-0431-49aa-8d6d-87c8b98ac358",
+      "dis": "s:Perimeter_ZN_1 ZN PSZ-AC-2 Fan",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5",
+      "equipRef": "r:5ff36ec1-7a35-41f4-9eae-6ec592dfb135",
+      "equip": "m:",
+      "fan": "m:",
+      "motor": "m:",
+      "constantAirVolume": "m:",
+      "discharge": "m:"
+    },
+    {
+      "id": "r:187de9c8-db8a-4a33-9c8a-6edb192d5c6b",
+      "dis": "s:Perimeter_ZN_1 ZN HP Htg Coil",
+      "equipRef": "r:5ff36ec1-7a35-41f4-9eae-6ec592dfb135",
+      "equip": "m:",
+      "coil": "m:",
+      "heating": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:2a179542-da3f-4836-b066-065ab9df629f",
+      "dis": "s:Perimeter_ZN_1 ZN PSZ-AC-2 1spd DX HP Clg Coil",
+      "equipRef": "r:5ff36ec1-7a35-41f4-9eae-6ec592dfb135",
+      "equip": "m:",
+      "coil": "m:",
+      "cooling": "m:",
+      "dx": "m:"
+    },
+    {
+      "id": "r:bb2c16b3-217e-46e2-94df-70e90a8c26a9",
+      "dis": "s:Perimeter_ZN_4 ZN PSZ-AC-5 Diffuser",
+      "hvac": "m:",
+      "directZone": "m:",
+      "equip": "m:",
+      "equipRef": "r:147c161a-2d06-444b-8da6-fe1226e80b07",
+      "ahuRef": "r:147c161a-2d06-444b-8da6-fe1226e80b07",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5"
+    },
+    {
+      "id": "r:d69f18a1-4877-4c44-bf8b-a8f038197557",
+      "dis": "s:Perimeter_ZN_3 ZN PSZ-AC-4 Diffuser",
+      "hvac": "m:",
+      "directZone": "m:",
+      "equip": "m:",
+      "equipRef": "r:f732bfdf-5fc5-41d2-a71b-700279ea113d",
+      "ahuRef": "r:f732bfdf-5fc5-41d2-a71b-700279ea113d",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5"
+    },
+    {
+      "id": "r:0f347fab-0e2f-4632-ba03-4bb23228370e",
+      "dis": "s:Core_ZN ZN PSZ-AC-1 Diffuser",
+      "hvac": "m:",
+      "directZone": "m:",
+      "equip": "m:",
+      "equipRef": "r:c8fff78f-0723-4066-9d89-4c7869af5981",
+      "ahuRef": "r:c8fff78f-0723-4066-9d89-4c7869af5981",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5"
+    },
+    {
+      "id": "r:5d4f5e2d-916a-4c1f-b869-7d859153fae1",
+      "dis": "s:Perimeter_ZN_2 ZN PSZ-AC-3 Diffuser",
+      "hvac": "m:",
+      "directZone": "m:",
+      "equip": "m:",
+      "equipRef": "r:d21deeea-5ee8-4128-aeba-cd4d1c360ca0",
+      "ahuRef": "r:d21deeea-5ee8-4128-aeba-cd4d1c360ca0",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5"
+    },
+    {
+      "id": "r:09630098-ee00-4c3f-bf4a-d3cb8012d624",
+      "dis": "s:Perimeter_ZN_1 ZN PSZ-AC-2 Diffuser",
+      "hvac": "m:",
+      "directZone": "m:",
+      "equip": "m:",
+      "equipRef": "r:5ff36ec1-7a35-41f4-9eae-6ec592dfb135",
+      "ahuRef": "r:5ff36ec1-7a35-41f4-9eae-6ec592dfb135",
+      "siteRef": "r:6b25c3c7-39e4-4be7-84a9-17e80feecaf5"
+    }
+  ]
+}

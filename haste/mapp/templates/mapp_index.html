@@ -6,48 +6,42 @@
 {% load crispy_forms_tags %}
 {% if no_map %}
 <div class="container" style="padding-top: 1em">
-  <div class="card border-top">
-    <h6 class="card-header text-primary">
-      {{no_map}}
-    </h6>
-  </div>
+    <div class="card border-top">
+        <h6 class="card-header text-primary">
+            {{no_map}}
+        </h6>
+    </div>
 </div>
 {% else %}
 <form method="get">
-<div class="container" style="padding-top: 1em">
-  {% if ptm %}
-  <div class="card">
-      <div class="form-row">
-        <div class="col-md-14">
-            {{ map_filter.form.brick_version|as_crispy_field }}
-        </div>
-        <div class="col-md-14">
-            {{ map_filter.form.haystack_version|as_crispy_field }}
-        </div>
-        <div class="col-md-14">
-            {{ map_filter.form.brick_inference_version|as_crispy_field }}
-        </div>
-      </div>
-  </div>
-  {% endif %}
-  <div class="card border-top">
-    <form method="get">
-
-    <h5 class="card-header text-primary">Points Table
-    <button class="btn btn-primary" type="submit" style="float: right">Search</button>
-    </h5>
-      <div class="row" style="padding-top: 1em">
-            <div class="col-sm-12">
-                <div class="card mb-3 boarder-right-0">
-                    <div class="card-body p-0 boarder-right-0">
-                        {% include 'points.html' %}
-                    </div>
+    <div class="container" style="padding-top: 1em">
+        {% if ptm %}
+        <div class="card">
+            <div class="form-row">
+                <div class="col-md-14">
+                    {{ map_filter.form.brick_version|as_crispy_field }}
+                </div>
+                <div class="col-md-14">
+                    {{ map_filter.form.haystack_version|as_crispy_field }}
+                </div>
+                <div class="col-md-14">
+                    {{ map_filter.form.brick_inference_version|as_crispy_field }}
                 </div>
             </div>
-      </div>
-    </form>
-  </div>
-  </div>
+        </div>
+        {% endif %}
+        <div class="card border-top">
+            <form method="get">
+
+                <h5 class="card-header text-primary">Points Table
+                    <button class="btn btn-primary" type="submit" style="float: right">Search</button>
+                </h5>
+                <div class="container" style="padding-top: 1em">
+                        {% include 'points.html' %}
+                </div>
+            </form>
+        </div>
+    </div>
 </form>
 {% endif %}
 {% endblock page_content %}
