@@ -63,4 +63,4 @@ Point protos in Project Haystack are mapped to Brick Classes at different releas
 
 
 ## Third-Party Licenses
-This project utilizes code written by [Patrick Coffey](https://patrickcoffey.bitbucket.io) under an [MIT](https://opensource.org/licenses/MIT) license
+This project utilizes code written by [Patrick Coffey](https://patrickcoffey.bitbucket.io) under an [MIT](https://opensource.org/licenses/MIT) license.
