@@ -1,5 +1,13 @@
 language: python
 python:
   - "3.6"
+  - "3.7"
+  - "3.8"
+
 install:
   - pip install -r requirements.txt
+  - pre-commit install
+
+script:
+  - pre-commit run --all-files
+  - py.test
