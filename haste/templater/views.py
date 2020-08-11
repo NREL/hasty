@@ -36,7 +36,7 @@ class HaystackCreateEquipmentTemplateView(CreateView):
         }
         return render(request, self.template_name, args)
 
-    def post(self, request, model_type):
+    def post(self, request):
         form = forms.HaystackEquipmentTemplateForm(request.POST)
         if form.is_valid():
             form.save()
@@ -54,7 +54,7 @@ class BrickCreateEquipmentTemplateView(CreateView):
         }
         return render(request, self.template_name, args)
 
-    def post(self, request, model_type):
+    def post(self, request):
         form = forms.HaystackEquipmentTemplateForm(request.POST)
         if form.is_valid():
             form.save()
