@@ -21,4 +21,5 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('admin/', admin.site.urls),
     path('mapp/', include('mapp.urls')),
+    path('templater/', include('templater.urls')),
 ]

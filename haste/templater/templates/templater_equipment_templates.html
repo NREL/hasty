@@ -1,0 +1,43 @@
+{% load static %}
+<div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Template Name</th>
+      <th scope="col">Template Type</th>
+      <th scope="col">Equipment Type</th>
+      <th scope="col">Points</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for template in haystack_equipment_templates %}
+      <tr>
+        <td>{{ template.name }}</td>
+        <td>Haystack</td>
+        <td>{{ template.equipment_type }}</td>
+        <td>
+          {% for point in template.points.all %}
+            {% if point != None %}
+              <p>{{ point.haystack_tagset }}</p>
+            {% endif %}
+          {% endfor %}
+        </td>
+      </tr>
+    {% endfor %}
+    {% for template in brick_equipment_templates %}
+      <tr>
+        <td>{{ template.name }}</td>
+        <td>Brick</td>
+        <td>{{ template.equipment_type }}</td>
+        <td>
+          {% for point in template.points.all %}
+            {% if point != None %}
+              <p>{{ point.haystack_tagset }}</p>
+            {% endif %}
+          {% endfor %}
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
