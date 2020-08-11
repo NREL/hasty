@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'api',
     'lib',
     'mapp',
+    'templater',
     'tests',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

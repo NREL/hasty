@@ -21,3 +21,4 @@ proto
 
 # Other
 haste/generate/migrations
+haste/templater/migrations

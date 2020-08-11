@@ -11,6 +11,9 @@ class InferenceVersion(models.Model):
 class HaystackVersion(models.Model):
     version = models.CharField(max_length=20, null=False, blank=False, unique=True)
 
+    def __str__(self):
+        return self.version
+
 
 class BrickVersion(models.Model):
     version = models.CharField(max_length=20, null=False, blank=False, unique=True)
@@ -45,8 +48,20 @@ class HaystackPointType(models.Model):
     haystack_tagset = models.CharField(max_length=150, null=False, blank=False)
     version = models.ForeignKey(HaystackVersion, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.haystack_tagset
+
 
 class PointTypeMap(models.Model):
     inference_version = models.ForeignKey(InferenceVersion, on_delete=models.CASCADE)
     brick_point = models.ForeignKey(BrickPointType, on_delete=models.CASCADE)
     haystack_point = models.ForeignKey(HaystackPointType, on_delete=models.CASCADE)
+
+
+class HaystackEquipmentType(models.Model):
+    marker_tags = models.ManyToManyField(HaystackMarkerTag)
+    haystack_tagset = models.CharField(max_length=150, null=False, blank=False)
+    version = models.ForeignKey(HaystackVersion, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.haystack_tagset

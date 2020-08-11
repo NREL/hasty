@@ -11,10 +11,10 @@
     </div>
     <div class="header clearfix" style="padding-top: 1em; padding-bottom: 5em">
         <button type="button" class="btn btn-primary btn-lg">
-            <a href="{% url 'add_site' %}" style="color: white; text-decoration: none">+ Create Site</a>
+            <a href="{% url 'add_site' %}" style="color: white; text-decoration: none">+ Create Custom Site</a>
         </button>
         <button type="button" class="btn btn-primary btn-lg">
-            <a href="{% url 'templates' %}" style="color: white; text-decoration: none">+ Choose from template</a>
+            <a href="{% url 'templates' %}" style="color: white; text-decoration: none">+ Create Site from Template</a>
         </button>
         <div class="col-sm-2" style="padding-top: 1em">
             <p style="text-align: center"><strong>Or</strong></p>
@@ -25,7 +25,7 @@
                 <div class="col-sm-3">
                     {% csrf_token %}
                     <input type="file" name="file" class="custom-file-input" id="customFile" >
-                    <label class="custom-file-label" for="customFile">Choose a file</label>
+                    <label class="custom-file-label" for="customFile">Create Site from File</label>
                 </div>
                 <div class="'col-sm-2" style="padding-left: 1em">
                     <button id="upload" type="submit" name="upload" class="btn btn-outline-dark" disabled>Upload</button>
