@@ -9,7 +9,7 @@ env:
 install:
   - pip install -r requirements.txt
   - pre-commit install
-  - pip install -U pytest
+
 before_script: cd haste
 script:
   - pre-commit run --all-files
