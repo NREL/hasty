@@ -1,5 +1,6 @@
 asgiref==3.2.5
 beautifulsoup4==4.9.1
+brickschema==0.1.7
 Django==3.0.7
 django-bootstrap4==2.0.1
 django-crispy-forms==1.9.1
