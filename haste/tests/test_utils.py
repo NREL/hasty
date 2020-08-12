@@ -4,7 +4,7 @@ import brickschema
 from mapp.resources.utils import generate_ranked_inference_csv
 
 
-def test_generate_ranked_inference_csv(brick_version='V1.1', haystack_version='V3.9.9'):
+def test_generate_ranked_inference_csv(brick_version='1.1', haystack_version='3.9.9'):
     p = 'tests/outputs/'
     if not os.path.isdir(p):
         os.makedirs(p)

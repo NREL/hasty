@@ -72,7 +72,7 @@ def generate_point_protos(haystack_version):
     return all_protos
 
 
-def generate_ranked_inference_csv(out_file, brick_version='V1.1', haystack_version='V3.9.9'):
+def generate_ranked_inference_csv(out_file, brick_version='1.1', haystack_version='3.9.9'):
     """
     generate a CSV file for a given brick, haystack, and py-brickschema version.  The CSV file
     contains a Haystack tagset in the first column, followed by a series of ranked Brick inference
