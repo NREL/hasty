@@ -1,0 +1,414 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<meta charset='UTF-8'/><title>equip &ndash; Project Haystack</title>
+<link rel='stylesheet' type='text/css' href='style.css' />
+</head>
+<body style='padding:0; background:#fff; margin:1em 4em 3em 6em;'>
+<div class='defc'>
+
+<div class='defc-nav'>
+<ul>
+<li><a href='index.html'>Index</a></li><li> » </li><li><a href='index-equip.html'>equip</a></li></ul>
+</div>
+<hr />
+
+<div class='defc-main'>
+
+<h2 class='defc-main-heading'></h2>
+<div class='defc-main-section'>
+<table class='defc-props'>
+<tr>
+<th><a href='lib-phIoT/equip.html'>equip</a></th>
+<td>
+<p>Equipment asset</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/actuator.html'>actuator</a></th>
+<td>
+<p>Equipment to move or control a mechanism</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/damper-actuator.html'>damper-actuator</a></th>
+<td>
+<p>Actuator to regulate the flow of air</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/valve-actuator.html'>valve-actuator</a></th>
+<td>
+<p>Actuator to regulate the flow of fluid</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/airHandlingEquip.html'>airHandlingEquip</a></th>
+<td>
+<p>HVAC equipment that conditions and delivers air via one or more fans</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/ahu.html'>ahu</a></th>
+<td>
+<p>Air Handling Unit</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/doas.html'>doas</a></th>
+<td>
+<p>Dedicated Outside Air System</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/mau.html'>mau</a></th>
+<td>
+<p>Makeup Air Unit</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/rtu.html'>rtu</a></th>
+<td>
+<p>Roof Top Unit</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/fcu.html'>fcu</a></th>
+<td>
+<p>Fan Coil Unit</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/crac.html'>crac</a></th>
+<td>
+<p>Computer Room Air Conditioner</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/unitVent.html'>unitVent</a></th>
+<td>
+<p>Unit Ventilator</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/heatPump.html'>heatPump</a></th>
+<td>
+<p>Heat pump</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/airTerminalUnit.html'>airTerminalUnit</a></th>
+<td>
+<p>Equipment in air distribution systems which terminate at the space</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/cav.html'>cav</a></th>
+<td>
+<p>Constant air volume terminal unit</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/vav.html'>vav</a></th>
+<td>
+<p>Variable air volume terminal unit</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/coolingOnly-vav.html'>coolingOnly-vav</a></th>
+<td>
+<p>Cooling only VAV without fan or reheat</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/fanPowered-vav.html'>fanPowered-vav</a></th>
+<td>
+<p>VAV contains a fan with reheat</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/battery.html'>battery</a></th>
+<td>
+<p>Equipment used to store electric energy</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/boiler.html'>boiler</a></th>
+<td>
+<p>Equipment to generate hot water or steam for heating</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/hot-water-boiler.html'>hot-water-boiler</a></th>
+<td>
+<p>Boiler which outputs hot water</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/steam-boiler.html'>steam-boiler</a></th>
+<td>
+<p>Boiler which outputs steam</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/chiller.html'>chiller</a></th>
+<td>
+<p>Equipment to remove heat from a liquid</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/conduit.html'>conduit</a></th>
+<td>
+<p>Duct, pipe, or cable to convey a substance or phenomenon</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/duct.html'>duct</a></th>
+<td>
+<p>Conduit used to convey air for HVAC</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/pipe.html'>pipe</a></th>
+<td>
+<p>Conduit used to convey a fluid</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/wire.html'>wire</a></th>
+<td>
+<p>Cabling used to convey electricity or data</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/coolingTower.html'>coolingTower</a></th>
+<td>
+<p>Equipment to transfer waste heat into the atmosphere</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/fumeHood.html'>fumeHood</a></th>
+<td>
+<p>Ventilation equipment to limit exposure to hazardous fumes</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/heatExchanger.html'>heatExchanger</a></th>
+<td>
+<p>Equipment to transfer heat between two working fluids</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/coil.html'>coil</a></th>
+<td>
+<p>Heat exchanger used to heat or cool air</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/coolingCoil.html'>coolingCoil</a></th>
+<td>
+<p>Coil used to cool air</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/heatingCoil.html'>heatingCoil</a></th>
+<td>
+<p>Coil used to heat air</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/humidifier-equip.html'>humidifier-equip</a></th>
+<td>
+<p>Equipment which adds moisture to air to increase humidity</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/luminaire.html'>luminaire</a></th>
+<td>
+<p>Light fixture using electricity to provide illumination</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/meter.html'>meter</a></th>
+<td>
+<p>Equipment to meter a substance or phenomenon</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/elec-meter.html'>elec-meter</a></th>
+<td>
+<p>Electricity meter</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/ac-elec-meter.html'>ac-elec-meter</a></th>
+<td>
+<p>AC Electricity meter</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/dc-elec-meter.html'>dc-elec-meter</a></th>
+<td>
+<p>DC Electricity meter</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/flow-meter.html'>flow-meter</a></th>
+<td>
+<p>Meter to measure flow rate and total volume of fluid</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/thermal-meter.html'>thermal-meter</a></th>
+<td>
+<p>Meter to measure energy transfer via fluid</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/motor.html'>motor</a></th>
+<td>
+<p>Equipment that converts electrical energy into mechanical energy</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/fan-motor.html'>fan-motor</a></th>
+<td>
+<p>Motor used with a fan to create air flow</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/pump-motor.html'>pump-motor</a></th>
+<td>
+<p>Motor used with a pump to move fluid</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/vfd.html'>vfd</a></th>
+<td>
+<p>Motor with variable frequency drive</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/panel.html'>panel</a></th>
+<td>
+<p>Enclosure for electrical and control equipment</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIct/controls-panel.html'>controls-panel</a></th>
+<td>
+<p>Panel housing controllers and networking gear</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/elec-panel.html'>elec-panel</a></th>
+<td>
+<p>Physical housing for electrical circuits, fuses, and breakers</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/plant.html'>plant</a></th>
+<td>
+<p>Central plant used to generate a substance for a process</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/chilled-water-plant.html'>chilled-water-plant</a></th>
+<td>
+<p>Plant used to generate chilled water for cooling</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/hot-water-plant.html'>hot-water-plant</a></th>
+<td>
+<p>Plant used to generate hot water for heating</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/steam-plant.html'>steam-plant</a></th>
+<td>
+<p>Plant used to generate steam for heating</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIct/rack.html'>rack</a></th>
+<td>
+<p>Enclosure or chassis used to mount computer and networking gear</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/radiantEquip.html'>radiantEquip</a></th>
+<td>
+<p>HVAC equipment that conditions a space without forced air</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/chilledBeam.html'>chilledBeam</a></th>
+<td>
+<p>Conditions a space using a heat exchanger integrated into the ceiling</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/radiantFloor.html'>radiantFloor</a></th>
+<td>
+<p>Heats a space using pipes or cables embedded beneath floor</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/radiator.html'>radiator</a></th>
+<td>
+<p>Heats a space using exposed pipes or coils</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/tank.html'>tank</a></th>
+<td>
+<p>Tank used to store a substance for temporary holding</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/thermostat.html'>thermostat</a></th>
+<td>
+<p>Senses and controls temperature of space in HVAC system</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/verticalTransport.html'>verticalTransport</a></th>
+<td>
+<p>Equipment to move humans and materials</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/elevator.html'>elevator</a></th>
+<td>
+<p>Enclosure used to move people between floors</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/escalator.html'>escalator</a></th>
+<td>
+<p>Moving staircase used to move people between floors</p>
+</td>
+</tr>
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='lib-phIoT/movingWalkway.html'>movingWalkway</a></th>
+<td>
+<p>Conveyor to move people across a horizontal or inclined plane</p>
+</td>
+</tr>
+</table>
+
+</div>
+
+<h2 class='defc-main-heading'></h2>
+<div class='defc-main-section'>
+<p class='defc-footer-ts'>
+Generated 23-Jul-2020 Thu 10:22:41PM MDT</p>
+
+</div>
+
+</div>
+</div>
+</body>
+</html>
