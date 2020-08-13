@@ -19,8 +19,20 @@ class Index(CreateView):
 
     def post(self, request):
         mt = request.POST.get('model_type')
-        if mt == 'haystack':
-            return redirect('templater.haystack.create_equipment_template')
+        if 'delete_haystack_equipment' in request.POST:
+            if request.POST.get('id'):
+                to_delete = tm.HaystackEquipmentTemplate.objects.get(id=request.POST.get('id'))
+                to_delete.delete()
+            return redirect('templater.index')
+        elif 'delete_brick_equipment' in request.POST:
+            return redirect('templater.index')
+        elif 'create_equipment' in request.POST:
+            return redirect(f"templater.{mt}.create_equipment_template")
+
+        elif 'create_fault' in request.POST:
+            # TODO
+            print("create_fault not yet handled")
+
         print(mt)
 
 

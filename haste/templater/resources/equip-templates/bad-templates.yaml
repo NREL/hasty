@@ -1,0 +1,34 @@
+---
+- template:
+    type: Haystack
+    version: 3.9.8
+    name: Bad template 1
+    description: Shouldn't work, wrong version
+    equipment_type: vav
+    points:
+      - damper-cmd-point
+- template:
+    type: Haystack
+    version: 3.9.9
+    name: Bad template 2
+    description: Shouldn't work, wrong bad equipment_type
+    equipment_type: sdfvea
+    points:
+      - damper-cmd-point
+- template:
+    type: Haystack
+    version: 3.9.9
+    name: Bad template 3
+    description: Template should save with only one point type, other not added
+    equipment_type: vav
+    points:
+      - damper-damper-cmd-point
+      - occupied-sensor-point
+- template:
+    type: Haystack
+    version: 3.9.9
+    name: Bad template 4
+    description: Point should not be added, although template saves
+    equipment_type: vav
+    points:
+      - damper-aderng-cmd-point
