@@ -1,0 +1,48 @@
+---
+- template:
+    type: Haystack
+    version: 3.9.9
+    name: G36 VAV Terminal Unit - Cooling only
+    description: This uses all of the available point protos available in Haystack 3.9.9.
+    equipment_type: vav
+    points:
+      - damper-cmd-point
+      - zone-air-temp-sensor-point
+      - occupied-sensor-point
+      - zone-air-co2-sensor-point
+      - zone-air-temp-occ-heating-sp-point
+      - zone-air-temp-occ-cooling-sp-point
+      - zone-air-temp-unocc-heating-sp-point
+      - zone-air-temp-unocc-cooling-sp-point
+- template:
+    type: Haystack
+    version: 3.9.9
+    name: G36 VAV Terminal Unit - HW Reheat
+    description: This uses all of the available point protos available in Haystack 3.9.9.
+    equipment_type: vav
+    points:
+      - damper-cmd-point
+      - hot-water-heat-cmd-valve-point  # should even if tags are out of order
+      - zone-air-temp-sensor-point
+      - occupied-sensor-point
+      - zone-air-co2-sensor-point
+      - zone-air-temp-occ-heating-sp-point
+      - zone-air-temp-occ-cooling-sp-point
+      - zone-air-temp-unocc-heating-sp-point
+      - zone-air-temp-unocc-cooling-sp-point
+- template:
+    type: Haystack
+    version: 3.9.9
+    name: G36 Parallel FPB - CV Fan
+    description: This uses all of the available point protos available in Haystack 3.9.9.
+    equipment_type: cav
+    points:
+      - damper-cmd-point
+      - hot-water-heat-valve-cmd-point  # should even if tags are out of order
+      - zone-air-temp-sensor-point
+      - occupied-sensor-point
+      - zone-air-co2-sensor-point
+      - zone-air-temp-occ-heating-sp-point
+      - zone-air-temp-occ-cooling-sp-point
+      - zone-air-temp-unocc-heating-sp-point
+      - zone-air-temp-unocc-cooling-sp-point

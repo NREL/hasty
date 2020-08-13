@@ -4,23 +4,33 @@
     <thead>
     <tr>
       <th scope="col">Template Name</th>
-      <th scope="col">Template Type</th>
+      <th scope="col">Info</th>
+      <th scope="col">Description</th>
       <th scope="col">Equipment Type</th>
       <th scope="col">Points</th>
+      <th scope="col">Delete</th>
     </tr>
     </thead>
     <tbody>
     {% for template in haystack_equipment_templates %}
       <tr>
-        <td>{{ template.name }}</td>
-        <td>Haystack</td>
+        <td style="max-width: 100px">{{ template.name }}</td>
+        <td>Haystack ({{ template.version }})</td>
+        <td style="max-width: 350px">{{ template.description }}</td>
         <td>{{ template.equipment_type }}</td>
-        <td>
+        <td style="min-width: 200px">
           {% for point in template.points.all %}
             {% if point != None %}
               <p>{{ point.haystack_tagset }}</p>
             {% endif %}
           {% endfor %}
+        </td>
+        <td>
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" id="id" name="id" value={{ template.id }}>
+            <button type="submit" class="btn btn-outline-danger" name="delete_haystack_equipment">Remove</button>
+          </form>
         </td>
       </tr>
     {% endfor %}
@@ -35,6 +45,13 @@
               <p>{{ point.haystack_tagset }}</p>
             {% endif %}
           {% endfor %}
+        </td>
+        <td>
+          <form method="post">
+            {% csrf_token %}
+            <input type="hidden" id="id" name="id" value={{ site.id }}>
+            <button type="submit" class="btn btn-outline-danger" name="delete_brick_equipment">Remove</button>
+          </form>
         </td>
       </tr>
     {% endfor %}

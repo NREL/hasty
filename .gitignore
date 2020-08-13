@@ -21,4 +21,9 @@ proto
 
 # Other
 haste/generate/migrations
-haste/templater/migrations
+haste/templater/migrations/*
+
+# Enable some templater migrations
+!haste/templater/migrations/__init__.py
+!haste/templater/migrations/0001_initial.py
+!haste/templater/migrations/0002_auto_20200813_0213.py
