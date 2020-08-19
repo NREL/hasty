@@ -10,9 +10,9 @@ install:
   - pip install -r requirements.txt
   - pre-commit install
 
-#before_script:
-#  - cd haste
-#  - python manage.py makemigrations
-#  - python manage.py migrate
+before_script:
+  - cd haste
+  - python manage.py makemigrations
+  - python manage.py migrate
 script:
   - tox -r
