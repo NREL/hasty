@@ -16,4 +16,4 @@ before_script:
   - python manage.py migrate
 
 script:
-  - tox --create-db -v
+  - tox -- --create-db -v
