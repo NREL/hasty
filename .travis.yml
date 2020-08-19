@@ -14,5 +14,6 @@ before_script:
   - cd haste
   - python manage.py makemigrations
   - python manage.py migrate
+
 script:
-  - tox -r
+  - tox --create-db -v
