@@ -6,31 +6,22 @@
 <div class="container" style="padding-top: 3em">
     <div class="jumbotron" style="padding-top: 3em">
         <h3 class="text-muted">Welcome to Haste</h3>
-      <p>Haste provides a simple interface to create <a href="{% url 'templater.index' %}">templates</a>, understand concept <a href="{% url 'mapp.index' %}">mappings</a> between Haystack and Brick, and <a href="{% url 'index' %}">create</a> meaningful semantic metadata models for your building.</p>
+        <p>Haste provides a simple interface to create <a href="{% url 'templater.index' %}">templates</a>, understand
+            concept <a href="{% url 'mapp.index' %}">mappings</a> between Haystack and Brick, and <a
+                    href="{% url 'index' %}">create</a> meaningful semantic metadata models for your building.</p>
     </div>
     <div class="header clearfix" style="padding-top: 1em; padding-bottom: 5em">
         <button type="button" class="btn btn-primary btn-lg">
-            <a href="{% url 'add_site' %}" style="color: white; text-decoration: none">+ Create Custom Site</a>
+            <a href="{% url 'create-site' %}" style="color: white; text-decoration: none">+ Create Custom Site</a>
         </button>
         <button type="button" class="btn btn-primary btn-lg">
-            <a href="{% url 'templates' %}" style="color: white; text-decoration: none">+ Create Site from Template</a>
+            <a href="{% url 'create-from_template' %}" style="color: white; text-decoration: none">+ Create Site from Template</a>
         </button>
         <div class="col-sm-2" style="padding-top: 1em">
             <p style="text-align: center"><strong>Or</strong></p>
         </div>
 
-        <form method="post" enctype="multipart/form-data">
-            <div class=" container row">
-                <div class="col-sm-3">
-                    {% csrf_token %}
-                    <input type="file" name="file" class="custom-file-input" id="customFile" onchange="return fileValidation()" >
-                    <label class="custom-file-label" for="customFile">Create Site from File</label>
-                </div>
-                <div class="'col-sm-2" style="padding-left: 1em">
-                    <button id="upload" type="submit" name="upload" class="btn btn-outline-dark" disabled>Upload</button>
-                </div>
-            </div>
-        </form>
+        <a href="{% url 'upload-site' %}" class="btn btn-primary btn-lg">Upload</a>
 
     </div>
     <div class="card mb-3">
@@ -43,7 +34,7 @@
                 </button>
             </div>
             <div class="container collapse show" id="showSimulations">
-                {% include 'all_sites.html' %}
+                {% include 'list_sites.html' %}
             </div>
         </div>
     </div>

@@ -10,19 +10,15 @@
         </tr>
         </thead>
         <tbody>
-        {% for site in sites %}
+        {% for site in object_list %}
         <tr>
-            <td><a href="{% url 'site' site.id %}">{{ site.name }} </a></td>
+            <td><a href="{% url 'site-detail' site.id %}">{{ site.name }} </a></td>
             <td>{{ site.air_handlers.count }}</td>
             <td class="text">
                 {% include 'partials/data_view_download_form.html' %}
             </td>
             <td>
-                <form method="post">
-                  {% csrf_token %}
-                  <input type="hidden" id="id" name="id" value={{ site.id }}>
-                  <button type="submit" class="btn btn-outline-danger" name="delete" >Remove</button>
-                </form>
+                <a href="{% url 'delete-site' site.id %}" class="btn btn-outline-danger">Remove</a>
             </td>
         </tr>
         {% endfor %}
