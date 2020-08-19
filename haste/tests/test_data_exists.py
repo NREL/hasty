@@ -4,7 +4,6 @@ import pytest
 from mapp.models import HaystackVersion, BrickVersion
 
 
-@pytest.fixture()
 @pytest.mark.django_db(transaction=True)
 class TestVersionData(TestCase):
     def test_brick_version(self):
