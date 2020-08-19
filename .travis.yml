@@ -17,7 +17,6 @@ install:
 before_script:
   - python ./haste/manage.py makemigrations
   - python ./haste/manage.py migrate
-  - python ./haste/manage.py syncdb
 
 script:
   - tox
