@@ -5,6 +5,9 @@ python:
 #  - "3.7"
 #  - "3.8"
 
+addons:
+  apt_packages:
+    - sqlite3
 #env:
 #  - DJANGO_SETTINGS_MODULE=haste.settings
 install:
