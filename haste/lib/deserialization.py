@@ -69,6 +69,8 @@ def save_ahus(ahus, site_id, vavs):
     for ahu in ahus:
         ahu_id = uuid4()
         ahu_name = ahu.get('dis')
+        if ahu_name is None:
+            ahu_name = ahu.get('id')
 
         imported_ahu = models.AirHandler.objects.create(id=ahu_id, name=ahu_name,
                                                         site_id=site, tagset=None, brick_class=None)

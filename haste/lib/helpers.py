@@ -399,6 +399,11 @@ def file_processing(file):
     deserialization.handle_haystack(data)
 
 
+def validate(file):
+    """Haystack file must at least have the right structure and a site"""
+    json.load(file)
+
+
 def handle_template(path):
     p = os.path.dirname(os.path.abspath(__file__))
     f_path = os.path.join(p, path)

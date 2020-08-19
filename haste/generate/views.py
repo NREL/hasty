@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.views.generic import CreateView
 from . import forms
 from . import models
-from lib.helpers import Shadowfax, BrickBuilder, file_processing, handle_template
+from lib.helpers import BrickBuilder, Shadowfax, file_processing, handle_template
 
 
 class Index(CreateView):
@@ -30,7 +30,10 @@ class Index(CreateView):
 
         elif 'upload' in request.POST:
             file = request.FILES['file']
-            file_processing(file)
+            try:
+                file_processing(file)
+            except BaseException:
+                return JsonResponse({'Result': 'invalid haystack type'}, status=500)
 
         sites = models.Site.objects.all()
         ahus = models.AirHandler.objects.all()
