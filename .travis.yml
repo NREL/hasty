@@ -15,4 +15,4 @@ python:
 #  - python manage.py makemigrations
 #  - python manage.py migrate
 script:
-  - tox
+  - tox -r
