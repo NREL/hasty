@@ -4,13 +4,15 @@ python:
   - "3.7"
   - "3.8"
 
-env:
-  - DJANGO_SETTINGS_MODULE=haste.settings
+#env:
+#  - DJANGO_SETTINGS_MODULE=haste.settings
 install:
   - pip install -r requirements.txt
   - pre-commit install
 
-before_script: cd haste
+#before_script:
+#  - cd haste
+#  - python manage.py makemigrations
+#  - python manage.py migrate
 script:
-  - pre-commit run --all-files
-  - pytest
+  - tox

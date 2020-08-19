@@ -60,7 +60,7 @@ def generate_point_protos(haystack_version):
     :param haystack_version: <str> version of Haystack, i.e. 'V3.9.9'
     :return: List[List[],] list of lists, with tagsets
     """
-    p = os.path.join(os.getcwd(), f"mapp/resources/haystack/{haystack_version}/index-pointProtos.html")
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"haystack/{haystack_version}/index-pointProtos.html")
     with open(p, 'r') as f:
         data = f.read()
     soup = BeautifulSoup(data, features="html.parser")
