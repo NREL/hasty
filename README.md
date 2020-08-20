@@ -1,4 +1,4 @@
-# Haste [![Travis-CI Build Status](https://travis-ci.org/nrel/haste.svg?branch=develop)](https://travis-ci.org/github/nrel/haste)
+# Haste [![Travis-CI Build Status](https://travis-ci.org/nrel/haste.svg?branch=develop)](https://travis-ci.org/github/nrel/haste) [![codecov](https://codecov.io/gh/NREL/haste/branch/develop/graph/badge.svg)](https://codecov.io/gh/NREL/haste)
 web app to create semantic metadata models, namely, Haystack and Brick
 
 # Setup
