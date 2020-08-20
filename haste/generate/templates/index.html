@@ -10,7 +10,7 @@
             concept <a href="{% url 'mapp.index' %}">mappings</a> between Haystack and Brick, and <a
                     href="{% url 'index' %}">create</a> meaningful semantic metadata models for your building.</p>
     </div>
-    <div class="header clearfix" style="padding-top: 1em; padding-bottom: 5em">
+        <div class="header clearfix" style="padding-top: 1em; padding-bottom: 5em">
         <button type="button" class="btn btn-primary btn-lg">
             <a href="{% url 'create-site' %}" style="color: white; text-decoration: none">+ Create Custom Site</a>
         </button>
@@ -21,8 +21,18 @@
             <p style="text-align: center"><strong>Or</strong></p>
         </div>
 
-        <a href="{% url 'upload-site' %}" class="btn btn-primary btn-lg">Upload</a>
-
+        <form method="post" enctype="multipart/form-data">
+            <div class=" container row">
+                <div class="col-sm-3">
+                    {% csrf_token %}
+                    <input type="file" name="file" class="custom-file-input" id="customFile" >
+                    <label class="custom-file-label" for="customFile">Create Site from File</label>
+                </div>
+                <div class="'col-sm-2" style="padding-left: 1em">
+                    <button id="upload" type="submit" name="upload" class="btn btn-outline-dark" disabled>Upload</button>
+                </div>
+            </div>
+        </form>
     </div>
     <div class="card mb-3">
         <div class="card-body p-0">

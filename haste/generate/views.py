@@ -1,42 +1,43 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
-from django.http import HttpResponseRedirect, JsonResponse
-from django.views.generic import ListView, DeleteView, View, CreateView
+from django.shortcuts import get_object_or_404, redirect, render
+from django.http import HttpResponseRedirect
+from django.views.generic import CreateView, View
 from . import forms
 from . import models
 from lib.helpers import BrickBuilder, Shadowfax, file_processing, handle_template
 
 
-class ListSites(ListView):
-    template_name = 'index.html'
-    queryset = models.Site.objects.all()
-
-
-class DeleteSite(DeleteView):
-    template_name = 'delete_site.html'
-    queryset = models.Site.objects.all()
-
-    def get_object(self, queryset=None):
-        id_ = self.kwargs.get("site_id")
-        return get_object_or_404(models.Site, id=id_)
-
-    def get_success_url(self):
-        return reverse('index')
-
-
-class UploadSite(View):
-
+class ListSites(View):
     def get(self, request):
-        return render(request, 'upload_site.html')
+        sites = models.Site.objects.all()
+        ahus = models.AirHandler.objects.all()
+
+        args = {
+            'sites': sites,
+            'ahus': ahus
+        }
+        return render(request, 'index.html', args)
 
     def post(self, request):
-        if 'upload' in request.POST:
-            file = request.FILES['file']
+        if 'delete' in request.POST:
+            id = request.POST.get('id')
             try:
-                file_processing(file)
+                site = models.Site.objects.get(id=id)
+                site.delete()
             except BaseException:
-                return JsonResponse({'Result': 'invalid haystack type'}, status=500)
+                print("object already deleted")
 
-        return redirect('index')
+        elif 'upload' in request.POST:
+            file = request.FILES['file']
+            file_processing(file)
+
+        sites = models.Site.objects.all()
+        ahus = models.AirHandler.objects.all()
+
+        args = {
+            'sites': sites,
+            'ahus': ahus
+        }
+        return render(request, 'index.html', args)
 
 
 class CreateSite(CreateView):

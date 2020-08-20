@@ -10,7 +10,7 @@
         </tr>
         </thead>
         <tbody>
-        {% for site in object_list %}
+        {% for site in sites %}
         <tr>
             <td><a href="{% url 'site-detail' site.id %}">{{ site.name }} </a></td>
             <td>{{ site.air_handlers.count }}</td>
@@ -18,9 +18,31 @@
                 {% include 'partials/data_view_download_form.html' %}
             </td>
             <td>
-                <a href="{% url 'delete-site' site.id %}" class="btn btn-outline-danger">Remove</a>
+                <button class="btn btn-outline-danger" data-toggle="modal" data-target="#myModal">Remove</button>
             </td>
         </tr>
+        <!-- Delete Modal -->
+        <div id="myModal" class="modal fade">
+            <div class="modal-dialog modal-confirm">
+                <div class="modal-content">
+                    <div class="modal-header flex-column">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title w-100">Are you sure?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Do you really want to delete this record? This process cannot be undone.</p>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" id="id" name="id" value={{ site.id }}>
+                            <button type="submit" class="btn btn-outline-danger" name="delete">Remove</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         {% endfor %}
         </tbody>
     </table>
