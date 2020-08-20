@@ -8,7 +8,7 @@ from templater.models import HaystackEquipmentTemplate
 
 
 def add_equipment_templates(apps, schema_editor):
-    p = os.path.join(os.getcwd(), f"templater/resources/equip-templates")
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "equip-templates")
     template_files = [os.path.join(p, f) for f in os.listdir(p) if f.endswith("-templates.yaml")]
     for f in template_files:
         with open(f, 'r') as fp:

@@ -17,7 +17,7 @@ def generate_haystack_equipment_types(apps, schema_editor):
     HaystackMarkerTag = apps.get_model('mapp', 'HaystackMarkerTag')
     HaystackEquipmentType = apps.get_model('mapp', 'HaystackEquipmentType')
     haystack_version_model = HaystackVersion.objects.get(version=hv)
-    p = os.path.join(os.getcwd(), f"mapp/resources/haystack/{hv}/defs.ttl")
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', f"resources/haystack/{hv}/defs.ttl")
 
     g = Graph()
     g.bind("ph", PH)
