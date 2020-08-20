@@ -2,21 +2,12 @@ dist: debian
 language: python
 python:
   - "3.6"
-#  - "3.7"
-#  - "3.8"
+  - "3.7"
+  - "3.8"
 
 addons:
   apt_packages:
     - sqlite3
-#env:
-#  - DJANGO_SETTINGS_MODULE=haste.settings
-#install:
-#  - pip install -r requirements.txt
-#  - pre-commit install
-
-#before_script:
-#  - python ./haste/manage.py makemigrations
-#  - python ./haste/manage.py migrate
 
 script:
   - tox
