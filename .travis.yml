@@ -10,13 +10,13 @@ addons:
     - sqlite3
 #env:
 #  - DJANGO_SETTINGS_MODULE=haste.settings
-#install:
-#  - pip install -r requirements.txt
-#  - pre-commit install
+install:
+  - pip install -r requirements.txt
+  - pre-commit install
 
 #before_script:
 #  - python ./haste/manage.py makemigrations
 #  - python ./haste/manage.py migrate
 
 script:
-  - tox -- --create-db --migrations
+  - pytest --reuse-db --migrations
