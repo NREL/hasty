@@ -19,4 +19,4 @@ addons:
 #  - python ./haste/manage.py migrate
 
 script:
-  - tox
+  - tox -- --create-db --migrations
