@@ -1,6 +1,7 @@
 # Create your tests here.
 from django.test import TestCase
 from . import models
+from os import path
 
 
 class IndexViewTest(TestCase):
@@ -38,3 +39,14 @@ class IndexViewTest(TestCase):
         # The site GET request should now be 0
         self.assertEqual(response.status_code, 200)
         self.assertEqual(list(response.context['sites']), [])
+
+    def test_upload(self):
+
+        basepath = path.dirname(__file__)
+        filepath = path.abspath(path.join(basepath, "..", "tests", "files", "carytown.json"))
+        with open(filepath) as file:
+            self.client.post('', {'upload': '', 'file': file})
+
+        response = self.client.get('')
+        sites = response.context['sites']
+        self.assertEqual(len(sites), 2)
