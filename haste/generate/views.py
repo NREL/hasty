@@ -1,13 +1,12 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponseRedirect
-from django.views.generic import CreateView
+from django.views.generic import CreateView, View
 from . import forms
 from . import models
-from lib.helpers import Shadowfax, BrickBuilder, file_processing, handle_template
+from lib.helpers import BrickBuilder, Shadowfax, file_processing, handle_template
 
 
-class Index(CreateView):
-
+class ListSites(View):
     def get(self, request):
         sites = models.Site.objects.all()
         ahus = models.AirHandler.objects.all()
@@ -19,7 +18,6 @@ class Index(CreateView):
         return render(request, 'index.html', args)
 
     def post(self, request):
-
         if 'delete' in request.POST:
             id = request.POST.get('id')
             try:
@@ -39,27 +37,40 @@ class Index(CreateView):
             'sites': sites,
             'ahus': ahus
         }
-
         return render(request, 'index.html', args)
 
 
-def data_view(request, site_id):
-    site = models.Site.objects.get(pk=site_id)
-    args = {
-        'site': site
-    }
-    if request.GET['download_type'] == 'haystack':
-        return render(request, 'data_view.html', args)
-    elif request.GET['download_type'] == 'brick':
-        builder = BrickBuilder(site)
-        builder.build()
-        builder.ttl_file_serializer()
-        url = 'https://viewer.brickschema.org/upload'
+class CreateSite(CreateView):
+    template_name = 'create_site.html'
 
-        return HttpResponseRedirect(url)
+    def get(self, request):
+        form = forms.SiteForm()
+        args = {'form': form}
+        return render(request, self.template_name, args)
+
+    def post(self, request):
+        form_result = forms.SiteForm(request.POST)
+        if form_result.is_valid():
+            site_def = form_result.save()
+            return redirect('site-detail', site_id=site_def.id)
 
 
-class Site(CreateView):
+class CreateFromTemplate(View):
+    template_name = 'templates.html'
+
+    def get(self, request):
+        return render(request, self.template_name)
+
+    def post(self, request):
+        if 'upload' in request.POST:
+            file = request.POST['upload']
+            id = handle_template(file)
+
+        site = models.Site.objects.get(id=id)
+        return redirect('site-detail', site_id=site.id)
+
+
+class SiteDetail(View):
     template_name = 'site.html'
 
     def get(self, request, site_id):
@@ -106,21 +117,6 @@ class Site(CreateView):
             pass
 
 
-class CreateSite(CreateView):
-    template_name = 'add_site.html'
-
-    def get(self, request):
-        form = forms.SiteForm()
-        args = {'form': form}
-        return render(request, self.template_name, args)
-
-    def post(self, request):
-        form_result = forms.SiteForm(request.POST)
-        if form_result.is_valid():
-            site_def = form_result.save()
-            return redirect('site', site_id=site_def.id)
-
-
 class AirHandler(CreateView):
     template_name = 'air_handler.html'
 
@@ -155,21 +151,17 @@ class AirHandler(CreateView):
             return redirect('site.ahu', site_id=site_id, ahu_id=ahu_id)
 
 
-class TemplateView(CreateView):
-    template_name = 'templates.html'
+def data_view(request, site_id):
+    site = models.Site.objects.get(pk=site_id)
+    args = {
+        'site': site
+    }
+    if request.GET['download_type'] == 'haystack':
+        return render(request, 'data_view.html', args)
+    elif request.GET['download_type'] == 'brick':
+        builder = BrickBuilder(site)
+        builder.build()
+        builder.ttl_file_serializer()
+        url = 'https://viewer.brickschema.org/upload'
 
-    def get(self, request):
-        sites = models.Site.objects.all()
-
-        args = {
-            'sites': sites,
-        }
-        return render(request, self.template_name, args)
-
-    def post(self, request):
-        if 'upload' in request.POST:
-            file = request.POST['upload']
-            id = handle_template(file)
-
-        site = models.Site.objects.get(id=id)
-        return redirect('site', site_id=site.id)
+        return HttpResponseRedirect(url)
