@@ -18,31 +18,13 @@
                 {% include 'partials/data_view_download_form.html' %}
             </td>
             <td>
-                <button class="btn btn-outline-danger" data-toggle="modal" data-target="#myModal">Remove</button>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" id="id" name="id" value={{ site.id }}>
+                    <button type="submit" class="btn btn-outline-danger" name="delete">Remove</button>
+                </form>
             </td>
         </tr>
-        <!-- Delete Modal -->
-        <div id="myModal" class="modal fade">
-            <div class="modal-dialog modal-confirm">
-                <div class="modal-content">
-                    <div class="modal-header flex-column">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title w-100">Are you sure?</h4>
-                    </div>
-                    <div class="modal-body">
-                        <p>Do you really want to delete this record? This process cannot be undone.</p>
-                    </div>
-                    <div class="modal-footer justify-content-center">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <form method="post">
-                            {% csrf_token %}
-                            <input type="hidden" id="id" name="id" value={{ site.id }}>
-                            <button type="submit" class="btn btn-outline-danger" name="delete">Remove</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
         {% endfor %}
         </tbody>
     </table>
