@@ -19,20 +19,7 @@ We recommend using the following:
 1. Install dependencies: `$ pip install -r requirements.txt`
 1. Activate pre-commit: `$ pre-commit install`
 1. Check that pre-commit is installed: `$ pre-commit --version`
-1. Check that tests are able to run: `$ py.test`
-```
-cmosiman-34078s:haste cmosiman$ py.test
-=============================================== test session starts ================================================
-platform darwin -- Python 3.6.5, pytest-5.3.5, py-1.8.2, pluggy-0.13.1
-django: settings: haste.settings (from env)
-rootdir: /Users/cmosiman/Github/Haste/haste, inifile: pytest.ini
-plugins: django-3.9.0
-collected 2 items
-
-tests/test_helpers.py ..                                                                                     [100%]
-
-================================================ 2 passed in 0.08s =================================================
-```
+1. Check that tests are able to run: `$ tox`
 
 # Running Haste
 After [setup](#setup) is complete, the web app can be run.  We have committed migrations in order to populate the following:
