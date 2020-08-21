@@ -8,14 +8,12 @@ class IndexViewTest(TestCase):
 
     def setUp(self):
         test_site = models.Site.objects.create(
-            id=1111,
             name="Test Site",
             city="Golden",
             state="CO",
             zip=80401
         )
         models.AirHandler.objects.create(
-            id=2222,
             name="Test AHU",
             site_id=test_site,
             tagset="tags",
@@ -37,11 +35,11 @@ class IndexViewTest(TestCase):
         # Send the delete in a POST
         response = self.client.post('', {'id': site.id, 'delete': ""})
         # The site GET request should now be 0
+        response = self.client.get('')
         self.assertEqual(response.status_code, 200)
         self.assertEqual(list(response.context['sites']), [])
 
     def test_upload(self):
-
         basepath = path.dirname(__file__)
         filepath = path.abspath(path.join(basepath, "..", "tests", "files", "carytown.json"))
         with open(filepath) as file:
@@ -50,3 +48,19 @@ class IndexViewTest(TestCase):
         response = self.client.get('')
         sites = response.context['sites']
         self.assertEqual(len(sites), 2)
+
+
+class CreateSiteTest(TestCase):
+
+    def test_create(self):
+        data = {
+            'name': "Test Create Site",
+            'city': "Golden",
+            'state': "CO",
+            'zip': 80401
+        }
+        response = self.client.post('/create_site/', data)
+        self.assertEqual(response.status_code, 302)
+
+        response = self.client.get('')
+        self.assertEqual([site.name for site in response.context['sites']], ["Test Create Site"])

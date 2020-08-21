@@ -20,6 +20,7 @@ class ListSites(View):
     def post(self, request):
         if 'delete' in request.POST:
             id = request.POST.get('id')
+            print(id)
             try:
                 site = models.Site.objects.get(id=id)
                 site.delete()
