@@ -64,3 +64,12 @@ class CreateSiteTest(TestCase):
 
         response = self.client.get('')
         self.assertEqual([site.name for site in response.context['sites']], ["Test Create Site"])
+
+
+class CreateFromTemplateTest(TestCase):
+
+    def test_upload_from_template(self):
+        self.client.post('/create_from_template/', {'upload': 'resources/smalloffice.json'})
+        response = self.client.get('')
+        self.assertEqual([site.name for site in response.context['sites']],
+                         ["s:-SmallOffice-ASHRAE 169-2013-5A created: 2020-05-04 20:29:25 -0600"])
