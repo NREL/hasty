@@ -8,7 +8,7 @@ def generate_haystack_tagsets(apps, schema_editor):
     hv = "3.9.9"
     HaystackPointType = apps.get_model('mapp', 'HaystackPointType')
     HaystackMarkerTag = apps.get_model('mapp', 'HaystackMarkerTag')
-    p = os.path.join(os.getcwd(), f"mapp/resources/haystack/{hv}/index-pointProtos.html")
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', f"resources/haystack/{hv}/index-pointProtos.html")
     with open(p, 'r') as f:
         data = f.read()
     soup = BeautifulSoup(data, features="html.parser")

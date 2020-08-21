@@ -8,8 +8,12 @@ db.sqlite3
 staticfiles
 
 # Testing
-tests/.pytest_cache
+.pytest_cache
 outputs
+.tox
+.coverage
+.eggs
+haste.egg-info
 
 # Haystack
 docHaystack

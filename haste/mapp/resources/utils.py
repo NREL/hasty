@@ -55,12 +55,11 @@ def infer_points(apps, schema_editor, brick_version='V1.1', haystack_version='V3
 def generate_point_protos(haystack_version):
     """
     Generate all point protos for a given Haystack version.  This function parses the
-    'index-pointProtos.html' file in order to generate the tagsets.  The file structure for
-    storing new versions of Haystack can be seen in the path below'
+    'index-pointProtos.html' file in order to generate the tagsets.
     :param haystack_version: <str> version of Haystack, i.e. 'V3.9.9'
-    :return: List[List[],] list of lists, with tagsets
+    :return: list, each element in the list is a string with a tagset, as 'tag1-tag2'.
     """
-    p = os.path.join(os.getcwd(), f"mapp/resources/haystack/{haystack_version}/index-pointProtos.html")
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"haystack/{haystack_version}/index-pointProtos.html")
     with open(p, 'r') as f:
         data = f.read()
     soup = BeautifulSoup(data, features="html.parser")
@@ -68,7 +67,7 @@ def generate_point_protos(haystack_version):
 
     # Generate a list of sets
     all_protos = [p.a.text.replace(' ', '-') for p in all_protos]
-    # all_protos = [p.split(' ') for p in all_protos]
+    all_protos = [p.replace('"', '') for p in all_protos]
     return all_protos
 
 
@@ -80,7 +79,7 @@ def generate_ranked_inference_csv(out_file, brick_version='1.1', haystack_versio
     :param out_file:
     :param brick_version:
     :param haystack_version:
-    :return:
+    :return: list, list of lists
     """
     all_protos = generate_point_protos(haystack_version)
     output = [
@@ -92,20 +91,18 @@ def generate_ranked_inference_csv(out_file, brick_version='1.1', haystack_versio
     ]
 
     hi = HaystackInferenceSession("https://example.bldg/#")
-    # a, b = hi.infer_entity(all_protos[0], str(uuid4()))
-    # print(a)
-    # print([bs[2] for bs in b])
     for proto in all_protos:
-        temp = [' '.join(proto)]
+        temp = [proto]
         try:
-            triple, ranked_inferences = hi.infer_entity(proto, str(uuid4()))
+            triple, ranked_inferences = hi.infer_entity(proto.split("-"), str(uuid4()))
             temp += [i[2][0] for i in ranked_inferences]
-        except IndexError as ie:
+        except IndexError:
             temp += [None]
-            print(ie)
 
         output.append(temp)
 
     with open(out_file, 'w+') as f:
         wr = csv.writer(f)
         wr.writerows(output)
+
+    return output
