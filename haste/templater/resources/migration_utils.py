@@ -7,7 +7,11 @@ from mapp.models import HaystackVersion, HaystackPointType, HaystackEquipmentTyp
 from templater.models import HaystackEquipmentTemplate
 
 
-def add_equipment_templates(apps, schema_editor):
+def add_equipment_templates_migration(apps, schema_editor):
+    add_equipment_templates()
+
+
+def add_equipment_templates():
     p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "equip-templates")
     template_files = [os.path.join(p, f) for f in os.listdir(p) if f.endswith("-templates.yaml")]
     for f in template_files:
