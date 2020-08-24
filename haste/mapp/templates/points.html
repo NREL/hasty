@@ -7,7 +7,6 @@
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">Id</th>
                     <th scope="col">Haystack Point Types {{ hpt_filter.form.haystack_tagset }}
                     </th>
                     <th scope="col">Tags</th>
@@ -15,15 +14,15 @@
                 </thead>
                 <tbody>
                 {% for pt in hpt %}
-                <tr>
-                    <td>{{ pt.id }}</td>
+                    <tr>
                     <td><a href="https://project-haystack.dev/doc/proto/{{ pt.haystack_tagset }}">
-                        {{pt.haystack_tagset}}</a>
+                        {{ pt.haystack_tagset }}</a>
                     </td>
                     <td>
-                <tr>
-                    <a href="https://brickschema.org/schema/1.1/Brick#{{ pm.brick_class }}">{{pt.marker_tags__tag}}</a></td>
-                </tr>
+                        {% for t in pt.marker_tags.all %}
+                            {{ t.tag }},
+                        {% endfor %}
+                    </td>
                 {% endfor %}
                 </tbody>
             </table>
@@ -32,7 +31,6 @@
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">Id</th>
                     <th scope="col">Brick Point Types {{ bpt_filter.form.brick_class }}
                     </th>
                     <th scope="col">Tags</th>
@@ -40,13 +38,15 @@
                 </thead>
                 <tbody>
                 {% for pt in bpt %}
-                <tr>
-                    <td>{{ pt.id }}</td>
-                    <td><a href="https://brickschema.org/schema/1.1/Brick#{{ pt.brick_class }}"> {{ pt.brick_class}}</a>
-                    </td>
-                    <td><a href="https://brickschema.org/schema/1.1/Brick#{{ pm.brick_class }}">{{ pm.brick_class }}</a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td><a href="https://brickschema.org/schema/1.1/Brick#{{ pt.brick_class }}"> {{ pt.brick_class }}</a>
+                        </td>
+                        <td>
+                            {% for t in pt.tags.all %}
+                                <a>{{ t.tag }}</a>,
+                            {% endfor %}
+                        </td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>
