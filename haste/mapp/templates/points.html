@@ -1,15 +1,17 @@
 {% load static %}
 {% load mapp_extras %}
 
-<div class="table container">
+<div class="table">
+    <button id="haystack" class="btn btn-warning" onclick="toggle_hay()" type="button">Haystack</button>
+    <button id="brick" class="btn btn-outline-info" onclick="toggle_brick()"type="button">Brick</button>
     <div class="row">
-        <div class="container col-sm-5">
+        <div id="hay_table" class="col" >
+            <h5 style="padding-top: 1em; padding-bottom: 1em">Haystack Version {{ hpt_filter.form.version }}</h5>
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Haystack Point Types {{ hpt_filter.form.haystack_tagset }}
-                    </th>
+                    <th scope="col">Haystack Point Types {{ hpt_filter.form.haystack_tagset }}</th>
                     <th scope="col">Tags</th>
                 </tr>
                 </thead>
@@ -17,24 +19,20 @@
                 {% for pt in hpt %}
                 <tr>
                     <td>{{ pt.id }}</td>
-                    <td><a href="https://project-haystack.dev/doc/proto/{{ pt.haystack_tagset }}">
-                        {{pt.haystack_tagset}}</a>
-                    </td>
-                    <td>
-                <tr>
-                    <a href="https://brickschema.org/schema/1.1/Brick#{{ pm.brick_class }}">{{pt.marker_tags__tag}}</a></td>
+                    <td><a href="https://project-haystack.dev/doc/proto/{{ pt.haystack_tagset }}">{{pt.haystack_tagset}}</a></td>
+                    <td><a href="https://brickschema.org/schema/1.1/Brick#{{ pm.brick_class }}">{{pt.marker_tags__tag}}</a></td>
                 </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
-        <div class="container col-sm-5">
+        <div id="brick_table" class="col">
+            <h5 style="padding-top: 1em; padding-bottom: 1em">Brick Version {{ bpt_filter.form.version }}</h5>
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Brick Point Types {{ bpt_filter.form.brick_class }}
-                    </th>
+                    <th scope="col">Brick Point Types {{ bpt_filter.form.brick_class }}</th>
                     <th scope="col">Tags</th>
                 </tr>
                 </thead>
@@ -42,10 +40,8 @@
                 {% for pt in bpt %}
                 <tr>
                     <td>{{ pt.id }}</td>
-                    <td><a href="https://brickschema.org/schema/1.1/Brick#{{ pt.brick_class }}"> {{ pt.brick_class}}</a>
-                    </td>
-                    <td><a href="https://brickschema.org/schema/1.1/Brick#{{ pm.brick_class }}">{{ pm.brick_class }}</a>
-                    </td>
+                    <td style="word-break: break-all"><a href="https://brickschema.org/schema/1.1/Brick#{{ pt.brick_class }}"> {{ pt.brick_class}}</a></td>
+                    <td style="word-break: break-all"><a href="https://brickschema.org/schema/1.1/Brick#{{ pm.brick_class }}">{{ pm.brick_class }}</a></td>
                 </tr>
                 {% endfor %}
                 </tbody>
@@ -53,3 +49,4 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="{% static 'generate/js/toggle.js' %}"></script>

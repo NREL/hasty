@@ -23,24 +23,21 @@
     <div class="container">
         <div class="card-deck" style="padding-top: 1em">
             {% if ptm %}
-            <div class="card border-top col-lg-1">
-                <h5 class="card-header text-primary col-lg-1" type="button" data-toggle="collapse"
+            <div class="card border-top">
+                <h5 class="card-header text-primary" type="button" data-toggle="collapse"
                     data-target="#showMaps"
                     aria-expanded="true" aria-controls="showMaps">
                     Point Mapp
                     <button class="btn btn-primary" type="submit" style="float: right">Search</button>
                 </h5>
                 <div class="container collapse show" id="showMaps">
-                    <h5>Haystack Version {{ map_filter.form.haystack_version }}</h5>
-                    <h5>Brick Version {{ map_filter.form.brick_version }}</h5>
-                    <h5>Inference Version {{ map_filter.form.inference_version }}</h5>
                     <div class="container" style="padding-top: 1em">
                         {% include 'point_map.html' %}
                     </div>
                 </div>
             </div>
             {% endif %}
-            <div class="card border-top">
+            <div class="card col-sm-4">
                 <form method="get">
                     <h5 class="card-header text-primary" type="button" data-toggle="collapse"
                         data-target="#showPointsTable"
@@ -48,8 +45,6 @@
                         <button class="btn btn-primary" type="submit" style="float: right">Search</button>
                     </h5>
                     <div class="container collapse show" id="showPointsTable" style="padding-top: 1em">
-                        <h5>Haystack Version {{ hpt_filter.form.version }}</h5>
-                        <h5>Brick Version {{ bpt_filter.form.version }}</h5>
                         {% include 'points.html' %}
                     </div>
                 </form>
