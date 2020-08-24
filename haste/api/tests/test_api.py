@@ -21,5 +21,3 @@ class TestGetSites(TestCase):
     def test_sites(self):
         response = self.client.get('/api/sites')
         self.assertEqual(response.status_code, 200)
-        print(response.data)
-        self.assertEqual([name.name for name in response.data['name']], ["Test Site"])
