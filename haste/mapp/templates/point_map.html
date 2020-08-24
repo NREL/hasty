@@ -7,14 +7,13 @@
                 <div class="row" style="padding-top: 1em; padding-bottom: 1em">
                 <h5 class="'col">Haystack Version {{ map_filter.form.haystack_version }}</h5>
                 <h5 class="col">Brick Version {{ map_filter.form.brick_version }}</h5>
+                    <h5 class="col">Inference Version {{ map_filter.form.inference_version }}</h5>
             </div>
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
                     <th scope="col">Haystack Point Type {{hpt_filter.haystack_version}}</th>
-                    {% for version in map_filter.form.inference_version|slice:"1:" %}
-                    <th scope="col">Brick Point Class Inference{{version}}</th>
-                    {% endfor %}
+                    <th scope="col">Brick Point Class Inference</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -22,9 +21,8 @@
                 <tr>
                     <td style="word-break: break-all"><a href="https://project-haystack.dev/doc/proto/{{ pt.haystack_point.haystack_tagset }}">{{pt.haystack_point }}</a></td>
                     <td style="word-break: break-all"><a href="https://brickschema.org/schema/1.1/Brick#{{ pt.brick_point.brick_class }}">{{pt.brick_point.brick_class }}</a></td>
-                    <td style="word-break: break-all"><a href="https://brickschema.org/schema/1.1/Brick#{{ pt.brick_point.brick_class }}">{{pt.brick_point.brick_class }}</a></td>
-                <tr>
-                    {% endfor %}
+                </tr>
+                  {% endfor %}
                 </tbody>
             </table>
         </div>
