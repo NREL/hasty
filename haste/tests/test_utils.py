@@ -65,4 +65,3 @@ def test_generate_point_protos_markers_only():
 @pytest.mark.django_db
 def test_generate_point_type_map():
     generate_point_type_map('1.1', '3.9.9', '0.1.7b5')
-    assert False
