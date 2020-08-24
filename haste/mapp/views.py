@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import CreateView
 
 from .models import HaystackPointType, BrickPointType, PointTypeMap
-from .filters import BrickPointTypeFilter, HaystackPointTypeFilter
+from .filters import BrickPointTypeFilter, HaystackPointTypeFilter, PointTypeMapFilter
 
 
 # # Create your views here.
@@ -20,6 +20,9 @@ class PointMappingView(CreateView):
             return render(request, self.template_name, args)
         else:
             ptm = PointTypeMap.objects.all()
+            map_filter = PointTypeMapFilter(request.GET)
+            ptm = map_filter.qs
+
             bpt_filter = BrickPointTypeFilter(request.GET)
             bpt = bpt_filter.qs
 
@@ -30,6 +33,7 @@ class PointMappingView(CreateView):
                 'hpt': hpt,
                 'ptm': ptm,
                 'bpt_filter': bpt_filter,
-                'hpt_filter': hpt_filter
+                'hpt_filter': hpt_filter,
+                'map_filter': map_filter
             }
             return render(request, self.template_name, args)

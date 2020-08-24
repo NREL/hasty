@@ -1,0 +1,30 @@
+{% load static %}
+{% load mapp_extras %}
+
+<div class="table container">
+  <div class="row">
+    <div class="container col-sm-5">
+      <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+          <th scope="col">Haystack Point Type
+          </th>
+          <th scope="col">Brick Point Class</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for pt in ptm %}
+          <tr>
+            <td><a href="https://project-haystack.dev/doc/proto/{{ pt.haystack_point.haystack_tagset }}">
+              {{ pt.haystack_point }}</a>
+            </td>
+            <td><a
+                href="https://brickschema.org/schema/1.1/Brick#{{ pt.brick_point.brick_class }}">{{ pt.brick_point.brick_class }}</a>
+            </td>
+          <tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

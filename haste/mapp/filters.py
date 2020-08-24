@@ -1,6 +1,6 @@
 import django_filters
 
-from .models import BrickPointType, HaystackPointType
+from .models import BrickPointType, HaystackPointType, PointTypeMap
 
 
 class BrickPointTypeFilter(django_filters.FilterSet):
@@ -8,7 +8,7 @@ class BrickPointTypeFilter(django_filters.FilterSet):
 
     class Meta:
         model = BrickPointType
-        fields = ('brick_class', )
+        fields = ('brick_class', 'version',)
 
 
 class HaystackPointTypeFilter(django_filters.FilterSet):
@@ -16,4 +16,10 @@ class HaystackPointTypeFilter(django_filters.FilterSet):
 
     class Meta:
         model = HaystackPointType
-        fields = ('haystack_tagset', )
+        fields = ('haystack_tagset', 'version',)
+
+
+class PointTypeMapFilter(django_filters.FilterSet):
+    class Meta:
+        model = PointTypeMap
+        fields = '__all__'
