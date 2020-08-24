@@ -134,22 +134,42 @@ class SiteDetailTest(TestCase):
 
 class AirHandlerTest(TestCase):
 
-    def test_ahu_terminal_with_id(self):
-
-        temp_site = models.Site.objects.create(
+    def setUp(self):
+        self.temp_site = models.Site.objects.create(
             name="Test Site with ID from site.ahu view",
             city="Golden",
             state="CO",
             zip=80401
         )
-        temp_ahu = models.AirHandler.objects.create(
+        self.temp_ahu = models.AirHandler.objects.create(
             name="Test AHU with ID from site.ahu view",
-            site_id=temp_site,
+            site_id=self.temp_site,
             tagset="tags",
             brick_class="brick"
         )
-        response = self.client.get('/site/{}/ahu/{}'.format(temp_site.id, temp_ahu.id))
+        # confirm adding terminal units properly
+        self.temp_terminal = models.TerminalUnit.objects.create(
+            name="Test Terminal Unit with ID from site.ahu view",
+            object_id=self.temp_ahu.id,
+            tagset="tags",
+            brick_class="brick"
+        )
+
+    def test_ahu_terminal_with_id(self):
+        response = self.client.get('/site/{}/ahu/{}'.format(self.temp_site.id, self.temp_ahu.id))
         added_site = response.context['site']
         added_ahu = response.context['ahu']
         self.assertEqual([added_site.name], ["Test Site with ID from site.ahu view"])
         self.assertEqual([added_ahu.name], ["Test AHU with ID from site.ahu view"])
+
+    def test_rename_terminal_unit(self):
+        data = {
+            "{}".format(self.temp_terminal.id): "New Name",
+            'terminal_unit': 1,
+            'update_terminal_unit': ""
+        }
+        response = self.client.post('/site/{}/ahu/{}'.format(self.temp_site.id, self.temp_ahu.id), data)
+        self.assertEqual(response.status_code, 302)
+
+        response = self.client.get('/site/{}/ahu/{}'.format(self.temp_site.id, self.temp_ahu.id))
+        self.assertTrue('terminal_units' in response.context)

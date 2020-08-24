@@ -145,7 +145,6 @@ class AirHandler(CreateView):
             new_name = data.get(key, False)
             tu.name = new_name
             tu.lookup_id = data.get('terminal_unit')
-            print(tu.lookup_id)
             tu.save()
 
             return redirect('site.ahu', site_id=site_id, ahu_id=ahu_id)
