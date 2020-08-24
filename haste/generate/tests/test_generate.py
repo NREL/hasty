@@ -1,6 +1,6 @@
 # Create your tests here.
 from django.test import TestCase
-from . import models
+from generate import models
 from os import path
 
 

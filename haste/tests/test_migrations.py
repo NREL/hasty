@@ -1,7 +1,8 @@
 from django.test import TestCase
+from django.db.models import Count
 import pytest
 
-from mapp.models import HaystackVersion, BrickVersion, HaystackMarkerTag, BrickTag
+from mapp.models import HaystackVersion, BrickVersion, HaystackMarkerTag, BrickTag, HaystackPointType
 from brickschema.graph import Graph as BrickGraph
 from brickschema.namespaces import BRICK
 from rdflib import RDF
@@ -141,3 +142,68 @@ class TestTags(TestCase):
         all_tags = list(g.g.subjects(RDF.type, BRICK['Tag']))
         bt = BrickTag.objects.filter(version=bvm)
         assert len(all_tags) == len(bt), f"For Brick version {bvm.version}: {len(all_tags)} tags exist in the Brick ttl file.  Only {len(bt)} tags are populated in the database."
+
+
+class TestHaystackPointTypes(TestCase):
+    def test_good_point_types(self):
+        hv = '3.9.9'
+        hv = HaystackVersion.objects.filter(version=hv)
+        assert len(hv) == 1
+        hpt = HaystackPointType.objects.filter(version=hv[0])
+        hpt_annotated = hpt.annotate(c=Count('marker_tags'))
+
+        # damper cmd
+        point_type = get_hpt_given_marker_tags(['damper', 'cmd', 'point'], hv[0], hpt_annotated)
+        assert len(point_type) == 1
+
+        # zone temp sp
+        point_type = get_hpt_given_marker_tags(['zone', 'air', 'temp', 'sensor', 'point'], hv[0], hpt_annotated)
+        assert len(point_type) == 1
+
+        # occupied sensor point
+        point_type = get_hpt_given_marker_tags(['occupied', 'sensor', 'point'], hv[0], hpt_annotated)
+        assert len(point_type) == 1
+
+        # zone co2
+        point_type = get_hpt_given_marker_tags(['zone', 'air', 'co2', 'sensor', 'point'], hv[0], hpt_annotated)
+        assert len(point_type) == 1
+
+        # zone occ heating sp
+        point_type = get_hpt_given_marker_tags(['zone', 'air', 'temp', 'occ', 'heating', 'sp', 'point'], hv[0], hpt_annotated)
+        assert len(point_type) == 1
+
+        # zone occ cooling sp
+        point_type = get_hpt_given_marker_tags(['zone', 'air', 'temp', 'occ', 'cooling', 'sp', 'point'], hv[0], hpt_annotated)
+        assert len(point_type) == 1
+
+        # zone unocc heating sp
+        point_type = get_hpt_given_marker_tags(['zone', 'air', 'temp', 'unocc', 'heating', 'sp', 'point'], hv[0], hpt_annotated)
+        assert len(point_type) == 1
+
+        # zone unocc cooling sp
+        point_type = get_hpt_given_marker_tags(['zone', 'air', 'temp', 'unocc', 'cooling', 'sp', 'point'], hv[0], hpt_annotated)
+        assert len(point_type) == 1
+
+    def test_bad_point_types(self):
+        hv = '3.9.9'
+        hv = HaystackVersion.objects.filter(version=hv)
+        assert len(hv) == 1
+        hpt = HaystackPointType.objects.filter(version=hv[0])
+        hpt_annotated = hpt.annotate(c=Count('marker_tags'))
+
+        point_type = get_hpt_given_marker_tags(['damper', 'cmd', 'point', 'sensor'], hv[0], hpt_annotated)
+        assert len(point_type) == 0
+
+        point_type = get_hpt_given_marker_tags(['discharge', 'air', 'temp', 'sensor', 'point'], hv[0], hpt_annotated)
+        assert len(point_type) == 0
+
+
+def get_hpt_given_marker_tags(marker_tags, hv_object, hpt_annotated):
+    hmt = HaystackMarkerTag.objects.filter(version=hv_object)
+    marker_tag_models = hmt.filter(tag__in=marker_tags)
+    assert len(marker_tag_models) == len(marker_tags)
+
+    temp = hpt_annotated.filter(c=len(marker_tag_models))
+    for tag in marker_tag_models:
+        temp = temp.filter(marker_tags=tag)
+    return temp

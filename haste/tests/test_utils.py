@@ -1,7 +1,7 @@
 import os
 
 import brickschema
-from mapp.resources.utils import generate_ranked_inference_csv, generate_point_protos
+from mapp.resources.migration_utils import generate_ranked_inference_csv, generate_point_protos
 
 
 def test_generate_ranked_inference_csv():
