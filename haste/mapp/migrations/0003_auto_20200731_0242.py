@@ -8,7 +8,7 @@ def generate_haystack_point_types(apps, schema_editor):
     hv = "3.9.9"
     HaystackPointType = apps.get_model('mapp', 'HaystackPointType')
     HaystackMarkerTag = apps.get_model('mapp', 'HaystackMarkerTag')
-    all_protos = generate_point_protos(hv)
+    all_protos = generate_point_protos(hv, True)
     for proto in all_protos:
         hpt = HaystackPointType(haystack_tagset=proto)
         hpt.save()

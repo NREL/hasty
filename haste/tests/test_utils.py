@@ -1,7 +1,8 @@
 import os
+import pytest
 
 import brickschema
-from mapp.resources.migration_utils import generate_ranked_inference_csv, generate_point_protos
+from mapp.resources.migration_utils import generate_ranked_inference_csv, generate_point_protos, generate_point_type_map
 
 
 def test_generate_ranked_inference_csv():
@@ -42,3 +43,25 @@ def test_generate_point_protos():
             count_protos_with_doublequote += 1
     assert count_non_marker_protos == 33  # stage:1 and phase:A points
     assert count_protos_with_doublequote == 0
+
+
+def test_generate_point_protos_markers_only():
+    haystack_version = '3.9.9'
+    protos = generate_point_protos(haystack_version, True)
+    assert isinstance(protos, list)
+    assert len(protos) == 398
+
+    count_non_marker_protos = 0
+    count_protos_with_doublequote = 0
+    for proto in protos:
+        if ':' in proto:
+            count_non_marker_protos += 1
+        if '"' in proto:
+            count_protos_with_doublequote += 1
+    assert count_non_marker_protos == 0  # stage:1 and phase:A points
+    assert count_protos_with_doublequote == 0
+
+
+@pytest.mark.django_db
+def test_generate_point_type_map():
+    generate_point_type_map('1.1', '3.9.9', '0.1.7b5')

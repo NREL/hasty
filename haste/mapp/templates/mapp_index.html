@@ -1,47 +1,64 @@
 {% extends "partials/base.html" %}
 {% block page_content %}
-{% include 'partials/header.html' %}
-{% include 'partials/nav.html' %}
-{% load static %}
-{% load crispy_forms_tags %}
-{% if no_map %}
-<div class="container" style="padding-top: 1em">
-    <div class="card border-top">
-        <h6 class="card-header text-primary">
-            {{no_map}}
-        </h6>
+  {% include 'partials/header.html' %}
+  {% include 'partials/nav.html' %}
+  {% load static %}
+  {% load crispy_forms_tags %}
+  <div class="container" style="padding-top: 1em">
+    <div class="jumbotron" style="padding-top: 3em">
+      <h3 class="text-muted">Welcome to the Haste Mapper</h3>
+      <p>The Mapper allows one to understand how concepts in Brick and Haystack relate to one another.</p>
     </div>
-</div>
-{% else %}
-<form method="get">
+  </div>
+  {% if no_map %}
     <div class="container" style="padding-top: 1em">
-        {% if ptm %}
-        <div class="card">
-            <div class="form-row">
-                <div class="col-md-14">
-                    {{ map_filter.form.brick_version|as_crispy_field }}
-                </div>
-                <div class="col-md-14">
-                    {{ map_filter.form.haystack_version|as_crispy_field }}
-                </div>
-                <div class="col-md-14">
-                    {{ map_filter.form.brick_inference_version|as_crispy_field }}
-                </div>
-            </div>
-        </div>
-        {% endif %}
-        <div class="card border-top">
-            <form method="get">
-
-                <h5 class="card-header text-primary">Points Table
-                    <button class="btn btn-primary" type="submit" style="float: right">Search</button>
-                </h5>
-                <div class="container" style="padding-top: 1em">
-                        {% include 'points.html' %}
-                </div>
-            </form>
-        </div>
+      <div class="card border-top">
+        <h6 class="card-header text-primary">
+          {{ no_map }}
+        </h6>
+      </div>
     </div>
-</form>
-{% endif %}
+  {% else %}
+    <form method="get">
+      <div class="container" style="padding-top: 1em">
+        {% if ptm %}
+          <div class="card border-top">
+            <h5 class="card-header text-primary" type="button" data-toggle="collapse"
+                data-target="#showMaps"
+                aria-expanded="true" aria-controls="showMaps">
+              Point Mapp
+              <button class="btn btn-primary" type="submit" style="float: right">Search</button>
+            </h5>
+            <div class="container collapse show" id="showMaps">
+              <h5>Haystack Version {{ map_filter.form.haystack_version }}</h5>
+              <h5>Brick Version {{ map_filter.form.brick_version }}</h5>
+              <h5>Inference Version {{ map_filter.form.inference_version }}</h5>
+              <div class="container" style="padding-top: 1em">
+                {% include 'point_map.html' %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+      <div class="container">
+
+        <div class="card border-top">
+          <form method="get">
+
+            <h5 class="card-header text-primary" type="button" data-toggle="collapse"
+                data-target="#showPointsTable"
+                aria-expanded="true" aria-controls="showPointsTable">Points Table
+              <button class="btn btn-primary" type="submit" style="float: right">Search</button>
+            </h5>
+            <div class="container collapse show" id="showPointsTable" style="padding-top: 1em">
+              <h5>Haystack Version {{ hpt_filter.form.version }}</h5>
+              <h5>Brick Version {{ bpt_filter.form.version }}</h5>
+              {% include 'points.html' %}
+            </div>
+          </form>
+        </div>
+      </div>
+      </div>
+    </form>
+  {% endif %}
 {% endblock page_content %}
