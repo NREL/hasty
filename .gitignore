@@ -6,6 +6,7 @@ __pycache__
 tmp
 db.sqlite3
 staticfiles
+test.db
 
 # Testing
 .pytest_cache

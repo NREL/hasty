@@ -26,7 +26,7 @@ def generate_point_type_map_migration(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mapp', '0010_auto_20200824_0225'),
+        ('mapp', '0008_auto_20200810_1944'),
     ]
 
     operations = [
