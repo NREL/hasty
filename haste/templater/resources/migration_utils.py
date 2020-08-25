@@ -55,7 +55,7 @@ def add_templates(template_dir, template_type):
                     if template_type == 'equipment':
                         template = create_equipment_template(BrickEquipmentTemplate, d, version, equipment_type)
                     elif template_type == 'fault':
-                        template = create_fault_template(HaystackFaultTemplate, d, version, equipment_type)
+                        template = create_fault_template(BrickFaultTemplate, d, version, equipment_type)
                     add_points('Brick', d, template, BrickPointType.objects.filter(version=version))
                 else:
                     print(f"Invalid type: {d['type']}")
