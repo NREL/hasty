@@ -10,3 +10,11 @@ def concat_protos(proto_list):
 
 # @register.filter
 # def list_all_tags()
+
+
+@register.filter
+def list_item(lst, i):
+    try:
+        return lst[i]
+    except BaseException:
+        return None

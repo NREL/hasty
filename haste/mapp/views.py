@@ -21,6 +21,11 @@ class PointMappingView(CreateView):
         else:
             ptm = PointTypeMap.objects.all()
             map_filter = PointTypeMapFilter(request.GET)
+
+            data = request.GET.copy()
+            data['inference_version'] = '2'
+            map_filter1 = PointTypeMapFilter(data)
+            ptm1 = map_filter1.qs
             ptm = map_filter.qs
 
             bpt_filter = BrickPointTypeFilter(request.GET)
@@ -32,6 +37,7 @@ class PointMappingView(CreateView):
                 'bpt': bpt,
                 'hpt': hpt,
                 'ptm': ptm,
+                'ptm1': ptm1,
                 'bpt_filter': bpt_filter,
                 'hpt_filter': hpt_filter,
                 'map_filter': map_filter
