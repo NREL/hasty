@@ -1,9 +1,12 @@
 {% load static %}
 {% load mapp_extras %}
 
-<div class="table container">
+<div class="table">
+    <button id="haystack" class="btn btn-warning" onclick="toggle_hay()" type="button">Haystack</button>
+    <button id="brick" class="btn btn-outline-info" onclick="toggle_brick()"type="button">Brick</button>
     <div class="row">
-        <div class="container col-sm-5">
+        <div id="hay_table" class="col" >
+            <h5 style="padding-top: 1em; padding-bottom: 1em">Haystack Version {{ hpt_filter.form.version }}</h5>
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -27,21 +30,20 @@
                 </tbody>
             </table>
         </div>
-        <div class="container col-sm-5">
+        <div id="brick_table" style="display: none" class="col">
+            <h5 style="padding-top: 1em; padding-bottom: 1em">Brick Version {{ bpt_filter.form.version }}</h5>
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">Brick Point Types {{ bpt_filter.form.brick_class }}
-                    </th>
-                    <th scope="col">Tags</th>
+                    <th scope="col" style="word-break: break-all">Brick Point Types {{ bpt_filter.form.brick_class }}</th>
+                    <th scope="col" style="word-break: break-all">Tags</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for pt in bpt %}
                     <tr>
-                        <td><a href="https://brickschema.org/schema/1.1/Brick#{{ pt.brick_class }}"> {{ pt.brick_class }}</a>
-                        </td>
-                        <td>
+                        <td style="word-break: break-all"><a href="https://brickschema.org/schema/1.1/Brick#{{ pt.brick_class }}"> {{ pt.brick_class }}</a></td>
+                        <td style="word-break: break-all">
                             {% for t in pt.tags.all %}
                                 <a>{{ t.tag }}</a>,
                             {% endfor %}
@@ -53,3 +55,4 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" src="{% static 'generate/js/toggle.js' %}"></script>
