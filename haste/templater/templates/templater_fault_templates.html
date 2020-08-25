@@ -1,43 +1,79 @@
 {% load static %}
+{% load templater_extras %}
 <div class="table-responsive">
-  <table class="table table-bordered table-hover">
-    <thead>
-    <tr>
-      <th scope="col">Fault Name</th>
-      <th scope="col">Template Type</th>
-      <th scope="col">Runs on Equipment Type</th>
-      <th scope="col">Points</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for template in haystack_fault_templates %}
-      <tr>
-        <td>{{ template.name }}</td>
-        <td>Haystack</td>
-        <td>{{ template.equipment_type }}</td>
-        <td>
-          {% for point in template.points.all %}
-            {% if point != None %}
-              <p>{{ point.haystack_tagset }}</p>
-            {% endif %}
-          {% endfor %}
-        </td>
-      </tr>
-    {% endfor %}
-    {% for template in brick_fault_templates %}
-      <tr>
-        <td>{{ template.name }}</td>
-        <td>Brick</td>
-        <td>{{ template.equipment_type }}</td>
-        <td>
-          {% for point in template.points.all %}
-            {% if point != None %}
-              <p>{{ point.haystack_tagset }}</p>
-            {% endif %}
-          {% endfor %}
-        </td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Fault Name</th>
+            <th scope="col">Template Type</th>
+            <th scope="col">Apply To</th>
+            <th scope="col">Logic</th>
+            <th scope="col">Points</th>
+            <th scope="col">Applicable to Equip Template</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for template in haystack_fault_templates %}
+            <tr>
+                <td>{{ template.name }}</td>
+                <td>Haystack ({{ template.version }})</td>
+                <td>{{ template.equipment_type }}</td>
+                <td>{{ template.logic }}</td>
+                <td>
+                    {% for point in template.points.all %}
+                        {% if point != None %}
+                            <p>{{ point.haystack_tagset }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% with equipment_templates=template|get_item:map %}
+                        {% for equipment in equipment_templates %}
+                            <p>{{ equipment.name }}</p>
+                        {% endfor %}
+                    {% endwith %}
+                </td>
+                <td>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" id="id" name="id" value={{ template.id }}>
+                        <button type="submit" class="btn btn-outline-danger" name="delete_haystack_fault">Remove
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        {% for template in brick_fault_templates %}
+            <tr>
+                <td>{{ template.name }}</td>
+                <td>Brick ({{ template.version }})</td>
+                <td>{{ template.equipment_type }}</td>
+                <td>{{ template.logic }}</td>
+                <td>
+                    {% for point in template.points.all %}
+                        {% if point != None %}
+                            <p>{{ point.brick_class }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% with equipment_templates=template|get_item:map %}
+                        {% for equipment in equipment_templates %}
+                            <p>{{ equipment.name }}</p>
+                        {% endfor %}
+                    {% endwith %}
+                </td>
+                <td>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" id="id" name="id" value={{ template.id }}>
+                        <button type="submit" class="btn btn-outline-danger" name="delete_brick_fault">Remove
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
