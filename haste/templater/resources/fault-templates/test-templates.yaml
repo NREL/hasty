@@ -9,3 +9,13 @@
     points:
       - damper-cmd-point
       - zone-air-temp-sensor-point
+- template:
+    type: Brick
+    version: 1.1
+    name: Test Fault Template Brick
+    description: Testius faultius templatius
+    logic: If the damper-cmd-point == True and zone-air-temp-sensor-point < 50; you're super hosed.
+    equipment_type: Variable_Air_Volume_Box
+    points:
+      - Damper_Command
+      - Zone_Air_Temperature_Sensor
