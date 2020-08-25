@@ -1,0 +1,38 @@
+{% extends "partials/base.html" %}
+{% block page_content %}
+  {% include 'partials/header.html' %}
+  {% include 'partials/nav.html' %}
+  {% load static %}
+  {% load crispy_forms_tags %}
+  <div class="container">
+    <h5>{{ mt }} Fault Template</h5>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.name|as_crispy_field }}
+      {{ form.version|as_crispy_field }}
+      {{ form.equipment_type|as_crispy_field }}
+      {{ form.description|as_crispy_field }}
+      {{ form.logic|as_crispy_field }}
+      <table>
+        <thead>
+        <th scope="col">Select Points</th>
+        </thead>
+        <tbody>
+
+        {% for point in form.points %}
+          <tr>
+            <td>{{ point }}</td>
+          </tr>
+
+        {% endfor %}
+
+        </tbody>
+      </table>
+      {#      {{ form.points|as_crispy_field }}#}
+      <button type="submit" class="btn btn-primary">Create Template</button>
+    </form>
+    <br>
+
+  </div>
+
+{% endblock page_content %}

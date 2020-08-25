@@ -48,6 +48,9 @@ class BrickPointType(models.Model):
     brick_class = models.CharField(max_length=150, null=False, blank=False)
     version = models.ForeignKey(BrickVersion, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.brick_class
+
 
 class HaystackPointType(models.Model):
     marker_tags = models.ManyToManyField(HaystackMarkerTag)
@@ -73,3 +76,12 @@ class HaystackEquipmentType(models.Model):
 
     def __str__(self):
         return self.haystack_tagset
+
+
+class BrickEquipmentType(models.Model):
+    tags = models.ManyToManyField(BrickTag)
+    brick_class = models.CharField(max_length=150, null=False, blank=False)
+    version = models.ForeignKey(BrickVersion, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.brick_class

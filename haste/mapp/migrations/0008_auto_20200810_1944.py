@@ -56,7 +56,7 @@ def generate_haystack_equipment_types(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mapp', '0007_haystackequipmenttype'),
+        ('mapp', '0005_auto_20200731_0409'),
     ]
 
     operations = [

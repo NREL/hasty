@@ -4,9 +4,9 @@ import csv
 
 from bs4 import BeautifulSoup
 import brickschema
-from brickschema.inference import HaystackInferenceSession
+from brickschema.inference import HaystackInferenceSession, BrickInferenceSession
 
-from mapp.models import BrickVersion, HaystackVersion, InferenceVersion, BrickPointType, HaystackPointType, PointTypeMap
+from mapp.models import BrickTag, BrickVersion, HaystackVersion, InferenceVersion, BrickPointType, HaystackPointType, PointTypeMap, BrickEquipmentType
 
 
 # def create_initial_mapper(apps, schema_editor, brick_version='V1.1', haystack_version='V3.9.9'):
@@ -165,3 +165,53 @@ def add_map_to_db(map, brick_version, haystack_version, inference_version):
             ptm.save()
         else:
             print(f"PointTypeMap for: {row[0]}, {row[1]} was not created.")
+
+
+def generate_brick_point_classes(bv):
+    bvm = brick_version_filter(bv)
+    bis = BrickInferenceSession(load_brick=True)
+    lup = bis._tag_sess.lookup
+    point_query = "SELECT ?p WHERE { ?p rdfs:subClassOf* brick:Point}"
+    brick_points = bis.g.query(point_query)
+    for p in brick_points:
+        pt = p[0].split("#")[1]
+        brick_point = BrickPointType(brick_class=pt, version=bvm)
+        brick_point.save()
+        for k, v in lup.items():
+            if len(v) > 0:
+                if pt == list(v)[0]:
+                    tags = list(k)
+                    for t in tags:
+                        bt = BrickTag.objects.filter(tag=t, version=bvm)
+                        if len(bt) == 1:
+                            brick_point.tags.add(bt[0])
+                        else:
+                            print(f"Brick tag: {t} was not found.")
+
+
+def generate_brick_equipment_classes(bv):
+    bvm = brick_version_filter(bv)
+    bis = BrickInferenceSession(load_brick=True)
+    lup = bis._tag_sess.lookup
+    equip_query = "SELECT ?p WHERE { ?p rdfs:subClassOf* brick:Equipment}"
+    brick_entities = bis.g.query(equip_query)
+    for e in brick_entities:
+        entity = e[0].split("#")[1]
+        brick_equip = BrickEquipmentType(brick_class=entity, version=bvm)
+        brick_equip.save()
+        for k, v in lup.items():
+            if len(v) > 0:
+                if e == list(v)[0]:
+                    tags = list(k)
+                    for t in tags:
+                        bt = BrickTag.objects.filter(tag=t, version=bvm)
+                        if len(bt) == 1:
+                            brick_equip.tags.add(bt[0])
+                        else:
+                            print(f"Brick tag: {t} was not found.")
+
+
+def brick_version_filter(bv):
+    bvm = BrickVersion.objects.filter(version=bv)
+    assert len(bvm) == 1
+    return bvm[0]

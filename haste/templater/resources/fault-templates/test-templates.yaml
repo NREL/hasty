@@ -1,0 +1,11 @@
+---
+- template:
+    type: Haystack
+    version: 3.9.9
+    name: Test Fault Template
+    description: Testius faultius templatius
+    logic: If the damper-cmd-point == True and zone-air-temp-sensor-point < 50; you're super hosed.
+    equipment_type: vav
+    points:
+      - damper-cmd-point
+      - zone-air-temp-sensor-point
