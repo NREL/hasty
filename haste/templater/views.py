@@ -27,7 +27,7 @@ class Index(CreateView):
         return render(request, self.template_name, args)
 
     def post(self, request):
-        handle_index_post(request)
+        return handle_index_post(request)
 
 
 class HaystackCreateEquipmentTemplateView(CreateView):
