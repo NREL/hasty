@@ -1,4 +1,4 @@
-﻿id,Category,Description,damperComponentID,heatingComponentID,coolingComponentID,Include Tagset from ID,Add Tagset,Final Tagset,Haste Choice,Brick Concept
+﻿id,Category,Description,damperComponentID,heatingComponentID,coolingComponentID,Include Tagset from ID,Add Tagset,Final Tagset,Hasty Choice,Brick Concept
 1,VAV,VAV cooling only,17,,,,vav equip,vav equip,TRUE,VAV
 2,VAV,VAV w/modulating hot-water reheat,17,57,,1,reheat,reheat vav equip,TRUE,RVAV
 3,VAV,VAV w/on-off elec reheat,17,60,,1,reheat,reheat vav equip,TRUE,RVAV

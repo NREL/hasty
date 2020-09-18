@@ -1,4 +1,4 @@
-﻿id,Category,Description,Usage Details,Include Tagset from ID,Add Tagset,Final Tagset,Haste Choice,comments,Brick Concept
+﻿id,Category,Description,Usage Details,Include Tagset from ID,Add Tagset,Final Tagset,Hasty Choice,comments,Brick Concept
 1,Damper,Outside air damper,Refers to a single outside air damper which is used for  economizing and ventilation purposes.,17,outside,outside damper actuator equip,,single outside air damper used for  economizing and ventilation.,Outside_Damper
 2,Damper,Economizing damper,Denotes a damper in an outside duct that is used to reduce conditioning requirements,1,economizer,economizer outside damper actuator equip,,single outside air damper used for  economizing only.,Economizer_Damper
 3,Damper,Outside air damper,"Denotes a damper in an outside duct used for ventilation purposes, not economizing.",1,ventilation,ventilation outside damper actuator equip,,single outside air damper used for ventilation only.,Damper

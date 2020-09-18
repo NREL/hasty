@@ -1,4 +1,4 @@
-# Haste [![Travis-CI Build Status](https://travis-ci.org/nrel/haste.svg?branch=develop)](https://travis-ci.org/github/nrel/haste) [![codecov](https://codecov.io/gh/NREL/haste/branch/develop/graph/badge.svg)](https://codecov.io/gh/NREL/haste)
+# Hasty [![Travis-CI Build Status](https://travis-ci.org/nrel/hasty.svg?branch=develop)](https://travis-ci.org/github/nrel/hasty) [![codecov](https://codecov.io/gh/NREL/hasty/branch/develop/graph/badge.svg)](https://codecov.io/gh/NREL/hasty)
 web app to create semantic metadata models, namely, Haystack and Brick
 
 # Setup
@@ -9,19 +9,19 @@ We recommend using the following:
 
 1. Install `pyenv` and `pyenv-virtualenv` for your system
 1. Install a python version through pyenv: `$ pyenv install 3.6.5`
-1. Create a new `haste` specific environment: `$ pyenv virtualenv 3.6.5 haste`
-1. Activate the environment in the root of the `path/to/Haste`: `$ pyenv local haste`
+1. Create a new `hasty` specific environment: `$ pyenv virtualenv 3.6.5 hasty`
+1. Activate the environment in the root of the `path/to/Hasty`: `$ pyenv local hasty`
 1. Check it is set correctly:
     ```
     $ pyenv version
-    haste (set by /Users/user/path/to/haste/.python-version)
+    hasty (set by /Users/user/path/to/hasty/.python-version)
     ```
 1. Install dependencies: `$ pip install -r requirements.txt`
 1. Activate pre-commit: `$ pre-commit install`
 1. Check that pre-commit is installed: `$ pre-commit --version`
 1. Check that tests are able to run: `$ tox`
 
-# Running Haste
+# Running Hasty
 After [setup](#setup) is complete, the web app can be run.  We have committed migrations in order to populate the following:
 - Versions: Only Haystack 3.9.9 and Brick 1.1 are supported at this time
 - Haystack marker tags: `q = "SELECT ?m WHERE { ?m rdfs:subClassOf* ph:marker}"`

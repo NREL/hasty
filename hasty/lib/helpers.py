@@ -14,14 +14,14 @@ from generate import models
 class Shadowfax:
     """
     The Lord of All Horses, and Gandalf's friend through many dangers.
-    He knows how to show the meaning of Haste.
+    He knows how to show the meaning of Hasty.
     """
 
     def __init__(self):
         p = os.path.dirname(os.path.abspath(__file__))
         f_path = os.path.join(p, 'Components.csv')
         self.df_components = pd.read_csv(f_path)
-        self.df_components = self.df_components[self.df_components['Haste Choice'] == True]  # noqa
+        self.df_components = self.df_components[self.df_components['Hasty Choice'] == True]  # noqa
         self.df_components['id'] = self.df_components['id'].astype(str)
         self.df_cc = self.df_components[self.df_components['Category'] == 'Cooling coil']
         self.df_hc = self.df_components[self.df_components['Category'] == 'Heating coil']
@@ -33,7 +33,7 @@ class Shadowfax:
         # Read in and generate terminal units
         f_path_tu = os.path.join(p, 'TerminalUnits.csv')
         self.df_terminal_units = pd.read_csv(f_path_tu)
-        self.df_terminal_units = self.df_terminal_units[self.df_terminal_units['Haste Choice'] == True]  # noqa
+        self.df_terminal_units = self.df_terminal_units[self.df_terminal_units['Hasty Choice'] == True]  # noqa
         cast_to_str = ['id', 'damperComponentID', 'heatingComponentID', 'coolingComponentID']
         self.df_terminal_units[cast_to_str] = self.df_terminal_units[cast_to_str].astype(str).applymap(
             lambda x: x.split('.')[0])
@@ -326,7 +326,7 @@ class BrickBuilder:
 class ComponentNotFoundError(Exception):
     def __init__(self, component_id):
         self.component_id = component_id
-        self.message = f"Component with ID = {self.component_id} not found in df_components as imported from Components.csv.  Make sure 'Haste Choice' == True is specified."
+        self.message = f"Component with ID = {self.component_id} not found in df_components as imported from Components.csv.  Make sure 'Hasty Choice' == True is specified."
 
     def __str__(self):
         return self.message
