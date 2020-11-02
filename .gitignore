@@ -34,3 +34,4 @@ hasty/templater/migrations/*
 !hasty/templater/migrations/0002_auto_20200825_0228.py
 
 !hasty/generate/migrations/__init__.py
+!hasty/generate/migrations/0001_initial.py
