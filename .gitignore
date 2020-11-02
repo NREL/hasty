@@ -25,7 +25,7 @@ lib-phScience
 proto
 
 # Other
-hasty/generate/migrations
+hasty/generate/migrations/*
 hasty/templater/migrations/*
 
 # Enable some templater migrations
