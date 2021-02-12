@@ -30,9 +30,11 @@ After [setup](#setup) is complete, the web app can be run.  We have committed mi
 - Brick Point classes: `q = "SELECT ?p WHERE { ?p rdfs:subClassOf* brick:Point}"`
 - Haystack Equipment types: `q = "SELECT ?m WHERE { ?m rdfs:subClassOf* phIoT:equip }"`
 
-Before starting the server, make sure to do the following:
-- `python manage.py makemigrations`
-- `python manage.py migrate`
+## Start the Postgres DB for local development
+Create a directory to locally attach a volume for development.  
+```yaml
+docker run -d --name=hasty-db -p 5432:5432 -e POSTGRES_DB=hasty-db -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password --restart=unless-stopped -v </Path/to/volume>:/var/lib/postgresql/data postgres
+```
 
 Now the server can be run:
 - `python manage.py runserver`
