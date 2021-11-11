@@ -8,8 +8,10 @@ django-filter==2.3.0
 djangorestframework==3.11.0
 importlib-metadata==1.6.0
 numpy==1.18.4
+packaging==20.4
 pandas==1.0.3
 pre-commit==2.6.0
+pyparsing==2.4.7
 pytest==5.3.5
 pytest-cov==2.8.1
 pytest-django==3.9.0

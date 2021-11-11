@@ -8,8 +8,8 @@ We recommend using the following:
 - [pre-commit](https://pre-commit.com/#install) for managing code styling
 
 1. Install `pyenv` and `pyenv-virtualenv` for your system
-1. Install a python version through pyenv: `$ pyenv install 3.6.5`
-1. Create a new `hasty` specific environment: `$ pyenv virtualenv 3.6.5 hasty`
+1. Install a python version through pyenv: `$ pyenv install 3.8.1`
+1. Create a new `hasty` specific environment: `$ pyenv virtualenv 3.8.1 hasty`
 1. Activate the environment in the root of the `path/to/Hasty`: `$ pyenv local hasty`
 1. Check it is set correctly:
     ```
@@ -32,10 +32,14 @@ After [setup](#setup) is complete, the web app can be run.  We have committed mi
 
 Before starting the server, make sure to do the following:
 - `python manage.py makemigrations`
-- `python manage.py migrate`
+- `python manage.py migrate --run-syncdb`
 
 Now the server can be run:
 - `python manage.py runserver`
+
+# Running from Docker
+- `docker build -t hasty .`
+- `docker run -dp 8000:8000 hasty`
 
 ## TODO:
 - Create migrations for mappings between Brick Classes <-> Haystack Point Tagsets
