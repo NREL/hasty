@@ -36,11 +36,11 @@ Before starting the server, make sure to do the following:
 
 Now the server can be run:
 - `python manage.py runserver`
-
+<!--
 # Running from Docker
 - `docker build -t hasty .`
 - `docker run -dp 8000:8000 hasty`
-
+-->
 ## TODO:
 - Create migrations for mappings between Brick Classes <-> Haystack Point Tagsets
 - Create migrations for equipment templates
