@@ -1,20 +1,30 @@
-.pyc
-__pycache__
-.idea
-.DS_Store
-.python-version
-tmp
-db.sqlite3
-staticfiles
-test.db
+# https://github.com/github/gitignore/blob/master/Python.gitignore
 
-# Testing
-.pytest_cache
-outputs
-.tox
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# pyenv
+#   For a library or package, you might want to ignore these files since the code is
+#   intended to run in multiple environments; otherwise, check them in:
+.python-version
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Unit test / coverage reports
+.tox/
 .coverage
-.eggs
-hasty.egg-info
+.pytest_cache/
+
+# Environments
+.venv
+
+# Repo-Specific
+
+outputs
 
 # Haystack
 docHaystack
