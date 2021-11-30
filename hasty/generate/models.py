@@ -140,8 +140,8 @@ class Site(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=50)
-    city = models.CharField(max_length=50)
-    state = models.CharField(max_length=2, choices=STATES)
+    city = models.CharField(max_length=50, default=None, null=True)
+    state = models.CharField(max_length=2, choices=STATES, default=None, null=True)
     zip = models.IntegerField()
 
 
