@@ -49,7 +49,7 @@ def find_tagset(entities, tags):
 
 def save_site(site):
     site = site[0]
-    site_id = str(site.get('id')[2:])  # remove "r:" from UUID
+    site_id = str(site.get('id'))  # [2:])  # remove "r:" from UUID
     site_name = site.get('dis')
     geo_city = site.get('geoCity')
     geo_state = site.get('geoState')
