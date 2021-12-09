@@ -1,6 +1,30 @@
 # Hasty [![Travis-CI Build Status](https://travis-ci.org/nrel/hasty.svg?branch=develop)](https://travis-ci.org/github/nrel/hasty) [![codecov](https://codecov.io/gh/NREL/hasty/branch/develop/graph/badge.svg)](https://codecov.io/gh/NREL/hasty)
 web app to create semantic metadata models, namely, Haystack and Brick
 
+# Using with Docker
+## Setup
+The following dependencies are requires:
+- [Docker](https://docs.docker.com/get-docker/)
+
+Project Setup:
+1. Navigate to project root
+1. Set postgres name, username, and password in `.env`
+1. Build Docker images `docker compose build`
+1. Create and run containers `docker compose up` for first time startup
+
+## Run Server
+- Start `docker compse start`
+- Stop `docker compose stop`
+## Reset Procedure
+If the environment gets messed up this is what you need to start from scratch again.
+1. Stop and remove containers and volumes `docker compose down -v`
+## Containers
+### hasty-web
+Django server container responsible for serving webpages and managing app. This container reads code from the working directory of the repo and will auto update on changes.
+### hasty-db
+Postgres database container. Data is stored in `hasty_pg_data` volume.
+
+
 # Setup
 We recommend using the following:
 - [pyenv](https://github.com/pyenv/pyenv#installation) for managing python versions
