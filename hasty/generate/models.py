@@ -14,7 +14,7 @@ class Point(models.Model):
     ch = [(h.get('id'), h.get('Final Typing Tagset')) for h in choices]
 
     id = models.UUIDField(primary_key=True, default=uuid4)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=150)
     lookup_id = models.CharField(max_length=100, choices=ch)
     tagset = models.CharField(max_length=200, default=None, null=True)
     brick_class = models.CharField(max_length=100, default=None, null=True)
@@ -27,7 +27,7 @@ class Point(models.Model):
 
 class Component(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=150)
     short_description = models.CharField(max_length=50, null=True)
     tagset = models.CharField(max_length=200, default=None, null=True)
     brick_class = models.CharField(max_length=100, default=None, null=True)
@@ -139,7 +139,7 @@ class Site(models.Model):
     )
 
     id = models.UUIDField(primary_key=True, default=uuid4)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=150)
     city = models.CharField(max_length=50, default=None, null=True)
     state = models.CharField(max_length=2, choices=STATES, default=None, null=True)
     zip = models.IntegerField()
@@ -147,7 +147,7 @@ class Site(models.Model):
 
 class ThermalZone(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=150)
     tagset = models.CharField(max_length=200, default=None, null=True)
     brick_class = models.CharField(max_length=100, default=None, null=True)
 
@@ -168,7 +168,7 @@ class TerminalUnit(models.Model):
     # Add in options for choice to be blank
     tu_choices.append(('None', 'None'))
 
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=150)
     lookup_id = models.CharField(max_length=50, choices=tuple(tu_choices))
 
     tagset = models.CharField(max_length=200, default=None, null=True)
@@ -213,7 +213,7 @@ class AirHandler(models.Model):
     )
 
     id = models.UUIDField(primary_key=True, default=uuid4)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=150)
     site_id = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='air_handlers')
     tagset = models.CharField(max_length=200, default=None, null=True)
     brick_class = models.CharField(max_length=100, default=None, null=True)

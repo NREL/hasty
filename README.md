@@ -15,6 +15,7 @@ Project Setup:
 ## Run Server
 - Start `docker compse start`
 - Stop `docker compose stop`
+- Tests `docker compose run web pytest`
 ## Reset Procedure
 If the environment gets messed up this is what you need to start from scratch again.
 1. Stop and remove containers and volumes `docker compose down -v`

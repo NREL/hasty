@@ -1,5 +1,6 @@
 from uuid import uuid4
 from generate import models
+import re
 
 
 def handle_haystack(data):
@@ -49,10 +50,11 @@ def find_tagset(entities, tags):
 
 def save_site(site):
     site = site[0]
-    site_id = str(site.get('id'))  # [2:])  # remove "r:" from UUID
+    strip_prefix = re.compile("([a-z]\\:)?(.*)")
+    site_id = strip_prefix.match(str(site.get('id')))[2]  # remove leading r:
     site_name = site.get('dis')
     geo_city = site.get('geoCity')
-    geo_state = site.get('geoState')
+    geo_state = strip_prefix.match(site.get('geoState'))[2]  # remove leading *:
 
     try:
         models.Site.objects.get(id=site_id)
