@@ -29,7 +29,7 @@ Django server container responsible for serving webpages and managing app. This 
 ### hasty-db
 Postgres database container. Data is stored in `hasty_pg_data` volume.
 
-## Without Docker
+<!-- ## Without Docker
 We recommend using the following:
 - [pyenv](https://github.com/pyenv/pyenv#installation) for managing python versions
 - [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv#installation) for managing packages and versions
@@ -47,7 +47,7 @@ We recommend using the following:
 1. Install dependencies: `$ pip install -r requirements.txt`
 1. Activate pre-commit: `$ pre-commit install`
 1. Check that pre-commit is installed: `$ pre-commit --version`
-1. Check that tests are able to run: `$ tox`
+1. Check that tests are able to run: `$ tox` -->
 
 # Running
 After installation is complete, the web app can be run.  We have committed migrations in order to populate the following:
