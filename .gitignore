@@ -3,6 +3,10 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 
+# Distribution / packaging
+.eggs/*
+*.egg-info
+
 # pyenv
 #   For a library or package, you might want to ignore these files since the code is
 #   intended to run in multiple environments; otherwise, check them in:
@@ -42,3 +46,4 @@ hasty/templater/migrations/*
 !hasty/templater/migrations/__init__.py
 !hasty/templater/migrations/0001_initial.py
 !hasty/templater/migrations/0002_auto_20200825_0228.py
+
