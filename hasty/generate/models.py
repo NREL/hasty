@@ -169,7 +169,7 @@ class TerminalUnit(models.Model):
     tu_choices.append(('None', 'None'))
 
     name = models.CharField(max_length=150)
-    lookup_id = models.CharField(max_length=50, choices=tuple(tu_choices))
+    lookup_id = models.CharField(max_length=100, choices=tuple(tu_choices))
 
     tagset = models.CharField(max_length=200, default=None, null=True)
     brick_class = models.CharField(max_length=100, default=None, null=True)

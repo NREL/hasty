@@ -50,7 +50,7 @@ class Shadowfax:
 
         f_path_p = os.path.join(p, 'Points.csv')
         self.df_points = pd.read_csv(f_path_p)
-        cast_to_str = ['id', 'Include Tagset from ID']
+        cast_to_str = ['id', 'Include Tagset from ID', 'Final Typing Tagset']
         self.df_points[cast_to_str] = self.df_points[cast_to_str].astype(str).applymap(
             lambda x: x.split('.')[0])
         self.df_points[cast_to_str] = self.df_points[cast_to_str].applymap(

@@ -54,7 +54,7 @@ def save_site(site):
     site_id = strip_prefix.match(str(site.get('id')))[2]  # remove leading r:
     site_name = site.get('dis')
     geo_city = site.get('geoCity')
-    geo_state = strip_prefix.match(site.get('geoState'))[2]  # remove leading *:
+    geo_state = strip_prefix.match(site.get('geoState'))[2] if site.get('geoState') else None  # remove leading *:
 
     try:
         models.Site.objects.get(id=site_id)
