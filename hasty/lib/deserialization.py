@@ -79,7 +79,7 @@ def save_ahus(ahus, site_id, vavs):
         imported_ahu.save()
 
         for vav in vavs:
-            if ahu.get('id') == vav.get('equipRef'):
+            if ahu.get('id') == vav.get('airRef'):
                 name = vav.get('dis')
                 name = name.replace(" ", "_")
                 imported_vav = models.TerminalUnit(
