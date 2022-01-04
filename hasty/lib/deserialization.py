@@ -7,10 +7,11 @@ def handle_haystack(data):
     data = data['rows']
     site = find_sites(data)
     ahus = find_ahus(data)
+    cavs = find_cavs(data)
     vavs = find_vavs(data)
 
     site_id = save_site(site)
-    save_ahus(ahus, site_id, vavs)
+    save_ahus(ahus, site_id, cavs, vavs)
     return site_id
 
 
@@ -35,6 +36,10 @@ def find_equips(entities):
 def find_ahus(entities):
     ahus = find_tagset(entities, tags=['ahu'])
     return ahus
+
+def find_cavs(entities):
+    cavs = find_tagset(entities, tags=['cav'])
+    return cavs
 
 
 def find_vavs(entities):
@@ -65,7 +70,7 @@ def save_site(site):
         return id
 
 
-def save_ahus(ahus, site_id, vavs):
+def save_ahus(ahus, site_id, cavs, vavs):
 
     site = models.Site.objects.get(id=site_id)
     for ahu in ahus:
@@ -78,19 +83,21 @@ def save_ahus(ahus, site_id, vavs):
                                                         site_id=site, tagset=None, brick_class=None)
         imported_ahu.save()
 
-        for vav in vavs:
-            if ahu.get('id') == vav.get('equipRef'):
-                name = vav.get('dis')
+        terminal_units = cavs + vavs
+
+        for terminal_unit in terminal_units:
+            if ahu.get('id') == terminal_unit.get('airRef'):
+                name = terminal_unit.get('dis')
                 name = name.replace(" ", "_")
-                imported_vav = models.TerminalUnit(
+                imported_terminal_unit = models.TerminalUnit(
                     name=name,
-                    lookup_id=vav.get('id'),
+                    lookup_id=terminal_unit.get('id'),
                     is_fed_by=imported_ahu
                 )
-                imported_vav.save()
+                imported_terminal_unit.save()
                 new_tz = models.ThermalZone(
                     name="Zone",
                     brick_class="HVAC_Zone",
-                    is_fed_by=imported_vav
+                    is_fed_by=imported_terminal_unit
                 )
                 new_tz.save()
