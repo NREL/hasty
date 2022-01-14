@@ -33,7 +33,11 @@ def generate_haystack_marker_tags(apps, schema_editor):
     HaystackVersion = apps.get_model('mapp', 'HaystackVersion')
     HaystackMarkerTag = apps.get_model('mapp', 'HaystackMarkerTag')
     haystack_version_model = HaystackVersion.objects.get(version=hv)
-    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', f"resources/haystack/{hv}/defs.ttl")
+    p = os.path.join(
+        os.path.dirname(
+            os.path.abspath(__file__)),
+        '..',
+        f"resources/haystack/{hv}/defs.ttl")
 
     g = Graph()
     g.bind("ph", PH)
@@ -50,7 +54,10 @@ def generate_haystack_marker_tags(apps, schema_editor):
     all_tags = [m[0] for m in match]
     for tag in all_tags:
         ns, t = tag.split("#")
-        t = HaystackMarkerTag(tag=t, version=haystack_version_model, namespace=ns)
+        t = HaystackMarkerTag(
+            tag=t,
+            version=haystack_version_model,
+            namespace=ns)
         t.save()
 
 

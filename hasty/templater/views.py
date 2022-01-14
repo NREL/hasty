@@ -12,10 +12,14 @@ class Index(CreateView):
     def get(self, request):
         haystack_equip_templates = tm.HaystackEquipmentTemplate.objects.all()
         haystack_fault_templates = tm.HaystackFaultTemplate.objects.all()
-        map = equipment_fault_template_mapper(haystack_fault_templates, haystack_equip_templates)
+        map = equipment_fault_template_mapper(
+            haystack_fault_templates, haystack_equip_templates)
         brick_equipment_templates = tm.BrickEquipmentTemplate.objects.all()
         brick_fault_templates = tm.BrickFaultTemplate.objects.all()
-        map.update(equipment_fault_template_mapper(brick_fault_templates, brick_equipment_templates))
+        map.update(
+            equipment_fault_template_mapper(
+                brick_fault_templates,
+                brick_equipment_templates))
 
         args = {
             'haystack_equipment_templates': haystack_equip_templates,
@@ -132,7 +136,8 @@ def index_delete(template, request):
 def equipment_fault_template_mapper(fault_templates, equipment_templates):
     mapping = {}
     for ft in fault_templates:
-        ets = equipment_templates.filter(version=ft.version, equipment_type=ft.equipment_type)
+        ets = equipment_templates.filter(
+            version=ft.version, equipment_type=ft.equipment_type)
         matches = []
         for et in ets:
             et_point_set = set(et.points.all())

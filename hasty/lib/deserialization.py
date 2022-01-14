@@ -54,13 +54,16 @@ def save_site(site):
     site_id = strip_prefix.match(str(site.get('id')))[2]  # remove leading r:
     site_name = site.get('dis')
     geo_city = site.get('geoCity')
-    geo_state = strip_prefix.match(site.get('geoState'))[2] if site.get('geoState') else None  # remove leading *:
+    # remove leading *:
+    geo_state = strip_prefix.match(site.get('geoState'))[
+        2] if site.get('geoState') else None
 
     try:
         models.Site.objects.get(id=site_id)
     except BaseException:
         id = uuid4()
-        imported_site = models.Site.objects.create(id=id, name=site_name, city=geo_city, state=geo_state, zip=0)
+        imported_site = models.Site.objects.create(
+            id=id, name=site_name, city=geo_city, state=geo_state, zip=0)
         imported_site.save()
         return id
 
@@ -74,8 +77,8 @@ def save_ahus(ahus, site_id, vavs):
         if ahu_name is None:
             ahu_name = ahu.get('id')
 
-        imported_ahu = models.AirHandler.objects.create(id=ahu_id, name=ahu_name,
-                                                        site_id=site, tagset=None, brick_class=None)
+        imported_ahu = models.AirHandler.objects.create(
+            id=ahu_id, name=ahu_name, site_id=site, tagset=None, brick_class=None)
         imported_ahu.save()
 
         for vav in vavs:

@@ -19,7 +19,10 @@ def test_generate_ranked_inference_csv():
     fp = f"{p}/ranked_mapping_Brick-{brick_version}_Haystack-{haystack_version}_py-brickschema-{brickschema.__version__}.csv"
     if os.path.isfile(fp):
         os.remove(fp)
-    output = generate_ranked_inference_csv(out_file=fp, brick_version=brick_version, haystack_version=haystack_version)
+    output = generate_ranked_inference_csv(
+        out_file=fp,
+        brick_version=brick_version,
+        haystack_version=haystack_version)
     assert os.path.isfile(fp)
     assert isinstance(output, list)
     assert output[0] == ['Brick Version', brick_version]

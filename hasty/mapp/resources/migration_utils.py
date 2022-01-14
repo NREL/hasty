@@ -60,7 +60,8 @@ def generate_point_protos(haystack_version, markers_only=False):
     :param haystack_version: <str> version of Haystack, i.e. 'V3.9.9'
     :return: list, each element in the list is a string with a tagset, as 'tag1-tag2'.
     """
-    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"haystack/{haystack_version}/index-pointProtos.html")
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                     f"haystack/{haystack_version}/index-pointProtos.html")
     with open(p, 'r') as f:
         data = f.read()
     soup = BeautifulSoup(data, features="html.parser")
@@ -74,7 +75,10 @@ def generate_point_protos(haystack_version, markers_only=False):
     return all_protos
 
 
-def generate_ranked_inference_csv(out_file, brick_version='1.1', haystack_version='3.9.9'):
+def generate_ranked_inference_csv(
+        out_file,
+        brick_version='1.1',
+        haystack_version='3.9.9'):
     """
     generate a CSV file for a given brick, haystack, and py-brickschema version.  The CSV file
     contains a Haystack tagset in the first column, followed by a series of ranked Brick inference
@@ -97,7 +101,8 @@ def generate_ranked_inference_csv(out_file, brick_version='1.1', haystack_versio
     for proto in all_protos:
         temp = [proto]
         try:
-            triple, ranked_inferences = hi.infer_entity(proto.split("-"), str(uuid4()))
+            triple, ranked_inferences = hi.infer_entity(
+                proto.split("-"), str(uuid4()))
             temp += [i[2][0] for i in ranked_inferences]
         except IndexError:
             temp += [None]
@@ -127,7 +132,10 @@ def verify_single_versions(brick_version, haystack_version, inference_version):
     return (bv, hv, iv)
 
 
-def generate_point_type_map(brick_version, haystack_version, inference_version):
+def generate_point_type_map(
+        brick_version,
+        haystack_version,
+        inference_version):
     p = os.path.join(os.path.dirname(os.path.abspath(__file__)))
     fp = f"{p}/ranked_mapping_Brick-{brick_version}_Haystack-{haystack_version}_py-brickschema-{inference_version}.csv"
 
@@ -143,23 +151,40 @@ def generate_point_type_map(brick_version, haystack_version, inference_version):
 
 
 def add_map_to_db(map, brick_version, haystack_version, inference_version):
-    bv, hv, iv = verify_single_versions(brick_version, haystack_version, inference_version)
+    bv, hv, iv = verify_single_versions(
+        brick_version, haystack_version, inference_version)
     for row in map:
-        hp = HaystackPointType.objects.filter(haystack_tagset=row[0], version=hv)
+        hp = HaystackPointType.objects.filter(
+            haystack_tagset=row[0], version=hv)
         bp = BrickPointType.objects.filter(brick_class=row[1], version=bv)
         ptm = False
         if len(hp) == 1 and len(bp) == 1:
             hp = hp[0]
             bp = bp[0]
-            ptm = PointTypeMap(inference_version=iv, haystack_version=hv, brick_version=bv, brick_point=bp, haystack_point=hp)
+            ptm = PointTypeMap(
+                inference_version=iv,
+                haystack_version=hv,
+                brick_version=bv,
+                brick_point=bp,
+                haystack_point=hp)
         elif len(hp) == 1 and len(bp) == 0:
             hp = hp[0]
-            ptm = PointTypeMap(inference_version=iv, haystack_version=hv, brick_version=bv, haystack_point=hp)
-            print(f"PointTypeMap for HaystackPointType: {hp.marker_tags}; Inference Version: {iv.version}, Brick Version: {bv.version} did not have a BrickPointType")
+            ptm = PointTypeMap(
+                inference_version=iv,
+                haystack_version=hv,
+                brick_version=bv,
+                haystack_point=hp)
+            print(
+                f"PointTypeMap for HaystackPointType: {hp.marker_tags}; Inference Version: {iv.version}, Brick Version: {bv.version} did not have a BrickPointType")
         elif len(hp) == 0 and len(bp) == 1:
             bp = bp[0]
-            ptm = PointTypeMap(inference_version=iv, haystack_version=hv, brick_version=bv, brick_point=bp)
-            print(f"PointTypeMap for BrickPointType: {bp.brick_class}; Inference Version: {iv.version}, Brick Version: {bv.version} did not have a HaystackPointType")
+            ptm = PointTypeMap(
+                inference_version=iv,
+                haystack_version=hv,
+                brick_version=bv,
+                brick_point=bp)
+            print(
+                f"PointTypeMap for BrickPointType: {bp.brick_class}; Inference Version: {iv.version}, Brick Version: {bv.version} did not have a HaystackPointType")
 
         if ptm:
             ptm.save()

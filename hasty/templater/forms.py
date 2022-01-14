@@ -4,8 +4,11 @@ from mapp.models import HaystackPointType, HaystackEquipmentType, BrickPointType
 
 
 class HaystackEquipmentTemplateForm(forms.ModelForm):
-    equipment_type = forms.ModelChoiceField(queryset=HaystackEquipmentType.objects.order_by('haystack_tagset'))
-    points = forms.ModelMultipleChoiceField(queryset=HaystackPointType.objects.all(), widget=forms.CheckboxSelectMultiple)
+    equipment_type = forms.ModelChoiceField(
+        queryset=HaystackEquipmentType.objects.order_by('haystack_tagset'))
+    points = forms.ModelMultipleChoiceField(
+        queryset=HaystackPointType.objects.all(),
+        widget=forms.CheckboxSelectMultiple)
 
     class Meta:
         model = models.HaystackEquipmentTemplate
@@ -13,8 +16,11 @@ class HaystackEquipmentTemplateForm(forms.ModelForm):
 
 
 class BrickEquipmentTemplateForm(forms.ModelForm):
-    equipment_type = forms.ModelChoiceField(queryset=BrickEquipmentType.objects.order_by('brick_class'))
-    points = forms.ModelMultipleChoiceField(queryset=BrickPointType.objects.all(), widget=forms.CheckboxSelectMultiple)
+    equipment_type = forms.ModelChoiceField(
+        queryset=BrickEquipmentType.objects.order_by('brick_class'))
+    points = forms.ModelMultipleChoiceField(
+        queryset=BrickPointType.objects.all(),
+        widget=forms.CheckboxSelectMultiple)
 
     class Meta:
         model = models.BrickEquipmentTemplate
@@ -22,8 +28,11 @@ class BrickEquipmentTemplateForm(forms.ModelForm):
 
 
 class HaystackFaultTemplateForm(forms.ModelForm):
-    equipment_type = forms.ModelChoiceField(queryset=HaystackEquipmentType.objects.order_by('haystack_tagset'))
-    points = forms.ModelMultipleChoiceField(queryset=HaystackPointType.objects.all(), widget=forms.CheckboxSelectMultiple)
+    equipment_type = forms.ModelChoiceField(
+        queryset=HaystackEquipmentType.objects.order_by('haystack_tagset'))
+    points = forms.ModelMultipleChoiceField(
+        queryset=HaystackPointType.objects.all(),
+        widget=forms.CheckboxSelectMultiple)
 
     class Meta:
         model = models.HaystackFaultTemplate
@@ -31,8 +40,11 @@ class HaystackFaultTemplateForm(forms.ModelForm):
 
 
 class BrickFaultTemplateForm(forms.ModelForm):
-    equipment_type = forms.ModelChoiceField(queryset=BrickEquipmentType.objects.order_by('brick_class'))
-    points = forms.ModelMultipleChoiceField(queryset=BrickPointType.objects.all(), widget=forms.CheckboxSelectMultiple)
+    equipment_type = forms.ModelChoiceField(
+        queryset=BrickEquipmentType.objects.order_by('brick_class'))
+    points = forms.ModelMultipleChoiceField(
+        queryset=BrickPointType.objects.all(),
+        widget=forms.CheckboxSelectMultiple)
 
     class Meta:
         model = models.BrickFaultTemplate

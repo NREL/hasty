@@ -10,7 +10,9 @@ class EquipmentTemplate(models.Model):
 
 class HaystackEquipmentTemplate(EquipmentTemplate):
     version = models.ForeignKey(HaystackVersion, on_delete=models.CASCADE)
-    equipment_type = models.ForeignKey(HaystackEquipmentType, on_delete=models.CASCADE)
+    equipment_type = models.ForeignKey(
+        HaystackEquipmentType,
+        on_delete=models.CASCADE)
     points = models.ManyToManyField(HaystackPointType)
 
 
@@ -18,7 +20,8 @@ class BrickEquipmentTemplate(EquipmentTemplate):
     # For trying to get uniqueness across version, equipment_type, and points:
     # https://stackoverflow.com/questions/55196633/unique-together-and-m2m-field
     version = models.ForeignKey(BrickVersion, on_delete=models.CASCADE)
-    equipment_type = models.ForeignKey(BrickEquipmentType, on_delete=models.CASCADE)
+    equipment_type = models.ForeignKey(
+        BrickEquipmentType, on_delete=models.CASCADE)
     points = models.ManyToManyField(BrickPointType)
 
 
@@ -33,11 +36,14 @@ class FaultTemplate(UseCaseTemplate):
 
 class HaystackFaultTemplate(FaultTemplate):
     version = models.ForeignKey(HaystackVersion, on_delete=models.CASCADE)
-    equipment_type = models.ForeignKey(HaystackEquipmentType, on_delete=models.CASCADE)
+    equipment_type = models.ForeignKey(
+        HaystackEquipmentType,
+        on_delete=models.CASCADE)
     points = models.ManyToManyField(HaystackPointType)
 
 
 class BrickFaultTemplate(FaultTemplate):
     version = models.ForeignKey(BrickVersion, on_delete=models.CASCADE)
-    equipment_type = models.ForeignKey(BrickEquipmentType, on_delete=models.CASCADE)
+    equipment_type = models.ForeignKey(
+        BrickEquipmentType, on_delete=models.CASCADE)
     points = models.ManyToManyField(BrickPointType)

@@ -50,7 +50,10 @@ def generate_haystack_marker_tags(apps, schema_editor):
     all_tags = [m[0] for m in match]
     for tag in all_tags:
         ns, t = tag.split("#")
-        t = HaystackMarkerTag(tag=t, version=haystack_version_model, namespace=ns)
+        t = HaystackMarkerTag(
+            tag=t,
+            version=haystack_version_model,
+            namespace=ns)
         t.save()
 
 

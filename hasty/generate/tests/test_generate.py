@@ -25,8 +25,10 @@ class IndexViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue('sites' in response.context)
         self.assertTrue('ahus' in response.context)
-        self.assertEqual([site.name for site in response.context['sites']], ["Test Site"])
-        self.assertEqual([ahu.name for ahu in response.context['ahus']], ["Test AHU"])
+        self.assertEqual(
+            [site.name for site in response.context['sites']], ["Test Site"])
+        self.assertEqual(
+            [ahu.name for ahu in response.context['ahus']], ["Test AHU"])
 
     def test_delete(self):
         # Get the test_site for the UUID
@@ -41,7 +43,14 @@ class IndexViewTest(TestCase):
 
     def test_upload(self):
         basepath = path.dirname(__file__)
-        filepath = path.abspath(path.join(basepath, "..", "..", "tests", "files", "carytown.json"))
+        filepath = path.abspath(
+            path.join(
+                basepath,
+                "..",
+                "..",
+                "tests",
+                "files",
+                "carytown.json"))
         with open(filepath) as file:
             self.client.post('', {'upload': '', 'file': file})
 
@@ -64,16 +73,18 @@ class CreateSiteTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
         response = self.client.get('')
-        self.assertEqual([site.name for site in response.context['sites']], ["Test Create Site"])
+        self.assertEqual([site.name for site in response.context['sites']], [
+                         "Test Create Site"])
 
 
 class CreateFromTemplateTest(TestCase):
     # Tests the CreateFromTemplate view in views.py
     def test_upload_from_template(self):
-        self.client.post('/create_from_template/', {'upload': 'resources/smalloffice.json'})
+        self.client.post('/create_from_template/',
+                         {'upload': 'resources/smalloffice.json'})
         response = self.client.get('')
-        self.assertEqual([site.name for site in response.context['sites']],
-                         ["s:-SmallOffice-ASHRAE 169-2013-5A created: 2020-05-04 20:29:25 -0600"])
+        self.assertEqual([site.name for site in response.context['sites']], [
+                         "s:-SmallOffice-ASHRAE 169-2013-5A created: 2020-05-04 20:29:25 -0600"])
 
 
 class SiteDetailTest(TestCase):
@@ -95,7 +106,8 @@ class SiteDetailTest(TestCase):
         self.assertEqual(response.status_code, 200)
         added_site = response.context['site']
         self.assertEqual([added_site.name], ["Test Site with ID"])
-        self.assertEqual([ahu.name for ahu in response.context['ahus']], ["Test AHU with ID"])
+        self.assertEqual([ahu.name for ahu in response.context['ahus']], [
+                         "Test AHU with ID"])
         # TODO: add terminal unit info and types
 
     def test_create_ahu(self):
@@ -129,7 +141,8 @@ class SiteDetailTest(TestCase):
         # redirects to the ahu view
         self.assertEqual(response.status_code, 302)
         response = self.client.get('/site/{}'.format(site.id))
-        self.assertEqual([ahu.name for ahu in response.context['ahus']], ["Test create AHU with ID"])
+        self.assertEqual([ahu.name for ahu in response.context['ahus']], [
+                         "Test create AHU with ID"])
 
 
 class AirHandlerTest(TestCase):
@@ -156,11 +169,14 @@ class AirHandlerTest(TestCase):
         )
 
     def test_ahu_terminal_with_id(self):
-        response = self.client.get('/site/{}/ahu/{}'.format(self.temp_site.id, self.temp_ahu.id))
+        response = self.client.get(
+            '/site/{}/ahu/{}'.format(self.temp_site.id, self.temp_ahu.id))
         added_site = response.context['site']
         added_ahu = response.context['ahu']
-        self.assertEqual([added_site.name], ["Test Site with ID from site.ahu view"])
-        self.assertEqual([added_ahu.name], ["Test AHU with ID from site.ahu view"])
+        self.assertEqual([added_site.name],
+                         ["Test Site with ID from site.ahu view"])
+        self.assertEqual([added_ahu.name],
+                         ["Test AHU with ID from site.ahu view"])
 
     def test_rename_terminal_unit(self):
         data = {
@@ -168,8 +184,10 @@ class AirHandlerTest(TestCase):
             'terminal_unit': 1,
             'update_terminal_unit': ""
         }
-        response = self.client.post('/site/{}/ahu/{}'.format(self.temp_site.id, self.temp_ahu.id), data)
+        response = self.client.post(
+            '/site/{}/ahu/{}'.format(self.temp_site.id, self.temp_ahu.id), data)
         self.assertEqual(response.status_code, 302)
 
-        response = self.client.get('/site/{}/ahu/{}'.format(self.temp_site.id, self.temp_ahu.id))
+        response = self.client.get(
+            '/site/{}/ahu/{}'.format(self.temp_site.id, self.temp_ahu.id))
         self.assertTrue('terminal_units' in response.context)

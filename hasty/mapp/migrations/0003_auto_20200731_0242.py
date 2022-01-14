@@ -13,17 +13,21 @@ def generate_haystack_point_types(apps, schema_editor):
         hpt = HaystackPointType(haystack_tagset=proto)
         hpt.save()
         for tag in proto.split('-'):
-            haystack_marker_model = HaystackMarkerTag.objects.filter(tag=tag, version__version=hv)
+            haystack_marker_model = HaystackMarkerTag.objects.filter(
+                tag=tag, version__version=hv)
             if len(haystack_marker_model) == 1:
                 hpt.tags.add(haystack_marker_model[0])
             elif len(haystack_marker_model) == 0:
-                print(f"Haystack tag: {tag} is not a marker tag in version {hv}")
-                print(f"A record for following proto will not be created: {proto}")
+                print(
+                    f"Haystack tag: {tag} is not a marker tag in version {hv}")
+                print(
+                    f"A record for following proto will not be created: {proto}")
                 hpt.delete()
                 break
             else:
                 print(f"Haystack tag: {tag} has multiple tags in version {hv}")
-                print(f"A record for following proto will not be created: {proto}")
+                print(
+                    f"A record for following proto will not be created: {proto}")
                 hpt.delete()
                 break
 

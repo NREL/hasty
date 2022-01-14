@@ -81,10 +81,13 @@ class AirHandlerForm(forms.Form):
     terminal_unit_default_type = forms.ChoiceField(choices=tu_choices)
     num_terminal_units = forms.IntegerField()
 
-    discharge_air_temperature_reset_strategy = forms.ChoiceField(choices=DAT_RESET_STRATEGY)
-    discharge_air_pressure_reset_strategy = forms.ChoiceField(choices=DAP_RESET_STRATEGY)
+    discharge_air_temperature_reset_strategy = forms.ChoiceField(
+        choices=DAT_RESET_STRATEGY)
+    discharge_air_pressure_reset_strategy = forms.ChoiceField(
+        choices=DAP_RESET_STRATEGY)
     economizer_control_strategy = forms.ChoiceField(choices=ECON_STRATEGY)
-    ventilation_control_strategy = forms.ChoiceField(choices=VENTILATION_STRATEGY)
+    ventilation_control_strategy = forms.ChoiceField(
+        choices=VENTILATION_STRATEGY)
 
     def __init__(self, *args, **kwargs):
         super(AirHandlerForm, self).__init__(*args, **kwargs)
@@ -171,7 +174,8 @@ class AirHandlerForm(forms.Form):
         :param component_class:
         :return:
         """
-        temp = self.sf.df_components[self.sf.df_components['id'] == component_lookup_id]
+        temp = self.sf.df_components[self.sf.df_components['id']
+                                     == component_lookup_id]
         name = f"{self.ahu_model.name} {temp['Description'].values[0]}"
         dis = temp['Description'].values[0]
         tags = temp['Final Tagset'].values[0]

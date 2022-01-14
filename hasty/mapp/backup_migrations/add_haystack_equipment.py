@@ -35,20 +35,26 @@ def generate_haystack_equipment_types(apps, schema_editor):
 
     all_equip = [m[0] for m in match]
     for equip in all_equip:
-        het = HaystackEquipmentType(haystack_tagset=equip.split("#")[1], version=haystack_version_model)
+        het = HaystackEquipmentType(
+            haystack_tagset=equip.split("#")[1],
+            version=haystack_version_model)
         het.save()
         hmm = HaystackMarkerTag.objects.filter(tag=equip.split("#")[1])
 
         if len(hmm) == 1:
             het.marker_tags.add(hmm[0])
         elif len(hmm) == 0:
-            print(f"Haystack tag: {equip.split('#')[1]} is not a marker tag in version {hv}")
-            print(f"A record for following equip will not be created: {equip.split('#')[1]}")
+            print(
+                f"Haystack tag: {equip.split('#')[1]} is not a marker tag in version {hv}")
+            print(
+                f"A record for following equip will not be created: {equip.split('#')[1]}")
             het.delete()
             break
         else:
-            print(f"Haystack tag: {equip.split('#')[1]} has multiple tags in version {hv}")
-            print(f"A record for following proto will not be created: {equip.split('#')[1]}")
+            print(
+                f"Haystack tag: {equip.split('#')[1]} has multiple tags in version {hv}")
+            print(
+                f"A record for following proto will not be created: {equip.split('#')[1]}")
             het.delete()
             break
 

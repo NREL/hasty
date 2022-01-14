@@ -18,8 +18,12 @@ def add_fault_templates_migration(apps, schema_editor):
 
 
 def add_templates(template_dir, template_type):
-    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), f"{template_dir}")
-    template_files = [os.path.join(p, f) for f in os.listdir(p) if f.endswith("-templates.yaml")]
+    p = os.path.join(
+        os.path.dirname(
+            os.path.abspath(__file__)),
+        f"{template_dir}")
+    template_files = [os.path.join(p, f) for f in os.listdir(
+        p) if f.endswith("-templates.yaml")]
     for f in template_files:
         with open(f, 'r') as fp:
             templates = yaml.load(fp, Loader=yaml.FullLoader)
@@ -31,32 +35,46 @@ def add_templates(template_dir, template_type):
                     version = check_single_version(HaystackVersion, d)
                     if not version:
                         continue
-                    equipment_type = HaystackEquipmentType.objects.filter(haystack_tagset=d['equipment_type'],
-                                                                          version=version)
+                    equipment_type = HaystackEquipmentType.objects.filter(
+                        haystack_tagset=d['equipment_type'], version=version)
                     if len(equipment_type) != 1:
                         print(
                             f"{len(equipment_type)} HaystackEquipmentType's found.  Template not added for {[d['name']]}")
                         continue
                     if template_type == 'equipment':
-                        template = create_equipment_template(HaystackEquipmentTemplate, d, version,
-                                                             equipment_type)
+                        template = create_equipment_template(
+                            HaystackEquipmentTemplate, d, version, equipment_type)
                     elif template_type == 'fault':
-                        template = create_fault_template(HaystackFaultTemplate, d, version, equipment_type)
-                    add_points('Haystack', d, template, HaystackPointType.objects.filter(version=version))
+                        template = create_fault_template(
+                            HaystackFaultTemplate, d, version, equipment_type)
+                    add_points(
+                        'Haystack',
+                        d,
+                        template,
+                        HaystackPointType.objects.filter(
+                            version=version))
                 elif d['type'] == 'Brick':
                     version = check_single_version(BrickVersion, d)
                     if not version:
                         continue
-                    equipment_type = BrickEquipmentType.objects.filter(brick_class=d['equipment_type'], version=version)
+                    equipment_type = BrickEquipmentType.objects.filter(
+                        brick_class=d['equipment_type'], version=version)
                     if len(equipment_type) != 1:
                         print(
                             f"{len(equipment_type)} BrickEquipmentType's found.  Template not added for {[d['name']]}")
                         continue
                     if template_type == 'equipment':
-                        template = create_equipment_template(BrickEquipmentTemplate, d, version, equipment_type)
+                        template = create_equipment_template(
+                            BrickEquipmentTemplate, d, version, equipment_type)
                     elif template_type == 'fault':
-                        template = create_fault_template(BrickFaultTemplate, d, version, equipment_type)
-                    add_points('Brick', d, template, BrickPointType.objects.filter(version=version))
+                        template = create_fault_template(
+                            BrickFaultTemplate, d, version, equipment_type)
+                    add_points(
+                        'Brick',
+                        d,
+                        template,
+                        BrickPointType.objects.filter(
+                            version=version))
                 else:
                     print(f"Invalid type: {d['type']}")
             else:
@@ -75,9 +93,9 @@ def create_fault_template(template_object, data, version, equipment_type):
 
 def create_equipment_template(template_object, data, version, equipment_type):
     equipment_type = equipment_type[0]
-    equipment_template = template_object(name=data['name'], version=version,
-                                         description=data.get('description', ""),
-                                         equipment_type=equipment_type)
+    equipment_template = template_object(
+        name=data['name'], version=version, description=data.get(
+            'description', ""), equipment_type=equipment_type)
     equipment_template.save()
     return equipment_template
 
@@ -100,7 +118,8 @@ def check_single_version(version_object, data):
     if len(v) == 1:
         return v[0]
     else:
-        print(f"{len(v)} {version_object}'s found.  Template not added for {data['name']}")
+        print(
+            f"{len(v)} {version_object}'s found.  Template not added for {data['name']}")
         return False
 
 
@@ -118,7 +137,9 @@ def add_haystack_points(points, equip_template, hpt):
     for p in points:
         tags = p.split("-")
         if len(tags) == len(set(tags)):
-            candidates = hpt.annotate(c=Count('marker_tags')).filter(c=len(tags))
+            candidates = hpt.annotate(
+                c=Count('marker_tags')).filter(
+                c=len(tags))
             for tag in tags:
                 candidates = candidates.filter(marker_tags__tag=tag)
             if len(candidates) == 1:
@@ -127,7 +148,8 @@ def add_haystack_points(points, equip_template, hpt):
             elif len(candidates) == 0:
                 print(f"Point not saved. No point type matching: {p}.")
             else:
-                print(f"Point not saved.  Multiple candidates matching: {p} - not unique.")
+                print(
+                    f"Point not saved.  Multiple candidates matching: {p} - not unique.")
         else:
             print(f"Point not saved.  Duplicate tags in: {p}.")
 
@@ -141,4 +163,5 @@ def add_brick_points(points, equip_template, bpt):
         elif len(candidates) == 0:
             print(f"Point not saved. No point type matching: {p}.")
         else:
-            print(f"Point not saved.  Multiple candidates matching: {p} - not unique.")
+            print(
+                f"Point not saved.  Multiple candidates matching: {p} - not unique.")

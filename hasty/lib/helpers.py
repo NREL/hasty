@@ -23,36 +23,46 @@ class Shadowfax:
         self.df_components = pd.read_csv(f_path)
         self.df_components = self.df_components[self.df_components['Hasty Choice'] == True]  # noqa
         self.df_components['id'] = self.df_components['id'].astype(str)
-        self.df_cc = self.df_components[self.df_components['Category'] == 'Cooling coil']
-        self.df_hc = self.df_components[self.df_components['Category'] == 'Heating coil']
-        self.df_hc_cc = self.df_components[self.df_components['Category'] == 'Heating cooling coil']
-        self.df_dis_fan = self.df_components[self.df_components['Category'] == 'Discharge fan']
-        self.df_ret_fan = self.df_components[self.df_components['Category'] == 'Return fan']
-        self.df_exh_fan = self.df_components[self.df_components['Category'] == 'Exhaust fan']
+        self.df_cc = self.df_components[self.df_components['Category']
+                                        == 'Cooling coil']
+        self.df_hc = self.df_components[self.df_components['Category']
+                                        == 'Heating coil']
+        self.df_hc_cc = self.df_components[self.df_components['Category']
+                                           == 'Heating cooling coil']
+        self.df_dis_fan = self.df_components[self.df_components['Category']
+                                             == 'Discharge fan']
+        self.df_ret_fan = self.df_components[self.df_components['Category']
+                                             == 'Return fan']
+        self.df_exh_fan = self.df_components[self.df_components['Category']
+                                             == 'Exhaust fan']
 
         # Read in and generate terminal units
         f_path_tu = os.path.join(p, 'TerminalUnits.csv')
         self.df_terminal_units = pd.read_csv(f_path_tu)
         self.df_terminal_units = self.df_terminal_units[self.df_terminal_units['Hasty Choice'] == True]  # noqa
-        cast_to_str = ['id', 'damperComponentID', 'heatingComponentID', 'coolingComponentID']
-        self.df_terminal_units[cast_to_str] = self.df_terminal_units[cast_to_str].astype(str).applymap(
-            lambda x: x.split('.')[0])
+        cast_to_str = [
+            'id',
+            'damperComponentID',
+            'heatingComponentID',
+            'coolingComponentID']
+        self.df_terminal_units[cast_to_str] = self.df_terminal_units[cast_to_str].astype(
+            str).applymap(lambda x: x.split('.')[0])
         self.df_terminal_units[cast_to_str] = self.df_terminal_units[cast_to_str].applymap(
             lambda x: "None" if x == "nan" else x)
 
         f_path_cp = os.path.join(p, 'ComponentPoints.csv')
         self.df_component_points = pd.read_csv(f_path_cp)
         cast_to_str = ['id', 'Requires Child ID', 'On Type ID', 'Add Point ID']
-        self.df_component_points[cast_to_str] = self.df_component_points[cast_to_str].astype(str).applymap(
-            lambda x: x.split('.')[0])
+        self.df_component_points[cast_to_str] = self.df_component_points[cast_to_str].astype(
+            str).applymap(lambda x: x.split('.')[0])
         self.df_component_points[cast_to_str] = self.df_component_points[cast_to_str].applymap(
             lambda x: "None" if x == "nan" else x)
 
         f_path_p = os.path.join(p, 'Points.csv')
         self.df_points = pd.read_csv(f_path_p)
         cast_to_str = ['id', 'Include Tagset from ID', 'Final Typing Tagset']
-        self.df_points[cast_to_str] = self.df_points[cast_to_str].astype(str).applymap(
-            lambda x: x.split('.')[0])
+        self.df_points[cast_to_str] = self.df_points[cast_to_str].astype(
+            str).applymap(lambda x: x.split('.')[0])
         self.df_points[cast_to_str] = self.df_points[cast_to_str].applymap(
             lambda x: "None" if x == "nan" else x)
 
@@ -180,7 +190,8 @@ class HaystackBuilder:
                 "dis": f"s:{tu.name}",
                 "ahuRef": f"r:{ahu_hay_id}",
             }
-            tu_type = self.sf.df_terminal_units[self.sf.df_terminal_units['id'] == tu.lookup_id]
+            tu_type = self.sf.df_terminal_units[self.sf.df_terminal_units['id']
+                                                == tu.lookup_id]
             if tu_type.empty:
                 raise TerminalUnitNotFoundError(tu.lookup_id)
             tags = tu_type['Final Tagset'].values[0]
@@ -198,7 +209,8 @@ class HaystackBuilder:
         :param tu_hay_id: The UUID of the terminal unit
         :return:
         """
-        tu_type = self.sf.df_terminal_units[self.sf.df_terminal_units['id'] == tu.lookup_id]
+        tu_type = self.sf.df_terminal_units[self.sf.df_terminal_units['id']
+                                            == tu.lookup_id]
         damper = tu_type['damperComponentID'].values[0]
         hc = tu_type['heatingComponentID'].values[0]
         cc = tu_type['coolingComponentID'].values[0]
@@ -224,7 +236,12 @@ class HaystackBuilder:
             final_tags = finalize_tags(t)
             self.hay_json.append(final_tags)
 
-    def gen_component_record(self, equip, component, equip_ref, component_type):
+    def gen_component_record(
+            self,
+            equip,
+            component,
+            equip_ref,
+            component_type):
         """
         Generate a record for a given component as a sub-equip of the defined equip_ref.
         The 'typing' tags for the component record
@@ -308,7 +325,8 @@ class BrickBuilder:
         self.ahus = models.AirHandler.objects.filter(site_id=self.site.id)
         self.hb = HaystackBuilder(self.site)
         self.brick_model = None
-        self.hay_sess = HaystackInferenceSession(quote(f"http://localhost/{self.site.name}#"))
+        self.hay_sess = HaystackInferenceSession(
+            quote(f"http://localhost/{self.site.name}#"))
 
     def build(self):
         self.hb.build()
@@ -318,7 +336,9 @@ class BrickBuilder:
 
     def ttl_file_serializer(self):
         ttl_file = StringIO()
-        ttl_file.write(self.brick_model.g.serialize(format="turtle").decode('utf-8'))
+        ttl_file.write(
+            self.brick_model.g.serialize(
+                format="turtle").decode('utf-8'))
         ttl_file.seek(0)
         return ttl_file
 

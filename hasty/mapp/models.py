@@ -5,21 +5,33 @@ from django.db import models
 
 # class Mapper(models.Model):
 class InferenceVersion(models.Model):
-    version = models.CharField(max_length=20, null=False, blank=False, unique=True)
+    version = models.CharField(
+        max_length=20,
+        null=False,
+        blank=False,
+        unique=True)
 
     def __str__(self):
         return self.version
 
 
 class HaystackVersion(models.Model):
-    version = models.CharField(max_length=20, null=False, blank=False, unique=True)
+    version = models.CharField(
+        max_length=20,
+        null=False,
+        blank=False,
+        unique=True)
 
     def __str__(self):
         return self.version
 
 
 class BrickVersion(models.Model):
-    version = models.CharField(max_length=20, null=False, blank=False, unique=True)
+    version = models.CharField(
+        max_length=20,
+        null=False,
+        blank=False,
+        unique=True)
 
     def __str__(self):
         return self.version
@@ -62,11 +74,21 @@ class HaystackPointType(models.Model):
 
 
 class PointTypeMap(models.Model):
-    inference_version = models.ForeignKey(InferenceVersion, on_delete=models.CASCADE)
-    haystack_version = models.ForeignKey(HaystackVersion, on_delete=models.CASCADE)
+    inference_version = models.ForeignKey(
+        InferenceVersion, on_delete=models.CASCADE)
+    haystack_version = models.ForeignKey(
+        HaystackVersion, on_delete=models.CASCADE)
     brick_version = models.ForeignKey(BrickVersion, on_delete=models.CASCADE)
-    brick_point = models.ForeignKey(BrickPointType, on_delete=models.CASCADE, null=True, blank=False)
-    haystack_point = models.ForeignKey(HaystackPointType, on_delete=models.CASCADE, null=True, blank=False)
+    brick_point = models.ForeignKey(
+        BrickPointType,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=False)
+    haystack_point = models.ForeignKey(
+        HaystackPointType,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=False)
 
 
 class HaystackEquipmentType(models.Model):

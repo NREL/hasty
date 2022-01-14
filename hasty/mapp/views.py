@@ -15,8 +15,7 @@ class PointMappingView(CreateView):
         bpt = BrickPointType.objects.all()
         if bpt is None and hpt is None:
             args = {
-                'no_map': "No mappings have been created. Please run initial migrations and restart app."
-            }
+                'no_map': "No mappings have been created. Please run initial migrations and restart app."}
             return render(request, self.template_name, args)
         else:
 

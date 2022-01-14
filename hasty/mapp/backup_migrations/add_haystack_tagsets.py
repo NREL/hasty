@@ -8,7 +8,9 @@ def generate_haystack_tagsets(apps, schema_editor):
     hv = "3.9.9"
     HaystackPointType = apps.get_model('mapp', 'HaystackPointType')
     HaystackMarkerTag = apps.get_model('mapp', 'HaystackMarkerTag')
-    p = os.path.join(os.getcwd(), f"mapp/resources/haystack/{hv}/index-pointProtos.html")
+    p = os.path.join(
+        os.getcwd(),
+        f"mapp/resources/haystack/{hv}/index-pointProtos.html")
     with open(p, 'r') as f:
         data = f.read()
     soup = BeautifulSoup(data, features="html.parser")
@@ -20,17 +22,21 @@ def generate_haystack_tagsets(apps, schema_editor):
         hpt = HaystackPointType(haystack_tagset=proto)
         hpt.save()
         for tag in proto.split('-'):
-            haystack_marker_model = HaystackMarkerTag.objects.filter(tag=tag, version__version=hv)
+            haystack_marker_model = HaystackMarkerTag.objects.filter(
+                tag=tag, version__version=hv)
             if len(haystack_marker_model) == 1:
                 hpt.tags.add(haystack_marker_model[0])
             elif len(haystack_marker_model) == 0:
-                print(f"Haystack tag: {tag} is not a marker tag in version {hv}")
-                print(f"A record for following proto will not be created: {proto}")
+                print(
+                    f"Haystack tag: {tag} is not a marker tag in version {hv}")
+                print(
+                    f"A record for following proto will not be created: {proto}")
                 hpt.delete()
                 break
             else:
                 print(f"Haystack tag: {tag} has multiple tags in version {hv}")
-                print(f"A record for following proto will not be created: {proto}")
+                print(
+                    f"A record for following proto will not be created: {proto}")
                 hpt.delete()
                 break
 

@@ -32,7 +32,8 @@ class Component(models.Model):
     tagset = models.CharField(max_length=200, default=None, null=True)
     brick_class = models.CharField(max_length=100, default=None, null=True)
 
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
+    content_type = models.ForeignKey(
+        ContentType, on_delete=models.CASCADE, null=True)
     object_id = models.UUIDField(null=True)
     is_part_of = GenericForeignKey('content_type', 'object_id')
 
@@ -43,43 +44,73 @@ class Component(models.Model):
 class HeatingCoil(Component):
     _ = SHADOW.generate_heating_coils()
     choices = [(h.get('id'), h.get('Description')) for h in _]
-    lookup_id = models.CharField(max_length=100, choices=choices, default="61", null=True, blank=True)
+    lookup_id = models.CharField(
+        max_length=100,
+        choices=choices,
+        default="61",
+        null=True,
+        blank=True)
 
 
 class CoolingCoil(Component):
     _ = SHADOW.generate_cooling_coils()
     choices = [(h.get('id'), h.get('Description')) for h in _]
-    lookup_id = models.CharField(max_length=100, choices=choices, default="44", null=True, blank=True)
+    lookup_id = models.CharField(
+        max_length=100,
+        choices=choices,
+        default="44",
+        null=True,
+        blank=True)
 
 
 class PreHeatCoil(Component):
     _ = SHADOW.generate_heating_coils()
     choices = [(h.get('id'), h.get('Description')) for h in _]
-    lookup_id = models.CharField(max_length=100, choices=choices, null=True, blank=True)
+    lookup_id = models.CharField(
+        max_length=100,
+        choices=choices,
+        null=True,
+        blank=True)
 
 
 class SupplementaryHeatingCoil(Component):
     _ = SHADOW.generate_heating_coils()
     choices = [(h.get('id'), h.get('Description')) for h in _]
-    lookup_id = models.CharField(max_length=100, choices=choices, null=True, blank=True)
+    lookup_id = models.CharField(
+        max_length=100,
+        choices=choices,
+        null=True,
+        blank=True)
 
 
 class DischargeFan(Component):
     _ = SHADOW.generate_discharge_fans()
     choices = [(h.get('id'), h.get('Description')) for h in _]
-    lookup_id = models.CharField(max_length=100, choices=choices, null=True, blank=True)
+    lookup_id = models.CharField(
+        max_length=100,
+        choices=choices,
+        null=True,
+        blank=True)
 
 
 class ReturnFan(Component):
     _ = SHADOW.generate_return_fans()
     choices = [(h.get('id'), h.get('Description')) for h in _]
-    lookup_id = models.CharField(max_length=100, choices=choices, null=True, blank=True)
+    lookup_id = models.CharField(
+        max_length=100,
+        choices=choices,
+        null=True,
+        blank=True)
 
 
 class ExhaustFan(Component):
     _ = SHADOW.generate_exhaust_fans()
     choices = [(h.get('id'), h.get('Description')) for h in _]
-    lookup_id = models.CharField(max_length=100, choices=choices, null=True, blank=True)
+    lookup_id = models.CharField(
+        max_length=100,
+        choices=choices,
+        null=True,
+        blank=True)
 
 
 class Site(models.Model):
@@ -141,7 +172,11 @@ class Site(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=150)
     city = models.CharField(max_length=50, default=None, null=True)
-    state = models.CharField(max_length=2, choices=STATES, default=None, null=True)
+    state = models.CharField(
+        max_length=2,
+        choices=STATES,
+        default=None,
+        null=True)
     zip = models.IntegerField()
 
 
@@ -151,7 +186,8 @@ class ThermalZone(models.Model):
     tagset = models.CharField(max_length=200, default=None, null=True)
     brick_class = models.CharField(max_length=100, default=None, null=True)
 
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
+    content_type = models.ForeignKey(
+        ContentType, on_delete=models.CASCADE, null=True)
     object_id = models.UUIDField(null=True)
 
     is_fed_by = GenericForeignKey('content_type', 'object_id')
@@ -174,7 +210,8 @@ class TerminalUnit(models.Model):
     tagset = models.CharField(max_length=200, default=None, null=True)
     brick_class = models.CharField(max_length=100, default=None, null=True)
 
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
+    content_type = models.ForeignKey(
+        ContentType, on_delete=models.CASCADE, null=True)
     object_id = models.UUIDField(null=True)
 
     is_fed_by = GenericForeignKey('content_type', 'object_id')
@@ -214,15 +251,22 @@ class AirHandler(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid4)
     name = models.CharField(max_length=150)
-    site_id = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='air_handlers')
+    site_id = models.ForeignKey(
+        Site,
+        on_delete=models.CASCADE,
+        related_name='air_handlers')
     tagset = models.CharField(max_length=200, default=None, null=True)
     brick_class = models.CharField(max_length=100, default=None, null=True)
 
     # Controls Configurations
-    discharge_air_temperature_reset_strategy = models.PositiveSmallIntegerField(choices=DAT_RESET_STRATEGY, default=1)
-    discharge_air_pressure_reset_strategy = models.PositiveSmallIntegerField(choices=DAP_RESET_STRATEGY, default=1)
-    economizer_control_strategy = models.PositiveSmallIntegerField(choices=ECON_STRATEGY, default=1)
-    ventilation_control_strategy = models.PositiveSmallIntegerField(choices=VENTILATION_STRATEGY, default=2)
+    discharge_air_temperature_reset_strategy = models.PositiveSmallIntegerField(
+        choices=DAT_RESET_STRATEGY, default=1)
+    discharge_air_pressure_reset_strategy = models.PositiveSmallIntegerField(
+        choices=DAP_RESET_STRATEGY, default=1)
+    economizer_control_strategy = models.PositiveSmallIntegerField(
+        choices=ECON_STRATEGY, default=1)
+    ventilation_control_strategy = models.PositiveSmallIntegerField(
+        choices=VENTILATION_STRATEGY, default=2)
 
     feeds = GenericRelation(TerminalUnit)
     has_part = GenericRelation(Component)

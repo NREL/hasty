@@ -21,7 +21,8 @@ def generate_brick_point_classes(apps, schema_editor):
                 if pt == list(v)[0]:
                     tags = list(k)
                     for t in tags:
-                        bt = BrickTag.objects.filter(tag=t, version__version=bv)
+                        bt = BrickTag.objects.filter(
+                            tag=t, version__version=bv)
                         if len(bt) == 1:
                             brick_point.tags.add(bt[0])
                         else:

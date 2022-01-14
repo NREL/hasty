@@ -101,7 +101,10 @@ class SiteDetail(View):
                 form_result.generate_all_components()
                 form_result.generate_terminal_units_and_thermal_zones()
                 form_result.generate_base_ahu_points()
-                return redirect('site.ahu', site_id=site_id, ahu_id=form_result.ahu_model.id)
+                return redirect(
+                    'site.ahu',
+                    site_id=site_id,
+                    ahu_id=form_result.ahu_model.id)
             else:
                 args = {
                     'form': form_result,
