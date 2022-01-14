@@ -1,6 +1,9 @@
 from uuid import uuid4
 from generate import models
 import re
+import os
+import json
+from lib.helpers import Shadowfax, json_dump_tags_from_string
 
 
 def handle_haystack(data):
@@ -37,6 +40,7 @@ def find_ahus(entities):
     ahus = find_tagset(entities, tags=['ahu'])
     return ahus
 
+
 def find_cavs(entities):
     cavs = find_tagset(entities, tags=['cav'])
     return cavs
@@ -59,13 +63,16 @@ def save_site(site):
     site_id = strip_prefix.match(str(site.get('id')))[2]  # remove leading r:
     site_name = site.get('dis')
     geo_city = site.get('geoCity')
-    geo_state = strip_prefix.match(site.get('geoState'))[2] if site.get('geoState') else None  # remove leading *:
+    # remove leading *:
+    geo_state = strip_prefix.match(site.get('geoState'))[
+        2] if site.get('geoState') else None
 
     try:
         models.Site.objects.get(id=site_id)
     except BaseException:
         id = uuid4()
-        imported_site = models.Site.objects.create(id=id, name=site_name, city=geo_city, state=geo_state, zip=0)
+        imported_site = models.Site.objects.create(
+            id=id, name=site_name, city=geo_city, state=geo_state, zip=0)
         imported_site.save()
         return id
 
@@ -101,3 +108,32 @@ def save_ahus(ahus, site_id, cavs, vavs):
                     is_fed_by=imported_terminal_unit
                 )
                 new_tz.save()
+
+
+def handle_template(path):
+    p = os.path.dirname(os.path.abspath(__file__))
+    f_path = os.path.join(p, path)
+    with open(f_path) as json_file:
+        data = json.loads(json_file.read())
+        site_id = handle_haystack(data)
+
+    return site_id
+
+
+def file_processing(file):
+    """
+    - get file extension
+    - if file ext is json
+        - if uuid4 id already exists
+            - just load the file as a copy with a new uuid4
+        - else we need to create a whole new model instance
+            - unserialize(file)?
+              what styles of haystack json are there
+    - elif file ext is osm
+        - unserialize(file)?
+    - elif file ext is idf
+        - unserialize(file)?
+    """
+
+    data = json.load(file)
+    handle_haystack(data)

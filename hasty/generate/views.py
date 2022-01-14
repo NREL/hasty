@@ -3,7 +3,8 @@ from django.http import HttpResponseRedirect
 from django.views.generic import CreateView, View
 from . import forms
 from . import models
-from lib.helpers import BrickBuilder, Shadowfax, file_processing, handle_template
+from lib.helpers import BrickBuilder, Shadowfax
+from lib.deserialization import file_processing, handle_template
 
 
 class ListSites(View):
