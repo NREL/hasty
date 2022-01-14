@@ -7,7 +7,6 @@ from urllib.parse import quote
 import pandas as pd
 from uuid import uuid4
 from brickschema.inference import HaystackInferenceSession
-from lib import deserialization
 from generate import models
 
 
@@ -117,7 +116,8 @@ class Shadowfax:
         data = {
             'id': terminal_unit_model.id,
             'name': terminal_unit_model.name,
-            'zone_name': terminal_unit_model.feeds.first().name
+            'zone_name': terminal_unit_model.feeds.first().name,
+            'operation_type': terminal_unit_model.lookup_id
         }
         return data
 

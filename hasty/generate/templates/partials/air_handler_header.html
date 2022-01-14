@@ -23,7 +23,7 @@
                     <ul id="none">
                         <li><span class="caret">Points</span>
                             <ul class="nested">
-                              {% for point in ahu.has_point.all %}
+                              {% for point in points %}
                                 <li>{{ point.name }}</li>
                               {% endfor %}
                             </ul>

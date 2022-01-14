@@ -17,7 +17,7 @@
                 <td>
                     <select id="terminal_unit" name="terminal_unit">
                         {% for tu_type in terminal_unit_types %}
-                        {% if tu_type.Description == tu.type %}
+                        {% if tu_type.id == tu.operation_type %}
                         <option value="{{ tu_type.id }}" selected>{{ tu_type.Description }}</option>
                         {% else %}
                         <option value="{{ tu_type.id }}">{{ tu_type.Description }}</option>
