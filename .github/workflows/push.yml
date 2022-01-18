@@ -1,13 +1,13 @@
-name: Validate Tests Pass
+name: Tests and Style
 on: push
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run Built-in Tests
+      - name: pytest
         run: docker compose run web pytest
-  autopep8:
+  style:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -15,12 +15,12 @@ jobs:
         uses: peter-evans/autopep8@v1
         with:
           args: --recursive --in-place --aggressive --aggressive --max-line-length=100 --ignore=E501,E402,W503,E731 .
-      - name: Create Pull Request
+      - name: create pull request
         uses: peter-evans/create-pull-request@v3
         with:
-          commit-message: autopep8 action fixes
-          title: Fixes by autopep8 action
-          body: This is an auto-generated PR with fixes by autopep8.
-          labels: autopep8, automated pr
+          commit-message: autopep8 formatting
+          title: autopep8 formatting
+          body: GitHub Action for automatic formatting.
+          labels: actions, autopep8
           reviewers: TShapinsky
-          branch: autopep8-patches
+          branch: actions/autopep8
