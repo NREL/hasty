@@ -1,0 +1,26 @@
+name: Tests and Style
+on: push
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: pytest
+        run: docker compose run web pytest
+  style:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: autopep8
+        uses: peter-evans/autopep8@v1
+        with:
+          args: --recursive --in-place --aggressive --aggressive --max-line-length=100 --ignore=E501,E402,W503,E731 .
+      - name: create pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: autopep8 formatting
+          title: autopep8 formatting
+          body: GitHub Action for automatic formatting.
+          labels: actions, autopep8
+          reviewers: TShapinsky
+          branch: actions/autopep8
