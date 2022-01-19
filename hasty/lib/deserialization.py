@@ -10,8 +10,8 @@ def handle_haystack(data):
     data = data['rows']
     site = find_sites(data)
     ahus = find_ahus(data)
-    terminal_units = find_cavs(data)
-    terminal_units += find_vavs(data)
+    terminal_units = find_cavs(data) + find_vavs(data)
+    # terminal_units += find_vavs(data)
     components = find_components(data)
     thermal_zones = find_tagset(data, tags=['hvac', 'zone', 'space'])
     reheat = find_tagset(data, tags=['reheats', 'equipRef'])
