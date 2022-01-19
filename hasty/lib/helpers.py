@@ -7,7 +7,6 @@ from urllib.parse import quote
 import pandas as pd
 from uuid import uuid4
 from brickschema.inference import HaystackInferenceSession
-from lib import deserialization
 from generate import models
 
 
@@ -117,7 +116,8 @@ class Shadowfax:
         data = {
             'id': terminal_unit_model.id,
             'name': terminal_unit_model.name,
-            'zone_name': terminal_unit_model.feeds.first().name
+            'zone_name': terminal_unit_model.feeds.first().name,
+            'operation_type': terminal_unit_model.lookup_id
         }
         return data
 
@@ -380,35 +380,6 @@ def json_dump_tags_from_string(s):
     return json.dumps(final_tags)
 
 
-def file_processing(file):
-    """
-    - get file extension
-    - if file ext is json
-        - if uuid4 id already exists
-            - just load the file as a copy with a new uuid4
-        - else we need to create a whole new model instance
-            - unserialize(file)?
-              what styles of haystack json are there
-    - elif file ext is osm
-        - unserialize(file)?
-    - elif file ext is idf
-        - unserialize(file)?
-    """
-
-    data = json.load(file)
-    deserialization.handle_haystack(data)
-
-
 def validate(file):
     """Haystack file must at least have the right structure and a site"""
     json.load(file)
-
-
-def handle_template(path):
-    p = os.path.dirname(os.path.abspath(__file__))
-    f_path = os.path.join(p, path)
-    with open(f_path) as json_file:
-        data = json.loads(json_file.read())
-        site_id = deserialization.handle_haystack(data)
-
-    return site_id
