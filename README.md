@@ -1,4 +1,4 @@
-# Hasty [![Travis-CI Build Status](https://travis-ci.org/nrel/hasty.svg?branch=develop)](https://travis-ci.org/github/nrel/hasty) [![codecov](https://codecov.io/gh/NREL/hasty/branch/develop/graph/badge.svg)](https://codecov.io/gh/NREL/hasty)
+# Hasty [![codecov](https://codecov.io/gh/NREL/hasty/branch/develop/graph/badge.svg)](https://codecov.io/gh/NREL/hasty)
 A web app to create and edit semantic metadata models of buildings with the following schemas. 
 
 - [Brick](https://brickschema.org/)
