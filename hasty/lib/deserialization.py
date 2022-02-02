@@ -93,9 +93,8 @@ def save_site(site):
         return id
 
 
-# This "Works" but is NOT good, If we want to move forward I think we probably need to rearchitect database.
-# For example, it should be possible to search for components by the id they had in the imported model. However that gets thrown out and the only component that knows what site it is is the ahu, so there are namespace problems there.
 def save_ahus(ahus, site_id, terminal_units, components, thermal_zones, reheat, points):
+    ignore_tags = set(['id', 'dis', 'equipRef', 'airRef'])
     s = Shadowfax()
     site = models.Site.objects.get(id=site_id)
     for ahu in ahus:
@@ -127,9 +126,11 @@ def save_ahus(ahus, site_id, terminal_units, components, thermal_zones, reheat, 
             c.save()
         for point in points:
             if ahu.get('id') == point.get('equipRef'):
+                tags = ' '.join(list(set(point.keys()) - ignore_tags))
                 imported_point = models.Point(
                     name=point.get('dis').replace(' ', '_'),
-                    is_point_of=imported_ahu
+                    is_point_of=imported_ahu,
+                    tagset=json_dump_tags_from_string(tags)
                 )
                 imported_point.save()
         for terminal_unit in terminal_units:
@@ -165,7 +166,6 @@ def save_ahus(ahus, site_id, terminal_units, components, thermal_zones, reheat, 
         component_class_tagsets = [{'df': item['df'], 'class': item['class'], 'tagset': [set(
             tagset.split(' ')) for tagset in item['df']['Final Tagset']]} for item in component_class_tagsets]
         for component in components:
-            ignore_tags = set(['id', 'dis', 'equipRef', 'airRef'])
             if ahu.get('id') == component.get('equipRef'):
                 name = component.get('dis').replace(" ", "_")
                 tags = set(component.keys()) - ignore_tags
@@ -174,7 +174,6 @@ def save_ahus(ahus, site_id, terminal_units, components, thermal_zones, reheat, 
                     if tags in tagset:
                         component_lookup_id = list(component_class_tagset['df']['id'])[
                             tagset.index(tags)]
-                        print(tags)
                         add_component(component, component_lookup_id,
                                       component_class_tagset['class'])
 

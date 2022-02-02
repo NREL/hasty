@@ -41,7 +41,7 @@ class IndexViewTest(TestCase):
 
     def test_upload(self):
         basepath = path.dirname(__file__)
-        filepath = path.abspath(path.join(basepath, "..", "..", "tests", "files", "carytown.json"))
+        filepath = path.abspath(path.join(basepath, "..", "..", "tests", "files", "mediumOffice_haystack.json"))
         with open(filepath) as file:
             self.client.post('', {'upload': '', 'file': file})
 
