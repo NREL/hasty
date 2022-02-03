@@ -1,13 +1,13 @@
 asgiref==3.2.5
 beautifulsoup4==4.9.1
 brickschema==0.1.9a1
-Django==3.0.7
+Django==3.1.14
 django-bootstrap4==2.0.1
 django-crispy-forms==1.9.1
-django-filter==2.3.0
-djangorestframework==3.11.0
+django-filter==2.4.0
+djangorestframework==3.11.2
 importlib-metadata==1.6.0
-numpy==1.18.4
+numpy==1.21.0
 packaging==20.4
 pandas==1.0.3
 pre-commit==2.6.0
@@ -18,7 +18,7 @@ pytest-cov==2.8.1
 pytest-django==3.9.0
 python-dateutil==2.8.1
 pytz==2019.3
-PyYAML==5.3.1
+PyYAML==5.4
 six==1.14.0
 soupsieve==2.0.1
 sqlparse==0.3.1
